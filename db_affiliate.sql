@@ -45,6 +45,8 @@ CREATE TABLE `tb_pesanans` (
   `id_pesanan` int(11) NOT NULL,
   `id_produk` int(11) DEFAULT NULL,
   `id_user` int(11) DEFAULT NULL,
+  `nama_produk` varchar(100) DEFAULT NULL,
+  'harga_jual' double DEFAULT NULL,
   `nama_pembeli` varchar(50) DEFAULT NULL,
   `tanggal_pembayaran` date DEFAULT NULL,
   `tanggal_pesanan` date DEFAULT NULL,
