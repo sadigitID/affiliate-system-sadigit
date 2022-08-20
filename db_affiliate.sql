@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 15, 2022 at 05:08 AM
--- Server version: 10.4.13-MariaDB
+-- Generation Time: Aug 20, 2022 at 09:57 AM
+-- Server version: 10.4.20-MariaDB
 -- PHP Version: 7.2.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -24,10 +24,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_bonuss`
+-- Table structure for table `tb_bonus`
 --
 
-CREATE TABLE `tb_bonuss` (
+CREATE TABLE `tb_bonus` (
   `id_bonus` int(11) NOT NULL,
   `id_user` int(11) DEFAULT NULL,
   `jml_bonus` double DEFAULT NULL,
@@ -38,10 +38,10 @@ CREATE TABLE `tb_bonuss` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_pesanans`
+-- Table structure for table `tb_pesanan`
 --
 
-CREATE TABLE `tb_pesanans` (
+CREATE TABLE `tb_pesanan` (
   `id_pesanan` int(11) NOT NULL,
   `id_produk` int(11) DEFAULT NULL,
   `id_user` int(11) DEFAULT NULL,
@@ -59,10 +59,10 @@ CREATE TABLE `tb_pesanans` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_produks`
+-- Table structure for table `tb_produk`
 --
 
-CREATE TABLE `tb_produks` (
+CREATE TABLE `tb_produk` (
   `id_produk` int(11) NOT NULL,
   `nama_produk` varchar(100) DEFAULT NULL,
   `harga_produk` double DEFAULT NULL,
@@ -74,10 +74,10 @@ CREATE TABLE `tb_produks` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_rekenings`
+-- Table structure for table `tb_rekening`
 --
 
-CREATE TABLE `tb_rekenings` (
+CREATE TABLE `tb_rekening` (
   `id_rek` int(11) NOT NULL,
   `no_rek` varchar(25) DEFAULT NULL,
   `nama_pemilik_rek` varchar(50) DEFAULT NULL,
@@ -123,30 +123,30 @@ INSERT INTO `tb_users` (`id_user`, `nama_lengkap`, `password`, `provinsi`, `kabu
 --
 
 --
--- Indexes for table `tb_bonuss`
+-- Indexes for table `tb_bonus`
 --
-ALTER TABLE `tb_bonuss`
+ALTER TABLE `tb_bonus`
   ADD PRIMARY KEY (`id_bonus`),
   ADD KEY `id_user` (`id_user`);
 
 --
--- Indexes for table `tb_pesanans`
+-- Indexes for table `tb_pesanan`
 --
-ALTER TABLE `tb_pesanans`
+ALTER TABLE `tb_pesanan`
   ADD PRIMARY KEY (`id_pesanan`),
   ADD KEY `id_produk` (`id_produk`),
   ADD KEY `id_user` (`id_user`);
 
 --
--- Indexes for table `tb_produks`
+-- Indexes for table `tb_produk`
 --
-ALTER TABLE `tb_produks`
+ALTER TABLE `tb_produk`
   ADD PRIMARY KEY (`id_produk`);
 
 --
--- Indexes for table `tb_rekenings`
+-- Indexes for table `tb_rekening`
 --
-ALTER TABLE `tb_rekenings`
+ALTER TABLE `tb_rekening`
   ADD PRIMARY KEY (`id_rek`);
 
 --
@@ -161,27 +161,27 @@ ALTER TABLE `tb_users`
 --
 
 --
--- AUTO_INCREMENT for table `tb_bonuss`
+-- AUTO_INCREMENT for table `tb_bonus`
 --
-ALTER TABLE `tb_bonuss`
+ALTER TABLE `tb_bonus`
   MODIFY `id_bonus` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `tb_pesanans`
+-- AUTO_INCREMENT for table `tb_pesanan`
 --
-ALTER TABLE `tb_pesanans`
+ALTER TABLE `tb_pesanan`
   MODIFY `id_pesanan` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `tb_produks`
+-- AUTO_INCREMENT for table `tb_produk`
 --
-ALTER TABLE `tb_produks`
+ALTER TABLE `tb_produk`
   MODIFY `id_produk` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `tb_rekenings`
+-- AUTO_INCREMENT for table `tb_rekening`
 --
-ALTER TABLE `tb_rekenings`
+ALTER TABLE `tb_rekening`
   MODIFY `id_rek` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -195,17 +195,17 @@ ALTER TABLE `tb_users`
 --
 
 --
--- Constraints for table `tb_bonuss`
+-- Constraints for table `tb_bonus`
 --
-ALTER TABLE `tb_bonuss`
-  ADD CONSTRAINT `tb_bonuss_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `tb_users` (`id_user`) ON UPDATE CASCADE;
+ALTER TABLE `tb_bonus`
+  ADD CONSTRAINT `tb_bonus_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `tb_users` (`id_user`) ON UPDATE CASCADE;
 
 --
--- Constraints for table `tb_pesanans`
+-- Constraints for table `tb_pesanan`
 --
-ALTER TABLE `tb_pesanans`
-  ADD CONSTRAINT `tb_pesanans_ibfk_1` FOREIGN KEY (`id_produk`) REFERENCES `tb_produks` (`id_produk`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `tb_pesanans_ibfk_2` FOREIGN KEY (`id_user`) REFERENCES `tb_users` (`id_user`) ON UPDATE CASCADE;
+ALTER TABLE `tb_pesanan`
+  ADD CONSTRAINT `tb_pesanan_ibfk_1` FOREIGN KEY (`id_produk`) REFERENCES `tb_produk` (`id_produk`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `tb_pesanan_ibfk_2` FOREIGN KEY (`id_user`) REFERENCES `tb_users` (`id_user`) ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
