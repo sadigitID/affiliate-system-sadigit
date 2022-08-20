@@ -1,23 +1,17 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Auth extends CI_Controller
+class auth extends CI_Controller
 {
 
     function __construct()
     {
         parent::__construct();
         $this->load->library('form_validation');
-        $this->load->model('auth_model');
     }
 
     public function index()
     {
-
-
-
-
-
 
         $this->load->view('template/auth/login');
     }
@@ -25,14 +19,7 @@ class Auth extends CI_Controller
 
     private function login()
     {
-        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
-        $this->form_validation->set_rules('password', 'Password', 'trim|required');
-        if ($this->form_validation->run() == false) {
-            $this->load->view('template/auth/login');
-        } else {
-            //validasi sukses
-            $this->login();
-        }
+        $this->load->view('template/auth/login');
     }
 
     public function register()
@@ -56,8 +43,7 @@ class Auth extends CI_Controller
         $this->form_validation->set_rules('link_yutub', 'Link Youtube', 'trim|required');
 
         if ($this->form_validation->run() == false) {
-            $data['title'] = 'Affilate | Registration';
-            $this->load->view('template/auth/register', $data);
+            $this->load->view('template/auth/register');
         } else {
             $data = [
                 'name'      => htmlspecialchars($this->input->post('name', true)),
@@ -82,5 +68,15 @@ class Auth extends CI_Controller
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Congratulation! your account has been created. Please Login!</div>');
             redirect('auth');
         }
+    }
+
+
+    public function forgot_password()
+    {
+        $this->load->view('template/auth/forgot-password');
+    }
+
+    public function logout()
+    {
     }
 }

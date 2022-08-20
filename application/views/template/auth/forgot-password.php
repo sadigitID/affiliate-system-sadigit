@@ -1,23 +1,11 @@
 <!DOCTYPE html>
-<!--
-Template Name: Metronic - Bootstrap 4 HTML, React, Angular 9 & VueJS Admin Dashboard Theme
-Author: KeenThemes
-Website: http://www.keenthemes.com/
-Contact: support@keenthemes.com
-Follow: www.twitter.com/keenthemes
-Dribbble: www.dribbble.com/keenthemes
-Like: www.facebook.com/keenthemes
-Purchase: https://1.envato.market/EA4JP
-Renew Support: https://1.envato.market/EA4JP
-License: You must have a valid license purchased only from themeforest(the above link) in order to legally use the theme for your project.
--->
 <html lang="en">
 <!--begin::Head-->
 
 <head>
     <base href="../../../../">
     <meta charset="utf-8" />
-    <title>Forgot Password | Keenthemes</title>
+    <title>Forgot Password | AFFILIATE</title>
     <meta name="description" content="Forgot password page example" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <link rel="canonical" href="https://keenthemes.com/metronic" />
@@ -69,10 +57,10 @@ License: You must have a valid license purchased only from themeforest(the above
                     <!--end::Aside Header-->
 
                     <!--begin::Aside Title-->
-                    <h3 class="font-weight-bolder text-center font-size-h4 text-dark-50  line-height-xl">
+                    <!-- <h3 class="font-weight-bolder text-center font-size-h4 text-dark-50  line-height-xl">
                         User Experience & Interface Design<br />
                         Strategy SaaS Solutions
-                    </h3>
+                    </h3> -->
                     <!--end::Aside Title-->
                 </div>
                 <!--end::Aside Top-->
@@ -86,21 +74,13 @@ License: You must have a valid license purchased only from themeforest(the above
 
             <!--begin::Content-->
             <div class="login-content flex-column-fluid d-flex flex-column p-10">
-                <!--begin::Top-->
-                <div class="text-right d-flex justify-content-center">
-                    <div class="top-forgot text-right d-flex justify-content-end pt-5 pb-lg-0 pb-10">
-                        <span class="font-weight-bold text-muted font-size-h4">Having issues?</span>
-                        <a href="javascript:;" class="font-weight-bold text-primary font-size-h4 ml-2" id="kt_login_signup">Get Help</a>
-                    </div>
-                </div>
-                <!--end::Top-->
 
                 <!--begin::Wrapper-->
                 <div class="d-flex flex-row-fluid flex-center">
                     <!--begin::Forgot-->
                     <div class="login-form">
                         <!--begin::Form-->
-                        <form class="form" id="kt_login_forgot_form" action="">
+                        <form class="form" id="kt_login_forgot_form" method="post" action="<?= base_url('auth/forgot_password'); ?>">
                             <!--begin::Title-->
                             <div class="pb-5 pb-lg-15">
                                 <h3 class="font-weight-bolder text-dark font-size-h2 font-size-h1-lg">Forgotten Password ?</h3>
@@ -117,7 +97,7 @@ License: You must have a valid license purchased only from themeforest(the above
                             <!--begin::Form group-->
                             <div class="form-group d-flex flex-wrap">
                                 <button type="submit" id="kt_login_forgot_form_submit_button" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-4">Submit</button>
-                                <a href="custom/pages/login/login-3/signin.html" id="kt_login_forgot_cancel" class="btn btn-light-primary font-weight-bolder font-size-h6 px-8 py-4 my-3">Cancel</a>
+                                <a href="<?= base_url('auth'); ?>" id="kt_login_forgot_cancel" class="btn btn-light-primary font-weight-bolder font-size-h6 px-8 py-4 my-3">Cancel</a>
                             </div>
                             <!--end::Form group-->
                         </form>
