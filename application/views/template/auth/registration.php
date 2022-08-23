@@ -81,7 +81,7 @@
                     <!--begin::Signin-->
                     <div class="login-form login-form-signup">
                         <!--begin::Form-->
-                        <form class="form" method="POST" action="<?= base_url('auth/register'); ?>" novalidate="novalidate" id="kt_login_signup_form">
+                        <form class="form" method="POST" action="<?= base_url('auth/registration'); ?>" novalidate="novalidate" id="kt_login_signup_form">
                             <!--begin: Wizard Step 1-->
                             <div class="pb-5" data-wizard-type="step-content" data-wizard-state="current">
                                 <!--begin::Title-->
@@ -97,80 +97,99 @@
                                 <!--begin::Form Group-->
                                 <div class="form-group">
                                     <label class="font-size-h6 font-weight-bolder text-dark">Nama</label>
-                                    <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="nama" id="nama" placeholder="Nama Lengkap" value="" required />
+                                    <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="nama_lengkap" id="nama_lengkap" placeholder="Nama Lengkap" value="<?= set_value('nama_lengkap') ?>" required />
+                                    <?= form_error('nama_lengkap', '<small class="text-danger pl-3">', '</small>'); ?>
                                 </div>
                                 <!--end::Form Group-->
 
                                 <!--begin::Form Group-->
                                 <div class="form-group">
                                     <label class="font-size-h6 font-weight-bolder text-dark">Password</label>
-                                    <input type="password" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="password" placeholder="Password" value="" required />
+                                    <input type="password" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="password" placeholder="Password" required />
+                                    <?= form_error('password', '<small class="text-danger pl-3">', '</small>'); ?>
                                 </div>
                                 <!--end::Form Group-->
                                 <!--begin::Form Group-->
                                 <div class="form-group">
                                     <label class="font-size-h6 font-weight-bolder text-dark">Provinsi</label>
-                                    <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="provinsi" placeholder="Provinsi" value="" required />
+                                    <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="provinsi" placeholder="Provinsi" value="<?= set_value('provinsi') ?>" required />
+                                    <?= form_error('provinsi', '<small class="text-danger pl-3">', '</small>'); ?>
                                 </div>
                                 <!--end::Form Group-->
                                 <!--begin::Form Group-->
                                 <div class="form-group">
                                     <label class="font-size-h6 font-weight-bolder text-dark">Kabupaten</label>
-                                    <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="kabupaten" placeholder="Kabupaten/Kota" value="" required />
+                                    <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="kabupaten" placeholder="Kabupaten/Kota" value="<?= set_value('kabupaten') ?>" required />
+                                    <?= form_error('kabupaten', '<small class="text-danger pl-3">', '</small>'); ?>
                                 </div>
                                 <!--end::Form Group-->
                                 <!--begin::Form Group-->
                                 <div class="form-group">
                                     <label class="font-size-h6 font-weight-bolder text-dark">Kecamatan</label>
-                                    <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="kecamatan" placeholder="Last Name" value="" required />
+                                    <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="kecamatan" placeholder="Kecamatan" value="<?= set_value('kecamatan') ?>" required />
+                                    <?= form_error('kecamatan', '<small class="text-danger pl-3">', '</small>'); ?>
                                 </div>
                                 <!--end::Form Group-->
 
                                 <!--begin::Form Group-->
                                 <div class="form-group">
                                     <label class="font-size-h6 font-weight-bolder text-dark">Alamat Lengkap</label>
-                                    <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="alamat_legkap" placeholder="ALamat Lengkap" value="" required />
+                                    <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="alamat_lengkap" placeholder="ALamat Lengkap" value="<?= set_value('alamat_lengkap') ?>" required />
+                                    <?= form_error('alamat_lengkap', '<small class="text-danger pl-3">', '</small>'); ?>
                                 </div>
                                 <!--end::Form Group-->
                                 <!--begin::Form Group-->
                                 <div class="form-group">
                                     <label class="font-size-h6 font-weight-bolder text-dark">Email</label>
-                                    <input type="email" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="email" placeholder="Email" value="" required />
+                                    <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="email" placeholder="Email" value="<?= set_value('email') ?>" />
+                                    <?= form_error('email', '<small class="text-danger pl-3">', '</small>'); ?>
                                 </div>
                                 <!--end::Form Group-->
 
                                 <!--begin::Form Group-->
                                 <div class="form-group">
                                     <label class="font-size-h6 font-weight-bolder text-dark">No Telephon</label>
-                                    <input type="tel" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="no_hp" placeholder="No Telephon" value="" required />
+                                    <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="no_hp" placeholder="No telephon" value="<?= set_value('no_hp') ?>" required />
+                                    <?= form_error('no_hp', '<small class="text-danger pl-3">', '</small>'); ?>
                                 </div>
                                 <!--end::Form Group-->
 
                                 <!--begin::Form Group-->
                                 <div class="form-group">
                                     <label class="font-size-h6 font-weight-bolder text-dark">Link Akun Tiktok</label>
-                                    <input type="tel" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="link_tiktok" placeholder="Link Akun Tiktok" value="" required />
+                                    <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="link_tiktok" placeholder="Link Akun Tiktok" value="<?= set_value('link_tiktok') ?>" required />
+                                    <?= form_error('link_tiktok', '<small class="text-danger pl-3">', '</small>'); ?>
                                 </div>
                                 <!--end::Form Group-->
                                 <!--begin::Form Group-->
                                 <div class="form-group">
                                     <label class="font-size-h6 font-weight-bolder text-dark">Link Akun Facebook</label>
-                                    <input type="tel" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="link_fb" placeholder="Link Akun Facebook" value="" required />
+                                    <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="link_fb" placeholder="Link Akun Facebook" value="<?= set_value('link_fb') ?>" required />
+                                    <?= form_error('link_fb', '<small class="text-danger pl-3">', '</small>'); ?>
+                                </div>
+                                <!--end::Form Group-->
+                                <!--begin::Form Group-->
+                                <div class="form-group">
+                                    <label class="font-size-h6 font-weight-bolder text-dark">Link Akun Instagram</label>
+                                    <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="link_ig" placeholder="Link Akun Instagram" value="<?= set_value('link_ig') ?>" required />
+                                    <?= form_error('link_ig', '<small class="text-danger pl-3">', '</small>'); ?>
                                 </div>
                                 <!--end::Form Group-->
                                 <!--begin::Form Group-->
                                 <div class="form-group">
                                     <label class="font-size-h6 font-weight-bolder text-dark">Link Akun Youtube</label>
-                                    <input type="tel" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="link_yutub" placeholder="Link Akun Youtube" value="" required />
+                                    <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="link_yutub" placeholder="Link Akun Youtube" value="<?= set_value('link_yutub') ?>" required />
+                                    <?= form_error('link_yutub', '<small class="text-danger pl-3">', '</small>'); ?>
                                 </div>
                                 <!--end::Form Group-->
+                                <div class="form-group d-flex flex-wrap">
+                                    <button type="submit" id="kt_login_forgot_form_submit_button" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-4">Submit</button>
+                                </div>
 
 
                                 <!--begin: Wizard Actions-->
                                 <div class="d-flex justify-content-between pt-3">
-                                    <div class="form-group d-flex flex-wrap">
-                                        <button type="submit" id="kt_login_forgot_form_submit_button" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-4">Submit</button>
-                                    </div>
+
                                 </div>
                                 <!--end: Wizard Actions-->
                             </div>

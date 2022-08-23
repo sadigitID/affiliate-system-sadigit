@@ -49,7 +49,7 @@
 
 <body id="kt_body" class="header-fixed header-mobile-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
 
-	<?php $this->load->view('template/layout') ?>
+	<?php $this->load->view('template_admin/layout') ?>
 	<script>
 		var HOST_URL = "https://preview.keenthemes.com/metronic/theme/html/tools/preview";
 	</script>

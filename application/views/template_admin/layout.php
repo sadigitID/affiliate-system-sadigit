@@ -1,14 +1,14 @@
 <!--begin::Main-->
 
-<?php $this->load->view('template/partials/_header-mobile') ?>
+<?php $this->load->view('template_admin/partials/_header-mobile') ?>
 <div class="d-flex flex-column flex-root">
 	<!--begin::Page-->
 	<div class="d-flex flex-row flex-column-fluid page">
-		<?php $this->load->view('template/partials/_aside') ?>
+		<?php $this->load->view('template_admin/partials/_aside') ?>
 
 		<!--begin::Wrapper-->
 		<div class="d-flex flex-column flex-row-fluid wrapper" id="kt_wrapper">
-			<?php $this->load->view('template/partials/_header') ?>
+			<?php $this->load->view('template_admin/partials/_header') ?>
 
 			<!--begin::Content-->
 			<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
@@ -20,7 +20,7 @@
 
 			<!--end::Content-->
 
-			<?php $this->load->view('template/partials/_footer') ?>
+			<?php $this->load->view('template_admin/partials/_footer') ?>
 		</div>
 
 		<!--end::Wrapper-->
