@@ -10,7 +10,6 @@ class Bonus extends CI_Controller
 
 		$this->load->library('form_validation');
 		$this->load->model('Umum_model', 'umum');
-
 	}
 
 	public function index()
@@ -147,7 +146,7 @@ class Bonus extends CI_Controller
 	function delete()
 	{
 		$id = $this->input->post('id_bonus', true);
-		$this->db->delete('tb_bonuss',['id_bonus'=>$id_bonus]);
+		$this->db->delete('tb_bonuss', ['id_bonus' => $id_bonus]);
 		echo json_encode('');
 	}
 }
