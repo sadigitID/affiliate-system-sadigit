@@ -49,9 +49,9 @@ class Login extends CI_Model
         $data = [
             'nama_lengkap' => htmlspecialchars($this->input->post('nama_lengkap', true)),
             'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
-            'province_id' => htmlspecialchars($this->input->post('province_id', true)),
-            'city_id' => htmlspecialchars($this->input->post('city_id', true)),
-            'district_id' => htmlspecialchars($this->input->post('district_id', true)),
+            'provinces' => htmlspecialchars($this->input->post('provinces', true)),
+            'cities' => htmlspecialchars($this->input->post('cities', true)),
+            'districts' => htmlspecialchars($this->input->post('districts', true)),
             'alamat_lengkap' => htmlspecialchars($this->input->post('alamat_lengkap', true)),
             'email' => htmlspecialchars($email),
             'no_hp' => htmlspecialchars($this->input->post('no_hp', true)),

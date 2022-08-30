@@ -47,9 +47,9 @@ class Auth extends CI_Controller
         $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[6]', [
             'min_length' => 'Password too short!'
         ]);
-        $this->form_validation->set_rules('province_id', 'Provinsi', 'trim|required');
-        $this->form_validation->set_rules('city_id', 'Kabupaten', 'trim|required');
-        $this->form_validation->set_rules('district_id', 'Kecamatan', 'trim|required');
+        // $this->form_validation->set_rules('province_id', 'Provinsi', 'trim|required');
+        // $this->form_validation->set_rules('city_id', 'Kabupaten', 'trim|required');
+        // $this->form_validation->set_rules('district_id', 'Kecamatan', 'trim|required');
         $this->form_validation->set_rules('alamat_lengkap', 'Alamat Lengkap', 'trim|required');
         $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[tb_users.email]', [
             'is_unique' => 'This email has already registered!'
