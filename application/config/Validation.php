@@ -4,9 +4,8 @@ namespace Config;
 
 use Login;
 
-class Validation
+class Validation extends 
 {
-
     public $registration = [
         [
             'field' => 'nama_lengkap',

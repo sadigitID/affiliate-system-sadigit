@@ -24,7 +24,7 @@
 	<!--begin::Footer-->
 	<div class="navi-separator mt-3"></div>
 	<div class="navi-footer px-8 py-5">
-		<a href="<?= base_url('login/out') ?>" class="btn btn-light-primary font-weight-bold">Sign Out</a>
+		<a href="<?= base_url('auth/logout') ?>" class="btn btn-light-primary font-weight-bold">Sign Out</a>
 	</div>
 
 	<!--end::Footer-->

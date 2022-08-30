@@ -112,22 +112,40 @@
                                 <!--begin::Form Group-->
                                 <div class="form-group">
                                     <label class="font-size-h6 font-weight-bolder text-dark">Provinsi</label>
-                                    <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="provinsi" placeholder="Provinsi" value="<?= set_value('provinsi') ?>" required />
-                                    <?= form_error('provinsi', '<small class="text-danger pl-3">', '</small>'); ?>
+                                    <select class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="province_id" id="provinces">
+                                    <option value="">--Pilih Provinsi--</option>
+                                        <?php 
+                                        if(!empty($provinces)){
+                                            foreach($provinces as $row){
+                                                echo '<option value="'.$row['province_id'].'">'.$row['province_name'].'</option>';
+                                            } 
+                                        }else {
+                                                echo '<option value="">--Tidak Ada Provinsi--</option>';
+                                            }
+                                        ?>        
+                                    </select>
+                                    <!-- <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="province_id" id="province_id" placeholder="Provinsi" value="<?= set_value('province_id') ?>" required />
+                                    <?= form_error('provinsi', '<small class="text-danger pl-3">', '</small>'); ?>  -->
                                 </div>
                                 <!--end::Form Group-->
                                 <!--begin::Form Group-->
                                 <div class="form-group">
                                     <label class="font-size-h6 font-weight-bolder text-dark">Kabupaten</label>
-                                    <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="kabupaten" placeholder="Kabupaten/Kota" value="<?= set_value('kabupaten') ?>" required />
-                                    <?= form_error('kabupaten', '<small class="text-danger pl-3">', '</small>'); ?>
+                                    <select class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="city_id" id="cities">
+                                        <option value="">--Pilih Kabupaten--</option>  
+                                    </select>
+                                    <!-- <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="city_id" id="city_id" placeholder="Kabupaten/Kota" value="<?= set_value('city_id') ?>" required />
+                                    <?= form_error('kabupaten', '<small class="text-danger pl-3">', '</small>'); ?> -->
                                 </div>
                                 <!--end::Form Group-->
                                 <!--begin::Form Group-->
                                 <div class="form-group">
                                     <label class="font-size-h6 font-weight-bolder text-dark">Kecamatan</label>
-                                    <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="kecamatan" placeholder="Kecamatan" value="<?= set_value('kecamatan') ?>" required />
-                                    <?= form_error('kecamatan', '<small class="text-danger pl-3">', '</small>'); ?>
+                                    <select class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="district_id" id="districts">
+                                        <option value="">--Pilih Kecamatan--</option>
+                                    </select>
+                                    <!-- <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="district_id" id="district_id" placeholder="Kecamatan" value="<?= set_value('district_id') ?>" required />
+                                    <?= form_error('kecamatan', '<small class="text-danger pl-3">', '</small>'); ?> -->
                                 </div>
                                 <!--end::Form Group-->
 
@@ -209,6 +227,7 @@
     <!--end::Main-->
 
 
+
     <script>
         var HOST_URL = "https://preview.keenthemes.com/metronic/theme/html/tools/preview";
     </script>
@@ -285,7 +304,68 @@
     <!--begin::Page Scripts(used by this page)-->
     <script src="<?= base_url(''); ?>/assets/js/pages/custom/login/login-3.js"></script>
     <!--end::Page Scripts-->
-</body>
-<!--end::Body-->
 
-</html>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#provinces').on('change', function(){
+                var province_id = $(this).val();
+                if(province_id){
+                    $.ajax({
+                        type:'POST',
+                        url:'<?= base_url('dropdowns/get_city'); ?>',
+                        data:'province_id='+province_id,
+                        success:function(data){
+                            $('#cities').html('<option value="">Pilih Kota</option>');
+                            var dataObj = jQuery.parseJSON(data);
+                            if(dataObj) {
+                                $(dataObj).each(function() {
+                                    var option = $('<option />');
+                                    option.attr('value', this.city_id).text(this.city_name);
+                                    $('#cities').append(option);
+                                });
+                            } else {
+                                $('#cities').html('<option value="">Kota tidak ditemukan</option>');
+                            }
+                        }
+                    });
+
+                } else {
+                    $('#cities').html('<option value="">Pilih Kota</option>');
+                    $('#districts').html('<option value="">Pilih Kecamatan</option>');
+                }
+        }); 
+        
+        $('#cities').on('change', function(){
+            var city_id = $(this).val();
+            if(city_id){
+                $.ajax({
+                    type:'POST',
+                    url:'<?= base_url('dropdowns/get_district'); ?>',
+                    data:'city_id='+city_id,
+                    success:function(data){
+                        $('#districts').html('<option value="">Pilih Kecamatan</option>');
+                        var dataObj = jQuery.parseJSON(data);
+                        if(dataObj) {
+                            $(dataObj).each(function() {
+                                var option = $('<option />');
+                                option.attr('value', this.district_id).text(this.district_name);
+                                $('#districts').append(option);
+                            });
+                        } else {
+                            $('#districts').html('<option value="">Kecamatan tidak ditemukan</option>');
+                        }
+                    }
+                });
+            } else {
+                $('#districts').html('<option value="">Pilih Kecamatan</option>');
+            }
+        });
+
+    </script>
+
+</body>
+//end::Body
+
+</html> 
+

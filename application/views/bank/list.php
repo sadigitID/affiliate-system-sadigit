@@ -1,31 +1,19 @@
-<div class="modal" id="modal_bonus" tabindex="-1">
+<div class="modal" id="modal_bank" tabindex="-1">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title">Bonus</h5>
+				<h5 class="modal-title">Bank</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-			<form id="form_bonus">
+			<form id="form_bank">
 				<div class="modal-body">
-					<input class="d-none" type="text" id="id_bonus" name="id_bonus" autocomplete="off" />
+					<input class="d-none" type="text" id="id" name="id" autocomplete="off" />
 					<div class="form-group row">
-						<label class="col-form-label col-4" for="id_user ">Nama user</label>
+						<label class="col-form-label col-4" for="nama_bank ">Bank</label>
 						<div class="col-8">
-							<input class="form-control " type="text" placeholder="masukan nama user" id="id_user" name="id_user" autocomplete="off" />
-						</div>
-					</div>
-					<div class="form-group row">
-						<label class="col-form-label col-4" for="jml_bonus ">jumlah bonus</label>
-						<div class="col-8">
-							<input class="form-control " type="text" placeholder="masukan jumlah bonus" id="jml_bonus" name="jml_bonus" autocomplete="off" />
-						</div>
-					</div>
-					<div class="form-group row">
-						<label class="col-form-label col-4" for="catatan ">catatan</label>
-						<div class="col-8">
-							<input class="form-control " type="text" placeholder="masukan catatan" id="catatan" name="catatan" autocomplete="off" />
+							<input class="form-control " type="text" placeholder="masukan nama Bank" id="nama_bank" name="nama_bank" autocomplete="off" />
 						</div>
 					</div>
 				</div>
@@ -42,10 +30,10 @@
 	<div class="card-header">
 		<div class="card-title">
 			<span class="card-icon"><i class="flaticon-squares-1 text-primary"></i></span>
-			<h3 class="card-label">data bonus affiliator</h3>
+			<h3 class="card-label">Referensi Bank</h3>
 		</div>
 		<div class="card-toolbar">
-			<span class="btn btn-light-primary" onclick="tambahBonus()">Tambah Bonus</span>
+			<span class="btn btn-light-primary" onclick="tambahBank()">Tambah bank</span>
 		</div>
 	</div>
 	<div class="card-body">
@@ -54,17 +42,12 @@
 			<thead>
 				<tr>
 					<th>No</th>
-					<th>Nama user</th>
-					<th>jumlah bonus</th>
-					<th>catatan</th>
+					<th>Bank</th>
 					<th>
 						<center>Aksi</center>
 					</th>
 				</tr>
 			</thead>
-			<tbody>
-
-			</tbody>
 		</table>
 		<!--end: Datatable-->
 	</div>
@@ -77,92 +60,75 @@
 			"responsive": true,
 			"processing": false,
 			"serverSide": true,
-			//"order": [],
+			"order": [],
 			"ajax": {
-				
-				"url": '<?= base_url('admin/bonus/tb_bonuss') ?>',
-				"type": "POST",
-				"dataType": "json",
-				"contentType": "application/json",
-				//"dataSrc": "data",
-				"data": function(d){
-					console.log(d);
-					return JSON.stringify(d.data)
-				}
+				"url": '<?= base_url('bank/dat_list/') ?>',
+				"type": "POST"
 			},
-			columns: [
-        		{ data: 0 },
-        		{ data: 1 },
-        		{ data: 2 },
-        		{ data: 3 },
-        		{ data: 4 }
-    ],
 			"ordering": false
 		});
 	})
 
-	const tambahBonus = async () => {
-		$('#form_bonus')[0].reset()
-		$('#modal_bonus').modal('show')
+	const tambahBank = async () => {
+		$('#form_bank')[0].reset()
+		$('#modal_bank').modal('show')
 	}
 
 	const _edit = async (id) => {
 		await $.ajax({
 			type: "post",
-			url: "<?= base_url('admin/bonus/getBonus') ?>",
+			url: "<?= base_url('bank/getBank') ?>",
 			data: {
 				id
 			},
 			dataType: "json",
 			success: function(res) {
-				$('#id_bonus').val(res.id)
-				$('#id_user').val(res.id_user)
-				$('#jml_bonus').val(res.jml_bonus)
-				$('#catatan').val(res.catatan)
-				$('#modal_bonus').modal('show')
+				$('#id').val(res.id)
+				$('#nama_bank').val(res.nama_bank)
+				$('#modal_bank').modal('show')
 			},
 			error(err) {
-				Swal.fire('', 'terjadi kesalahan saat mengambil data bonus', 'error');
+				Swal.fire('', 'terjadi kesalahan saat mengambil data bank', 'error');
 			}
 		});
 	}
 
 	const _delete = async (id) => {
-		const result = await confirm('apakah anda yakin akan menghapus bonus ini?')
+		const result = await confirm('apakah anda yakin akan menghapus bank ini?')
 
 		if (!result.isConfirmed) return;
 
 		await $.ajax({
 			type: "post",
-			url: "<?= base_url('admin/bonus/delete') ?>",
+			url: "<?= base_url('bank/delete') ?>",
 			data: {
 				id
 			},
 			dataType: "json",
 			success: function(res) {
-				Swal.fire('', 'berhasil menghapus bonus', 'success')
+				Swal.fire('', 'berhasil menghapus bank', 'success')
 				table.ajax.reload()
 			},
 			error(err) {
-				Swal.fire('', 'terjadi kesalahan saat menghapus bonus', 'error');
+				Swal.fire('', 'terjadi kesalahan saat menghapus bank', 'error');
 			}
 		});
 	}
 
 	const save = async (btn) => {
 		btn.prop('disabled', true)
-		const data = $('#form_bonus').serializeArray()
+		const data = $('#form_bank').serializeArray()
 		await $.ajax({
 			type: "post",
-			url: "<?= base_url('admin/bonus/save') ?>",
+			url: "<?= base_url('bank/save') ?>",
 			data,
 			dataType: "json",
 			success: function(res) {
 				if (res.status) {
-					$('#modal_bonus').modal('hide');
+					$('#modal_bank').modal('hide');
 					Swal.fire("", "Berhasil menyimpan data", "success");
 					table.ajax.reload();
-					$('#form_bonus').find('.text-danger').remove()
+					$('#form_bank').find('.text-danger').remove()
 				} else {
 
 					$.each(res.messages, function(key, value) {

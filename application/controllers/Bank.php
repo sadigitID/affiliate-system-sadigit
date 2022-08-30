@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Bonus extends CI_Controller
+class bank extends CI_Controller
 {
 
 	function __construct()
@@ -16,24 +16,25 @@ class Bonus extends CI_Controller
 	public function index()
 	{
 		$data = [
-			'view' => 'admin/bonus',
-			'active' => 'bonus',
-			'sub1' => 'bonus',
+			'view' => 'bank/list',
+			'active' => 'bank',
+			'sub1' => 'bank',
 		];
 
-		$this->load->view('template_admin/index', $data);
+		$this->load->view('template/index', $data);
 	}
 
-	public function tb_bonuss()
+
+	public function dat_list()
 	{
 		header('Content-Type: application/json');
 
 
-		$tabel = 'tb_bonus';
+		$tabel = 'dat_bank';
 		$column_order = array();
-		$coloumn_search = array('id_user', 'jml_bonus', 'catatan');
+		$coloumn_search = array('nama_bank');
 		$select = "*";
-		$order_by = array('id_bonus' => 'desc');
+		$order_by = array('id' => 'desc');
 		$join = [];
 		$where = [];
 		$group_by = [];
@@ -47,9 +48,7 @@ class Bonus extends CI_Controller
 			$hapus =  "<i class='fas fa-trash-alt btn btn-icon btn-light-danger' onclick={_delete('$list->id')}></i>";
 			$row = array();
 			$row[] = ++$no;
-			$row[] = $list->id_user;
-			$row[] = $list->jml_bonus;
-			$row[] = $list->catatan;
+			$row[] = $list->nama_bank;
 			$row[] = "<center>
                        $edit 
                        $hapus
@@ -58,7 +57,6 @@ class Bonus extends CI_Controller
 		}
 
 		$output = array(
-			//"draw" => @$_POST['draw'],
 			"draw" => @$_POST['draw'],
 			"recordsTotal" => $this->umum->count_all($tabel, $column_order, $coloumn_search, $order_by, $where, $join, $select, $group_by),
 			"recordsFiltered" => $this->umum->count_filtered($tabel, $column_order, $coloumn_search, $order_by, $where, $join, $select, $group_by),
@@ -68,14 +66,12 @@ class Bonus extends CI_Controller
 		echo json_encode($output);
 	}
 
-	function check_bonus()
+	function check_bank()
 	{
-		$id_user = $this->input->post('id_user');
-		$jml_bonus = $this->input->post('jml_bonus');
-		$catatan = $this->input->post('catatan');
-		$id_bonus = $this->input->post('id_bonus');
+		$nama_bank = $this->input->post('nama_bank');
+		$id = $this->input->post('id');
 
-		$check = $this->db->select('id_user', 'jml_bonus', 'catatan')->from('tb_bonuss')->where('id_bonus !=', $id_bonus)->where('id_user', $id_user)->get();
+		$check = $this->db->select('nama_bank')->from('dat_bank')->where('id !=', $id)->where('nama_bank', $nama_bank)->get();
 		if ($check->num_rows() > 0) {
 			return false;
 		}
@@ -86,24 +82,11 @@ class Bonus extends CI_Controller
 	{
 		$config = [
 			[
-				'field' => 'id_user',
-				'rules' => 'required',
+				'field' => 'nama_bank',
+				'rules' => 'required|callback_check_bank',
 				'errors' => [
-					'required' => 'nama user tidak boleh kosong'
-				]
-			],
-			[
-				'field' => 'jml_bonus',
-				'rules' => 'required',
-				'errors' => [
-					'required' => 'jumlah bonus tidak boleh kosong'
-				]
-			],
-			[
-				'field' => 'catatan',
-				'rules' => 'required',
-				'errors' => [
-					'required' => 'catatan tidak boleh kosong'
+					'required' => 'nama bank tidak boleh kosong',
+					"check_bank" => 'nama bank sudah ada yang menggunakan'
 				]
 			],
 		];
@@ -113,22 +96,20 @@ class Bonus extends CI_Controller
 		$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
 		if ($this->form_validation->run() == TRUE) {
 
-			$id_bonus = $this->input->post('id_bonus');
+			$id = $this->input->post('id');
 
 			$payloadData = [
-				'id_user' => $this->input->post('id_user'),
-				'jml_bonus' => $this->input->post('jml_bonus'),
-				'catatan' => $this->input->post('catatan'),
+				'nama_bank' => $this->input->post('nama_bank'),
 			];
 
-			if ($id_bonus == "") {
-				$this->db->insert('tb_bonuss', $payloadData);
+			if ($id == "") {
+				$this->db->insert('dat_bank', $payloadData);
 			} else {
-				$this->db->update('tb_bonuss', $payloadData, ['id_bonus' => $id_bonus]);
+				$this->db->update('dat_bank', $payloadData, ['id' => $id]);
 			}
 
 			$data['status'] = true;
-			$this->session->set_flashdata('daftar_bonus', 'Berhasil menyimpan bonus');
+			$this->session->set_flashdata('daftar_item', 'Berhasil menyimpan produk');
 		} else {
 			foreach ($_POST as $key => $value) {
 				$data['messages'][$key] = form_error($key);
@@ -137,17 +118,17 @@ class Bonus extends CI_Controller
 		echo json_encode($data);
 	}
 
-	function getBonus()
+	function getBank()
 	{
-		$id = $this->input->post('id_bonus', true);
-		$data = $this->db->get_where('tb_bonuss', ['id_bonus' => $id_bonus])->row();
+		$id = $this->input->post('id', true);
+		$data = $this->db->get_where('dat_bank', ['id' => $id])->row();
 		echo json_encode($data);
 	}
 
 	function delete()
 	{
-		$id = $this->input->post('id_bonus', true);
-		$this->db->delete('tb_bonuss',['id_bonus'=>$id_bonus]);
+		$id = $this->input->post('id', true);
+		$this->db->delete('dat_bank',['id'=>$id]);
 		echo json_encode('');
 	}
 }

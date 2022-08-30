@@ -60,8 +60,8 @@
 					</a>
 				</li>
 
-				<li class="menu-item <?= $active == 'admin/bonus' ? 'menu-item-active' : '' ?>" aria-haspopup="true">
-					<a href="<?= base_url('admin/bonus') ?>" class="menu-link">
+				<li class="menu-item <?= $active == 'admin/produk' ? 'menu-item-active' : '' ?>" aria-haspopup="true">
+					<a href="<?= base_url('admin/produk') ?>" class="menu-link">
 						<span class="svg-icon menu-icon">
 							<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
 								<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -70,7 +70,6 @@
 									<rect fill="#000000" x="6" y="11" width="9" height="2" rx="1" />
 									<rect fill="#000000" x="6" y="15" width="5" height="2" rx="1" />
 								</g>
-
 							</svg>
 
 						</span>
@@ -78,8 +77,8 @@
 					</a>
 				</li>
 
-				<li class="menu-item <?= $active == 'admin/bonus' ? 'menu-item-active' : '' ?>" aria-haspopup="true">
-					<a href="<?= base_url('admin/bonus') ?>" class="menu-link">
+				<li class="menu-item <?= $active == 'admin/pesanan' ? 'menu-item-active' : '' ?>" aria-haspopup="true">
+					<a href="<?= base_url('admin/pesanan') ?>" class="menu-link">
 						<span class="svg-icon menu-icon">
 							<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
 								<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
