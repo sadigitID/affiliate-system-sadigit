@@ -1,52 +1,8 @@
-<div class="modal" id="modal_produk" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Produk</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <form id="form_produk">
-        <div class="modal-body">
-          <input class="d-none" type="text" id="id_produk" name="id_produk" autocomplete="off" />
-          <div class="form-group row">
-            <label class="col-form-label col-4" for="nama_produk ">Nama Produk</label>
-            <div class="col-8">
-              <input class="form-control " type="text" placeholder="masukan nama produk" id="nama_produk" name="nama_produk" autocomplete="off" />
-            </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-form-label col-4" for="harga_produk ">Harga Produk</label>
-            <div class="col-8">
-              <input class="form-control " type="text" placeholder="masukan harga produk" id="harga_produk" name="harga_produk" autocomplete="off" />
-            </div>
-          </div>
-          <div class="form-group row">
-            <label class="col-form-label col-4" for="jml_komisi ">Jumlah Komisi</label>
-            <div class="col-8">
-              <input class="form-control " type="text" placeholder="masukan jumlah komisi" id="jml_komisi" name="jml_komisi" autocomplete="off" />
-            </div>
-          </div>
-          <input class="d-none" type="text" id="link_produk" name="link_produk" autocomplete="off" />
-        </div>
-      </form>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-light-primary" onclick="save($(this))">Simpan</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-      </div>
-    </div>
-  </div>
-</div>
-
 <div class="card card-custom">
   <div class="card-header">
     <div class="card-title">
       <span class="card-icon"><i class="flaticon-squares-1 text-primary"></i></span>
       <h3 class="card-label">Data Produk</h3>
-    </div>
-    <div class="card-toolbar">
-      <span class="btn btn-light-primary" onclick="tambahProduk()">Tambah Produk</span>
     </div>
   </div>
   <div class="card-body">
