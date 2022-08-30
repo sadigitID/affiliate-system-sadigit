@@ -5,66 +5,42 @@ class Dropdown extends CI_Model
 {
     public function __construct()
     {
-        parent::__construct(); //
-        $this->provinceTbl = 'provinces';
-        $this->cityTbl = 'cities';
-        $this->districtTbl = 'districts';
+        parent::__construct(); 
     }
     
-    public function get_province($params = array())
+    public function get_province()
     {
-        $this->db->select('p.province_id', '.province_name');
-        $this->db->from($this->provinceTbl . ' as p');
+        $this->db->select('*');
+        $q = $this->db->get('provinces');
+        $response = $q->result_array();
 
-        if (array_key_exists('conditions', $params)) {
-            foreach ($params['conditions'] as $key => $value) {
-                if (strpos($key, '.') !== false) {
-                    $this->db->where($key, $value);
-                } else {
-                    $this->db->where('p.'. $key, $value);
-                }
-            }
-        }
-        $query = $this->db->get();
-        return $query->result_array();
-
+        return $response;
     }
     
-    public function get_city($params = array())
+    public function get_city($postData)
     {
-        $this->db->select('c.city_id', 'c.city_name');
-        $this->db->from($this->cityTbl . ' as c');
+        $response = array();
 
-        if (array_key_exists('conditions', $params)) {
-            foreach ($params['conditions'] as $key => $value) {
-                if (strpos($key, '.') !== false) {
-                    $this->db->where($key, $value);
-                } else {
-                    $this->db->where('c.'. $key, $value);
-                }
-            }
-        }
-        $query = $this->db->get();
-        return $query->result_array();
+        $this->db->select('city_id, city_name');
+        $this->db->where('provinces', $postData['provinces']);
+        $q = $this->db->get('cities');
+        $response = $q->result_array();
+
+        return $response;
+        
     }
     
     
-    public function get_district($params = array())
+    public function get_district($postData)
     {
-        $this->db->select('d.district_id', 'd.district_name');
-        $this->db->from($this->districtTbl . ' as d');
+        $response = array();
 
-        if (array_key_exists('conditions', $params)) {
-            foreach ($params['conditions'] as $key => $value) {
-                if (strpos($key, '.') !== false) {
-                    $this->db->where($key, $value);
-                } else {
-                    $this->db->where('d.'. $key, $value);
-                }
-            }
-        }
-        $query = $this->db->get();
-        return $query->result_array();
+        $this->db->select('district_id, district_name');
+        $this->db->where('cities', $postData['cities']);
+        $q = $this->db->get('districts');
+        $response = $q->result_array();
+
+        return $response;
     }
     
 }

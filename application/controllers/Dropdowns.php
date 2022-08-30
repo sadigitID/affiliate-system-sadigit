@@ -16,28 +16,18 @@ class Dropdowns extends CI_Controller
 
     public function get_city()
     {
-        $cities = array();
-        $province_id = $this->input->post('province_id');
-        if ($province_id) {
-            $con['conditions'] = array(
-                'province_id' => $province_id
-            );
-            $cities = $this->dropdowns->get_city($con);
-        }
-        echo json_encode($cities);
+        $postData = $this->input->post();
+
+        $data = $this->dropdown->get_city($postData);
+        echo json_encode($data);
     }
 
     public function get_district()
     {
-        $districts = array();
-        $city_id = $this->input->post('city_id');
-        if ($city_id) {
-            $con['conditions'] = array(
-                'city_id' => $city_id
-            );
-            $districts = $this->dropdowns->get_district($con);
-        }
-        echo json_encode($districts);
+        $postData = $this->input->post();
+
+        $data = $this->dropdown->get_district($postData);
+        echo json_encode($data);
     }
 
 
