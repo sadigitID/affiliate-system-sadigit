@@ -2,14 +2,11 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 class Dropdown extends CI_Model
-{
-    public function __construct()
-    {
-        parent::__construct(); 
-    }
-    
+{   
     public function get_province()
     {
+        $response = array();
+
         $this->db->select('*');
         $q = $this->db->get('provinces');
         $response = $q->result_array();
