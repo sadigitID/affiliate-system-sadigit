@@ -9,6 +9,7 @@ class Auth extends CI_Controller
         parent::__construct();
         $this->load->library('form_validation');
         $this->load->model('Login');
+        $this->load->model('dropdown');
     }
 
     public function index()
@@ -39,7 +40,6 @@ class Auth extends CI_Controller
 
     public function registration()
     {
-        $this->load->model('Dropdown');
         // if ($this->session->userdata('email')) {
         //     redirect('affiliator/affiliator');
         // }
@@ -60,9 +60,10 @@ class Auth extends CI_Controller
         $this->form_validation->set_rules('link_fb', 'Link Facebook', 'trim');
         $this->form_validation->set_rules('link_ig', 'Link Instagram', 'trim');
         $this->form_validation->set_rules('link_yutub', 'Link Youtube', 'trim');
+        $data['provinces'] = $this->dropdown->get_province();
 
         if ($this->form_validation->run($this) == false) {
-            $this->load->view('template/auth/registration');
+            $this->load->view('template/auth/registration', $data);
         } else {
             $this->Login->registration(); //
         }

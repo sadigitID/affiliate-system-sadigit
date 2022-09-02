@@ -80,7 +80,6 @@
                     <!--begin::Forgot-->
                     <div class="login-form">
                         <!--begin::Form-->
-
                         <form class="form" id="kt_login_forgot_form" method="post" action="<?= base_url('auth/forgot_password'); ?>">
                             <!--begin::Title-->
                             <div class="pb-5 pb-lg-15">
@@ -88,8 +87,6 @@
                                 <p class="text-muted font-weight-bold font-size-h4">Enter your email to reset your password</p>
                             </div>
                             <!--end::Title-->
-                            
-                            <?= $this->session->flashdata('message'); ?>
 
                             <!--begin::Form group-->
                             <div class="form-group">
@@ -184,9 +181,9 @@
     <!--end::Global Config-->
 
     <!--begin::Global Theme Bundle(used by all pages)-->
-    <!-- <script src="<?= base_url(''); ?>/assets/plugins/global/plugins.bundle.js"></script>
+    <script src="<?= base_url(''); ?>/assets/plugins/global/plugins.bundle.js"></script>
     <script src="<?= base_url(''); ?>/assets/plugins/custom/prismjs/prismjs.bundle.js"></script>
-    <script src="<?= base_url(''); ?>/assets/js/scripts.bundle.js"></script> -->
+    <script src="<?= base_url(''); ?>/assets/js/scripts.bundle.js"></script>
     <!--end::Global Theme Bundle-->
 
 

@@ -9,13 +9,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <link rel="canonical" href="https://keenthemes.com/metronic" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
-
-
+    
     <link href="<?= base_url(''); ?>/assets/css/pages/login/login-3.css" rel="stylesheet" type="text/css" />
-
     <link href="<?= base_url(''); ?>/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
     <link href="<?= base_url(''); ?>/assets/plugins/custom/prismjs/prismjs.bundle.css" rel="stylesheet" type="text/css" />
-    <link href="<?= base_url(''); ?>/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
 
     <link href="<?= base_url(''); ?>/assets/css/themes/layout/header/base/light.css" rel="stylesheet" type="text/css" />
     <link href="<?= base_url(''); ?>/assets/css/themes/layout/header/menu/light.css" rel="stylesheet" type="text/css" />
@@ -25,7 +22,6 @@
     <link rel="shortcut icon" href="<?= base_url(''); ?>/assets/media/logos/favicon.ico" />
 
 </head>
-
 <body id="kt_body" class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
 
     <div class="d-flex flex-column flex-root">
@@ -59,6 +55,7 @@
                                         <a href="<?= base_url('auth'); ?>" class="text-primary font-weight-bolder">Sign In</a>
                                     </div>
                                 </div>
+
                                 <div class="form-group">
                                     <label class="font-size-h6 font-weight-bolder text-dark">Nama</label>
                                     <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="nama_lengkap" id="nama_lengkap" placeholder="Nama Lengkap" value="<?= set_value('nama_lengkap') ?>" required />
@@ -70,81 +67,78 @@
                                     <input type="password" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="password" placeholder="Password" required />
                                     <?= form_error('password', '<small class="text-danger pl-3">', '</small>'); ?>
                                 </div>
-
+                                
                                 <div class="form-group">
                                     <label class="font-size-h6 font-weight-bolder text-dark">Provinsi</label>
-                                    <select id="provinces" name="provinces" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6">
-                                        <option>-- Pilih Provinsi --</option>
+                                    <select name="provinces" id="provinces" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6">
+                                    <option >-- Pilih Provinsi --</option>
+
                                         <?php
-                                        foreach ($provinces as $row) {
-                                            echo '<option value="' . $row->province_id . '">' . $row->province_name . '</option>';
-                                        }
-                                        ?>
+                                        foreach($provinces as $province){ ?>
+                                            <option value="<?=$province->province_id?>"><?=$province->province_name?></option>
+                                        <?php } ?>  
                                     </select>
-                                    <!-- <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="province_id" id="province_id" placeholder="Provinsi" value="<?= set_value('province_id') ?>" required />
                                     <?= form_error('provinsi', '<small class="text-danger pl-3">', '</small>'); ?>  -->
                                 </div>
-
+                                
                                 <div class="form-group">
                                     <label class="font-size-h6 font-weight-bolder text-dark">Kabupaten</label>
-                                    <select id="cities" name="cities" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6">
-                                        <option>-- Pilih Kabupaten --</option>
+                                    <select name="cities" id="cities" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" >
+                                        <option>-- Pilih Kabupaten/Kota --</option>  
                                     </select>
-                                    <!-- <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="city_id" id="city_id" placeholder="Kabupaten/Kota" value="<?= set_value('city_id') ?>" required />
                                     <?= form_error('kabupaten', '<small class="text-danger pl-3">', '</small>'); ?> -->
                                 </div>
-
+                                
                                 <div class="form-group">
                                     <label class="font-size-h6 font-weight-bolder text-dark">Kecamatan</label>
-                                    <select id="districts" name="districts" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6">
+                                    <select name="districts" id="districts" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6">
                                         <option value="">-- Pilih Kecamatan --</option>
                                     </select>
-                                    <!-- <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="district_id" id="district_id" placeholder="Kecamatan" value="<?= set_value('district_id') ?>" required />
                                     <?= form_error('kecamatan', '<small class="text-danger pl-3">', '</small>'); ?> -->
                                 </div>
-
+                               
                                 <div class="form-group">
                                     <label class="font-size-h6 font-weight-bolder text-dark">Alamat Lengkap</label>
                                     <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="alamat_lengkap" placeholder="ALamat Lengkap" value="<?= set_value('alamat_lengkap') ?>" required />
                                     <?= form_error('alamat_lengkap', '<small class="text-danger pl-3">', '</small>'); ?>
                                 </div>
-
+                                
                                 <div class="form-group">
                                     <label class="font-size-h6 font-weight-bolder text-dark">Email</label>
                                     <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="email" placeholder="Email" value="<?= set_value('email') ?>" />
                                     <?= form_error('email', '<small class="text-danger pl-3">', '</small>'); ?>
                                 </div>
-
+                                
                                 <div class="form-group">
                                     <label class="font-size-h6 font-weight-bolder text-dark">No Telephon</label>
                                     <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="no_hp" placeholder="No telephon" value="<?= set_value('no_hp') ?>" required />
                                     <?= form_error('no_hp', '<small class="text-danger pl-3">', '</small>'); ?>
                                 </div>
-
+                                
                                 <div class="form-group">
                                     <label class="font-size-h6 font-weight-bolder text-dark">Link Akun Tiktok</label>
                                     <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="link_tiktok" placeholder="Link Akun Tiktok" value="<?= set_value('link_tiktok') ?>" required />
                                     <?= form_error('link_tiktok', '<small class="text-danger pl-3">', '</small>'); ?>
                                 </div>
-
+                               
                                 <div class="form-group">
                                     <label class="font-size-h6 font-weight-bolder text-dark">Link Akun Facebook</label>
                                     <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="link_fb" placeholder="Link Akun Facebook" value="<?= set_value('link_fb') ?>" required />
                                     <?= form_error('link_fb', '<small class="text-danger pl-3">', '</small>'); ?>
                                 </div>
-
+                               
                                 <div class="form-group">
                                     <label class="font-size-h6 font-weight-bolder text-dark">Link Akun Instagram</label>
                                     <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="link_ig" placeholder="Link Akun Instagram" value="<?= set_value('link_ig') ?>" required />
                                     <?= form_error('link_ig', '<small class="text-danger pl-3">', '</small>'); ?>
                                 </div>
-
+                               
                                 <div class="form-group">
                                     <label class="font-size-h6 font-weight-bolder text-dark">Link Akun Youtube</label>
                                     <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="link_yutub" placeholder="Link Akun Youtube" value="<?= set_value('link_yutub') ?>" required />
                                     <?= form_error('link_yutub', '<small class="text-danger pl-3">', '</small>'); ?>
                                 </div>
-
+                               
                                 <div class="form-group d-flex flex-wrap">
                                     <button type="submit" id="kt_login_forgot_form_submit_button" class="btn btn-primary font-weight-bolder font-size-h6 px-8 py-4 my-3 mr-4">Submit</button>
                                 </div>
@@ -169,7 +163,7 @@
                 var province_id = $('#provinces').val();
                 if (province_id != '') {
                     $.ajax({
-                        url: "<?php echo base_url(); ?>Dropdowns/get_city",
+                        url: "<?php echo base_url(); ?>dropdowns/get_city",
                         method: "POST",
                         data: {
                             province_id: province_id
@@ -179,7 +173,7 @@
                         }
                     });
                 } else {
-                    $('#cities').html('<option value="">Select City</option>');
+                    $('#cities').html('<option value="">-- Pilih Kabupaten/Kota --</option>');
                     $('#districts').html('<option value="">-- Pilih Kecamatan --</option>');
                 }
             });
@@ -188,7 +182,7 @@
                 var city_id = $('#cities').val();
                 if (city_id != '') {
                     $.ajax({
-                        url: "<?php echo base_url(); ?>Dropdowns/get_district",
+                        url: "<?php echo base_url(); ?>dropdowns/get_district",
                         method: "POST",
                         data: {
                             city_id: city_id
@@ -204,6 +198,8 @@
 
 
         });
+    </script>
+
     </script>
 
     <script>
@@ -270,14 +266,22 @@
             "font-family": "Poppins"
         };
     </script>
+    <!--end::Global Config-->
 
     <!--begin::Global Theme Bundle(used by all pages)-->
     <script src="<?= base_url(''); ?>/assets/plugins/global/plugins.bundle.js"></script>
     <script src="<?= base_url(''); ?>/assets/plugins/custom/prismjs/prismjs.bundle.js"></script>
     <script src="<?= base_url(''); ?>/assets/js/scripts.bundle.js"></script>
+    <!--end::Global Theme Bundle-->
 
+
+    <!--begin::Page Scripts(used by this page)-->
     <script src="<?= base_url(''); ?>/assets/js/pages/custom/login/login-3.js"></script>
+    <!--end::Page Scripts-->
+
 
 </body>
+<!-- end::Body -->
 
-</html>
+</html> 
+
