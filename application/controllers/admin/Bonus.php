@@ -29,7 +29,7 @@ class Bonus extends CI_Controller
 		header('Content-Type: application/json');
 
 
-		$tabel = 'tb_bonuss';
+		$tabel = 'tb_bonus';
 		$column_order = array();
 		$coloumn_search = array('id_user', 'jml_bonus', 'catatan');
 		$select = "*";
@@ -58,6 +58,7 @@ class Bonus extends CI_Controller
 		}
 
 		$output = array(
+			//"draw" => @$_POST['draw'],
 			"draw" => @$_POST['draw'],
 			"recordsTotal" => $this->umum->count_all($tabel, $column_order, $coloumn_search, $order_by, $where, $join, $select, $group_by),
 			"recordsFiltered" => $this->umum->count_filtered($tabel, $column_order, $coloumn_search, $order_by, $where, $join, $select, $group_by),

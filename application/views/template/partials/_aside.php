@@ -1,4 +1,3 @@
-<?php $config = $this->db->get('config')->row() ?>
 <!--begin::Aside-->
 <div class="aside aside-left aside-fixed d-flex flex-column flex-row-auto" id="kt_aside">
 
@@ -6,8 +5,8 @@
 	<div class="brand flex-column-auto" id="kt_brand">
 
 		<!--begin::Logo-->
-		<a href="<?= base_url('home') ?>" class="brand-logo">
-			<h4 style="color:white;"><?= $config->short_name ?></h4>
+		<a href="<?= base_url('affiliator') ?>" class="brand-logo">
+			<h4 style="color:white;">SADIGIT Affiliate</h4>
 		</a>
 
 		<!--end::Logo-->
@@ -43,8 +42,8 @@
 			<!--begin::Menu Nav-->
 			<ul class="menu-nav">
 
-				<li class="menu-item <?= $active == 'bank' ? 'menu-item-active' : '' ?>" aria-haspopup="true">
-					<a href="<?= base_url('bank') ?>" class="menu-link">
+				<li class="menu-item <?= $active == 'affiliator' ? 'menu-item-active' : '' ?>" aria-haspopup="true">
+					<a href="<?= base_url('affiliator') ?>" class="menu-link">
 						<span class="svg-icon menu-icon">
 							<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
 								<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -57,9 +56,66 @@
 							</svg>
 
 						</span>
-						<span class="menu-text">Data Bank</span>
+						<span class="menu-text">Dashboard</span>
 					</a>
 				</li>
+
+				<li class="menu-item <?= $active == 'affiliator/bank' ? 'menu-item-active' : '' ?>" aria-haspopup="true">
+					<a href="<?= base_url('affiliator/bank') ?>" class="menu-link">
+						<span class="svg-icon menu-icon">
+							<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+								<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+									<polygon points="0 0 24 0 24 24 0 24" />
+									<path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
+									<rect fill="#000000" x="6" y="11" width="9" height="2" rx="1" />
+									<rect fill="#000000" x="6" y="15" width="5" height="2" rx="1" />
+								</g>
+
+							</svg>
+
+						</span>
+						<span class="menu-text">Produk</span>
+					</a>
+				</li>
+
+				<li class="menu-item <?= $active == 'affiliator/bank' ? 'menu-item-active' : '' ?>" aria-haspopup="true">
+					<a href="<?= base_url('affiliator/bank') ?>" class="menu-link">
+						<span class="svg-icon menu-icon">
+							<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+								<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+									<polygon points="0 0 24 0 24 24 0 24" />
+									<path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
+									<rect fill="#000000" x="6" y="11" width="9" height="2" rx="1" />
+									<rect fill="#000000" x="6" y="15" width="5" height="2" rx="1" />
+								</g>
+
+							</svg>
+
+						</span>
+						<span class="menu-text">Pesanan Affiliate</span>
+					</a>
+				</li>
+
+				<li class="menu-item <?= $active == 'affiliator/bank' ? 'menu-item-active' : '' ?>" aria-haspopup="true">
+					<a href="<?= base_url('affiliator/bank') ?>" class="menu-link">
+						<span class="svg-icon menu-icon">
+							<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+								<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+									<polygon points="0 0 24 0 24 24 0 24" />
+									<path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
+									<rect fill="#000000" x="6" y="11" width="9" height="2" rx="1" />
+									<rect fill="#000000" x="6" y="15" width="5" height="2" rx="1" />
+								</g>
+
+							</svg>
+
+						</span>
+						<span class="menu-text">Pengaturan</span>
+
+
+					</a>
+				</li>
+
 			</ul>
 
 			<!--end::Menu Nav-->
