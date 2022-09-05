@@ -1,3 +1,4 @@
+<!-- start of modal tambah bonus -->
 <div class="modal" id="modal_bonus" tabindex="-1">
 	<div class="modal-dialog">
 		<div class="modal-content">
@@ -11,23 +12,33 @@
 				<div class="modal-body">
 					<input class="d-none" type="text" id="id_bonus" name="id_bonus" autocomplete="off" />
 					<div class="form-group row">
-						<label class="col-form-label col-4" for="id_user ">Nama user</label>
+						<label class="col-form-label col-4" for="id_user ">Nama Affiliator</label>
 						<div class="col-8">
-							<input class="form-control " type="text" placeholder="masukan nama user" id="id_user" name="id_user" autocomplete="off" />
+							<!-- <input class="form-control " type="text" placeholder="Nama Affiliator" id="id_user" name="id_user" autocomplete="off" /> -->
+							<select class="form-control" id="id_user" name="id_user" required>
+								<option value="">No Selected</option>
+
+								<?php
+								foreach($namaUser as $nama){ ?>
+									<option value="<?=$nama->id_user?>"><?=$nama->nama_lengkap?></option>
+								<?php } ?>
+
+							</select>
 						</div>
 					</div>
 					<div class="form-group row">
-						<label class="col-form-label col-4" for="jml_bonus ">jumlah bonus</label>
+						<label class="col-form-label col-4" for="jml_bonus ">Jumlah Bonus</label>
 						<div class="col-8">
-							<input class="form-control " type="text" placeholder="masukan jumlah bonus" id="jml_bonus" name="jml_bonus" autocomplete="off" />
+							<input class="form-control " type="text" placeholder="Jumlah Bonus" id="jml_bonus" name="jml_bonus" autocomplete="off" />
 						</div>
 					</div>
 					<div class="form-group row">
-						<label class="col-form-label col-4" for="catatan ">catatan</label>
+						<label class="col-form-label col-4" for="catatan ">Catatan</label>
 						<div class="col-8">
-							<input class="form-control " type="text" placeholder="masukan catatan" id="catatan" name="catatan" autocomplete="off" />
+							<input class="form-control " type="text" placeholder="Catatan" id="catatan" name="catatan" autocomplete="off" />
 						</div>
 					</div>
+					<input class="form-control " type="hidden" placeholder="tanggal_bonus" id="tanggal_bonus" name="tanggal_bonus" autocomplete="off" value="<?php echo date("Y-m-d") ?>"/>
 				</div>
 			</form>
 			<div class="modal-footer">
@@ -37,6 +48,45 @@
 		</div>
 	</div>
 </div>
+<!-- end of modal tambah bonus -->
+
+<!-- start of export data pdf -->
+<div class="modal" id="modal_printPDF" tabindex="-1">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Print PDF</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<form id="form_printPDF">
+				<div class="modal-body">
+					<div class="form-group row">
+						<label class="col-form-label col-4" for="id_user ">Dari Tanggal</label>
+						<div class="col-8">
+							<input type="date" class="form-control" name="tgl_awal">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-form-label col-4" for="id_user ">Sampai Tanggal</label>
+						<div class="col-8">
+							<input type="date" class="form-control" name="tgl_akhir">
+						</div>
+					</div>
+
+				</div>
+			</form>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-light-primary" onclick="save($(this))">Simpan</button>
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- end of export data pdf -->
+
+
 
 <div class="card card-custom">
 	<div class="card-header">
@@ -57,6 +107,7 @@
 					<th>Nama user</th>
 					<th>jumlah bonus</th>
 					<th>catatan</th>
+					<th>tanggal bonus</th>
 					<th>
 						<center>Aksi</center>
 					</th>
@@ -66,37 +117,43 @@
 
 			</tbody>
 		</table>
+		<!-- Button print PDF -->
+		<div class="card-toolbar">
+			<span class="btn btn-light-primary svg-icon svg-icon-primary svg-icon-2x" onclick="printPDF()"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Devices\Printer.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+				<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+					<rect x="0" y="0" width="24" height="24"/>
+					<path d="M16,17 L16,21 C16,21.5522847 15.5522847,22 15,22 L9,22 C8.44771525,22 8,21.5522847 8,21 L8,17 L5,17 C3.8954305,17 3,16.1045695 3,15 L3,8 C3,6.8954305 3.8954305,6 5,6 L19,6 C20.1045695,6 21,6.8954305 21,8 L21,15 C21,16.1045695 20.1045695,17 19,17 L16,17 Z M17.5,11 C18.3284271,11 19,10.3284271 19,9.5 C19,8.67157288 18.3284271,8 17.5,8 C16.6715729,8 16,8.67157288 16,9.5 C16,10.3284271 16.6715729,11 17.5,11 Z M10,14 L10,20 L14,20 L14,14 L10,14 Z" fill="#000000"/>
+					<rect fill="#000000" opacity="0.3" x="8" y="2" width="8" height="2" rx="1"/>
+				</g>
+			</svg><!--end::Svg Icon--> Print PDF</span>
+		</div>
+		<!-- Button print Excel -->
+		<div class="card-toolbar">
+			<span class="btn btn-light-primary svg-icon svg-icon-primary svg-icon-2x" onclick="printExcel()"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Devices\Printer.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+				<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+					<rect x="0" y="0" width="24" height="24"/>
+					<path d="M16,17 L16,21 C16,21.5522847 15.5522847,22 15,22 L9,22 C8.44771525,22 8,21.5522847 8,21 L8,17 L5,17 C3.8954305,17 3,16.1045695 3,15 L3,8 C3,6.8954305 3.8954305,6 5,6 L19,6 C20.1045695,6 21,6.8954305 21,8 L21,15 C21,16.1045695 20.1045695,17 19,17 L16,17 Z M17.5,11 C18.3284271,11 19,10.3284271 19,9.5 C19,8.67157288 18.3284271,8 17.5,8 C16.6715729,8 16,8.67157288 16,9.5 C16,10.3284271 16.6715729,11 17.5,11 Z M10,14 L10,20 L14,20 L14,14 L10,14 Z" fill="#000000"/>
+					<rect fill="#000000" opacity="0.3" x="8" y="2" width="8" height="2" rx="1"/>
+				</g>
+			</svg><!--end::Svg Icon--> Print Excel</span>
+		</div>
 		<!--end: Datatable-->
 	</div>
 </div>
 <!--end::Card-->
+
 <script>
 	let table
 	$(document).ready(async () => {
 		table = $('#table').DataTable({
 			"responsive": true,
-			"processing": false,
+			"processing": true,
 			"serverSide": true,
-			//"order": [],
+			"order": [],
 			"ajax": {
-				
-				"url": '<?= base_url('admin/bonus/tb_bonuss') ?>',
-				"type": "POST",
-				"dataType": "json",
-				"contentType": "application/json",
-				//"dataSrc": "data",
-				"data": function(d){
-					console.log(d);
-					return JSON.stringify(d.data)
-				}
+				"url": '<?= base_url('admin/bonus/tb_bonus/') ?>',
+				"type": "POST"
 			},
-			columns: [
-        		{ data: 0 },
-        		{ data: 1 },
-        		{ data: 2 },
-        		{ data: 3 },
-        		{ data: 4 }
-    ],
 			"ordering": false
 		});
 	})
@@ -106,19 +163,29 @@
 		$('#modal_bonus').modal('show')
 	}
 
-	const _edit = async (id) => {
+	const printPDF = async () => {
+		$('#form_printPDF')[0].reset()
+		$('#modal_printPDF').modal('show')
+	}
+
+	function printExcel() {
+		window.location.href="<?= base_url('admin/bonus_excel'); ?>";
+	}
+
+	const _edit = async (id_bonus) => {
 		await $.ajax({
 			type: "post",
 			url: "<?= base_url('admin/bonus/getBonus') ?>",
 			data: {
-				id
+				id_bonus
 			},
 			dataType: "json",
 			success: function(res) {
-				$('#id_bonus').val(res.id)
+				$('#id_bonus').val(res.id_bonus)
 				$('#id_user').val(res.id_user)
 				$('#jml_bonus').val(res.jml_bonus)
 				$('#catatan').val(res.catatan)
+				$('#tanggal_bonus').val(res.tanggal_bonus)
 				$('#modal_bonus').modal('show')
 			},
 			error(err) {
@@ -127,7 +194,7 @@
 		});
 	}
 
-	const _delete = async (id) => {
+	const _delete = async (id_bonus) => {
 		const result = await confirm('apakah anda yakin akan menghapus bonus ini?')
 
 		if (!result.isConfirmed) return;
@@ -136,7 +203,7 @@
 			type: "post",
 			url: "<?= base_url('admin/bonus/delete') ?>",
 			data: {
-				id
+				id_bonus
 			},
 			dataType: "json",
 			success: function(res) {

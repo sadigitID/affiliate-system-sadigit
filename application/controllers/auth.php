@@ -60,9 +60,13 @@ class Auth extends CI_Controller
         $this->form_validation->set_rules('link_fb', 'Link Facebook', 'trim');
         $this->form_validation->set_rules('link_ig', 'Link Instagram', 'trim');
         $this->form_validation->set_rules('link_yutub', 'Link Youtube', 'trim');
+        $data['provinces'] = $this->dropdown->get_province();
 
         if ($this->form_validation->run($this) == false) {
+<<<<<<< HEAD
             $data['provinces'] = $this->dropdown->get_province();
+=======
+>>>>>>> 844b6fc915150adcc1f9045feebe59535ce66786
             $this->load->view('template/auth/registration', $data);
         } else {
             $this->Login->registration(); //

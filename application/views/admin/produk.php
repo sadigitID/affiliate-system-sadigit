@@ -19,13 +19,13 @@
 					<div class="form-group row">
 						<label class="col-form-label col-4" for="harga_produk ">Harga produk</label>
 						<div class="col-8">
-							<input class="form-control " type="text" placeholder="masukan harga produk" id="harga_produk" name="harga_produk" autocomplete="off" />
+							<input class="form-control " type="number" placeholder="masukan harga produk" id="harga_produk" name="harga_produk" autocomplete="off" />
 						</div>
 					</div>
 					<div class="form-group row">
 						<label class="col-form-label col-4" for="jml_komisi ">Jumlah komisi</label>
 						<div class="col-8">
-							<input class="form-control " type="text" placeholder="masukan jumlah komisi" id="jml_komisi" name="jml_komisi" autocomplete="off" />
+							<input class="form-control " type="number" placeholder="masukan jumlah komisi" id="jml_komisi" name="jml_komisi" autocomplete="off" />
 						</div>
 					</div>
                     <div class="form-group row">
