@@ -17,21 +17,23 @@ class Bonus extends CI_Controller
 	{
 		$data = [
 			'view' => 'admin/bonus',
-			'active' => 'bonus',
-			'sub1' => 'bonus',
+			'active' => 'admin/bonus',
+			'sub1' => 'admin/bonus',
 		];
+
+		$data['namaUser'] = $this->umum->getNama();
 
 		$this->load->view('template_admin/index', $data);
 	}
 
-	public function tb_bonuss()
+	public function tb_bonus()
 	{
 		header('Content-Type: application/json');
 
 
 		$tabel = 'tb_bonus';
 		$column_order = array();
-		$coloumn_search = array('id_user', 'jml_bonus', 'catatan');
+		$coloumn_search = array('id_user', 'jml_bonus', 'catatan', 'tanggal_bonus');
 		$select = "*";
 		$order_by = array('id_bonus' => 'desc');
 		$join = [];
@@ -42,14 +44,14 @@ class Bonus extends CI_Controller
 		$no = @$_POST['start'];
 
 		foreach ($list as $list) {
-			// akuntansi_journal_edit
-			$edit =  "<i class='fas fa-edit btn btn-icon btn-light-primary' onclick={_edit('$list->id')}></i>";
-			$hapus =  "<i class='fas fa-trash-alt btn btn-icon btn-light-danger' onclick={_delete('$list->id')}></i>";
+			$edit =  "<i class='fas fa-edit btn btn-icon btn-light-primary' onclick={_edit('$list->id_bonus')}></i>";
+			$hapus =  "<i class='fas fa-trash-alt btn btn-icon btn-light-danger' onclick={_delete('$list->id_bonus')}></i>";
 			$row = array();
 			$row[] = ++$no;
 			$row[] = $list->id_user;
 			$row[] = $list->jml_bonus;
 			$row[] = $list->catatan;
+			$row[] = $list->tanggal_bonus;
 			$row[] = "<center>
                        $edit 
                        $hapus
@@ -58,7 +60,6 @@ class Bonus extends CI_Controller
 		}
 
 		$output = array(
-			//"draw" => @$_POST['draw'],
 			"draw" => @$_POST['draw'],
 			"recordsTotal" => $this->umum->count_all($tabel, $column_order, $coloumn_search, $order_by, $where, $join, $select, $group_by),
 			"recordsFiltered" => $this->umum->count_filtered($tabel, $column_order, $coloumn_search, $order_by, $where, $join, $select, $group_by),
@@ -73,9 +74,10 @@ class Bonus extends CI_Controller
 		$id_user = $this->input->post('id_user');
 		$jml_bonus = $this->input->post('jml_bonus');
 		$catatan = $this->input->post('catatan');
+		$tanggal_bonus = $this->input->post('tanggal_bonus');
 		$id_bonus = $this->input->post('id_bonus');
 
-		$check = $this->db->select('id_user', 'jml_bonus', 'catatan')->from('tb_bonuss')->where('id_bonus !=', $id_bonus)->where('id_user', $id_user)->get();
+		$check = $this->db->select('id_user', 'jml_bonus', 'catatan', 'tanggal_bonus')->from('tb_bonus')->where('id_bonus !=', $id_bonus)->where('id_user', $id_user)->get();
 		if ($check->num_rows() > 0) {
 			return false;
 		}
@@ -119,16 +121,16 @@ class Bonus extends CI_Controller
 				'id_user' => $this->input->post('id_user'),
 				'jml_bonus' => $this->input->post('jml_bonus'),
 				'catatan' => $this->input->post('catatan'),
+				'tanggal_bonus' => $this->input->post('tanggal_bonus'),
 			];
 
 			if ($id_bonus == "") {
-				$this->db->insert('tb_bonuss', $payloadData);
+				$this->db->insert('tb_bonus', $payloadData);
 			} else {
-				$this->db->update('tb_bonuss', $payloadData, ['id_bonus' => $id_bonus]);
+				$this->db->update('tb_bonus', $payloadData, ['id_bonus' => $id_bonus]);
 			}
 
 			$data['status'] = true;
-			$this->session->set_flashdata('daftar_bonus', 'Berhasil menyimpan bonus');
 		} else {
 			foreach ($_POST as $key => $value) {
 				$data['messages'][$key] = form_error($key);
@@ -139,15 +141,15 @@ class Bonus extends CI_Controller
 
 	function getBonus()
 	{
-		$id = $this->input->post('id_bonus', true);
-		$data = $this->db->get_where('tb_bonuss', ['id_bonus' => $id_bonus])->row();
+		$id_bonus = $this->input->post('id_bonus', true);
+		$data = $this->db->get_where('tb_bonus', ['id_bonus' => $id_bonus])->row();
 		echo json_encode($data);
 	}
 
 	function delete()
 	{
-		$id = $this->input->post('id_bonus', true);
-		$this->db->delete('tb_bonuss',['id_bonus'=>$id_bonus]);
+		$id_bonus = $this->input->post('id_bonus', true);
+		$this->db->delete('tb_bonus',['id_bonus'=>$id_bonus]);
 		echo json_encode('');
 	}
 }

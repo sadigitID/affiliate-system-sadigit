@@ -114,10 +114,10 @@
                                     <label class="font-size-h6 font-weight-bolder text-dark">Provinsi</label>
                                     <select name="provinces" id="provinces" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6">
                                     <option >-- Pilih Provinsi --</option>
-                                        <?php 
-                                            foreach($provinces as $province){
-                                                echo '<option value="'.$province['province_id'].'">'.$province['province_name'].'</option>';
-                                        } ?>      
+                                        <?php
+                                        foreach($provinces as $province){ ?>
+                                            <option value="<?=$province->province_id?>"><?=$province->province_name?></option>
+                                        <?php } ?>  
                                     </select>
                                     <!-- <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="province_id" id="province_id" placeholder="Provinsi" value="<?= set_value('province_id') ?>" required />
                                     <?= form_error('provinsi', '<small class="text-danger pl-3">', '</small>'); ?>  -->
@@ -221,18 +221,18 @@
     </div>
     <!--end::Main-->
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type='text/javascript'>
         var baseURL= "<?php echo base_url();?>";
 
         $(document).ready(function(){
-            $('provinces').change(function(){
-                var provinces = $(this).val();
+            $('#provinces').change(function(){
+                var province_id = $('#provinces').val();
 
                 $.ajax({
                     url: '<?= base_url() ?>dropdown/get_province',
                     method: 'post',
-                    data: {provinces: provinces},
+                    data: {province_id: province_id},
                     dataType: 'json',
                     success: function(response){
                         $('#cities').find('option').not(':first').remove();
@@ -246,12 +246,12 @@
             });
 
             $('#cities').change(function(){
-                var cities = $(this).val();
+                var city_id = $('#cities').val();
 
                 $.ajax({
                     url: '<?= base_url() ?>dropdown/get_city',
                     method: 'post',
-                    data: {cities: cities},
+                    data: {city_id: city_id},
                     dataType: 'json',
                     success: function(response){
                         $('#districts').find('option').not(':first').remove();
@@ -265,6 +265,52 @@
 
         });
 
+    </script> -->
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+
+            $('#provinces').change(function() {
+                var province_id = $('#provinces').val();
+                if (province_id != '') {
+                    $.ajax({
+                        url: "<?php echo base_url(); ?>dropdowns/get_city",
+                        method: "POST",
+                        data: {
+                            province_id: province_id
+                        },
+                        success: function(data) {
+                            $('#cities').html(data);
+                        }
+                    });
+                } else {
+                    $('#cities').html('<option value="">-- Pilih Kabupaten/Kota --</option>');
+                    $('#districts').html('<option value="">-- Pilih Kecamatan --</option>');
+                }
+            });
+
+            $('#cities').change(function() {
+                var city_id = $('#cities').val();
+                if (city_id != '') {
+                    $.ajax({
+                        url: "<?php echo base_url(); ?>dropdowns/get_district",
+                        method: "POST",
+                        data: {
+                            city_id: city_id
+                        },
+                        success: function(data) {
+                            $('#districts').html(data);
+                        }
+                    });
+                } else {
+                    $('#districts').html('<option value="">-- Pilih Kecamatan --</option>');
+                }
+            });
+
+
+        });
     </script>
 
     <script>

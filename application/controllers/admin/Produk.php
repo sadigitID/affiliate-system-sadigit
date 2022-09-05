@@ -17,8 +17,8 @@ class Produk extends CI_Controller
 	{
 		$data = [
 			'view' => 'admin/produk',
-			'active' => 'produk',
-			'sub1' => 'produk',
+			'active' => 'admin/produk',
+			'sub1' => 'admin/produk',
 		];
 
 		$this->load->view('template_admin/index', $data);
@@ -59,7 +59,6 @@ class Produk extends CI_Controller
 		}
 
 		$output = array(
-			//"draw" => @$_POST['draw'],
 			"draw" => @$_POST['draw'],
 			"recordsTotal" => $this->umum->count_all($tabel, $column_order, $coloumn_search, $order_by, $where, $join, $select, $group_by),
 			"recordsFiltered" => $this->umum->count_filtered($tabel, $column_order, $coloumn_search, $order_by, $where, $join, $select, $group_by),
@@ -138,7 +137,6 @@ class Produk extends CI_Controller
 			}
 
 			$data['status'] = true;
-			$this->session->set_flashdata('daftar_produk', 'Berhasil menyimpan produk');
 		} else {
 			foreach ($_POST as $key => $value) {
 				$data['messages'][$key] = form_error($key);

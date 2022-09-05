@@ -9,6 +9,7 @@ class Auth extends CI_Controller
         parent::__construct();
         $this->load->library('form_validation');
         $this->load->model('Login');
+        $this->load->model('dropdown');
     }
 
     public function index()
@@ -47,9 +48,9 @@ class Auth extends CI_Controller
         $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[6]', [
             'min_length' => 'Password too short!'
         ]);
-        $this->form_validation->set_rules('province_id', 'Provinsi', 'trim|required');
-        $this->form_validation->set_rules('city_id', 'Kabupaten', 'trim|required');
-        $this->form_validation->set_rules('district_id', 'Kecamatan', 'trim|required');
+        $this->form_validation->set_rules('provinces', 'Provinsi', 'trim|required');
+        $this->form_validation->set_rules('cities', 'Kabupaten', 'trim|required');
+        $this->form_validation->set_rules('districts', 'Kecamatan', 'trim|required');
         $this->form_validation->set_rules('alamat_lengkap', 'Alamat Lengkap', 'trim|required');
         $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[tb_users.email]', [
             'is_unique' => 'This email has already registered!'
@@ -61,7 +62,8 @@ class Auth extends CI_Controller
         $this->form_validation->set_rules('link_yutub', 'Link Youtube', 'trim');
 
         if ($this->form_validation->run($this) == false) {
-            $this->load->view('template/auth/registration');
+            $data['provinces'] = $this->dropdown->get_province();
+            $this->load->view('template/auth/registration', $data);
         } else {
             $this->Login->registration(); //
         }
