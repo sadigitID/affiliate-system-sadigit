@@ -106,9 +106,9 @@ CREATE TABLE `tb_users` (
   `link_yutub` varchar(50) DEFAULT NULL,
   `role` enum('Admin','Affiliator') DEFAULT NULL,
   `is_active` int(1) NOT NULL,
-  `created_at` date NULL,
-  `updated_at` date NULL,
-  `deleted_at` date NULL
+  `created_at` int(11) DEFAULT current_timestamp(),
+  `updated_at` int(11) DEFAULT current_timestamp(),
+  `deleted_at` int(11) DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
