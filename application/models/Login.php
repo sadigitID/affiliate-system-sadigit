@@ -24,7 +24,7 @@ class Login extends CI_Model
                     ];
                     $this->session->set_userdata($data);
                     if ($user['role'] == 'Admin') {
-                        redirect('admin/produk');
+                        redirect('admin/administrator');
                     } else {
                         redirect('affiliator/affiliator');
                     }
@@ -49,9 +49,9 @@ class Login extends CI_Model
         $data = [
             'nama_lengkap' => htmlspecialchars($this->input->post('nama_lengkap', true)),
             'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
-            'provinces' => htmlspecialchars($this->input->post('provinces', true)),
-            'cities' => htmlspecialchars($this->input->post('cities', true)),
-            'districts' => htmlspecialchars($this->input->post('districts', true)),
+            'province_id' => htmlspecialchars($this->input->post('province_id', true)),
+            'city_id' => htmlspecialchars($this->input->post('city_id', true)),
+            'district_id' => htmlspecialchars($this->input->post('district_id', true)),
             'alamat_lengkap' => htmlspecialchars($this->input->post('alamat_lengkap', true)),
             'email' => htmlspecialchars($email),
             'no_hp' => htmlspecialchars($this->input->post('no_hp', true)),
@@ -63,7 +63,7 @@ class Login extends CI_Model
             'is_active' => 0,
             'created_at' => time(),
             'updated_at' => time(),
-            'deleted_at' => 0
+            'deleted_at' => time(),
         ];
 
         //token
@@ -87,7 +87,7 @@ class Login extends CI_Model
     private function _sendEmail($token, $type)
     {
 
-        $config = array(
+        $config = Array(
             'protocol' => 'smtp',
             'smtp_host' => 'smtp.mailtrap.io',
             'smtp_port' => 2525,
@@ -95,7 +95,7 @@ class Login extends CI_Model
             'smtp_pass' => '6ea6946ee15b3b',
             'crlf' => "\r\n",
             'newline' => "\r\n"
-        );
+          );
 
         $this->load->library('email');
         $this->email->initialize($config);
@@ -203,7 +203,7 @@ class Login extends CI_Model
         $this->form_validation->set_rules('password1', 'Password', 'trim|required|min_length[6]|matches[password2]');
         $this->form_validation->set_rules('password2', 'Password', 'trim|required|min_length[6]|matches[password1]');
         if ($this->form_validation->run() == false) {
-            $this->load->view('template/auth/change-password');
+            $this->load->view('auth/change-password');
         } else {
             $password = password_hash($this->input->post('password1'), PASSWORD_DEFAULT);
             $email = $this->session->userdata('reset_email');

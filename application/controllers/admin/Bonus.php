@@ -21,7 +21,7 @@ class Bonus extends CI_Controller
 			'sub1' => 'admin/bonus',
 		];
 
-		$data['namaUser'] = $this->umum->getNama();
+		$data['user'] = $this->db->get('tb_users')->result();
 
 		$this->load->view('template_admin/index', $data);
 	}

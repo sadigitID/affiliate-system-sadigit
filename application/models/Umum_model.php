@@ -8,30 +8,6 @@ class Umum_model extends CI_Model
         parent::__construct();
     }
 
-    function getNama(){
-        
-        // $this->db->select('tb_bonus.*, tb_users.id_user AS id_user, tb_users.nama_lengkap,');
-        // $this->db->join('tb_users', 'tb_bonus.id_user = tb_users.id_user');
-        // $this->db->from('tb_bonus');
-        // $query = $this->db->get();
-        // return $query->result();
-
-        $this->db->select('*');
-        $this->db->from('tb_users');
-        $this->db->join('tb_bonus', 'tb_users.id_user = tb_bonus.id_user');
-        $join_query = $this->db->get();
-
-        return $join_query->result();
-
-        // $this->db->select('*');
-        // $q = $this->db->get('tb_bonus');
-        // $this->db->join('tb_users', 'tb_bonus.id_user = tb_users.id_user');
-
-        // $response = $q->result_array();
-
-        // return $response;
-    }
-
     private function _get_datatables_query($tabel, $column_order, $coloumn_search, $order_by, $where, $join, $select, $group_by)
     {
         $this->db->select($select);

@@ -15,19 +15,18 @@ class Auth extends CI_Controller
     public function index()
     {
         // if ($this->session->userdata('email')) {
-        //     redirect('affiliator/affiliator');
+        //     redirect('auth');
         // }
 
         $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
         $this->form_validation->set_rules('password', 'Password', 'trim|required');
 
         if ($this->form_validation->run() == false) {
-            $this->load->view('template/auth/login');
+            $this->load->view('auth/login');
         } else {
             // validasinya success
             $this->login();
         }
-
     }
 
 
@@ -41,16 +40,16 @@ class Auth extends CI_Controller
     public function registration()
     {
         // if ($this->session->userdata('email')) {
-        //     redirect('affiliator/affiliator');
+        //     redirect('auth');
         // }
 
         $this->form_validation->set_rules('nama_lengkap', 'Nama', 'required|trim');
         $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[6]', [
             'min_length' => 'Password too short!'
         ]);
-        $this->form_validation->set_rules('provinces', 'Provinsi', 'trim|required');
-        $this->form_validation->set_rules('cities', 'Kabupaten', 'trim|required');
-        $this->form_validation->set_rules('districts', 'Kecamatan', 'trim|required');
+        $this->form_validation->set_rules('province_id', 'Provinsi', 'trim|required');
+        $this->form_validation->set_rules('city_id', 'Kabupaten', 'trim|required');
+        $this->form_validation->set_rules('district_id', 'Kecamatan', 'trim|required');
         $this->form_validation->set_rules('alamat_lengkap', 'Alamat Lengkap', 'trim|required');
         $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[tb_users.email]', [
             'is_unique' => 'This email has already registered!'
@@ -60,14 +59,10 @@ class Auth extends CI_Controller
         $this->form_validation->set_rules('link_fb', 'Link Facebook', 'trim');
         $this->form_validation->set_rules('link_ig', 'Link Instagram', 'trim');
         $this->form_validation->set_rules('link_yutub', 'Link Youtube', 'trim');
-        $data['provinces'] = $this->dropdown->get_province();
 
         if ($this->form_validation->run($this) == false) {
-<<<<<<< HEAD
             $data['provinces'] = $this->dropdown->get_province();
-=======
->>>>>>> 844b6fc915150adcc1f9045feebe59535ce66786
-            $this->load->view('template/auth/registration', $data);
+            $this->load->view('auth/registration', $data);
         } else {
             $this->Login->registration(); //
         }
@@ -84,11 +79,10 @@ class Auth extends CI_Controller
     {
         $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
         if ($this->form_validation->run() == false) {
-            $this->load->view('template/auth/forgot-password');
+            $this->load->view('auth/forgot-password');
         } else {
             $this->Login->forgot_password();
         }
-
     }
 
     public function resetpassword()
@@ -109,43 +103,9 @@ class Auth extends CI_Controller
 
     public function blocked()
     {
-        $this->load->view('template/auth/blocked');
+        $this->load->view('auth/blocked');
     }
 
 
-    public function change_password()
-    {
-        $data['tb_users'] = $this->db->get_where('tb_users', ['email' => $this->session->userdata('email')])->row_array();
-
-        $this->form_validation->set_rules('password_lama', 'Current Password', 'required|trim');
-        $this->form_validation->set_rules('new_password1', 'New Password', 'required|trim|min_length[6]|matches[new_password2]');
-        $this->form_validation->set_rules('new_password2', 'Confirm New Password', 'required|trim|min_length[6]|matches[new_password1]');
-
-        if ($this->form_validation->run() == false) {
-            $this->load->view('template/auth/change-password', $data);
-        } else {
-
-            $password_lama = $this->input->post('password_lama');
-            $new_password = $this->input->post('new_password1');
-
-            if (!password_verify($password_lama, $data['tb_users']['password'])) {
-                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Wrong current password!</div>');
-                redirect('template/auth/change-password');
-            } else {
-                if ($password_lama == $this->input->post('new_password1')) {
-                    $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">New password cannot be the same as current password!</div>');
-                    redirect('template/auth/change-password');
-                } else {
-                    $password_baru = password_hash($this->input->post('new_password1'), PASSWORD_DEFAULT);
-                    $this->db->set('password', $password_baru);
-                    $this->db->where('email', $this->session->userdata('email'));
-                    $this->db->update('tb_users');
-
-                    $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Password changed!</div>');
-                    redirect('template/auth/change-password');
-                }
-            }
-            //$this->Login->change_password();
-        }
-    }
+    
 }
