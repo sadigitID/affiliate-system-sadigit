@@ -3,28 +3,31 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Dropdowns extends CI_Controller
 {
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->model('Dropdown');
+    }
+
     public function index()
     {
-        $this->load->model('dropdown');
-        $this->load->helper('url');
-        $data['provinces'] = $this->dropdown->get_province();
-        $this->load->view('template/auth/registration', $data);
+        $data['provinces'] = $this->Dropdown->get_province();
+        $this->load->view('template/auth/registration', $data); 
+    
     }
 
     public function get_city()
     {
-        $postData = $this->input->post();
-        $this->load->model('dropdown');
-        $data = $this->dropdown->get_city($postData);
-        echo json_encode($data);
+        if ($this->input->post('province_id')) {
+            echo $this->Dropdown->get_city($this->input->post('province_id'));
+        }
     }
 
     public function get_district()
     {
-        $postData = $this->input->post();
-        $this->load->model('dropdown');
-
-        $data = $this->dropdown->get_district($postData);
-        echo json_encode($data);
+        if ($this->input->post('city_id')) {
+            echo $this->Dropdown->get_district($this->input->post('city_id'));
+        }
     }
+
 }

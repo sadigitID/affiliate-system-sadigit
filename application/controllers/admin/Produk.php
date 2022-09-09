@@ -17,8 +17,8 @@ class Produk extends CI_Controller
 	{
 		$data = [
 			'view' => 'admin/produk',
-			'active' => 'produk',
-			'sub1' => 'produk',
+			'active' => 'admin/produk',
+			'sub1' => 'admin/produk',
 		];
 
 		$this->load->view('template_admin/index', $data);

@@ -1,4 +1,3 @@
-<?php $config = $this->db->get('config')->row() ?>
 <!--begin::Aside-->
 <div class="aside aside-left aside-fixed d-flex flex-column flex-row-auto" id="kt_aside">
 
@@ -6,8 +5,8 @@
 	<div class="brand flex-column-auto" id="kt_brand">
 
 		<!--begin::Logo-->
-		<a href="<?= base_url('affiliator/affiliator') ?>" class="brand-logo">
-			<h4 style="color:white;"><?= $config->short_name ?></h4>
+		<a href="<?= base_url('affiliator') ?>" class="brand-logo">
+			<h4 style="color:white;">SADIGIT Affiliate</h4>
 		</a>
 
 		<!--end::Logo-->
@@ -45,25 +44,44 @@
 
 				<li class="menu-item <?= $active == 'affiliator/affiliator' ? 'menu-item-active' : '' ?>" aria-haspopup="true">
 					<a href="<?= base_url('affiliator/affiliator') ?>" class="menu-link">
-						<span class="svg-icon menu-icon svg-icon-primary">
-							<!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Layout\Layout-4-blocks.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+						<span class="svg-icon menu-icon">
+							<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
 								<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-									<rect x="0" y="0" width="24" height="24" />
-									<rect fill="#000000" x="4" y="4" width="7" height="7" rx="1.5" />
-									<path d="M5.5,13 L9.5,13 C10.3284271,13 11,13.6715729 11,14.5 L11,18.5 C11,19.3284271 10.3284271,20 9.5,20 L5.5,20 C4.67157288,20 4,19.3284271 4,18.5 L4,14.5 C4,13.6715729 4.67157288,13 5.5,13 Z M14.5,4 L18.5,4 C19.3284271,4 20,4.67157288 20,5.5 L20,9.5 C20,10.3284271 19.3284271,11 18.5,11 L14.5,11 C13.6715729,11 13,10.3284271 13,9.5 L13,5.5 C13,4.67157288 13.6715729,4 14.5,4 Z M14.5,13 L18.5,13 C19.3284271,13 20,13.6715729 20,14.5 L20,18.5 C20,19.3284271 19.3284271,20 18.5,20 L14.5,20 C13.6715729,20 13,19.3284271 13,18.5 L13,14.5 C13,13.6715729 13.6715729,13 14.5,13 Z" fill="#000000" opacity="0.3" />
+									<polygon points="0 0 24 0 24 24 0 24" />
+									<path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
+									<rect fill="#000000" x="6" y="11" width="9" height="2" rx="1" />
+									<rect fill="#000000" x="6" y="15" width="5" height="2" rx="1" />
 								</g>
+
 							</svg>
-							<!--end::Svg Icon-->
+
 						</span>
 						<span class="menu-text">Dashboard</span>
 					</a>
 				</li>
-				<!-- END DASHBOARD -->
 
 				<li class="menu-section ">
 					<h4 class="menu-text">Menu</h4>
 					<i class="menu-icon ki ki-bold-more-hor icon-md"></i>
 				</li>
+
+				<!-- <li class="menu-item <?= $active == 'affiliator/bank' ? 'menu-item-active' : '' ?>" aria-haspopup="true">
+					<a href="<?= base_url('affiliator/bank') ?>" class="menu-link">
+						<span class="svg-icon menu-icon">
+							<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+								<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+									<polygon points="0 0 24 0 24 24 0 24" />
+									<path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
+									<rect fill="#000000" x="6" y="11" width="9" height="2" rx="1" />
+									<rect fill="#000000" x="6" y="15" width="5" height="2" rx="1" />
+								</g>
+
+							</svg>
+
+						</span>
+						<span class="menu-text">Data Bank</span>
+					</a>
+				</li> -->
 
 				<!-- START PRODUK MENU -->
 				<li class="menu-item <?= $active == 'affiliator/produk' ? 'menu-item-active' : '' ?>" aria-haspopup="true">
@@ -161,52 +179,85 @@
 				</li>
 				<!-- END PESANAN MENU -->
 
-				<!-- START PENGATURAN MENU -->
-				<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-					<a href="javascript:;" class="menu-link menu-toggle">
-						<span class="svg-icon menu-icon svg-icon-primary">
-							<!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\General\Settings-2.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-								<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-									<rect x="0" y="0" width="24" height="24" />
-									<path d="M5,8.6862915 L5,5 L8.6862915,5 L11.5857864,2.10050506 L14.4852814,5 L19,5 L19,9.51471863 L21.4852814,12 L19,14.4852814 L19,19 L14.4852814,19 L11.5857864,21.8994949 L8.6862915,19 L5,19 L5,15.3137085 L1.6862915,12 L5,8.6862915 Z M12,15 C13.6568542,15 15,13.6568542 15,12 C15,10.3431458 13.6568542,9 12,9 C10.3431458,9 9,10.3431458 9,12 C9,13.6568542 10.3431458,15 12,15 Z" fill="#000000" />
-								</g>
-							</svg>
-							<!--end::Svg Icon-->
-						</span>
-						<span class="menu-text">Pengaturan</span>
-						<i class="menu-arrow"></i>
-					</a>
-					<div class="menu-submenu">
-						<i class="menu-arrow"></i>
-						<ul class="menu-subnav">
-							<li class="menu-item menu-item-parent" aria-haspopup="true">
-								<span class="menu-link">
-									<span class="menu-text">Pengaturan</span>
-								</span>
-							</li>
-							<li class="menu-item <?= $active == 'affiliator/' ? 'menu-item-active' : '' ?>" aria-haspopup="true">
-								<a href="<?= base_url('affiliator/') ?>" class="menu-link">
-									<i class="menu-bullet menu-bullet-dot">
-										<span>
-										</span>
-									</i>
-									<span class="menu-text">Akun Affiliate</span>
-								</a>
-							</li>
 
-							<li class="menu-item <?= $active == 'affiliator/rekening' ? 'menu-item-active' : '' ?>" aria-haspopup="true">
-								<a href="<?= base_url('affiliator/rekening') ?>" class="menu-link">
+				<!-- start menu -->
+				<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                	<a href="javascript:;" class="menu-link menu-toggle">
+				  		<span class="svg-icon menu-icon">
+								<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+									<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+										<polygon points="0 0 24 0 24 24 0 24" />
+										<path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
+										<rect fill="#000000" x="6" y="11" width="9" height="2" rx="1" />
+										<rect fill="#000000" x="6" y="15" width="5" height="2" rx="1" />
+									</g>
+								</svg>
+						</span>
+							<span class="menu-text">Pengaturan</span>
+							<i class="menu-arrow"></i>
+					</a>
+                  	<div class="menu-submenu">
+                    	<i class="menu-arrow"></i>
+                    		<ul class="menu-subnav">
+                      			<li class="menu-item menu-item-parent" aria-haspopup="true">
+                        			<span class="menu-link">
+										<span class="menu-text">Bonus</span>
+									</span>
+                      			</li>
+								<li class="menu-item <?= $active == 'affiliator/Rekening' ? 'menu-item-active' : '' ?>" aria-haspopup="true">
+								<a href="<?= base_url('affiliator/Rekening') ?>" class="menu-link">
 									<i class="menu-bullet menu-bullet-dot">
 										<span>
+
 										</span>
 									</i>
-									<span class="menu-text">Alamat Rekening</span>
+									<span class="menu-text">Rekening</span>
 								</a>
-							</li>
-						</ul>
-					</div>
-				</li>
-				<!-- END PENGATURAN MENU -->
+                      			</li>
+
+								<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+                        			<a href="javascript:;" class="menu-link menu-toggle">
+                          				<i class="menu-bullet menu-bullet-dot">
+                            				<span></span>
+                          				</i>
+                          				<span class="menu-text">Account</span>
+                          				<i class="menu-arrow"></i>
+                        			</a>
+									<div class="menu-submenu">
+										<i class="menu-arrow"></i>
+										<ul class="menu-subnav">
+											<li class="menu-item <?= $active == 'affiliator/Profile' ? 'menu-item-active' : '' ?>" aria-haspopup="true">
+												<a href="<?= base_url('affiliator/Profile') ?>" class="menu-link">
+												<i class="menu-bullet menu-bullet-line">
+													<span></span>
+												</i>
+												<span class="menu-text">Profile</span>
+												</a>
+											</li>
+											<li class="menu-item" aria-haspopup="true">
+											<a href="<?= base_url('affiliator/Edit_profile') ?>" class="menu-link">
+												<i class="menu-bullet menu-bullet-line">
+													<span></span>
+												</i>
+												<span class="menu-text">Edit Profile</span>
+												</a>
+											</li>
+											<li class="menu-item <?= $active == 'affiliator/Change_password' ? 'menu-item-active' : '' ?>" aria-haspopup="true">
+												<a href="<?= base_url('affiliator/Change_password') ?>" class="menu-link">
+												<i class="menu-bullet menu-bullet-line">
+													<span></span>
+												</i>
+												<span class="menu-text">Change Password</span>
+												</a>
+											</li>
+										</ul>
+									</div>
+								</li>
+                    		</ul>
+                  	</div>
+                </li>
+				<!-- end menu -->
+
 			</ul>
 
 			<!--end::Menu Nav-->

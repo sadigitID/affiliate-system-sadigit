@@ -24,7 +24,7 @@ class Login extends CI_Model
                     ];
                     $this->session->set_userdata($data);
                     if ($user['role'] == 'Admin') {
-                        redirect('admin/produk');
+                        redirect('admin/administrator');
                     } else {
                         redirect('affiliator/affiliator');
                     }
@@ -49,9 +49,9 @@ class Login extends CI_Model
         $data = [
             'nama_lengkap' => htmlspecialchars($this->input->post('nama_lengkap', true)),
             'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
-            'provinces' => htmlspecialchars($this->input->post('provinces', true)),
-            'cities' => htmlspecialchars($this->input->post('cities', true)),
-            'districts' => htmlspecialchars($this->input->post('districts', true)),
+            'province_id' => htmlspecialchars($this->input->post('province_id', true)),
+            'city_id' => htmlspecialchars($this->input->post('city_id', true)),
+            'district_id' => htmlspecialchars($this->input->post('district_id', true)),
             'alamat_lengkap' => htmlspecialchars($this->input->post('alamat_lengkap', true)),
             'email' => htmlspecialchars($email),
             'no_hp' => htmlspecialchars($this->input->post('no_hp', true)),
@@ -63,7 +63,7 @@ class Login extends CI_Model
             'is_active' => 0,
             'created_at' => time(),
             'updated_at' => time(),
-            'deleted_at' => 0
+            'deleted_at' => time(),
         ];
 
         //token
@@ -86,7 +86,7 @@ class Login extends CI_Model
 
     private function _sendEmail($token, $type)
     {
-        
+
         $config = Array(
             'protocol' => 'smtp',
             'smtp_host' => 'smtp.mailtrap.io',
@@ -102,7 +102,7 @@ class Login extends CI_Model
 
         $this->email->from('gabudbanget@gmail.com', 'Admin');
         $this->email->to($this->input->post('email'));
-        
+
         if ($type == 'verify') {
             $this->email->subject('Verifikasi Akun');
             $this->email->message('Klik link ini untuk verifikasi akun : <a href="' . base_url() . 'auth/verify?email=' . $this->input->post('email') . '&token=' . urlencode($token) . '">Verifikasi</a>');
@@ -119,7 +119,7 @@ class Login extends CI_Model
         }
     }
 
-    public function verify($email, $token) 
+    public function verify($email, $token)
     {
         $user = $this->db->get_where('tb_users', ['email' => $email])->row_array();
 
@@ -127,7 +127,7 @@ class Login extends CI_Model
             $user_token = $this->db->get_where('tb_user_token', ['token' => $token])->row_array();
 
             if ($user_token) {
-                if (time() - $user_token['created_at'] < (60 * 60 *24)) {
+                if (time() - $user_token['created_at'] < (60 * 60 * 24)) {
                     $this->db->set('is_active', 1);
                     $this->db->where('email', $email);
                     $this->db->update('tb_users');
@@ -148,13 +148,12 @@ class Login extends CI_Model
         } else {
             $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Email salah</div>');
             redirect('auth');
-        } 
-
+        }
     }
 
     public function forgot_password()
     {
-        
+
         $email = $this->input->post('email');
         $user = $this->db->get_where('tb_users', ['email' => $email, 'is_active' => 1])->row_array();
 
@@ -175,7 +174,7 @@ class Login extends CI_Model
         }
     }
 
-    public function resetpassword($email, $token) 
+    public function resetpassword($email, $token)
     {
         $user = $this->db->get_where('tb_users', ['email' => $email])->row_array();
 
@@ -192,19 +191,19 @@ class Login extends CI_Model
         } else {
             $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Email salah</div>');
             redirect('auth');
-        } 
+        }
     }
 
-    public function change_password() 
+    public function change_password()
     {
         if (!$this->session->userdata('reset_email')) {
             redirect('auth');
         }
-        
+
         $this->form_validation->set_rules('password1', 'Password', 'trim|required|min_length[6]|matches[password2]');
         $this->form_validation->set_rules('password2', 'Password', 'trim|required|min_length[6]|matches[password1]');
         if ($this->form_validation->run() == false) {
-            $this->load->view('template/auth/change-password');
+            $this->load->view('auth/change-password');
         } else {
             $password = password_hash($this->input->post('password1'), PASSWORD_DEFAULT);
             $email = $this->session->userdata('reset_email');
@@ -217,5 +216,4 @@ class Login extends CI_Model
             redirect('auth');
         }
     }
-
 }

@@ -7,7 +7,7 @@
 <head>
 	<base href="">
 	<meta charset="utf-8" />
-	<title>Sistem Manajemen Perumahan</title>
+	<title>SADIGIT Affiliate</title>
 	<meta name="description" content="Manajemen web dunibuah" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 	<link rel="canonical" href="https://keenthemes.com/metronic" />

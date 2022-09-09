@@ -79,6 +79,9 @@
                 <!--begin::Wrapper-->
                 <div class="d-flex flex-row-fluid flex-center">
                     <!--begin::Signin-->
+                    
+                    <?= $this->session->flashdata('message'); ?>
+                    
                     <div class="login-form login-form-signup">
                         <!--begin::Form-->
                         <form class="form" method="POST" action="<?= base_url('auth/registration'); ?>" novalidate="novalidate" id="kt_login_signup_form">
@@ -112,12 +115,12 @@
                                 <!--begin::Form Group-->
                                 <div class="form-group">
                                     <label class="font-size-h6 font-weight-bolder text-dark">Provinsi</label>
-                                    <select id='provinces' class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6">
-                                        <option>-- Pilih Provinsi --</option>
+                                    <select name="province_id" id="province_id" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6">
+                                    <option >-- Pilih Provinsi --</option>
                                         <?php
-                                        foreach ($provinces as $province) {
-                                            echo '<option value="' . $province['province_id'] . '">' . $province['province_name'] . '</option>';
-                                        } ?>
+                                        foreach($provinces as $province){ ?>
+                                            <option value="<?=$province->province_id?>"><?=$province->province_name?></option>
+                                        <?php } ?>  
                                     </select>
                                     <!-- <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="province_id" id="province_id" placeholder="Provinsi" value="<?= set_value('province_id') ?>" required />
                                     <?= form_error('provinsi', '<small class="text-danger pl-3">', '</small>'); ?>  -->
@@ -126,8 +129,8 @@
                                 <!--begin::Form Group-->
                                 <div class="form-group">
                                     <label class="font-size-h6 font-weight-bolder text-dark">Kabupaten</label>
-                                    <select id='cities' class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6">
-                                        <option>-- Pilih Kabupaten --</option>
+                                    <select name="city_id" id="city_id" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" >
+                                        <option>-- Pilih Kabupaten --</option>  
                                     </select>
                                     <!-- <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="city_id" id="city_id" placeholder="Kabupaten/Kota" value="<?= set_value('city_id') ?>" required />
                                     <?= form_error('kabupaten', '<small class="text-danger pl-3">', '</small>'); ?> -->
@@ -136,7 +139,7 @@
                                 <!--begin::Form Group-->
                                 <div class="form-group">
                                     <label class="font-size-h6 font-weight-bolder text-dark">Kecamatan</label>
-                                    <select id='districts' class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6">
+                                    <select name="district_id" id="district_id" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6">
                                         <option value="">-- Pilih Kecamatan --</option>
                                     </select>
                                     <!-- <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="district_id" id="district_id" placeholder="Kecamatan" value="<?= set_value('district_id') ?>" required />
@@ -221,51 +224,47 @@
     </div>
     <!--end::Main-->
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type='text/javascript'>
-        var baseURL = "<?php echo base_url(); ?>";
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script>
         $(document).ready(function() {
-            $('#provinces').change(function() {
-                var provinces = $(this).val();
 
-                $.ajax({
-                    url: '<?= base_url('Dropdowns/get_city/') ?>',
-                    method: 'post',
-                    data: {
-                        provinces: provinces
-                    },
-                    dataType: 'json',
-                    success: function(response) {
-                        $('#cities').find('option').not(':first').remove();
-                        $('#districts').find('option').not(':first').remove();
-
-                        $.each(response, function(index, data) {
-                            $('#cities').append('<option value="' + data['city_id'] + '">' + data['city_name'] + '</option>');
-                        });
-                    }
-                });
+            $('#province_id').change(function() {
+                var province_id = $('#province_id').val();
+                if (province_id != '') {
+                    $.ajax({
+                        url: "<?php echo base_url(); ?>dropdowns/get_city",
+                        method: "POST",
+                        data: {
+                            province_id: province_id
+                        },
+                        success: function(data) {
+                            $('#city_id').html(data);
+                        }
+                    });
+                } else {
+                    $('#city_id').html('<option value="">-- Pilih Kabupaten/Kota --</option>');
+                    $('#district_id').html('<option value="">-- Pilih Kecamatan --</option>');
+                }
             });
 
-            $('#cities').change(function() {
-                var cities = $(this).val();
-
-                $.ajax({
-                    url: '<?= base_url('Dropdowns/get_district/') ?>',
-                    method: 'post',
-                    data: {
-                        cities: cities
-                    },
-                    dataType: 'json',
-                    success: function(response) {
-                        $('#districts').find('option').not(':first').remove();
-
-                        $.each(response, function(index, data) {
-                            $('#districts').append('<option value="' + data['district_id'] + '">' + data['district_name'] + '</option>');
-                        });
-                    }
-                });
+            $('#city_id').change(function() {
+                var city_id = $('#city_id').val();
+                if (city_id != '') {
+                    $.ajax({
+                        url: "<?php echo base_url(); ?>dropdowns/get_district",
+                        method: "POST",
+                        data: {
+                            city_id: city_id
+                        },
+                        success: function(data) {
+                            $('#district_id').html(data);
+                        }
+                    });
+                } else {
+                    $('#district_id').html('<option value="">-- Pilih Kecamatan --</option>');
+                }
             });
+
 
         });
     </script>
@@ -351,4 +350,5 @@
 </body>
 <!-- end::Body -->
 
-</html>
+</html> 
+

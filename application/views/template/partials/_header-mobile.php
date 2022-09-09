@@ -2,7 +2,7 @@
 <div id="kt_header_mobile" class="header-mobile align-items-center header-mobile-fixed">
 
 	<!--begin::Logo-->
-	<a href="<?= base_url('home') ?>">
+	<a href="<?= base_url('affiliator') ?>">
 		<h4 style="color:white;"><?= $this->session->userdata('app_short_name') ?></h4>
 	</a>
 

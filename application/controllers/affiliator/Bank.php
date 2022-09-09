@@ -27,7 +27,7 @@ class bank extends CI_Controller
 
 	public function dat_list()
 	{
-		header('Content-Type: application/json');
+		header('Content-Type: application/json'); //untuk apa? biar bisa di convert ke json
 
 
 		$tabel = 'dat_bank';

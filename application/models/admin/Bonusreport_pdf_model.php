@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Umum_admin_model extends CI_Model
+class Bonusreport_pdf_model extends CI_Model
 {
     public function __construct()
     {
@@ -113,4 +113,11 @@ class Umum_admin_model extends CI_Model
         $val = join('', $exp);
         return (float) $val;
     }
+
+   function view_by_date($tgl_awal, $tgl_akhir){
+        $tgl_awal = $this->db->escape($tgl_awal);
+        $tgl_akhir = $this->db->escape($tgl_akhir);
+        $this->db->where('DATE(tanggal_bonus) BETWEEN '.$tgl_awal.' AND '.$tgl_akhir); // Tambahkan where tanggal nya
+        return $this->db->get('tb_bonus')->result();// Tampilkan data transaksi sesuai tanggal yang diinput oleh user pada filter
+  }
 }

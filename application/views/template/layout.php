@@ -14,7 +14,6 @@
 			<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 				<!--Content area here-->
 				<div class="container-fluid">
-					<!--  -->
 					<?php $this->load->view("$view") ?>
 				</div>
 			</div>

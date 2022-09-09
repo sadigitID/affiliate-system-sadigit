@@ -80,21 +80,22 @@
                     <!--begin::Signin-->
                     <div class="login-form">
                         <!--begin::Form-->
-                        <form class="form" method="post" action="<?= base_url('auth/login'); ?>" id="kt_login_singin_form">
+                        <form class="form" method="post" action="<?= base_url('auth'); ?>" id="kt_login_singin_form">
                             <!--begin::Title-->
                             <div class="pb-5 pb-lg-15">
                                 <h3 class="font-weight-bolder text-dark font-size-h2 font-size-h1-lg">Sign In</h3>
                                 <div class="text-muted font-weight-bold font-size-h4">
                                     New Here?
-                                    <a href="<?= base_url('auth/register'); ?>" class="text-primary font-weight-bolder">Create Account</a>
+                                    <a href="<?= base_url('auth/registration'); ?>" class="text-primary font-weight-bolder">Create Account</a>
                                 </div>
                             </div>
                             <!--begin::Title-->
-
+                            <?= $this->session->flashdata('message'); ?>
                             <!--begin::Form group-->
                             <div class="form-group">
                                 <label class="font-size-h6 font-weight-bolder text-dark">Your Email</label>
                                 <input class="form-control h-auto py-7 px-6 rounded-lg border-0" type="text" name="email" required />
+                                <?= form_error('email', '<small class="text-danger pl-3">', '</small>'); ?>
                             </div>
                             <!--end::Form group-->
 
@@ -104,8 +105,9 @@
                                     <label class="font-size-h6 font-weight-bolder text-dark pt-5">Your Password</label>
                                 </div>
                                 <input class="form-control h-auto py-7 px-6 rounded-lg border-0" type="password" name="password" required />
+                                <?= form_error('password', '<small class="text-danger pl-3">', '</small>'); ?>
                                 <hr>
-                                <a href="<?= base_url('auth/forgot_password'); ?>" class="text-primary font-size-h6 font-weight-bolder text-hover-primary pt-5">
+                                <a href="<?= base_url('Auth/forgot_password'); ?>" class="text-primary font-size-h6 font-weight-bolder text-hover-primary pt-5">
                                     Forgot Password ?
                                 </a>
                             </div>
@@ -204,7 +206,8 @@
 
 
     <!--begin::Page Scripts(used by this page)-->
-    <script src="<?= base_url(''); ?>/assets/js/pages/custom/login/login-3.js"></script>
+<!--     
+    <script src="<?= base_url(''); ?>/assets/js/pages/custom/login/login-3.js"></script> -->
     <!--end::Page Scripts-->
 </body>
 <!--end::Body-->

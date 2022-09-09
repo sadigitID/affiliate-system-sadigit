@@ -4,15 +4,16 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Affiliator extends CI_Controller
 {
 
-	public function __construct()
+	function __construct()
 	{
 		parent::__construct();
+
 		$this->load->library('form_validation');
 		$this->load->model('Umum_model', 'umum');
-		//is_logged_in();
+
 	}
 
-	public function index()
+    public function index()
 	{
 		$data = [
 			'view' => 'affiliator/dashboard',
@@ -38,7 +39,7 @@ class Affiliator extends CI_Controller
 	{
 		header('Content-Type: application/json');
 
-
+ 
 		$tabel = 'dat_bank';
 		$column_order = array();
 		$coloumn_search = array('nama_bank');
@@ -137,43 +138,7 @@ class Affiliator extends CI_Controller
 	function delete()
 	{
 		$id = $this->input->post('id', true);
-		$this->db->delete('dat_bank', ['id' => $id]);
+		$this->db->delete('dat_bank',['id'=>$id]);
 		echo json_encode('');
 	}
-
-	public function edit_profile()
-	{
-		$data['tb_users'] = $this->db->get_where('tb_users', ['email' => $this->session->userdata('email')])->row_array();
-
-		$this->form_validation->set_rules('nama_lengkap', 'Nama Lengkap', 'required|trim');
-		$this->form_validation->set_rules('provinsi', 'Provinsi', 'trim|required');
-		$this->form_validation->set_rules('kabupaten', 'Kabupaten', 'trim|required');
-		$this->form_validation->set_rules('kecamatan', 'Kecamatan', 'trim|required');
-		$this->form_validation->set_rules('alamat_lengkap', 'Alamat Lengkap', 'trim|required');
-		$this->form_validation->set_rules('no_hp', 'No Hp', 'required|trim');
-
-		if ($this->form_validation->run() == false) {
-			$this->load->view('affiliator/edit-profile');
-		} else {
-			$nama_lengkap = $this->input->post('nama_lengkap');
-			$provinsi = $this->input->post('provinsi');
-			$kabupaten = $this->input->post('kabupaten');
-			$kecamatan = $this->input->post('kecamatan');
-			$alamat_lengkap = $this->input->post('alamat_lengkap');
-			$no_hp = $this->input->post('no_hp');
-
-			$this->db->set('nama_lengkap', $nama_lengkap);
-			$this->db->set('provinsi', $provinsi);
-			$this->db->set('kabupaten', $kabupaten);
-			$this->db->set('kecamatan', $kecamatan);
-			$this->db->set('alamat_lengkap', $alamat_lengkap);
-			$this->db->set('no_hp', $no_hp);
-			$this->db->where('email', $this->session->userdata('email'));
-			$this->db->update('tb_users');
-
-			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Your profile has been updated!</div>');
-			redirect('affiliator/edit_profile');
-		}
-	}
-
 }

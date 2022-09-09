@@ -54,14 +54,6 @@
                     <a href="#" class="login-logo text-center pt-lg-25 pb-10">
                         <img src="<?= base_url(''); ?>/assets/media/logos/logo-1.png" class="max-h-70px" alt="" />
                     </a>
-                    <!--end::Aside Header-->
-
-                    <!--begin::Aside Title-->
-                    <!-- <h3 class="font-weight-bolder text-center font-size-h4 text-dark-50  line-height-xl">
-                        User Experience & Interface Design<br />
-                        Strategy SaaS Solutions
-                    </h3> -->
-                    <!--end::Aside Title-->
                 </div>
                 <!--end::Aside Top-->
 
@@ -87,6 +79,7 @@
                                 <p class="text-muted font-weight-bold font-size-h4">Enter your email to reset your password</p>
                             </div>
                             <!--end::Title-->
+                            <?= $this->session->flashdata('message'); ?> 
 
                             <!--begin::Form group-->
                             <div class="form-group">
