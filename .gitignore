@@ -18,4 +18,4 @@ application/logs/*
 application/config/database.php
 application/config/config.php
 application/config/email.php
-
+application/config/*
