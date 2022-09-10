@@ -18,7 +18,7 @@
                                 </div>
                                 <div>
                                     <a href="#" class="font-weight-bolder font-size-h5 text-dark-75 text-hover-primary">
-                                    <?= $user['nama_lengkap']; ?>
+                                    <?= $tb_users['nama_lengkap']; ?>
                                     </a>
                                     <div class="text-muted">
                                         Affiliator
@@ -30,25 +30,25 @@
                         <!--begin::Contact-->
                             <div class="py-9">
                                 <div class="d-flex align-items-center justify-content-between mb-3">
-                                    <span class="text"><?= $user['nama_lengkap']; ?></span>
+                                    <span class="text"><?= $tb_users['nama_lengkap']; ?></span>
                                 </div>
                                 <div class="d-flex align-items-center justify-content-between mb-3">
-                                    <span class="text"><?= $user['province_name']; ?></span>
+                                    <span class="text"><?= $tb_users['province_id']; ?></span>
                                 </div>
                                 <div class="d-flex align-items-center justify-content-between mb-3">
-                                    <span class="text"><?= $user['city_name']; ?></span>
+                                    <span class="text"><?= $tb_users['city_id']; ?></span>
                                 </div>
                                 <div class="d-flex align-items-center justify-content-between mb-3">
-                                    <span class="text"><?= $user['district_name']; ?></span>
+                                    <span class="text"><?= $tb_users['district_id']; ?></span>
                                 </div>
                                 <div class="d-flex align-items-center justify-content-between mb-3">
-                                    <span class="text"><?= $user['alamat_lengkap']; ?></span>
+                                    <span class="text"><?= $tb_users['alamat_lengkap']; ?></span>
                                 </div>
                                 <div class="d-flex align-items-center justify-content-between mb-3">
-                                    <span class="text"><?= $user['email']; ?></span>
+                                    <span class="text"><?= $tb_users['email']; ?></span>
                                 </div>
                                 <div class="d-flex align-items-center justify-content-between mb-3">
-                                    <span class="text"><?= $user['no_hp']; ?></span>
+                                    <span class="text"><?= $tb_users['no_hp']; ?></span>
                                 </div>
                             </div>
                         <!--end::Contact-->
@@ -82,7 +82,7 @@
                                     <label class="col-xl-6 col-lg-3 col-form-label">Nama Lengkap</label>
                                     <div class="col-lg-9 col-xl-9">
                                         <div class="input-group input-group-lg input-group-solid">
-                                            <input class="form-control form-control-lg form-control-solid" type="text" id="nama_lengkap" name="nama_lengkap" value="<?= $user['nama_lengkap']; ?>" />
+                                            <input class="form-control form-control-lg form-control-solid" type="text" id="nama_lengkap" name="nama_lengkap" value="<?= $tb_users['nama_lengkap']; ?>" />
                                             <?= form_error('nama_lengkap', '<small class="text-danger pl-3">', '</small>'); ?>
                                         </div>
                                     </div>
@@ -92,26 +92,25 @@
                                     <label class="col-xl-6 col-lg-3 col-form-label">Provinsi</label>
                                     <div class="col-lg-9 col-xl-9">
                                         <select id="province_id" name="province_id" class="form-control form-control-lg form-control-solid">
-                                            <option value="<?= $user['province_id']; ?>"><?= $user['province_name']; ?></option>
-                                            <option >-- Pilih Provinsi --</option>
-                                                <?php
-                                                foreach($provinces as $province){ ?>
-                                                    <option value="<?=$province->province_id?>"><?=$province->province_name?></option>
-                                                <?php } ?>
+                                            <option value=""></option>
+                                            <option value="">Bahasa Indonesia - Indonesian</option>
                                         </select>
+
+                                        <?= form_error('province_id', '<small class="text-danger pl-3">', '</small>'); ?>
                                     </div>
-                                    <?= form_error('province_id', '<small class="text-danger pl-3">', '</small>'); ?>
                                 </div>
                                 <!--begin::Form Group-->
                                 <div class="form-group row">
                                     <label id="city_id" name="city_id" class="col-xl-6 col-lg-3 col-form-label">Kabupaten/Kota</label>
                                     <div class="col-lg-9 col-xl-9">
                                         <select class="form-control form-control-lg form-control-solid">
-                                            <option value="<?= $user['city_id']; ?>"><?= $user['city_name']; ?></option>
-                                            <option>-- Pilih Kabupaten --</option> 
+                                            <option data-offset="-39600" value="International Date Line West">(GMT-11:00) International Date Line West</option>
+                                            <option data-offset="-39600" value="Midway Island">(GMT-11:00) Midway Island</option>
+                                            <option data-offset="-39600" value="Samoa">(GMT-11:00) Samoa</option>
                                         </select>
-                                    </div>
+
                                         <?= form_error('city_id', '<small class="text-danger pl-3">', '</small>'); ?>
+                                    </div>
                                 </div>
                                 <!--begin::Form Group-->
 
@@ -120,18 +119,20 @@
                                     <label class="col-xl-6 col-lg-3 col-form-label">Kecamatan</label>
                                     <div class="col-lg-9 col-xl-9">
                                         <select id="district_id" name="district_id" class="form-control form-control-lg form-control-solid">
-                                            <option value="<?= $user['district_id']; ?>"><?= $user['district_name']; ?></option>
-                                            <option value="">-- Pilih Kecamatan --</option>
+                                            <option data-offset="-39600" value="International Date Line West">(GMT-11:00) International Date Line West</option>
+                                            <option data-offset="-39600" value="Midway Island">(GMT-11:00) Midway Island</option>
+                                            <option data-offset="-39600" value="Samoa">(GMT-11:00) Samoa</option>
                                         </select>
-                                    </div>
+
                                         <?= form_error('district_id', '<small class="text-danger pl-3">', '</small>'); ?>
+                                    </div>
                                 </div>
                                 <!--begin::Form Group-->
                                 <div class="form-group row">
                                     <label class="col-xl-6 col-lg-3 col-form-label">Alamat Lengkap</label>
                                     <div class="col-lg-9 col-xl-9">
                                         <div class="input-group input-group-lg input-group-solid">
-                                            <input id="alamat_lengkap" name="alamat_lengkap" class="form-control form-control-lg form-control-solid" type="text" value="<?= $user['alamat_lengkap']; ?>" />
+                                            <input id="alamat_lengkap" name="alamat_lengkap" class="form-control form-control-lg form-control-solid" type="text" value="<?= $tb_users['alamat_lengkap']; ?>" />
                                             <?= form_error('alamat_lengkap', '<small class="text-danger pl-3">', '</small>'); ?>
                                         </div>
                                     </div>
@@ -142,7 +143,7 @@
                                     <div class="col-lg-9 col-xl-9">
                                         <div class="input-group input-group-lg input-group-solid">
                                             <div class="input-group-prepend"><span class="input-group-text"><i class="la la-at"></i></span></div>
-                                            <input id="email" name="email" type="text" class="form-control form-control-lg form-control-solid" value="<?= $user['email']; ?>" readonly />
+                                            <input id="email" name="email" type="text" class="form-control form-control-lg form-control-solid" value="<?= $tb_users['email']; ?>" readonly />
                                             <?= form_error('email', '<small class="text-danger pl-3">', '</small>'); ?>
                                         </div>
                                     </div>
@@ -152,7 +153,7 @@
                                     <label class="col-xl-6 col-lg-3 col-form-label">No WhatsApp</label>
                                     <div class="col-lg-9 col-xl-9">
                                         <div class="input-group input-group-lg input-group-solid">
-                                            <input id="no_hp" name="no_hp" class="form-control form-control-lg form-control-solid" type="text" value="<?= $user['no_hp']; ?>" />
+                                            <input id="no_hp" name="no_hp" class="form-control form-control-lg form-control-solid" type="text" value="<?= $tb_users['no_hp']; ?>" />
                                         
                                             <?= form_error('no_hp', '<small class="text-danger pl-3">', '</small>'); ?>
                                         </div>
@@ -178,50 +179,5 @@
     <!--end::Container-->
 </body>
 <!--end::Body-->
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
-    <script>
-        $(document).ready(function() {
-
-            $('#province_id').change(function() {
-                var province_id = $('#province_id').val();
-                if (province_id != '') {
-                    $.ajax({
-                        url: "<?php echo base_url(); ?>dropdowns/get_city",
-                        method: "POST",
-                        data: {
-                            province_id: province_id
-                        },
-                        success: function(data) {
-                            $('#city_id').html(data);
-                        }
-                    });
-                } else {
-                    $('#city_id').html('<option value="">-- Pilih Kabupaten/Kota --</option>');
-                    $('#district_id').html('<option value="">-- Pilih Kecamatan --</option>');
-                }
-            });
-
-            $('#city_id').change(function() {
-                var city_id = $('#city_id').val();
-                if (city_id != '') {
-                    $.ajax({
-                        url: "<?php echo base_url(); ?>dropdowns/get_district",
-                        method: "POST",
-                        data: {
-                            city_id: city_id
-                        },
-                        success: function(data) {
-                            $('#district_id').html(data);
-                        }
-                    });
-                } else {
-                    $('#district_id').html('<option value="">-- Pilih Kecamatan --</option>');
-                }
-            });
-
-
-        });
-    </script>
 
 </html>

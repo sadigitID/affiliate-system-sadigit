@@ -6,7 +6,7 @@
 
 		<!--begin::Copyright-->
 		<div class="text-dark order-2 order-md-1">
-			<span class="text-muted font-weight-bold mr-2">2021©</span>
+			<span class="text-muted font-weight-bold mr-2"><?= date('Y'); ?>©</span>
 			<a href="https://sadigit.co.id" target="_blank" class="text-dark-75 text-hover-primary">PT.Sawarga Digital Indonesia</a>
 		</div>
 

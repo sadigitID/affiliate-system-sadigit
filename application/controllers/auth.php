@@ -10,14 +10,15 @@ class Auth extends CI_Controller
         $this->load->library('form_validation');
         $this->load->model('Login');
         $this->load->model('dropdown');
+
+        // if ($this->session->userdata('email')) {
+        //     $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">You are already logged in!</div>');
+        //     redirect(base_url());
+        // }
     }
 
     public function index()
     {
-        // if ($this->session->userdata('email')) {
-        //     redirect('auth');
-        // }
-
         $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
         $this->form_validation->set_rules('password', 'Password', 'trim|required');
 

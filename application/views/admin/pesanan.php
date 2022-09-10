@@ -3,7 +3,7 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title">Bonus</h5>
+				<h5 class="modal-title">Pesanan</h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
@@ -11,6 +11,13 @@
 			<form id="form_pesanan">
 				<div class="modal-body">
 					<input class="d-none" type="text" id="id_pesanan" name="id_pesanan" autocomplete="off" />
+					<div class="form-group row">
+						<label class="col-form-label col-4" for="id_user ">No Pesanan</label>
+						<div class="col-8">
+							<!-- <input class="form-control " type="text" placeholder="Nama Affiliator" id="id_user" name="id_user" autocomplete="off" /> -->
+							<input class="form-control " type="text" placeholder="Nama Produk" id="nama_produk" name="nama_produk" autocomplete="off"  />
+						</div>
+					</div>
 					<div class="form-group row">
 						<label class="col-form-label col-4" for="id_user ">Nama Pembeli</label>
 						<div class="col-8">
@@ -122,7 +129,10 @@
 	<div class="card-header">
 		<div class="card-title">
 			<span class="card-icon"><i class="flaticon-squares-1 text-primary"></i></span>
-			<h3 class="card-label">Manajemen Bonus</h3>
+			<h3 class="card-label">Manajemen Pesanan</h3>
+		</div>
+		<div class="card-toolbar">
+			<span class="btn btn-light-primary" onclick="tambahBonus()">Tambah Bonus</span>
 		</div>
 		<div class="card-toolbar">
 			<span class="btn btn-light-primary" onclick="tambahBonus()">Tambah Bonus</span>
@@ -133,11 +143,11 @@
 		<table class="table table-bordered" id="table" style="margin-top: 13px !important">
 			<thead>
 				<tr>
-					<th>No</th>
+					<th>No Pesanan</th>
 					<th>Nama Pembeli</th>
 					<th>Nama Produk</th>
 					<th>Total Pesanan</th>
-					<th>Status Pesanan bonus</th>
+					<th>Status Pesanan </th>
                     <th>Tanggal Pembayaran</th>
 					<th>Foto Bukti Pembayaran</th>
                     <th>Nama Affiliator</th>

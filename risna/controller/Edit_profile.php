@@ -8,8 +8,7 @@ class Edit_profile extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->library('form_validation');
-        $this->load->model('Dropdown');
-        $this->load->model('m_user');
+		$this->load->model('');
 
 	}
 
@@ -20,57 +19,9 @@ class Edit_profile extends CI_Controller
             'sub1' => 'edit-profile',
         ];
 
-        $data['user'] =$this->m_user->getUser($this->session->userdata('email'));
-        $data['provinces'] = $this->Dropdown->get_province();
-
+        $data['tb_users'] = $this->db->get_where('tb_users', ['email' => $this->session->userdata('email')])->row_array();
         $this->load->view('template/index', $data);
     }
-
-    // public function tb_pesanan()
-	// {
-	// 	header('Content-Type: application/json');
-
-
-	// 	$tabel = 'tb_users';
-	// 	$column_order = array();
-	// 	$coloumn_search = array('id_user','nama_lengkap','password', 'province_id', 'city_id', 'district_id', 'alamat_lengkap', 'no_hp', 'email', 'role', 'is_active', 'created_at');
-	// 	$select = "*";
-	// 	$order_by = array('id_pesanan' => 'desc');
-	// 	$join[] = ['field' =>  'tb_users', 'condition' => 'provinces.province_id = tb_users.province_id','cities.city_id = tb_users.city_id','districts.district_id = tb_users.district_id', 'direction' => 'left'];
-	// 	$where = [];
-	// 	$group_by = [];
-	// 	$list = $this->umum->get_datatables($tabel, $column_order, $coloumn_search, $order_by, $where, $join, $select, $group_by);
-	// 	$data = array();
-	// 	$no = @$_POST['start'];
-
-	// 	foreach ($list as $list) {
-	// 		$row = array();
-	// 		$row[] = ++$no;
-	// 		$row[] = $list->id_user;
-	// 		$row[] = $list->nama_lengkap;
-	// 		$row[] = $list->password;
-	// 		$row[] = $list->province_id;
-    //         $row[] = $list->city_id;
-	// 		$row[] = $list->district_id;
-	// 		$row[] = $list->alamat_lengkap;
-	// 		$row[] = $list->no_hp;
-    //         $row[] = $list->email;
-	// 		$row[] = $list->role;
-    //         $row[] = $list->is_active;
-	// 		$row[] = $list->at_created;
-	// 		$data[] = $row;
-	// 	}
-
-	// 	$output = array(
-	// 		"draw" => @$_POST['draw'],
-	// 		"recordsTotal" => $this->umum->count_all($tabel, $column_order, $coloumn_search, $order_by, $where, $join, $select, $group_by),
-	// 		"recordsFiltered" => $this->umum->count_filtered($tabel, $column_order, $coloumn_search, $order_by, $where, $join, $select, $group_by),
-	// 		"data" => $data,
-	// 	);
-	// 	//output to json format
-	// 	echo json_encode($output);
-	// }
-
 
     public function edit_profile() {
         

@@ -5,7 +5,7 @@
 	<div class="brand flex-column-auto" id="kt_brand">
 
 		<!--begin::Logo-->
-		<a href="<?= base_url('affiliator') ?>" class="brand-logo">
+		<a href="<?= base_url('affiliator/affiliator') ?>" class="brand-logo">
 			<h4 style="color:white;">SADIGIT Affiliate</h4>
 		</a>
 

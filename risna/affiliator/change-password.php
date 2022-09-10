@@ -11,10 +11,10 @@
                 <h3 class="card-label font-weight-bolder text-dark">Account Information</h3>
                 <span class="text-muted font-weight-bold font-size-sm mt-1">Change your password</span>
             </div>
+            <?= $this->session->flashdata('message'); ?>
         </div>
         <!--end::Header-->
         <!--begin::Form-->
-        <?= $this->session->flashdata('message'); ?>
         <form method="post" action="<?= base_url('affiliator/change_password/change_password'); ?>" class="form offcanvas-mobile w-350px w-xxl-750px">
             <div class="card-body offcanvas-mobile w-350px w-xxl-1000px">
                 <!--begin::Heading-->

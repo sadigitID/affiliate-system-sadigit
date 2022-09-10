@@ -12,7 +12,7 @@ class Login extends CI_Model
     {
         $user = $this->db->get_where('tb_users', ['email' => $email])->row_array();
 
-        //jika usernya ada
+        //jika usernya ada 
         if ($user) {
             //jika user active
             if ($user['is_active'] == 1) {

@@ -8,7 +8,7 @@ class Change_password extends CI_Controller
     {
         parent::__construct();
         $this->load->library('form_validation');
-        $this->load->model('');
+        $this->load->model('m_user');
     }
 
     public function index()
@@ -33,27 +33,13 @@ class Change_password extends CI_Controller
         if ($this->form_validation->run() == false) {
             redirect('affiliator/change_password');
         } else {
-            $password = $this->input->post('password');
-            $new_password = $this->input->post('password1');
-            if (!password_verify($password, $data['tb_users']['password'])) {
-                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Wrong current password!</div>');
-                redirect('affiliator/change_password');
-            } else {
-                if ($password == $new_password) {
-                    $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">New password cannot be the same as current password!</div>');
-                    redirect('affiliator/change_password');
-                } else {
-                    // password sudah ok
-                    $password_hash = password_hash($new_password, PASSWORD_DEFAULT);
+            $where = $this->db->get_where('tb_users', ['email' => $this->session->userdata('email')])->row_array();
 
-                    $this->db->set('password', $password_hash);
-                    $this->db->where('email', $this->session->userdata('email'));
-                    $this->db->update('tb_users');
+            $data = array('password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT));
 
-                    $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Password changed!</div>');
-                    redirect('affiliator/change_password');
-                }
-            }
+            $this->m_user->update_data($where, $data, 'tb_users');
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Password has been changed!</div>');
+            redirect('affiliator/change_password');
         }
     }
 }
