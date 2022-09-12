@@ -4,7 +4,7 @@
 
 		<!--begin::Symbol-->
 		<div class="symbol bg-white-o-15 mr-3">
-			<span class="symbol-label text-success font-weight-bold font-size-h4"><?= substr($this->session->userdata('nama'), 0, 1) ?></span>
+			<!-- <span class="symbol-label text-success font-weight-bold font-size-h4"><?= substr($this->session->userdata('nama_lengkap'), 0, 1) ?></span> -->
 		</div>
 
 		<!--end::Symbol-->
@@ -24,7 +24,7 @@
 	<!--begin::Footer-->
 	<div class="navi-separator mt-3"></div>
 	<div class="navi-footer px-8 py-5">
-		<a href="<?= base_url('login/out') ?>" class="btn btn-light-primary font-weight-bold">Sign Out</a>
+		<a href="<?= base_url('auth/logout') ?>" class="btn btn-light-primary font-weight-bold">Sign Out</a>
 	</div>
 
 	<!--end::Footer-->

@@ -90,11 +90,11 @@
                                 </div>
                             </div>
                             <!--begin::Title-->
-                            <?= $this->session->flashdata('message'); ?>
                             <!--begin::Form group-->
+                            <?= $this->session->flashdata('message'); ?>
                             <div class="form-group">
                                 <label class="font-size-h6 font-weight-bolder text-dark">Your Email</label>
-                                <input class="form-control h-auto py-7 px-6 rounded-lg border-0" type="text" name="email" required />
+                                <input class="form-control h-auto py-7 px-6 rounded-lg border-0" type="text" name="email" value="<?= set_value('email') ?>" />
                                 <?= form_error('email', '<small class="text-danger pl-3">', '</small>'); ?>
                             </div>
                             <!--end::Form group-->
@@ -104,7 +104,7 @@
                                 <div class="d-flex justify-content-between mt-n5">
                                     <label class="font-size-h6 font-weight-bolder text-dark pt-5">Your Password</label>
                                 </div>
-                                <input class="form-control h-auto py-7 px-6 rounded-lg border-0" type="password" name="password" required />
+                                <input class="form-control h-auto py-7 px-6 rounded-lg border-0" type="password" />
                                 <?= form_error('password', '<small class="text-danger pl-3">', '</small>'); ?>
                                 <hr>
                                 <a href="<?= base_url('Auth/forgot_password'); ?>" class="text-primary font-size-h6 font-weight-bolder text-hover-primary pt-5">
@@ -206,7 +206,7 @@
 
 
     <!--begin::Page Scripts(used by this page)-->
-<!--     
+    <!--     
     <script src="<?= base_url(''); ?>/assets/js/pages/custom/login/login-3.js"></script> -->
     <!--end::Page Scripts-->
 </body>

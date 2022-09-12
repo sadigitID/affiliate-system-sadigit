@@ -33,6 +33,9 @@ class Auth extends CI_Controller
 
     private function login()
     {
+        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
+        $this->form_validation->set_rules('password', 'Password', 'trim|required');
+        
         $email = $this->input->post('email');
         $password = $this->input->post('password');
         $this->Login->login($email, $password);

@@ -9,7 +9,7 @@ class Rekening extends CI_Controller
     parent::__construct();
 
     $this->load->library('form_validation');
-    $this->load->model('Umum_model', 'umum');
+    $this->load->model('Umum_model', 'rekening');
   }
 
   public function index()
@@ -19,7 +19,8 @@ class Rekening extends CI_Controller
       'active' => 'rekening',
       'sub1' => 'rekening',
     ];
-
+    
+    $data['bank'] = $this->db->get('tb_bank')->result();
     $this->load->view('template/index', $data);
   }
 
@@ -30,34 +31,34 @@ class Rekening extends CI_Controller
 
     $tabel = 'tb_rekening';
     $column_order = array();
-    $coloumn_search = array('no_rek', 'nama_pemilik_rek', 'nama_bank');
+    $coloumn_search = array('id_rek','no_rek', 'nama_pemilik_rek', 'bank');
     $select = "*";
     $order_by = array('id_rek' => 'desc');
-    $join = [];
-    $where = [];
+    $join[] = ['field' => 'tb_bank', 'condition' => 'tb_rekening.id_bank = tb_bank.id_bank', 'direction' => 'left'];
+		$where[] = ['field' => 'id_rek', 'condition' => $this->session->userdata('email'), 'direction' => ''];
     $group_by = [];
-    $list = $this->umum->get_datatables($tabel, $column_order, $coloumn_search, $order_by, $where, $join, $select, $group_by);
+    $list = $this->rekening->get_datatables($tabel, $column_order, $coloumn_search, $order_by, $where, $join, $select, $group_by);
     $data = array();
     $no = @$_POST['start'];
 
     foreach ($list as $list) {
       // akuntansi_journal_edit
-      $edit =  "<i class='fas fa-edit btn btn-icon btn-light-primary' onclick={_edit('$list->id')}></i>";
+      $edit =  "<i class='fas fa-edit btn btn-icon btn-light-primary' onclick={_edit('$list->id_rek')}></i>";
       $row = array();
       $row[] = ++$no;
       $row[] = $list->no_rek;
       $row[] = $list->nama_pemilik_rek;
-      $row[] = $list->nama_bank;
+      $row[] = $list->bank;
       $row[] = "<center>
-                      $edit 
-                    </center>";
+                  $edit 
+                </center>";
       $data[] = $row;
     }
 
     $output = array(
       "draw" => @$_POST['draw'],
-      "recordsTotal" => $this->umum->count_all($tabel, $column_order, $coloumn_search, $order_by, $where, $join, $select, $group_by),
-      "recordsFiltered" => $this->umum->count_filtered($tabel, $column_order, $coloumn_search, $order_by, $where, $join, $select, $group_by),
+      "recordsTotal" => $this->rekening->count_all($tabel, $column_order, $coloumn_search, $order_by, $where, $join, $select, $group_by),
+      "recordsFiltered" => $this->rekening->count_filtered($tabel, $column_order, $coloumn_search, $order_by, $where, $join, $select, $group_by),
       "data" => $data,
     );
     //output to json format
@@ -70,8 +71,9 @@ class Rekening extends CI_Controller
     $no_rek = $this->input->post('no_rek');
     $nama_pemilik_rek = $this->input->post('nama_pemilik_rek');
     $nama_bank = $this->input->post('nama_bank');
+    $id_bank = $this->input->post('id_bank');
 
-    $check = $this->db->select('id_rek', 'no_rek', 'nama_pemilik_rek', 'nama_bank')->from('tb_rekening')->where('id_rek !=', $id_rek)->where('id_rek', $id_rek)->get();
+    $check = $this->db->select('id_rek', 'no_rek', 'nama_pemilik_rek', 'nama_bank', 'id_bank')->from('tb_rekening')->where('id_rek !=', $id_rek)->where('id_rek', $id_rek)->get();
     if ($check->num_rows() > 0) {
       return false;
     }
@@ -112,6 +114,7 @@ class Rekening extends CI_Controller
       $id_rek = $this->input->post('id_rek');
 
       $payloadData = [
+        'id_rek' => $this->input->post('id_rek'),
         'no_rek' => $this->input->post('no_rek'),
         'nama_pemilik_rek' => $this->input->post('nama_pemilik_rek'),
         'nama_bank' => $this->input->post('nama_bank'),
