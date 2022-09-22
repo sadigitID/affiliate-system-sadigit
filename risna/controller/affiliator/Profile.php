@@ -18,7 +18,7 @@ class Profile extends CI_Controller
             'sub1' => 'edit-profile',
         ];
 
-        $data['tb_users'] = $this->db->get_where('tb_users', ['email' => $this->session->userdata('email')])->row_array();
+        $data['user'] = $this->db->get_where('tb_users', ['email' => $this->session->userdata('email')])->row_array();
         $this->load->view('template/index', $data);
     }
 

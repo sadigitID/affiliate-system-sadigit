@@ -46,43 +46,6 @@
 </div>
 <!-- end of modal tambah bonus -->
 
-<!-- start of export data pdf -->
-<div class="modal" id="modal_printPDF" tabindex="-1">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title">Print PDF</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<form id="form_printPDF">
-				<div class="modal-body">
-					<div class="form-group row">
-						<label class="col-form-label col-4" for="id_user ">Dari Tanggal</label>
-						<div class="col-8">
-							<input type="date" class="form-control" name="tgl_awal">
-						</div>
-					</div>
-					<div class="form-group row">
-						<label class="col-form-label col-4" for="id_user ">Sampai Tanggal</label>
-						<div class="col-8">
-							<input type="date" class="form-control" name="tgl_akhir">
-						</div>
-					</div>
-
-				</div>
-			</form>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-light-primary" onclick="save($(this))">Simpan</button>
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-			</div>
-		</div>
-	</div>
-</div>
-<!-- end of export data pdf -->
-
-
 
 <div class="card card-custom">
 	<div class="card-header">
@@ -153,18 +116,11 @@
 			},
 			dataType: "json",
 			success: function(res) {
-				$('#id_pesanan').val(res.id_pesanan)
-				$('#id_produk').val(res.id_produk)
+				$('#id_bonus').val(res.id_bonus)
 				$('#id_user').val(res.id_user)
-				$('#nama_produk').val(res.nama_produk)
-				$('#harga_jual').val(res.harga_jual)
-				$('#nama_pembeli').val(res.nama_pembeli)
-				$('#tanggal_pembayaran').val(res.tanggal_pembayaran)
-				$('#tanggal_pesanan').val(res.tanggal_pesanan)
-				$('#foto_pembayaran').val(res.foto_pembayaran)
-				$('#no_wa_pembeli').val(res.no_wa_pembeli)
-				$('#status_komisi').val(res.status_komisi)
-				$('#status_pesanan').val(res.status_pesanan)
+				$('#jml_bonus').val(res.jml_bonus)
+				$('#catatan').val(res.catatan)
+				$('#tanggal_bonus').val(res.tanggal_bonus)
 				$('#modal_bonus').modal('show')
 			},
 			error(err) {

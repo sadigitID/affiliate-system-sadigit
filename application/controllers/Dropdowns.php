@@ -29,5 +29,5 @@ class Dropdowns extends CI_Controller
             echo $this->Dropdown->get_district($this->input->post('city_id'));
         }
     }
-
+ 
 }

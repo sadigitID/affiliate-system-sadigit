@@ -31,9 +31,9 @@ class Produk extends CI_Controller
 
 		$tabel = 'tb_produk';
 		$column_order = array();
-		$coloumn_search = array('id_produk', 'nama_produk', 'harga_produk', 'jml_komisi', 'deskripsi_produk');
+		$coloumn_search = array('id_produk', 'nama_produk', 'harga_produk', 'jml_komisi', 'deskripsi_produk', 'link_produk');
 		$select = "*";
-		$order_by = array('id_produk' => 'desc');
+		$order_by = array('id_produk' => 'asc');
 		$join = [];
 		$where = [];
 		$group_by = [];
@@ -51,6 +51,7 @@ class Produk extends CI_Controller
             $row[] = $list->harga_produk;
 			$row[] = $list->jml_komisi;
             $row[] = $list->deskripsi_produk;
+			$row[] = $list->link_produk;
 			$row[] = "<center>
                        $edit 
                        $hapus
@@ -75,8 +76,9 @@ class Produk extends CI_Controller
 		$harga_produk = $this->input->post('harga_produk');
 		$jml_komisi = $this->input->post('jml_komisi');
         $deskripsi_produk = $this->input->post('deskripsi_produk');
+		$link_produk = $this->input->post('link_produk');
 
-		$check = $this->db->select( 'nama_produk', 'harga_produk', 'jml_komisi', 'deskripsi_produk')->from('tb_produk')->where('id_produk !=', $id_produk)->where('id_produk', $id_produk)->get();
+		$check = $this->db->select( 'nama_produk', 'harga_produk', 'jml_komisi', 'deskripsi_produk', 'link_produk')->from('tb_produk')->where('id_produk !=', $id_produk)->where('id_produk', $id_produk)->get();
 		if ($check->num_rows() > 0) {
 			return false;
 		}
@@ -114,6 +116,13 @@ class Produk extends CI_Controller
 					'required' => 'deskripsi produk tidak boleh kosong'
 				]
 			],
+			[
+				'field' => 'link_produk',
+				'rules' => 'required',
+				'errors' => [
+					'required' => 'link produk tidak boleh kosong'
+				]
+			],
 		];
 
 		$data = array('status' => false, 'messages' => array());
@@ -128,6 +137,7 @@ class Produk extends CI_Controller
 				'harga_produk' => $this->input->post('harga_produk'),
 				'jml_komisi' => $this->input->post('jml_komisi'),
                 'deskripsi_produk' => $this->input->post('deskripsi_produk'),
+				'link_produk' => $this->input->post('link_produk'),
 			];
 
 			if ($id_produk == "") {

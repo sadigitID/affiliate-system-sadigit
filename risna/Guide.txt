@@ -1,3 +1,1 @@
-masukan folder affiliator pada view sekalian sm foldernya
-
-masukan vontroller pada folder affiliator di controller
+m_user di model

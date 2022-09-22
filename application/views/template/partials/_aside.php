@@ -65,24 +65,6 @@
 					<i class="menu-icon ki ki-bold-more-hor icon-md"></i>
 				</li>
 
-				<!-- <li class="menu-item <?= $active == 'affiliator/bank' ? 'menu-item-active' : '' ?>" aria-haspopup="true">
-					<a href="<?= base_url('affiliator/bank') ?>" class="menu-link">
-						<span class="svg-icon menu-icon">
-							<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-								<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-									<polygon points="0 0 24 0 24 24 0 24" />
-									<path d="M5.85714286,2 L13.7364114,2 C14.0910962,2 14.4343066,2.12568431 14.7051108,2.35473959 L19.4686994,6.3839416 C19.8056532,6.66894833 20,7.08787823 20,7.52920201 L20,20.0833333 C20,21.8738751 19.9795521,22 18.1428571,22 L5.85714286,22 C4.02044787,22 4,21.8738751 4,20.0833333 L4,3.91666667 C4,2.12612489 4.02044787,2 5.85714286,2 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" />
-									<rect fill="#000000" x="6" y="11" width="9" height="2" rx="1" />
-									<rect fill="#000000" x="6" y="15" width="5" height="2" rx="1" />
-								</g>
-
-							</svg>
-
-						</span>
-						<span class="menu-text">Data Bank</span>
-					</a>
-				</li> -->
-
 				<!-- START PRODUK MENU -->
 				<li class="menu-item <?= $active == 'affiliator/produk' ? 'menu-item-active' : '' ?>" aria-haspopup="true">
 					<a href="<?= base_url('affiliator/produk') ?>" class="menu-link">
@@ -124,8 +106,8 @@
 									<span class="menu-text">Pesanan</span>
 								</span>
 							</li>
-							<li class="menu-item <?= $active == 'affiliator/pesanan' ? 'menu-item-active' : '' ?>" aria-haspopup="true">
-								<a href="<?= base_url('affiliator/pesanan') ?>" class="menu-link">
+							<li class="menu-item <?= $active == 'affiliator/pesanan_affiliate' ? 'menu-item-active' : '' ?>" aria-haspopup="true">
+								<a href="<?= base_url('affiliator/pesanan_affiliate') ?>" class="menu-link">
 									<i class="menu-bullet menu-bullet-dot">
 										<span>
 										</span>
@@ -182,7 +164,7 @@
 
 				<!-- start menu -->
 				<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                	<a href="javascript:;" class="menu-link menu-toggle">
+                	<a href="<?= base_url('affiliator/Edit_profile') ?>" class="menu-link menu-toggle">
 				  		<span class="svg-icon menu-icon">
 								<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
 									<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -194,67 +176,7 @@
 								</svg>
 						</span>
 							<span class="menu-text">Pengaturan</span>
-							<i class="menu-arrow"></i>
 					</a>
-                  	<div class="menu-submenu">
-                    	<i class="menu-arrow"></i>
-                    		<ul class="menu-subnav">
-                      			<li class="menu-item menu-item-parent" aria-haspopup="true">
-                        			<span class="menu-link">
-										<span class="menu-text">Bonus</span>
-									</span>
-                      			</li>
-								<li class="menu-item <?= $active == 'affiliator/Rekening' ? 'menu-item-active' : '' ?>" aria-haspopup="true">
-								<a href="<?= base_url('affiliator/Rekening') ?>" class="menu-link">
-									<i class="menu-bullet menu-bullet-dot">
-										<span>
-
-										</span>
-									</i>
-									<span class="menu-text">Rekening</span>
-								</a>
-                      			</li>
-
-								<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
-                        			<a href="javascript:;" class="menu-link menu-toggle">
-                          				<i class="menu-bullet menu-bullet-dot">
-                            				<span></span>
-                          				</i>
-                          				<span class="menu-text">Account</span>
-                          				<i class="menu-arrow"></i>
-                        			</a>
-									<div class="menu-submenu">
-										<i class="menu-arrow"></i>
-										<ul class="menu-subnav">
-											<li class="menu-item <?= $active == 'affiliator/Profile' ? 'menu-item-active' : '' ?>" aria-haspopup="true">
-												<a href="<?= base_url('affiliator/Profile') ?>" class="menu-link">
-												<i class="menu-bullet menu-bullet-line">
-													<span></span>
-												</i>
-												<span class="menu-text">Profile</span>
-												</a>
-											</li>
-											<li class="menu-item" aria-haspopup="true">
-											<a href="<?= base_url('affiliator/Edit_profile') ?>" class="menu-link">
-												<i class="menu-bullet menu-bullet-line">
-													<span></span>
-												</i>
-												<span class="menu-text">Edit Profile</span>
-												</a>
-											</li>
-											<li class="menu-item <?= $active == 'affiliator/Change_password' ? 'menu-item-active' : '' ?>" aria-haspopup="true">
-												<a href="<?= base_url('affiliator/Change_password') ?>" class="menu-link">
-												<i class="menu-bullet menu-bullet-line">
-													<span></span>
-												</i>
-												<span class="menu-text">Change Password</span>
-												</a>
-											</li>
-										</ul>
-									</div>
-								</li>
-                    		</ul>
-                  	</div>
                 </li>
 				<!-- end menu -->
 

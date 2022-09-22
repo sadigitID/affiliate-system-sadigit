@@ -46,29 +46,21 @@
     <div class="d-flex flex-column flex-root">
         <!--begin::Login-->
         <div class="login login-3 wizard d-flex flex-column flex-lg-row flex-column-fluid">
-            <!--begin::Aside-->
-            <div class="login-aside d-flex flex-column flex-row-auto">
-                <!--begin::Aside Top-->
-                <div class="d-flex flex-column-auto flex-column pt-lg-40 pt-15">
-                    <!--begin::Aside header-->
-                    <a href="#" class="login-logo text-center pt-lg-25 pb-10">
-                        <img src="<?= base_url(''); ?>/assets/media/logos/logo-1.png" class="max-h-70px" alt="" />
-                    </a>
-                    <!--end::Aside header-->
+           <!--begin::Aside-->
+           <div class="login-aside d-flex align-content-around flex-wrap flex-column ">
+                <!--begin::Aside header-->
+            <a href="https://www.sadigit.co.id/" class="align-self-center mb-10">
+				<img src="<?= base_url(''); ?>/assets/media/images/sadigit.png" class="min-h-70px" alt=""/>
+			</a>
+            <!--end::Aside header-->
 
-                    <!--begin::Aside Title-->
-                    <!-- <h3 class="font-weight-bolder text-center font-size-h4 text-dark-50 line-height-xl">
-                        User Experience & Interface Design<br />
-                        Strategy SaaS Solutions
-                    </h3> -->
-                    <!--end::Aside Title-->
-                </div>
-                <!--end::Aside Top-->
-
-                <!--begin::Aside Bottom-->
-                <div class="aside-img d-flex flex-row-fluid bgi-no-repeat bgi-position-x-center" style="background-position-y: calc(100% + 5rem); background-image: url(<?= base_url(''); ?>/assets/media/svg/illustrations/login-visual-5.svg)">
-                </div>
-                <!--end::Aside Bottom-->
+            <!--begin::Aside title-->
+            <h3 class="font-weight-bolder text-center font-size-h4 font-size-h1-lg" style="color: #70B443;">
+            Profesional Software Developer<br/>
+                <!-- with great build tools -->
+            </h3>
+            <!--end::Aside title-->
+               <!-- NANTI DISINI ADA GAMBAR LOGO SADIGIT -->
             </div>
             <!--begin::Aside-->
 
@@ -93,8 +85,8 @@
                             <!--begin::Form group-->
                             <?= $this->session->flashdata('message'); ?>
                             <div class="form-group">
-                                <label class="font-size-h6 font-weight-bolder text-dark">Your Email</label>
-                                <input class="form-control h-auto py-7 px-6 rounded-lg border-0" type="text" name="email" value="<?= set_value('email') ?>" />
+                                <label class="font-size-h6 font-weight-bolder text-dark" for="email">Your Email</label>
+                                <input class="form-control h-auto py-7 px-6 rounded-lg border-0" type="text" name="email" id="email"/>
                                 <?= form_error('email', '<small class="text-danger pl-3">', '</small>'); ?>
                             </div>
                             <!--end::Form group-->
@@ -102,9 +94,9 @@
                             <!--begin::Form group-->
                             <div class="form-group">
                                 <div class="d-flex justify-content-between mt-n5">
-                                    <label class="font-size-h6 font-weight-bolder text-dark pt-5">Your Password</label>
+                                    <label class="font-size-h6 font-weight-bolder text-dark pt-5" for="password">Your Password</label>
                                 </div>
-                                <input class="form-control h-auto py-7 px-6 rounded-lg border-0" type="password" />
+                                <input class="form-control h-auto py-7 px-6 rounded-lg border-0" type="password" name="password" id="password"/>
                                 <?= form_error('password', '<small class="text-danger pl-3">', '</small>'); ?>
                                 <hr>
                                 <a href="<?= base_url('Auth/forgot_password'); ?>" class="text-primary font-size-h6 font-weight-bolder text-hover-primary pt-5">

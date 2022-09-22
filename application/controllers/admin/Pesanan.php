@@ -11,7 +11,7 @@ class Pesanan extends CI_Controller
 		$this->load->library('form_validation');
 		$this->load->model('admin/Pesanan_model', 'pesanan');
 
-	}  
+	}
 
 	public function index()
 	{
@@ -21,7 +21,7 @@ class Pesanan extends CI_Controller
 			'sub1' => 'admin/pesanan',
 		];
 
-		$data['produk'] = $this->db->get('tb_users')->result();
+		$data['produk'] = $this->db->get('tb_produk')->result();
 
 		$this->load->view('template_admin/index', $data);
 	}
@@ -36,7 +36,7 @@ class Pesanan extends CI_Controller
 		$coloumn_search = array('id_pesanan', 'nama_pembeli', 'id_produk', 'harga_jual', 'status_pesanan', 'tanggal_pembayaran', 'foto_pembayaran', 'id_user', 'status_komisi');
 		$select = "*";
 		$order_by = array('id_pesanan' => 'asc');
-		$join[] = ['field' => 'tb_users', 'condition' => 'tb_pesanan.id_user = tb_users.id_user', 'direction' => 'left'];
+		$join[] = ['field' => 'tb_produk', 'condition' => 'tb_pesanan.id_produk = tb_produk.id_produk', 'direction' => 'left'];
 		$where = [];
 		$group_by = [];
 		$list = $this->pesanan->get_datatables($tabel, $column_order, $coloumn_search, $order_by, $where, $join, $select, $group_by);
@@ -48,12 +48,12 @@ class Pesanan extends CI_Controller
 			$row = array();
 			$row[] = $list->id_pesanan;
 			$row[] = $list->nama_pembeli;
-			$row[] = $list->nama_produk;
+			$row[] = $list->nama_produk; //harusnya joinkan tabel tb_produk terus nanti yg dipanggil field nama_produk dari tb_produk
 			$row[] = $list->harga_jual; //digunakan untuk total pesanan
             $row[] = $list->status_pesanan;
             $row[] = $list->tanggal_pembayaran;
             $row[] = $list->foto_pembayaran;
-            $row[] = $list->nama_lengkap;
+            $row[] = $list->id_user; //join dgn tabel user ambil field nama_lengkap
             $row[] = $list->status_komisi; //ini harusnya jml_komisi ambil dari tb_produk
             $row[] = $list->status_komisi;
 			$row[] = "<center>

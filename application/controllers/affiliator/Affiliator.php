@@ -10,10 +10,9 @@ class Affiliator extends CI_Controller
 
 		$this->load->library('form_validation');
 		$this->load->model('Umum_model', 'umum');
-
 	}
 
-    public function index()
+	public function index()
 	{
 		$data = [
 			'view' => 'affiliator/dashboard',
@@ -39,7 +38,7 @@ class Affiliator extends CI_Controller
 	{
 		header('Content-Type: application/json');
 
- 
+
 		$tabel = 'dat_bank';
 		$column_order = array();
 		$coloumn_search = array('nama_bank');
@@ -138,7 +137,7 @@ class Affiliator extends CI_Controller
 	function delete()
 	{
 		$id = $this->input->post('id', true);
-		$this->db->delete('dat_bank',['id'=>$id]);
+		$this->db->delete('dat_bank', ['id' => $id]);
 		echo json_encode('');
 	}
 }

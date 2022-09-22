@@ -27,14 +27,14 @@
       <th>Catatan</th>
     </tr>
     <?php
-        if(empty($reportbonus_pdf)){ // Jika data tidak ada
+        if(empty($export)){ // Jika data tidak ada
             echo "<tr><td colspan='5'>Data tidak ada</td></tr>";
         }else{ // Jika jumlah data lebih dari 0 (Berarti jika data ada)
-            foreach($reportbonus_pdf as $data){ // Looping hasil data transaksi
+            foreach($export as $data){ // Looping hasil data transaksi
                 $tanggal_bonus = date('d-m-Y', strtotime($data->tanggal_bonus)); // Ubah format tanggal jadi dd-mm-yyyy
                 echo "<tr>";
                 echo "<td style='width: 80px;'>".$tanggal_bonus."</td>";
-                echo "<td style='width: 100px;'>".$data->id_user."</td>";
+                echo "<td style='width: 100px;'>".$data->nama_lengkap."</td>";
                 echo "<td style='width: 300px;'>".$data->jml_bonus."</td>";
                 echo "<td style='width: 60px;'>".$data->catatan."</td>";
                 echo "</tr>";
