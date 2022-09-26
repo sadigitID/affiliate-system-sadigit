@@ -7,7 +7,7 @@ class Administrator extends CI_Controller
   function __construct()
   {
     parent::__construct();
-
+    
     $this->load->library('form_validation');
     $this->load->model('Umum_admin_model', 'umum');
     $this->load->model('M_user', 'm_user');
@@ -20,7 +20,7 @@ class Administrator extends CI_Controller
       'view' => 'admin/dashboard',
       'active' => 'administrator',
       'sub1' => 'administrator',
-    ];
+    ]; 
 
     $this->data['jumlah_affiliate'] = $this->m_user->jumlah();
     $this->data['jumlah_pmasuk'] = $this->m_pesanan->jumlah_masuk();
@@ -37,6 +37,7 @@ class Administrator extends CI_Controller
     ];
 
     $this->load->view('template_admin/index', $data);
+    
   }
 
   public function pesanan()

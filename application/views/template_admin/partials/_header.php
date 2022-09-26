@@ -68,9 +68,9 @@
 								font-weight-bolder font-size-base
 								d-none d-md-inline
 								mr-3
-							"><?= $this->session->userdata('nama') ?></span>
+							"><?= $this->session->userdata('email') ?></span>
 						<span class="symbol symbol-35 symbol-light-success">
-							<span class="symbol-label font-size-h5 font-weight-bold"><?= substr($this->session->userdata('nama'), 0, 1) ?></span>
+							<span class="symbol-label font-size-h5 font-weight-bold"><?= substr($this->session->userdata('email'), 0, 1) ?></span>
 						</span>
 					</div>
 				</div>

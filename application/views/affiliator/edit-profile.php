@@ -10,10 +10,11 @@
                 <div class="card card-custom">
                     <!--begin::Body-->
                     <div class="card-body pt-15">
-                        <!--begin::User-->
-                        <div class="text-center mb-10">
+                         <!--begin::User-->
+                         <div class="text-center mb-10">
                             <div class="symbol symbol-60 symbol-circle symbol-xl-90">
-                                <img class="symbol symbol-60 symbol-circle symbol-xl-90" src="<?= base_url('assets/media/users/default.jpg');?>">
+                                <!-- <img class="symbol symbol-60 symbol-circle symbol-xl-90" src="<?= base_url('assets/media/users/default.jpg'); ?>"> -->
+			                    <span class="symbol-label text-success text-uppercase font-weight-bolder font-size-h1"><?= substr($this->session->userdata('email'), 0, 3) ?></span>
                                 <i class="symbol-badge symbol-badge-bottom bg-success"></i>
                             </div>
 
@@ -21,7 +22,7 @@
                                 <?= $user['nama_lengkap']; ?>
                             </h4>
                             <div class="text-muted mb-2">
-                                Member Since <?= date('d F Y',strtotime($user['created_at'])); ?>
+                                Member Since <?= date('d F Y', strtotime($user['created_at'])); ?>
                             </div>
                         </div>
                         <!--end::User-->
@@ -99,23 +100,6 @@
                                     </span>
                                 </a>
                             </div>
-                            <div class="navi-item mb-2">
-                                <a href="<?= base_url('affiliator/Rekening') ?>" class="navi-link py-4">
-                                    <span class="navi-icon mr-2">
-										<span class="svg-icon"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Shopping\Credit-card.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-											<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-												<rect x="0" y="0" width="24" height="24"/>
-												<rect fill="#000000" opacity="0.3" x="2" y="5" width="20" height="14" rx="2"/>
-												<rect fill="#000000" x="2" y="8" width="20" height="3"/>
-												<rect fill="#000000" opacity="0.3" x="16" y="14" width="4" height="2" rx="1"/>
-											</g>
-										</svg><!--end::Svg Icon--></span>
-                                    </span>
-                                    <span class="navi-text font-size-lg">
-                                        Rekening
-                                    </span>
-                                </a>
-                            </div>
                         </div>
                         <!--end::Nav-->
 
@@ -146,13 +130,13 @@
 
                                 <!--begin::Form-->
                                 <?= $this->session->flashdata('message'); ?>
-                                <form action="<?= base_url('affiliator/edit_profile'); ?>" method="post" class="form offcanvas-mobile w-350px w-xxl-750px">
-                                    <div class="card-body offcanvas-mobile w-50px w-xxl-700px">
+                                <form action="<?= base_url('affiliator/edit_profile/updateUser') ?>" method="post" class="form offcanvas-mobile w-350px w-xxl-750px" id="editFrm" name="editFrm">
+                                    <div class="card-body">
                                     <!--begin::Heading-->
                                     <!--begin::Form Group-->
                                         <div class="form-group row">
                                             <label class="col-xl-6 col-lg-3 col-form-label" for="nama_lengkap">Full Name</label>
-                                            <div class="col-lg-9 col-xl-9">
+                                            <div class="col-lg-9 col-xl-8">
                                                 <div class="input-group input-group-lg input-group-solid">
                                                     <input class="form-control form-control-lg form-control-solid" type="text" id="nama_lengkap" name="nama_lengkap" value="<?= $user['nama_lengkap']; ?>" />
                                                     <?= form_error('nama_lengkap', '<small class="text-danger pl-3">', '</small>'); ?>
@@ -162,49 +146,58 @@
                                     <!--begin::Form Group-->
                                         <div class="form-group row">
                                             <label class="col-xl-6 col-lg-3 col-form-label" for="province_id">Province</label>
-                                            <div class="col-lg-9 col-xl-9">
+                                            <div class="col-lg-9 col-xl-8">
                                                 <select id="province_id" name="province_id" class="form-control form-control-lg form-control-solid">
                                                     <option value="<?= $user['province_id']; ?>"><?= $user['province_name']; ?></option>
-                                                    <?php
-                                                    foreach($provinces as $province):?>
-                                                    <option value="<?=$province->province_id;?>"><?=$province->province_name;?></option>
-                                                    <?php endforeach;?>
+                                                    <?php 
+                                                        foreach ($provinces as $province) {
+                                                            ?>
+                                                            <option <?= ($user['province_id'] == $province['province_id']) ? 'selected' : '';?> value="<?php echo $province['province_id'];?>"><?php echo $province['province_name'];?></option>}
+                                                            <?php
+                                                        }
+                                                    ?>
                                                 </select>
-                                                <!-- <input class="form-control form-control-lg form-control-solid" type="text" id="province_id" name="province_id" value="<?= $user['nama_lengkap']; ?>" />
-                                             -->
                                             </div>
                                             <?= form_error('province_id', '<small class="text-danger pl-3">', '</small>'); ?>
                                         </div>
                                     <!--begin::Form Group-->
                                         <div class="form-group row">
                                             <label id="city_id" name="city_id" class="col-xl-6 col-lg-3 col-form-label" for="city_id">County/City</label>
-                                            <div class="col-lg-9 col-xl-9">
+                                            <div id="city_id">
                                                 <select class="form-control form-control-lg form-control-solid">
-                                                    <option value="<?= $user['city_id']; ?>"><?= $user['city_name']; ?></option>
-                                                    <option value="">-- Pilih Kecamatan --</option>
+                                                    <option value="">-- Pilih Kabupaten/Kota --</option>
+                                                    <?php 
+                                                        foreach ($cities as $city) {
+                                                            ?>
+                                                            <option <?= ($user['city_id'] == $city['city_id']) ? 'selected' : '';?> value="<?php echo $city['city_id'];?>"><?php echo $city['city_name'];?></option>}
+                                                            <?php
+                                                        }
+                                                    ?>
                                                 </select>
-                                                <!-- <input class="form-control form-control-lg form-control-solid" type="text" id="city_id" name="city_id" value="<?= $user['nama_lengkap']; ?>" />
-                                                     -->
                                             </div>
                                             <?= form_error('city_id', '<small class="text-danger pl-3">', '</small>'); ?>
                                         </div>
                                     <!--begin::Form Group-->
                                         <div class="form-group row">
                                             <label class="col-xl-6 col-lg-3 col-form-label" for="district_id">District</label>
-                                            <div class="col-lg-9 col-xl-9">
+                                            <div id="district_id">
                                                 <select id="district_id" name="district_id" class="form-control form-control-lg form-control-solid">
-                                                    <option value="<?= $user['district_id']; ?>"><?= $user['district_name']; ?></option>
                                                     <option value="">-- Pilih Kecamatan --</option>
+                                                    <?php 
+                                                        foreach ($districts as $district) {
+                                                            ?>
+                                                            <option <?= ($user['district_id'] == $district['district_id']) ? 'selected' : '';?> value="<?php echo $district['district_id'];?>"><?php echo $district['district_name'];?></option>}
+                                                            <?php
+                                                        }
+                                                    ?>
                                                 </select>
-                                                <!-- <input class="form-control form-control-lg form-control-solid" type="text" id="district_id" name="district_id" value="<?= $user['nama_lengkap']; ?>" />
-                                                     -->
                                             </div>
                                             <?= form_error('district_id', '<small class="text-danger pl-3">', '</small>'); ?>
                                         </div> 
                                     <!--begin::Form Group-->
                                         <div class="form-group row">
                                             <label class="col-xl-6 col-lg-3 col-form-label" for="alamat_lengkap">Complete Address</label>
-                                            <div class="col-lg-9 col-xl-9">
+                                            <div class="col-lg-9 col-xl-8">
                                                 <div class="input-group input-group-lg input-group-solid">
                                                     <input id="alamat_lengkap" name="alamat_lengkap" class="form-control form-control-lg form-control-solid" type="text" value="<?= $user['alamat_lengkap']; ?>" />
                                                     <?= form_error('alamat_lengkap', '<small class="text-danger pl-3">', '</small>'); ?>
@@ -214,7 +207,7 @@
                                     <!--begin::Form Group-->
                                         <div class="form-group row">
                                             <label class="col-xl-6 col-lg-3 col-form-label" for="email">Email Address</label>
-                                            <div class="col-lg-9 col-xl-9">
+                                            <div class="col-lg-9 col-xl-8">
                                                 <div class="input-group input-group-lg input-group-solid">
                                                     <div class="input-group-prepend"><span class="input-group-text"><i class="la la-at"></i></span></div>
                                                     <input id="email" name="email" type="text" class="form-control form-control-lg form-control-solid" value="<?= $user['email']; ?>" readonly />
@@ -225,7 +218,7 @@
                                     <!--begin::Form Group-->
                                         <div class="form-group row">
                                             <label class="col-xl-6 col-lg-3 col-form-label" for="no_hp">Phone Number</label>
-                                            <div class="col-lg-9 col-xl-9">
+                                            <div class="col-lg-9 col-xl-8">
                                                 <div class="input-group input-group-lg input-group-solid">
                                                     <input id="no_hp" name="no_hp" class="form-control form-control-lg form-control-solid" type="text" value="<?= $user['no_hp']; ?>" />
                                                     <?= form_error('no_hp', '<small class="text-danger pl-3">', '</small>'); ?>
@@ -234,7 +227,7 @@
                                         </div>
 
                                         <div class="form-group row">
-                                            <div class="col-lg-9 col-xl-9"> 
+                                            <div class="col-lg-9 col-xl-8"> 
                                                 <button type="sumbit" class="btn btn-success mr-2">Save Changes</button>
                                             </div>
                                             </div>
@@ -260,54 +253,108 @@
 </body>
 <!--end::Body-->
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
-        $(document).ready(function() {
+         $(document).ready(function(){
+            $("#province_id").change(function(){
+                // Here we will run an ajax request
+                var province_id = $(this).val();  // Selected country id
+                $.ajax({
+                    url : '<?php echo base_url('edit_profile/get_city')?>/',
+                    type: 'POST',
+                    data:{province_id:province_id},
+                    dataType: 'json',
+                    success: function(response){
+                        if(response['city_id']) {
+                            $("#city_id").html(response['city_id']);
+                        } 
 
-            $('#province_id').change(function() {
-                var province_id = $('#province_id').val();
-                if (province_id != '') {
-                    $.ajax({
-                        url: "<?php echo base_url(); ?>/affiliator/Edit_profile/get_city",
-                        method: "POST",
-                        data: {
-                            province_id: province_id
-                        },
-                        success: function(data) {
-                            $('#city_id').html(data);
-                        }
-                    });
-                } else {
-                    // $('#city_id').html('<option value="">-- Pilih Kabupaten/Kota --</option>').change();
-                    $('#city_id').html('<option value="'+value.city_id+'" selected>'+value.city_name+'</option>').trigger('change');
-                    $('#city_id').html('<option value="'+value.city_id+'" selected>'+value.city_name+'</option>');
-                    $('#district_id').html('<option value="'+value.district_id+'" selected>'+value.district_name+'</option>').trigger('change');
-                    $('#district_id').html('<option value="'+value.district_id+'" selected>'+value.district_name+'</option>');
-                }
+                    }
+                });
+                $("#citiesBox").html("<select name=\"city\" id=\"city\" class=\"form-control\">\
+                    <option value=\"\">Select a City</option>\
+                </select>");
+
             });
 
-            $('#city_id').change(function() {
-                var city_id = $('#city_id').val();
-                if (city_id != '') {
-                    $.ajax({
-                        url: "<?php echo base_url(); ?>/affiliator/Edit_profile/get_district",
-                        method: "POST",
-                        data: {
-                            city_id: city_id
-                        },
-                        success: function(data) {
-                            $('#district_id').html(data);
-                        }
-                    });
-                } else {
+
+            
+
+            $(document).on("change","#city_id",function(){
+                var city_id = $(this).val();  // Selected state id
+                $.ajax({
+                    url : '<?php echo base_url('edit_profile/get_district')?>/',
+                    type: 'POST',
+                    data:{city_id:city_id},
+                    dataType: 'json',
+                    success: function(response){
+                        if(response['district_id']) {
+                            $("#district_id").html(response['district_id']);
+                        } 
+                    }
                     
-                    $('#district_id').html('<option value="'+value.district_id+'" selected>'+value.district_name+'</option>').trigger('change');
-                    $('#district_id').html('<option value="'+value.district_id+'" selected>'+value.district_name+'</option>');
-                    // $('#district_id').html('<option value="">-- Pilih Kecamatan --</option>');
+                });
+                //alert(state_id)
+            })
+        });
+
+        $("#editFrm").submit(function(event){
+            event.preventDefault();
+
+            $.ajax({
+                url : '<?php echo base_url('edit_profile/index'.$user['email'])?>',
+                type: 'post',
+                data: $(this).serializeArray(),
+                dataType : 'json',
+                success: function(response){
+                    if (response['status'] == 0) {
+                        if (response['nama_lengkap']) {
+                            $(".nama_lengkap_error").html(response['nama_lengkap']);
+                        } else {
+                            $(".nama_lengkap_error").html("");
+                        }
+
+                        if (response['province_id']) {
+                            $(".province_id_error").html(response['province_id']);
+                        } else {
+                            $(".province_id_error").html("");
+                        }
+
+                        if (response['city_id']) {
+                            $(".city_id_error").html(response['city_id']);
+                        } else {
+                            $(".city_id_error").html("");
+                        }
+
+                        if (response['district_id']) {
+                            $(".district_id_error").html(response['district_id']);
+                        } else {
+                            $(".district_id_error").html("");
+                        }
+
+                        if (response['email']) {
+                            $(".email_error").html(response['email']);
+                        } else {
+                            $(".email_error").html("");
+                        }
+
+                        if (response['alamat_lengkap']) {
+                            $(".alamat_lengkap_error").html(response['alamat_lengkap']);
+                        } else {
+                            $(".alamat_lengkap_error").html("");
+                        }
+
+                        if (response['no_hp']) {
+                            $(".no_hp_error").html(response['no_hp']);
+                        } else {
+                            $(".no_hp_error").html("");
+                        }
+                    } else {
+                        window.location.href="<?php echo base_url('edit_profile/index')?>";
+                    }
+                    //console.log(response)
                 }
-            });
-
-
+            })
         });
     </script>
 

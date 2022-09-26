@@ -10,7 +10,7 @@
 		<!--end::Symbol-->
 
 		<!--begin::Text-->
-		<div class="text-white m-0 flex-grow-1 mr-3 font-size-h5"><?= $this->session->userdata('nama') ?></div>
+		<div class="text-white m-0 flex-grow-1 mr-3 font-size-h5"><?= $this->session->userdata('nama_lengkap') ?></div>
 
 		<!--end::Text-->
 	</div>

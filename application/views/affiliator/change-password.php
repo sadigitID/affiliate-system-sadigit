@@ -11,10 +11,11 @@
                 <div class="card">
                     <!--begin::Body-->
                     <div class="card-body ">
-                        <!--begin::User-->
-                        <div class="text-center mb-10">
+                         <!--begin::User-->
+                         <div class="text-center mb-10">
                             <div class="symbol symbol-60 symbol-circle symbol-xl-90">
-                                <img class="symbol symbol-60 symbol-circle symbol-xl-90" src="<?= base_url('assets/media/users/default.jpg'); ?>">
+                                <!-- <img class="symbol symbol-60 symbol-circle symbol-xl-90" src="<?= base_url('assets/media/users/default.jpg'); ?>"> -->
+			                    <span class="symbol-label text-success text-uppercase font-weight-bolder font-size-h1"><?= substr($this->session->userdata('email'), 0, 3) ?></span>
                                 <i class="symbol-badge symbol-badge-bottom bg-success"></i>
                             </div>
 
@@ -105,23 +106,6 @@
                                     </span>
                                 </a>
                             </div>
-                            <div class="navi-item mb-2">
-                                <a href="<?= base_url('affiliator/Rekening') ?>" class="navi-link py-4">
-                                    <span class="navi-icon mr-2">
-										<span class="svg-icon"><!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Shopping\Credit-card.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
-											<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-												<rect x="0" y="0" width="24" height="24"/>
-												<rect fill="#000000" opacity="0.3" x="2" y="5" width="20" height="14" rx="2"/>
-												<rect fill="#000000" x="2" y="8" width="20" height="3"/>
-												<rect fill="#000000" opacity="0.3" x="16" y="14" width="4" height="2" rx="1"/>
-											</g>
-										</svg><!--end::Svg Icon--></span>
-                                    </span>
-                                    <span class="navi-text font-size-lg">
-                                        Rekening
-                                    </span>
-                                </a>
-                            </div>
                         </div>
                         <!--end::Nav-->
 
@@ -154,12 +138,12 @@
 
                                 <!--begin::Form-->
                                 <form action="<?= base_url('affiliator/change_password'); ?>" method="post" class="form offcanvas-mobile w-350px w-xxl-750px">
-                                    <div class="card-body offcanvas-mobile w-40px w-xxl-700px">
+                                    <div class="card-body">
                                         <!--begin::Heading-->
                                         <!--begin::Form Group-->
                                         <div class="form-group row">
                                             <label class="col-xl-6 col-lg-3 col-form-label" for="password">Current Password</label>
-                                            <div class="col-lg-9 col-xl-9">
+                                            <div class="col-lg-9 col-xl-9">    
                                                 <div class="input-group input-group-lg input-group-solid">
                                                     <input class="form-control form-control-lg form-control-solid" type="password" id="password" name="password" required/>
                                                     <?= form_error('password', '<small class="text-danger pl-3">', '</small>'); ?>

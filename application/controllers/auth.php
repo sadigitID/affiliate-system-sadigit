@@ -6,19 +6,21 @@ class Auth extends CI_Controller
 
     public function __construct()
     {
+        
         parent::__construct();
         $this->load->library('form_validation');
         $this->load->model('Login');
         $this->load->model('dropdown');
 
-        // if ($this->session->userdata('email')) {
-        //     $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">You are already logged in!</div>');
-        //     redirect(base_url());
-        // }
     }
 
     public function index()
     {
+        // if ($this->session->userdata('email')) {
+        //     $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">You are already logged in!</div>');
+        //     redirect(base_url());
+        // }
+
         $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
         $this->form_validation->set_rules('password', 'Password', 'trim|required');
 
@@ -86,7 +88,7 @@ class Auth extends CI_Controller
             $this->load->view('auth/forgot-password');
         } else {
             $this->Login->forgot_password();
-        }
+        } 
     }
 
     public function resetpassword()

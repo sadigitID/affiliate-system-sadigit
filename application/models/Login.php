@@ -20,7 +20,9 @@ class Login extends CI_Model
                 if (password_verify($password, $user['password'])) {
                     $data = [
                         'email' => $user['email'],
-                        'role' => $user['role']
+                        'role' => $user['role'],
+                        'nama_lengkap' => $user['nama_lengkap'],
+                        'id_user' => $user['id_user'],
                     ];
                     $this->session->set_userdata($data);
                     if ($user['role'] == 'Admin') {

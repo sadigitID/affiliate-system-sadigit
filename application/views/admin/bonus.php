@@ -7,7 +7,7 @@
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
-			</div>
+			</div> 
 			<form id="form_bonus">
 				<div class="modal-body">
 					<input class="d-none" type="text" id="id_bonus" name="id_bonus" autocomplete="off" />
