@@ -42,7 +42,7 @@ class Bonus_komisi extends CI_Controller
       $row = array();
       $row[] = ++$no;
       $row[] = $list->jml_bonus;
-      $row[] = $list->catatan;
+      $row[] = $list->catatan; 
       $row[] = $list->tanggal_bonus;
       $data[] = $row;
     }

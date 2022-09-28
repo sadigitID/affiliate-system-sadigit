@@ -35,11 +35,12 @@ class Rekening extends CI_Controller
 
 		$tabel = 'tb_rekening';
 		$column_order = array();
-		$coloumn_search = array('id_rek', 'id_bank', 'nama_pemilik_rek', 'no_rek');
-		$select = "*";
+		$coloumn_search = array('id_rek', 'nama_bank', 'nama_pemilik_rek', 'no_rek');
+		$select = "tb_rekening.*, tb_bank.nama_bank";
 		$order_by = array('id_rek' => 'asc');
 		$join[] = ['field' => 'tb_bank', 'condition' => 'tb_rekening.id_bank = tb_bank.id_bank', 'direction' => 'left'];
-		$where = [];
+		// $join[] = ['field' => 'tb_users', 'condition' => 'tb_rekening.email = tb_users.email', 'direction' => 'left'];
+		$where = []; 
 		$group_by = [];
 		$list = $this->umum->get_datatables($tabel, $column_order, $coloumn_search, $order_by, $where, $join, $select, $group_by);
 		$data = array();

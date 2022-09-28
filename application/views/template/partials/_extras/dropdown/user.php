@@ -4,13 +4,13 @@
 
 		<!--begin::Symbol-->
 		<div class="symbol bg-white-o-15 mr-3">
-			<span class="symbol-label text-success font-weight-bold font-size-h4"><?= substr($this->session->userdata('nama_lengkap'), 0, 1) ?></span>
+			<span class="symbol-label text-success font-weight-bold font-size-h4"><?= substr($this->session->userdata('email'), 0, 1) ?></span>
 		</div>
 
 		<!--end::Symbol-->
 
 		<!--begin::Text-->
-		<div class="text-white m-0 flex-grow-1 mr-3 font-size-h5"><?= $this->session->userdata('nama_lengkap') ?></div>
+		<div class="text-white m-0 flex-grow-1 mr-3 font-size-h5"><?= $this->session->userdata('email') ?></div>
 
 		<!--end::Text-->
 	</div>

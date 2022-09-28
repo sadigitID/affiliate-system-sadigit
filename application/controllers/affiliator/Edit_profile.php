@@ -22,6 +22,7 @@ class Edit_profile extends CI_Controller
         ];
 
         $data['user'] = $this->m_profile->getUser($this->session->userdata('email'));
+        // $data['user'] = $this->m_profile->getUser_id('id_user', $this->session->userdata('id_user'));
         $data['provinces'] = $this->m_profile->get_province();
         $data['cities'] = $this->m_profile->get_city($data['user']['province_id']);
         $data['districts'] = $this->m_profile->get_district($data['user']['city_id']);
@@ -64,60 +65,15 @@ class Edit_profile extends CI_Controller
         echo json_encode($response);
     }
 
-
-    public function edit($email) {
-        $user = $this->m_profile->getUser($email);
-
-        if (empty($user)) {
-            $this->session->set_flashdata('error','Record not found.');
-            redirect(base_url('edit_profile/index'));
-        }
-
-        $data = [
-            'view' => 'affiliator/edit-profile',
-            'active' => 'edit-profile',
-            'sub1' => 'edit-profile',
-        ];
-        $data['user'] = $this->m_profile->getUser($this->session->userdata('email'));
-        $data['provinces'] = $this->m_profile->get_province();
-        $data['cities'] = $this->m_profile->get_city($data['user']['province_id']);
-        $data['districts'] = $this->m_profile->get_district($data['user']['city_id']);
-
-        $this->load->view('edit-profile',$data);
-    }
-
-    public function updateUser($email)
+    public function updateUser()
     {
-        $response = [];
-
-        $data['user'] = $this->db->get_where('tb_users', ['email' => $this->session->userdata('email')])->row_array();
+        $data['user'] = $this->m_profile->getUser($this->session->userdata('email'));
             $config = [
                 [
                     'field' => 'nama_lengkap',
         			'rules' => 'required|trim',
         			'errors' => [
         				'required' => 'nama tidak boleh kosong'
-        			]
-                ],
-                [
-                    'field' => 'province_id',
-        			'rules' => 'required|trim',
-        			'errors' => [
-        				'required' => 'provinsi tidak boleh kosong'
-        			]
-                ],
-                [
-                    'field' => 'city_id',
-                    'rules' => 'required|trim',
-                    'errors' => [
-                        'required' => 'kota tidak boleh kosong'
-                    ]
-                ],
-                [
-                    'field' => 'district_id',
-        			'rules' => 'required|trim',
-        			'errors' => [
-        				'required' => 'kecamatan tidak boleh kosong'
         			]
                 ],
                 [
@@ -141,29 +97,35 @@ class Edit_profile extends CI_Controller
         	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
             $this->form_validation->set_message('required', '{field} tidak boleh kosong');
 
-        if ($this->form_validation->run() == true) {
-            // We will insert a record here
-            $formData = [];
-            $formData['nama_lengkap'] = $this->input->post('nama_lengkap');
-            $formData['province_id'] = $this->input->post('province_id');
-            $formData['city_id'] = $this->input->post('city_id');
-            $formData['district_id'] = $this->input->post('district_id');
-            $formData['alamat_lengkap'] = $this->input->post('alamat_lengkap');
-            $formData['no_hp'] = $this->input->post('no_hp');
-            $this->m_profile->update($email, $formData); // Here we will update a record
-            $this->session->set_flashdata('message','User updated successfully.');
-
+        if ($this->form_validation->run() == false) {
+            $data = [
+                'view' => 'affiliator/edit-profile',
+                'active' => 'edit-profile',
+                'sub1' => 'edit-profile',
+            ];
+    
+            $data['user'] = $this->m_profile->getUser($this->session->userdata('email'));
+            $data['provinces'] = $this->m_profile->get_province();
+            $data['cities'] = $this->m_profile->get_city($data['user']['province_id']);
+            $data['districts'] = $this->m_profile->get_district($data['user']['city_id']);
+    
+            $this->load->view('template/index', $data);
         } else {
+            $where = $this->db->get_where('tb_users', ['email', $this->session->userdata('email')])->row_array();
 
-            // Here we will return error
-            $response['nama_lengkap'] = form_error('nama_lengkap');
-            $response['province_id'] = form_error('province_id');
-            $response['city_id'] = form_error('city_id');
-            $response['district_id'] = form_error('district_id');
-            $response['alamat_lengkap'] = form_error('alamat_lengkap');
-            $response['no_hp'] = form_error('no_hp');
+            $data = array(
+                'nama_lengkap' => $this->input->post('nama_lengkap'),
+                'province_id' => $this->input->post('province_id'),
+                'city_id' => $this->input->post('city_id'),
+                'district_id' => $this->input->post('district_id'),
+                'alamat_lengkap' => $this->input->post('alamat_lengkap'),
+                'no_hp' => $this->input->post('no_hp'),
+            );
+
+            $this->m_profile->update_data($where, $data, 'tb_users');
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Account has been changed!</div>');
+            redirect('affiliator/edit_profile');
         }
-        echo json_encode($response);
     }
 
     

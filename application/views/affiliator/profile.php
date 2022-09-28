@@ -69,7 +69,7 @@
                         <!--begin::Nav-->
                         <div class="navi navi-bold navi-hover navi-active navi-link-rounded">
                             <div class="navi-item mb-2">
-                                <a href="<?= base_url('affiliator/profile') ?>" class="navi-link py-4">
+                                <a href="<?= base_url('affiliator/profile') ?>" class="navi-link py-4 active">
                                     <span class="navi-icon mr-2">
                                         <span class="svg-icon"><!--begin::Svg Icon | path:assets/media/svg/icons/Design/Layers.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -85,7 +85,7 @@
                                 </a> 
                             </div>
                             <div class="navi-item mb-2">
-                                <a href="<?= base_url('affiliator/edit_profile') ?>" class="navi-link py-4 active">
+                                <a href="<?= base_url('affiliator/edit_profile') ?>" class="navi-link py-4 ">
                                     <span class="navi-icon mr-2">
                                         <span class="svg-icon"><!--begin::Svg Icon | path:assets/media/svg/icons/Design/Layers.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -139,7 +139,7 @@
                                     <div class="card-header">
                                         <div class="card-title align-items-start flex-column">
                                             <h3 class="card-label font-weight-bolder text-dark">Personal Information</h3>
-                                            <span class="text-muted font-weight-bold font-size-sm mt-1">Change your personal information</span>
+                                            <span class="text-muted font-weight-bold font-size-sm mt-1">Member since <?= date('d F Y',strtotime($user['created_at'])); ?></span>
                                         </div>
                                     </div>
                                 <!--end::Header-->
@@ -151,104 +151,54 @@
                                     <!--begin::Heading-->
                                     <!--begin::Form Group-->
                                         <div class="form-group row">
-                                            <label class="col-xl-6 col-lg-3 col-form-label" for="nama_lengkap">Full Name</label>
-                                            <div class="col-xl-12">
-                                                <div class="input-group input-group-lg input-group-solid">
-                                                    <input class="form-control form-control-lg form-control-solid" type="text" id="nama_lengkap" name="nama_lengkap" value="<?= $user['nama_lengkap']; ?>" />
-                                                    <?= form_error('nama_lengkap', '<small class="text-danger pl-3">', '</small>'); ?>
-                                                </div>
+                                            <div class=" col-xl-12 d-flex align-items-center justify-content-between ">
+                                                <span class="font-weight-bold mr-6">Name Full:</span>
+                                                <span class="text-muted"><?= $user['nama_lengkap']; ?></span>
                                             </div>
                                         </div>
                                     <!--begin::Form Group-->
-                                        <div class="form-group row">
-                                            <label class="col-xl-6 col-lg-3 col-form-label" for="province_id">Province</label>
-                                            <div class="col-xl-12">
-                                                <select id="province_id" name="province_id" class="form-control form-control-lg form-control-solid">
-                                                    <!-- <option value="">-- Pilih Kabupaten/Kota --</option> -->
-                                                    <option value="">-- Select Province --</option>
-                                                    <?php 
-                                                        foreach ($provinces as $province) {
-                                                            ?>
-                                                            <option <?= ($user['province_id'] == $province['province_id']) ? 'selected' : '';?> value="<?php echo $province['province_id'];?>"><?php echo $province['province_name'];?></option>}
-                                                            <?php
-                                                        }
-                                                    ?>
-                                                </select>
-                                            </div>
-                                            <?= form_error('province_id', '<small class="text-danger pl-3">', '</small>'); ?>
-                                        </div>
-                                    <!--begin::Form Group-->
-                                        <div class="form-group row">
-                                            <label id="city_id" name="city_id" class="col-xl-6 col-lg-3 col-form-label" for="city_id">County/City</label>
-                                            <div class="col-xl-12">
-                                                <select class="form-control form-control-lg form-control-solid">
-                                                    <option value="">-- Select County/City --</option>
-                                                    <?php 
-                                                        foreach ($cities as $city) {
-                                                            ?>
-                                                            <option <?= ($user['city_id'] == $city['city_id']) ? 'selected' : '';?> value="<?= $city['city_id'];?>"><?= $city['city_name'];?></option>}
-                                                            <?php
-                                                        }
-                                                    ?>
-                                                </select>
-                                            </div>
-                                            <?= form_error('city_id', '<small class="text-danger pl-3">', '</small>'); ?>
-                                        </div>
-                                    <!--begin::Form Group-->
-                                        <div class="form-group row">
-                                            <label class="col-xl-6 col-lg-3 col-form-label" for="district_id">District</label>
-                                            <div class="col-xl-12">
-                                                <select id="district_id" name="district_id" class="form-control form-control-lg form-control-solid">
-                                                    <option value="">-- Select District --</option>
-                                                    <?php 
-                                                        foreach ($districts as $district) {
-                                                            ?>
-                                                            <option <?= ($user['district_id'] == $district['district_id']) ? 'selected' : '';?> value="<?= $district['district_id'];?>"><?= $district['district_name'];?></option>}
-                                                            <?php
-                                                        }
-                                                    ?>
-                                                </select>
-                                            </div>
-                                            <?= form_error('district_id', '<small class="text-danger pl-3">', '</small>'); ?>
-                                        </div> 
-                                    <!--begin::Form Group-->
-                                        <div class="form-group row">
-                                            <label class="col-xl-6 col-lg-3 col-form-label" for="alamat_lengkap">Complete Address</label>
-                                            <div class="col-xl-12">
-                                                <div class="input-group input-group-lg input-group-solid">
-                                                    <input id="alamat_lengkap" name="alamat_lengkap" class="form-control form-control-lg form-control-solid" type="text" value="<?= $user['alamat_lengkap']; ?>" />
-                                                    <?= form_error('alamat_lengkap', '<small class="text-danger pl-3">', '</small>'); ?>
-                                                </div>
+                                    <div class="form-group row">
+                                            <div class=" col-xl-12 d-flex align-items-center justify-content-between ">
+                                                <span class="font-weight-bold mr-6">Province:</span>
+                                                <span class="text-muted"><?= $user['province_name']; ?></span>
                                             </div>
                                         </div>
                                     <!--begin::Form Group-->
-                                        <div class="form-group row">
-                                            <label class="col-xl-6 col-lg-3 col-form-label" for="email">Email Address</label>
-                                            <div class="col-xl-12">
-                                                <div class="input-group input-group-lg input-group-solid">
-                                                    <div class="input-group-prepend"><span class="input-group-text"><i class="la la-at"></i></span></div>
-                                                    <input id="email" name="email" type="text" class="form-control form-control-lg form-control-solid" value="<?= $user['email']; ?>" readonly />
-                                                    <?= form_error('email', '<small class="text-danger pl-3">', '</small>'); ?>
-                                                </div>
+                                    <div class="form-group row">
+                                            <div class=" col-xl-12 d-flex align-items-center justify-content-between ">
+                                                <span class="font-weight-bold mr-6">County/City:</span>
+                                                <span class="text-muted"><?= $user['city_name']; ?></span>
                                             </div>
                                         </div>
                                     <!--begin::Form Group-->
-                                        <div class="form-group row">
-                                            <label class="col-xl-6 col-lg-3 col-form-label" for="no_hp">Phone Number</label>
-                                            <div class="col-xl-12">
-                                                <div class="input-group input-group-lg input-group-solid">
-                                                    <input id="no_hp" name="no_hp" class="form-control form-control-lg form-control-solid" type="text" value="<?= $user['no_hp']; ?>" />
-                                                    <?= form_error('no_hp', '<small class="text-danger pl-3">', '</small>'); ?>
-                                                </div>
+                                    <div class="form-group row">
+                                            <div class=" col-xl-12 d-flex align-items-center justify-content-between ">
+                                                <span class="font-weight-bold mr-6">District:</span>
+                                                <span class="text-muted"><?= $user['district_name']; ?></span>
                                             </div>
                                         </div>
-
-                                        <div class="form-group row">
-                                            <div class="col-xl-12"> 
-                                                <button type="sumbit" class="btn btn-success mr-2">Save Changes</button>
-                                            </div>
+                                    <!--begin::Form Group-->
+                                    <div class="form-group row">
+                                            <div class=" col-xl-12 d-flex align-items-center justify-content-between ">
+                                                <span class="font-weight-bold mr-6">Complete Address:</span>
+                                                <span class="text-muted"><?= $user['alamat_lengkap']; ?></span>
                                             </div>
                                         </div>
+                                    <!--begin::Form Group-->
+                                    <div class="form-group row">
+                                            <div class=" col-xl-12 d-flex align-items-center justify-content-between ">
+                                                <span class="font-weight-bold mr-6">Email Address:</span>
+                                                <span class="text-muted"><?= $user['email']; ?></span>
+                                            </div>
+                                        </div>
+                                    <!--begin::Form Group-->
+                                    <div class="form-group row">
+                                            <div class=" col-xl-12 d-flex align-items-center justify-content-between ">
+                                                <span class="font-weight-bold mr-6">Phone Number:</span>
+                                                <span class="text-muted"><?= $user['no_hp']; ?></span>
+                                            </div>
+                                        </div>
+                                    
                                 </form>
                                 <!--END::Form Group-->
                             </div>
