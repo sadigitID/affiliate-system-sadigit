@@ -48,19 +48,7 @@
         <div class="login login-3 wizard d-flex flex-column flex-lg-row flex-column-fluid">
            <!--begin::Aside-->
            <div class="login-aside d-flex align-content-around flex-wrap flex-column ">
-                <!--begin::Aside header-->
-            <a href="https://www.sadigit.co.id/" class="align-self-center mb-10">
-				<img src="<?= base_url(''); ?>/assets/media/images/sadigit.png" class="min-h-70px" alt=""/>
-			</a>
-            <!--end::Aside header-->
-
-            <!--begin::Aside title-->
-            <h3 class="font-weight-bolder text-center font-size-h4 font-size-h1-lg" style="color: #70B443;">
-            Profesional Software Developer<br/>
-                <!-- with great build tools -->
-            </h3>
-            <!--end::Aside title-->
-               <!-- NANTI DISINI ADA GAMBAR LOGO SADIGIT -->
+                
             </div>
             <!--begin::Aside-->
 
@@ -99,7 +87,7 @@
                                 <input class="form-control h-auto py-7 px-6 rounded-lg border-0" type="password" name="password" id="password"/>
                                 <?= form_error('password', '<small class="text-danger pl-3">', '</small>'); ?>
                                 <hr>
-                                <a href="<?= base_url('Auth/forgot_password'); ?>" class="text-primary font-size-h6 font-weight-bolder text-hover-primary pt-5">
+                                <a href="<?= base_url('auth/forgot_password'); ?>" class="text-primary font-size-h6 font-weight-bolder text-hover-primary pt-5">
                                     Forgot Password ?
                                 </a>
                             </div>

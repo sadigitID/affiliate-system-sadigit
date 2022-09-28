@@ -89,7 +89,7 @@ class Auth extends CI_Controller
         } else {
             $this->Login->forgot_password();
         } 
-    }
+    } 
 
     public function resetpassword()
     {

@@ -47,23 +47,10 @@
         <!--begin::Login-->
         <div class="login login-3 wizard d-flex flex-column flex-lg-row flex-column-fluid wizard" id="kt_login">
             <!--begin::Aside-->
-            <div class="login-aside d-flex align-items-center flex-column ">
-                <!--begin::Aside header-->
-            <a href="https://www.sadigit.co.id/" class="text-center mb-10">
-				<img src="<?= base_url(''); ?>/assets/media/images/sadigit.png" class="min-h-70px" alt=""/>
-			</a>
-            <!--end::Aside header-->
-
-            <!--begin::Aside title-->
-            <h3 class="font-weight-bolder text-center font-size-h4 font-size-h1-lg" style="color: #70B443;">
-            Profesional Software Developer<br/>
-                <!-- with great build tools -->
-            </h3>
-            <!--end::Aside title-->
-               <!-- NANTI DISINI ADA GAMBAR LOGO SADIGIT -->
+           <div class="login-aside d-flex align-content-around flex-wrap flex-column ">
+                
             </div>
             <!--begin::Aside-->
-
             <!--begin::Content-->
             <div class="login-content flex-column-fluid d-flex flex-column p-10">
                 <!--begin::Wrapper-->
@@ -106,7 +93,7 @@
                                 <div class="form-group">
                                     <label class="font-size-h6 font-weight-bolder text-dark" for="province_id">Province</label>
                                     <select name="province_id" id="province_id" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6">
-                                    <option >-- Pilih Provinsi --</option>
+                                        <option >-- Select a Province --</option>
                                         <?php
                                         foreach($provinces as $province){ ?>
                                             <option value="<?=$province->province_id?>"><?=$province->province_name?></option>
@@ -119,9 +106,11 @@
                                 <!--begin::Form Group-->
                                 <div class="form-group">
                                     <label class="font-size-h6 font-weight-bolder text-dark" for="city_id">County/City</label>
-                                    <select name="city_id" id="city_id" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" >
-                                        <option>-- Pilih Kabupaten --</option>  
-                                    </select>
+                                    <div id="cityBox">
+                                        <select name="city_id" id="city_id" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" >
+                                            <option>-- Pilih Kabupaten --</option>  
+                                        </select>
+                                    </div>
                                     <!-- <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="city_id" id="city_id" placeholder="Kabupaten/Kota" value="<?= set_value('city_id') ?>" required />
                                     <?= form_error('kabupaten', '<small class="text-danger pl-3">', '</small>'); ?> -->
                                 </div>

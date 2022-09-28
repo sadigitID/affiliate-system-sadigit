@@ -5,9 +5,12 @@ class Dropdown extends CI_Model
 {   
     public function get_province()
     {
-        $this->db->order_by('province_name', 'asc');
-        $query = $this->db->get('provinces');
-        return $query->result();
+        // $this->db->order_by('province_name', 'asc');
+        // $query = $this->db->get('provinces');
+        // return $query->result();
+
+        $provinces = $this->db->get('provinces')->result();
+        return $provinces;
     }
     
     public function get_city($province_id)
@@ -21,6 +24,9 @@ class Dropdown extends CI_Model
         }
 
         return $output;
+
+        // $cities = $this->db->get_where('cities', ['province_id' => $province_id])->result_array();
+        // return $cities;
     }
 
         

@@ -205,7 +205,7 @@ class Login extends CI_Model
         $this->form_validation->set_rules('password1', 'Password', 'trim|required|min_length[6]|matches[password2]');
         $this->form_validation->set_rules('password2', 'Password', 'trim|required|min_length[6]|matches[password1]');
         if ($this->form_validation->run() == false) {
-            $this->load->view('auth/change-password');
+            $this->load->view('auth/change-forgot-password');
         } else {
             $password = password_hash($this->input->post('password1'), PASSWORD_DEFAULT);
             $email = $this->session->userdata('reset_email');
