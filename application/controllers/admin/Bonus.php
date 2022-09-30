@@ -10,8 +10,6 @@ class Bonus extends CI_Controller
 
 		$this->load->library('form_validation');
 		$this->load->model('Umum_model', 'umum');
-		$this->load->model('M_bonus', 'm_bonus');
-
 	}
 
 	public function index()
@@ -22,7 +20,6 @@ class Bonus extends CI_Controller
 			'sub1' => 'admin/bonus',
 		];
 
-		// $data['user'] = $this->db->get('tb_users')->result();
 		$data['user'] = $this->db->get_where('tb_users', ['role' => "Affiliator"])->result();
 
 		$this->load->view('template_admin/index', $data);
@@ -31,7 +28,6 @@ class Bonus extends CI_Controller
 	public function tb_bonus()
 	{
 		header('Content-Type: application/json');
-
 
 		$tabel = 'tb_bonus';
 		$column_order = array();
@@ -55,8 +51,8 @@ class Bonus extends CI_Controller
 			$row[] = $list->catatan;
 			$row[] = $list->tanggal_bonus;
 			$row[] = "<center>
-                       $edit 
-                       $hapus
+                      $edit 
+                      $hapus
                     </center>";
 			$data[] = $row;
 		}
@@ -151,7 +147,7 @@ class Bonus extends CI_Controller
 	function delete()
 	{
 		$id_bonus = $this->input->post('id_bonus', true);
-		$this->db->delete('tb_bonus',['id_bonus'=>$id_bonus]);
+		$this->db->delete('tb_bonus', ['id_bonus' => $id_bonus]);
 		echo json_encode('');
 	}
 }

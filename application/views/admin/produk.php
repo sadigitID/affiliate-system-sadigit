@@ -28,7 +28,7 @@
 							<input class="form-control " type="number" placeholder="masukan jumlah komisi" id="jml_komisi" name="jml_komisi" autocomplete="off" />
 						</div>
 					</div>
-                    <div class="form-group row">
+					<div class="form-group row">
 						<label class="col-form-label col-4" for="deskripsi_produk">Deskripsi produk</label>
 						<div class="col-8">
 							<input class="form-control " type="text" placeholder="masukan deskripsi produk" id="deskripsi_produk" name="deskripsi_produk" autocomplete="off" />
@@ -69,7 +69,7 @@
 					<th>Nama produk</th>
 					<th>Harga produk</th>
 					<th>Jumlah komisi</th>
-                    <th>Deskripsi produk</th>
+					<th>Deskripsi produk</th>
 					<th>Link produk</th>
 					<th>
 						<center>Aksi</center>
@@ -118,7 +118,7 @@
 				$('#nama_produk').val(res.nama_produk)
 				$('#harga_produk').val(res.harga_produk)
 				$('#jml_komisi').val(res.jml_komisi)
-                $('#deskripsi_produk').val(res.deskripsi_produk)
+				$('#deskripsi_produk').val(res.deskripsi_produk)
 				$('#modal_produk').modal('show')
 			},
 			error(err) {

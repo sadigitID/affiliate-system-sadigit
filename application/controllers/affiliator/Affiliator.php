@@ -7,9 +7,11 @@ class Affiliator extends CI_Controller
 	function __construct()
 	{
 		parent::__construct();
-		
+
 		$this->load->library('form_validation');
 		$this->load->model('Umum_model', 'umum');
+		$this->load->model('M_pesanan', 'm_pesanan');
+		$this->load->model('M_bonus', 'm_bonus');
 	}
 
 	public function index()
@@ -20,6 +22,8 @@ class Affiliator extends CI_Controller
 			'sub1' => 'affiliator',
 		];
 
+		$this->data['jumlah_pesanan'] = $this->m_pesanan->jumlah_pesanan();
+		$this->data['jumlah_bonus'] = $this->m_bonus->jumlah_bonus();
 		$this->load->view('template/index', $data);
 	}
 

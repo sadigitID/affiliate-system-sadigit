@@ -10,7 +10,6 @@ class Checkout_produk extends CI_Controller
 
 		$this->load->library('form_validation');
 		$this->load->model('Umum_model', 'umum');
-
 	}
 
 	public function index()
@@ -23,7 +22,6 @@ class Checkout_produk extends CI_Controller
 	public function tb_pesanan()
 	{
 		header('Content-Type: application/json');
-
 
 		$tabel = 'tb_pesanan';
 		$column_order = array();
@@ -38,7 +36,7 @@ class Checkout_produk extends CI_Controller
 		$no = @$_POST['start'];
 
 		// foreach ($list as $list) {
-        //     //ini keknya untuk munculin database ke dalem table
+		//     //ini keknya untuk munculin database ke dalem table
 		// 	$row = array();
 		// 	$row[] = ++$no;
 		// 	$row[] = $list->nama_pembeli;
@@ -80,7 +78,7 @@ class Checkout_produk extends CI_Controller
 					'required' => 'nama produk tidak boleh kosong'
 				]
 			],
-            // [
+			// [
 			// 	'field' => 'foto_pembayaran',
 			// 	'rules' => 'required',
 			// 	'errors' => [
@@ -100,9 +98,9 @@ class Checkout_produk extends CI_Controller
 				'id_pesanan' => $this->input->post('id_pesanan'),
 				'nama_pembeli' => $this->input->post('nama_pembeli'),
 				'no_wa_pembeli' => $this->input->post('no_wa_pembeli'),
-                'id_produk' => $this->input->post('id_produk'),
-                'tanggal_pembayaran' => $this->input->post('tanggal_pembayaran'),
-                //'foto_pembayaran' => $this->input->post('foto_pembayaran'),
+				'id_produk' => $this->input->post('id_produk'),
+				'tanggal_pembayaran' => $this->input->post('tanggal_pembayaran'),
+				//'foto_pembayaran' => $this->input->post('foto_pembayaran'),
 			];
 
 			if ($id_pesanan == "") {

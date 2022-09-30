@@ -10,7 +10,6 @@ class Pesanan extends CI_Controller
 
 		$this->load->library('form_validation');
 		$this->load->model('admin/Pesanan_model', 'pesanan');
-
 	}
 
 	public function index()
@@ -29,7 +28,6 @@ class Pesanan extends CI_Controller
 	public function tb_pesanan()
 	{
 		header('Content-Type: application/json');
-
 
 		$tabel = 'tb_pesanan';
 		$column_order = array();
@@ -50,14 +48,14 @@ class Pesanan extends CI_Controller
 			$row[] = $list->nama_pembeli;
 			$row[] = $list->nama_produk; //harusnya joinkan tabel tb_produk terus nanti yg dipanggil field nama_produk dari tb_produk
 			$row[] = $list->harga_jual; //digunakan untuk total pesanan
-            $row[] = $list->status_pesanan;
-            $row[] = $list->tanggal_pembayaran;
-            $row[] = $list->foto_pembayaran;
-            $row[] = $list->id_user; //join dgn tabel user ambil field nama_lengkap
-            $row[] = $list->status_komisi; //ini harusnya jml_komisi ambil dari tb_produk
-            $row[] = $list->status_komisi;
+			$row[] = $list->status_pesanan;
+			$row[] = $list->tanggal_pembayaran;
+			$row[] = $list->foto_pembayaran;
+			$row[] = $list->id_user; //join dgn tabel user ambil field nama_lengkap
+			$row[] = $list->status_komisi; //ini harusnya jml_komisi ambil dari tb_produk
+			$row[] = $list->status_komisi;
 			$row[] = "<center>
-                       $edit 
+                      $edit 
                     </center>";
 			$data[] = $row;
 		}

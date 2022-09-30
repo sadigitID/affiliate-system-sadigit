@@ -34,7 +34,7 @@
 							<input class="form-control " type="text" placeholder="Catatan" id="catatan" name="catatan" autocomplete="off" />
 						</div>
 					</div>
-					<input class="form-control " type="hidden" placeholder="tanggal_bonus" id="tanggal_bonus" name="tanggal_bonus" autocomplete="off" value="<?php echo date("Y-m-d") ?>"/>
+					<input class="form-control " type="hidden" placeholder="tanggal_bonus" id="tanggal_bonus" name="tanggal_bonus" autocomplete="off" value="<?php echo date("Y-m-d") ?>" />
 				</div>
 			</form>
 			<div class="modal-footer">
@@ -64,9 +64,9 @@
 				<tr>
 					<th>No</th>
 					<th>Nama user</th>
-					<th>jumlah bonus</th>
-					<th>catatan</th>
-					<th>tanggal bonus</th>
+					<th>Jumlah bonus</th>
+					<th>Catatan</th>
+					<th>Tanggal bonus</th>
 					<th>
 						<center>Aksi</center>
 					</th>

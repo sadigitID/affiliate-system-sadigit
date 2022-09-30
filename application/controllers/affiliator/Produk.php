@@ -6,9 +6,9 @@ class Produk extends CI_Controller
   function __construct()
   {
     parent::__construct();
-
     $this->load->library('form_validation');
     $this->load->model('Umum_model', 'umum');
+    $this->load->library('session');
   }
 
   public function index()
@@ -25,7 +25,6 @@ class Produk extends CI_Controller
   public function tb_produk()
   {
     header('Content-Type: application/json');
-
     $tabel = 'tb_produk';
     $column_order = array();
     $coloumn_search = array('nama_produk', 'harga_produk', 'jml_komisi', 'link_produk');
@@ -37,15 +36,20 @@ class Produk extends CI_Controller
     $list = $this->umum->get_datatables($tabel, $column_order, $coloumn_search, $order_by, $where, $join, $select, $group_by);
     $data = array();
     $no = @$_POST['start'];
+    $id_user = $this->session->userdata('id_user');
 
     foreach ($list as $list) {
-      // akuntansi_journal_edit
+      $copy =  "<i class='fas fa-copy btn btn-icon btn-light-success' onclick={_copy('$list->id_produk')}></i>";
       $row = array();
       $row[] = ++$no;
       $row[] = $list->nama_produk;
       $row[] = $list->harga_produk;
       $row[] = $list->jml_komisi;
-      $row[] = $list->link_produk;
+      $long_url = $list->link_produk . 'aff=' . $id_user . '&prd=' . $list->id_produk;
+      $row[] = $long_url;
+      $row[] = "<center>
+                  $copy
+                </center>";
       $data[] = $row;
     }
 
@@ -78,6 +82,16 @@ class Produk extends CI_Controller
   {
     $id_produk = $this->input->post('id_produk', true);
     $data = $this->db->get_where('tb_produk', ['id_produk' => $id_produk])->row();
+
     echo json_encode($data);
+  }
+
+  function copyLink()
+  {
+    $id_produk = $this->input->post('id_produk', true);
+    $data = $this->db->get_where('tb_produk', ['id_produk' => $id_produk])->row();
+    $id_user = $this->session->userdata('id_user');
+    $url = $data->link_produk . 'aff=' . $id_user . '&prd=' . $data->id_produk;
+    echo json_encode($url);
   }
 }

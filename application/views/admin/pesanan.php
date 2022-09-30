@@ -10,8 +10,8 @@
 			</div>
 			<form id="form_confirm">
 				<div class="modal-body">
-                    <button type="button" class="btn btn-light-primary" onclick="selesaikan($(this))">Selesaikan</button>
-				    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batalkan</button>
+					<button type="button" class="btn btn-light-primary" onclick="selesaikan($(this))">Selesaikan</button>
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Batalkan</button>
 				</div>
 			</form>
 		</div>
@@ -31,16 +31,16 @@
 		<table class="table table-bordered" id="table" style="margin-top: 13px !important">
 			<thead>
 				<tr>
-                <th>No Pesanan</th>
+					<th>No Pesanan</th>
 					<th>Nama Pembeli</th>
 					<th>Nama Produk</th>
 					<th>Total Pesanan</th>
 					<th>Status Pesanan</th>
-                    <th>Tanggal Pembayaran</th>
-                    <th>Foto Bukti Pembayaran</th>
-                    <th>Nama Affiliator</th>
-                    <th>Jumlah Komisi</th>
-                    <th>Status Komisi</th>
+					<th>Tanggal Pembayaran</th>
+					<th>Foto Bukti Pembayaran</th>
+					<th>Nama Affiliator</th>
+					<th>Jumlah Komisi</th>
+					<th>Status Komisi</th>
 					<th>
 						<center>Aksi</center>
 					</th>
@@ -71,12 +71,12 @@
 		});
 	})
 
-    const _confirm = async () => {
+	const _confirm = async () => {
 		$('#form_confirm')[0].reset()
 		$('#modal_confirm').modal('show')
 	}
 
-    const selesaikan = async (btn) => {
+	const selesaikan = async (btn) => {
 		btn.prop('disabled', true)
 		const data = $('#form_bonus').serializeArray()
 		await $.ajax({

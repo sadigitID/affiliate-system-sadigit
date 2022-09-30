@@ -42,7 +42,7 @@ class Pesanan_affiliate extends CI_Controller
     foreach ($list as $list) {
       $row = array();
       $row[] = $list->id_pesanan;
-      $row[] = $list->nama_produk;
+      $row[] = $list->nama_produk; //mengambil dari tb_produk
       $row[] = $list->status_pesanan;
       $row[] = $list->jml_komisi; //mengambil dari tb_produk
       $row[] = $list->tanggal_pesanan;

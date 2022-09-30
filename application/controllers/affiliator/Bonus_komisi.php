@@ -42,7 +42,7 @@ class Bonus_komisi extends CI_Controller
       $row = array();
       $row[] = ++$no;
       $row[] = $list->jml_bonus;
-      $row[] = $list->catatan; 
+      $row[] = $list->catatan;
       $row[] = $list->tanggal_bonus;
       $data[] = $row;
     }
@@ -65,7 +65,7 @@ class Bonus_komisi extends CI_Controller
     $catatan = $this->input->post('catatan');
     $tanggal_bonus = $this->input->post('tanggal_bonus');
 
-    $check = $this->db->select('jml_bonus', 'catatan', 'tanggal_bonus')->from('tb_bonus')->where('id_bonus !=', $id_bonus)->where('id_bonus', $id_bonus)->get();
+    $check = $this->db->select('id_user', 'jml_bonus', 'catatan', 'tanggal_bonus')->from('tb_bonus')->where('id_bonus !=', $id_bonus)->where('id_bonus', $id_bonus)->get();
     if ($check->num_rows() > 0) {
       return false;
     }

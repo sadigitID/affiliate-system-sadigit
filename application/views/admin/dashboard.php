@@ -22,7 +22,7 @@
     </div>
     <!--end::Stats Widget 25-->
   </div>
-  <div class="col-xl-4"> 
+  <div class="col-xl-4">
     <!--begin::Stats Widget 26-->
     <div class="card card-custom bg-light-danger card-stretch gutter-b">
       <!--begin::ody-->
