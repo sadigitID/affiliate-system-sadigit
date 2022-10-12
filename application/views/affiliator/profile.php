@@ -14,7 +14,7 @@
                          <div class="text-center mb-10">
                             <div class="symbol symbol-60 symbol-circle symbol-xl-90">
                                 <!-- <img class="symbol symbol-60 symbol-circle symbol-xl-90" src="<?= base_url('assets/media/users/default.jpg'); ?>"> -->
-			                    <span class="symbol-label text-success text-uppercase font-weight-bolder font-size-h1"><?= substr($this->session->userdata('email'), 0, 3) ?></span>
+			                    <span class="symbol-label text-success text-uppercase font-weight-bolder font-size-h1"><?= substr($this->session->userdata('nama_lengkap'), 0, 1) ?></span>
                                 <i class="symbol-badge symbol-badge-bottom bg-success"></i>
                             </div>
 
@@ -69,7 +69,7 @@
                         <!--begin::Nav-->
                         <div class="navi navi-bold navi-hover navi-active navi-link-rounded">
                             <div class="navi-item mb-2">
-                                <a href="<?= base_url('affiliator/profile') ?>" class="navi-link py-4 active">
+                                <a href="<?= base_url().'affiliator/profile/'.$user['id_user'] ?>" class="navi-link py-4 active">
                                     <span class="navi-icon mr-2">
                                         <span class="svg-icon"><!--begin::Svg Icon | path:assets/media/svg/icons/Design/Layers.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -85,7 +85,7 @@
                                 </a> 
                             </div>
                             <div class="navi-item mb-2">
-                                <a href="<?= base_url('affiliator/edit_profile') ?>" class="navi-link py-4 ">
+                                <a href="<?= base_url().'affiliator/edit_profile/edit/'.$user['id_user']; ?>" class="navi-link py-4 ">
                                     <span class="navi-icon mr-2">
                                         <span class="svg-icon"><!--begin::Svg Icon | path:assets/media/svg/icons/Design/Layers.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -101,7 +101,7 @@
                                 </a> 
                             </div>
                             <div class="navi-item mb-2">
-                                <a  href="<?= base_url('affiliator/change_password') ?>" class="navi-link py-4 ">
+                                <a  href="<?= base_url('affiliator/change_password/') ?>" class="navi-link py-4 ">
                                     <span class="navi-icon mr-2">
                                         <span class="svg-icon"><!--begin::Svg Icon | path:assets/media/svg/icons/General/User.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -130,7 +130,7 @@
             <div class="flex-row-fluid ml-lg-8">
                 <!--begin::Row-->
                 <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-6"> 
                         <!--begin::List Widget 10-->
                         <div class="card card-custom  card-stretch gutter-b">
                             <!--begin::Card-->
@@ -146,7 +146,7 @@
 
                                 <!--begin::Form-->
                                 <?= $this->session->flashdata('message'); ?>
-                                <form action="<?= base_url('affiliator/edit_profile/updateUser') ?>" method="post" class="form offcanvas-mobile w-350px w-xxl-750px">
+                                <form action="<?= base_url('affiliator/edit_profile/updateUser') ?>" method="get" class="form offcanvas-mobile w-350px w-xxl-750px">
                                     <div class="card-body" style="width: 35rem;">
                                     <!--begin::Heading-->
                                     <!--begin::Form Group-->
@@ -158,42 +158,42 @@
                                         </div>
                                     <!--begin::Form Group-->
                                     <div class="form-group row">
-                                            <div class=" col-xl-12 d-flex align-items-center justify-content-between ">
+                                            <div class=" col-xl-12 col-lg-3 d-flex align-items-center justify-content-between ">
                                                 <span class="font-weight-bold mr-6">Province:</span>
                                                 <span class="text-muted"><?= $user['province_name']; ?></span>
                                             </div>
                                         </div>
                                     <!--begin::Form Group-->
                                     <div class="form-group row">
-                                            <div class=" col-xl-12 d-flex align-items-center justify-content-between ">
+                                            <div class=" col-xl-12 col-lg-3 d-flex align-items-center justify-content-between ">
                                                 <span class="font-weight-bold mr-6">County/City:</span>
                                                 <span class="text-muted"><?= $user['city_name']; ?></span>
                                             </div>
                                         </div>
                                     <!--begin::Form Group-->
                                     <div class="form-group row">
-                                            <div class=" col-xl-12 d-flex align-items-center justify-content-between ">
+                                            <div class=" col-xl-12 col-lg-3 d-flex align-items-center justify-content-between ">
                                                 <span class="font-weight-bold mr-6">District:</span>
                                                 <span class="text-muted"><?= $user['district_name']; ?></span>
                                             </div>
                                         </div>
                                     <!--begin::Form Group-->
                                     <div class="form-group row">
-                                            <div class=" col-xl-12 d-flex align-items-center justify-content-between ">
+                                            <div class=" col-xl-12 col-lg-3 d-flex align-items-center justify-content-between ">
                                                 <span class="font-weight-bold mr-6">Complete Address:</span>
                                                 <span class="text-muted"><?= $user['alamat_lengkap']; ?></span>
                                             </div>
                                         </div>
                                     <!--begin::Form Group-->
                                     <div class="form-group row">
-                                            <div class=" col-xl-12 d-flex align-items-center justify-content-between ">
+                                            <div class=" col-xl-12 col-lg-3 d-flex align-items-center justify-content-between ">
                                                 <span class="font-weight-bold mr-6">Email Address:</span>
                                                 <span class="text-muted"><?= $user['email']; ?></span>
                                             </div>
                                         </div>
                                     <!--begin::Form Group-->
                                     <div class="form-group row">
-                                            <div class=" col-xl-12 d-flex align-items-center justify-content-between ">
+                                            <div class=" col-xl-12 col-lg-3 d-flex align-items-center justify-content-between ">
                                                 <span class="font-weight-bold mr-6">Phone Number:</span>
                                                 <span class="text-muted"><?= $user['no_hp']; ?></span>
                                             </div>
@@ -219,111 +219,4 @@
 <!--end::Container-->
 </body>
 <!--end::Body-->
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script>
-         $(document).ready(function(){
-            $("#province_id").change(function(){
-                // Here we will run an ajax request
-                var province_id = $(this).val();  // Selected country id
-                $.ajax({
-                    url : '<?= base_url('edit_profile/get_city')?>/',
-                    type: 'POST',
-                    data:{province_id:province_id},
-                    dataType: 'json',
-                    success: function(response){
-                        if(response['city_id']) {
-                            $("#city_id").html(response['city_id']);
-                        } 
-
-                    }
-                });
-                
-                // $("#citiesBox").html("<select name=\"city\" id=\"city\" class=\"form-control\">\
-                //     <option value=\"\">Select a City</option>\
-                // </select>");
-
-            });
-
-
-            
-
-            $(document).on("change","#city_id",function(){
-                var city_id = $(this).val();  // Selected state id
-                $.ajax({
-                    url : '<?php echo base_url('edit_profile/get_district')?>/',
-                    type: 'POST',
-                    data:{city_id:city_id},
-                    dataType: 'json',
-                    success: function(response){
-                        if(response['district_id']) {
-                            $("#district_id").html(response['district_id']);
-                        } 
-                    }
-                    
-                });
-                //alert(state_id)
-            })
-        });
-
-        $("#editFrm").submit(function(event){
-            event.preventDefault();
-
-            $.ajax({
-                url : '<?php echo base_url('edit_profile/index'.$user['email'])?>',
-                type: 'post',
-                data: $(this).serializeArray(),
-                dataType : 'json',
-                success: function(response){
-                    if (response['status'] == 0) {
-                        if (response['nama_lengkap']) {
-                            $(".nama_lengkap_error").html(response['nama_lengkap']);
-                        } else {
-                            $(".nama_lengkap_error").html("");
-                        }
-
-                        if (response['province_id']) {
-                            $(".province_id_error").html(response['province_id']);
-                        } else {
-                            $(".province_id_error").html("");
-                        }
-
-                        if (response['city_id']) {
-                            $(".city_id_error").html(response['city_id']);
-                        } else {
-                            $(".city_id_error").html("");
-                        }
-
-                        if (response['district_id']) {
-                            $(".district_id_error").html(response['district_id']);
-                        } else {
-                            $(".district_id_error").html("");
-                        }
-
-                        if (response['email']) {
-                            $(".email_error").html(response['email']);
-                        } else {
-                            $(".email_error").html("");
-                        }
-
-                        if (response['alamat_lengkap']) {
-                            $(".alamat_lengkap_error").html(response['alamat_lengkap']);
-                        } else {
-                            $(".alamat_lengkap_error").html("");
-                        }
-
-                        if (response['no_hp']) {
-                            $(".no_hp_error").html(response['no_hp']);
-                        } else {
-                            $(".no_hp_error").html("");
-                        }
-                    } else {
-                        window.location.href="<?php echo base_url('edit_profile/index')?>";
-                    }
-                    //console.log(response)
-                }
-            })
-        });
-    </script>
-
 </html>

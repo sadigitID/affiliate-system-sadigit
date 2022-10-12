@@ -21,8 +21,7 @@ class Edit_profile extends CI_Controller
             'sub1' => 'edit-profile',
         ];
 
-        $data['user'] = $this->m_profile->getUser($this->session->userdata('email'));
-        // $data['user'] = $this->m_profile->getUser_id('id_user', $this->session->userdata('id_user'));
+        $data['user'] = $this->m_profile->getUser('id_user', $this->session->userdata('id_user'));
         $data['provinces'] = $this->m_profile->get_province();
         $data['cities'] = $this->m_profile->get_city($data['user']['province_id']);
         $data['districts'] = $this->m_profile->get_district($data['user']['city_id']);
@@ -64,10 +63,39 @@ class Edit_profile extends CI_Controller
         $response['districts'] = $districtString;
         echo json_encode($response);
     }
-
-    public function updateUser()
+    public function profile()
     {
-        $data['user'] = $this->m_profile->getUser($this->session->userdata('email'));
+        $data = [
+            'view' => 'affiliator/edit-profile',
+            'active' => 'edit-profile',
+            'sub1' => 'edit-profile',
+        ];
+
+        $data['user'] = $this->m_profile->getUser('id_user', $this->session->userdata('id_user'));
+        $data['provinces'] = $this->m_profile->get_province();
+        $data['cities'] = $this->m_profile->get_city($data['user']['province_id']);
+        $data['districts'] = $this->m_profile->get_district($data['user']['city_id']);
+
+        $this->load->view('template/index', $data);
+    }
+
+    public function edit($id_user) {
+        $data = [
+            'view' => 'affiliator/edit-profile',
+            'active' => 'edit-profile',
+            'sub1' => 'edit-profile',
+        ];
+
+        $data['user'] = $this->db->query("select a.*,b.*,c.*,d.* from tb_users a join provinces b on a.province_id=b.province_id join cities c on a.city_id=c.city_id join districts d on a.district_id=d.district_id where a.id_user='$id_user' ")->row_array();
+        $data['provinces'] = $this->m_profile->get_province();
+        $data['cities'] = $this->m_profile->get_city($data['user']['province_id']);
+        $data['districts'] = $this->m_profile->get_district($data['user']['city_id']);
+
+        $this->load->view('template/index',$data);
+    }
+
+    public function updateUser() 
+    {
             $config = [
                 [
                     'field' => 'nama_lengkap',
@@ -104,14 +132,17 @@ class Edit_profile extends CI_Controller
                 'sub1' => 'edit-profile',
             ];
     
-            $data['user'] = $this->m_profile->getUser($this->session->userdata('email'));
+            $data['user'] = $this->m_profile->getUser('id_user', $this->session->userdata('id_user'));
             $data['provinces'] = $this->m_profile->get_province();
             $data['cities'] = $this->m_profile->get_city($data['user']['province_id']);
             $data['districts'] = $this->m_profile->get_district($data['user']['city_id']);
     
             $this->load->view('template/index', $data);
         } else {
-            $where = $this->db->get_where('tb_users', ['email', $this->session->userdata('email')])->row_array();
+            $id_user = $this->input->post('id_user');
+            $where = array (
+                'id_user' => $id_user
+            );
 
             $data = array(
                 'nama_lengkap' => $this->input->post('nama_lengkap'),
@@ -120,11 +151,11 @@ class Edit_profile extends CI_Controller
                 'district_id' => $this->input->post('district_id'),
                 'alamat_lengkap' => $this->input->post('alamat_lengkap'),
                 'no_hp' => $this->input->post('no_hp'),
-            );
+            ); 
 
             $this->m_profile->update_data($where, $data, 'tb_users');
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Account has been changed!</div>');
-            redirect('affiliator/edit_profile');
+            redirect(base_url(). 'affiliator/profile');
         }
     }
 

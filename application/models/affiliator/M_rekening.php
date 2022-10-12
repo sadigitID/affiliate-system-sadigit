@@ -80,9 +80,6 @@ class M_rekening extends CI_Model
 
   public function getRekening($email)
   {
-    // $query = $this->db->get_where('tb_rekening', ['id_rek' => $id_rek])->row();
-    // return $query; 
-
     return $this->db->query("select a.*,b.*,c.* from tb_rekening a join tb_bank b on a.id_bank=b.id_bank join tb_users c on a.id_user=c.id_user where c.email='$email' ")->row_array();
     
   }
@@ -95,7 +92,7 @@ class M_rekening extends CI_Model
   public function addRekening($data,$table)
   {
     $this->db->insert($table,$data);
-  }
+  } 
   
     
 

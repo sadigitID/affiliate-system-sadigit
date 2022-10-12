@@ -38,8 +38,9 @@ class Produk extends CI_Controller
     $no = @$_POST['start'];
     $id_user = $this->session->userdata('id_user');
 
+
     foreach ($list as $list) {
-      $copy =  "<i class='fas fa-copy btn btn-icon btn-light-success' onclick={_copy('$list->id_produk')}></i>";
+      $copy =  "<button> <i class='fas fa-copy btn btn-icon btn-light-success' onclick={copyToClipboard('#$list->link_produk')}></i> </button>";
       $row = array();
       $row[] = ++$no;
       $row[] = $list->nama_produk;
@@ -48,7 +49,7 @@ class Produk extends CI_Controller
       $long_url = $list->link_produk . 'aff=' . $id_user . '&prd=' . $list->id_produk;
       $row[] = $long_url;
       $row[] = "<center>
-                  $copy
+                  $copy 
                 </center>";
       $data[] = $row;
     }

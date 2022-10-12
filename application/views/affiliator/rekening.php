@@ -1,5 +1,5 @@
 <!-- start of modal tambah bonus -->
-<div class="modal" id="modal_bonus" tabindex="-1">
+<div class="modal" id="modal_rekening" tabindex="-1">
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -8,7 +8,7 @@
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-			<form id="form_bonus">
+			<form id="form_rekening">
 				<div class="modal-body">
 					<input class="d-none" type="text" id="id_rek" name="id_rek" autocomplete="off" />
 					<div class="form-group row">
@@ -34,6 +34,7 @@
 							<input class="form-control " type="text" placeholder="No Rekening" id="no_rek" name="no_rek" autocomplete="off" />
 						</div>
 					</div>
+					<input class="d-none" type="text" id="id_user" name="id_user" autocomplete="off"  value="<>"/>
 					<!-- <input class="form-control " type="hidden" placeholder="email" id="id_user" name="id_user" autocomplete="off" value="<?= $this->session->userdata('email') ?>"/>                
 				 -->
                 </div>
@@ -55,7 +56,7 @@
 			<h3 class="card-label">Manajemen Rekening</h3>
 		</div>
 		<div class="card-toolbar">
-			<span class="btn btn-light-primary" onclick="tambahBonus()">Tambah Rekening</span>
+			<span class="btn btn-light-primary" onclick="tambahRekening()">Tambah Rekening</span>
 		</div>
 	</div>
 	<div class="card-body">
@@ -63,7 +64,6 @@
 		<table class="table table-bordered" id="table" style="margin-top: 13px !important">
 			<thead>
 				<tr>
-					<th>No</th>
 					<th>Nama Bank</th>
 					<th>Nama Pemilik Rekening</th>
 					<th>No Rekening</th>
@@ -90,46 +90,46 @@
 			"serverSide": true,
 			"order": [],
 			"ajax": {
-				"url": '<?= base_url('affiliator/rekening/tb_bonus/') ?>',
+				"url": '<?= base_url('affiliator/rekening/tb_rekening/') ?>',
 				"type": "POST"
 			},
 			"ordering": false
 		});
 	})
 
-	const tambahBonus = async () => {
-		$('#form_bonus')[0].reset()
-		$('#modal_bonus').modal('show')
+	const tambahRekening = async () => {
+		$('#form_rekening')[0].reset()
+		$('#modal_rekening').modal('show')
 	}
 
-	const printPDF = async () => {
-		$('#form_printPDF')[0].reset()
-		$('#modal_printPDF').modal('show')
-	}
+	// const printPDF = async () => {
+	// 	$('#form_printPDF')[0].reset()
+	// 	$('#modal_printPDF').modal('show')
+	// }
 
-	const _edit = async (id_rek) => {
+	const _edit = async (id_user) => {
 		await $.ajax({
 			type: "post",
-			url: "<?= base_url('affiliator/rekening/getBonus') ?>",
+			url: "<?= base_url('affiliator/rekening/getRekening') ?>",
 			data: {
-				id_rek
+				id_user
 			},
 			dataType: "json",
 			success: function(res) {
-				$('#id_rek').val(res.id_rek)
 				$('#id_bank').val(res.id_bank)
 				$('#nama_pemilik_rek').val(res.nama_pemilik_rek)
 				$('#no_rek').val(res.no_rek)
-				$('#modal_bonus').modal('show')
+				$('#modal_rekening').modal('show')
 			},
 			error(err) {
-				Swal.fire('', 'terjadi kesalahan saat mengambil data bonus', 'error');
+				Swal.fire('', 'terjadi kesalahan saat mengambil data rekening', 'error');
 			}
 		});
+		
 	}
 
-	const _delete = async (id_rek) => {
-		const result = await confirm('apakah anda yakin akan menghapus bonus ini?')
+	const _delete = async (id_user) => {
+		const result = await confirm('apakah anda yakin akan menghapus rekening ini?')
 
 		if (!result.isConfirmed) return;
 
@@ -137,22 +137,22 @@
 			type: "post",
 			url: "<?= base_url('affiliator/rekening/delete') ?>",
 			data: {
-				id_rek
+				id_user
 			},
 			dataType: "json",
 			success: function(res) {
-				Swal.fire('', 'berhasil menghapus bonus', 'success')
+				Swal.fire('', 'berhasil menghapus rekening', 'success')
 				table.ajax.reload()
 			},
 			error(err) {
-				Swal.fire('', 'terjadi kesalahan saat menghapus bonus', 'error');
+				Swal.fire('', 'terjadi kesalahan saat menghapus rekening', 'error');
 			}
 		});
 	}
 
 	const save = async (btn) => {
 		btn.prop('disabled', true)
-		const data = $('#form_bonus').serializeArray()
+		const data = $('#form_rekening').serializeArray()
 		await $.ajax({
 			type: "post",
 			url: "<?= base_url('affiliator/rekening/save') ?>",
@@ -160,10 +160,10 @@
 			dataType: "json",
 			success: function(res) {
 				if (res.status) {
-					$('#modal_bonus').modal('hide');
+					$('#modal_rekening').modal('hide');
 					Swal.fire("", "Berhasil menyimpan data", "success");
 					table.ajax.reload();
-					$('#form_bonus').find('.text-danger').remove()
+					$('#form_rekening').find('.text-danger').remove()
 				} else {
 
 					$.each(res.messages, function(key, value) {

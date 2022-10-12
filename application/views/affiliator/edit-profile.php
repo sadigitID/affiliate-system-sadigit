@@ -14,7 +14,7 @@
                          <div class="text-center mb-10">
                             <div class="symbol symbol-60 symbol-circle symbol-xl-90">
                                 <!-- <img class="symbol symbol-60 symbol-circle symbol-xl-90" src="<?= base_url('assets/media/users/default.jpg'); ?>"> -->
-			                    <span class="symbol-label text-success text-uppercase font-weight-bolder font-size-h1"><?= substr($this->session->userdata('email'), 0, 3) ?></span>
+			                    <span class="symbol-label text-success text-uppercase font-weight-bolder font-size-h1"><?= substr($this->session->userdata('nama_lengkap'), 0, 1) ?></span>
                                 <i class="symbol-badge symbol-badge-bottom bg-success"></i>
                             </div>
 
@@ -61,15 +61,12 @@
                                     <span class="text-muted"><?= $user['alamat_lengkap']; ?></span>
                                 </div>
                             </div>
-                            <!-- <div class="d-flex align-items-center justify-content-between mb-3">
-                                <span class="text-muted">Member since <?= date('d F Y',strtotime($user['created_at'])); ?></span>
-                            </div> -->
                         <!--end::Contact-->
 
                         <!--begin::Nav-->
                         <div class="navi navi-bold navi-hover navi-active navi-link-rounded">
                             <div class="navi-item mb-2">
-                                <a href="<?= base_url('affiliator/profile') ?>" class="navi-link py-4">
+                                <a href="<?= base_url().'affiliator/profile/'.$user['id_user']; ?>" class="navi-link py-4">
                                     <span class="navi-icon mr-2">
                                         <span class="svg-icon"><!--begin::Svg Icon | path:assets/media/svg/icons/Design/Layers.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -85,7 +82,7 @@
                                 </a> 
                             </div>
                             <div class="navi-item mb-2">
-                                <a href="<?= base_url('affiliator/edit_profile') ?>" class="navi-link py-4 active">
+                                <a href="<?= base_url().'affiliator/edit_profile/edit/'.$user['id_user']; ?>" class="navi-link py-4 active">
                                     <span class="navi-icon mr-2">
                                         <span class="svg-icon"><!--begin::Svg Icon | path:assets/media/svg/icons/Design/Layers.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -144,11 +141,12 @@
                                     </div>
                                 <!--end::Header-->
 
-                                <!--begin::Form-->
+                                <!--begin::Form--> 
                                 <?= $this->session->flashdata('message'); ?>
-                                <form action="<?= base_url('affiliator/edit_profile/updateUser') ?>" method="post" class="form offcanvas-mobile w-350px w-xxl-750px">
+                                <form action="<?= base_url().'affiliator/edit_profile/updateUser/'?>" method="post" class="form offcanvas-mobile w-350px w-xxl-750px">
                                     <div class="card-body" style="width: 35rem;">
                                     <!--begin::Heading-->
+                                    <input type="hidden" value="<?= $user['id_user']; ?>" name="id_user">
                                     <!--begin::Form Group-->
                                         <div class="form-group row">
                                             <label class="col-xl-6 col-lg-3 col-form-label" for="nama_lengkap">Full Name</label>
@@ -234,7 +232,7 @@
                                         </div>
                                     <!--begin::Form Group-->
                                         <div class="form-group row">
-                                            <label class="col-xl-6 col-lg-3 col-form-label" for="no_hp">Phone Number</label>
+                                            <label class="col-xl-6 col-lg-3 col-form-label" for="no_hp">Phone Number/WhatsApp</label>
                                             <div class="col-xl-12">
                                                 <div class="input-group input-group-lg input-group-solid">
                                                     <input id="no_hp" name="no_hp" class="form-control form-control-lg form-control-solid" type="text" value="<?= $user['no_hp']; ?>" />
