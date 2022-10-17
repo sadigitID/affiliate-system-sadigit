@@ -111,31 +111,32 @@
 
     <script>
 	let table
-	$(document).ready(async () => {
-		table = $('#table').DataTable({
-			"responsive": true,
-			"processing": true,
-			"serverSide": true,
-			"order": [],
-			"ajax": {
-				"url": '<?= base_url('checkout_produk/tb_pesanan') ?>',
-				"type": "POST"
-			},
-			"ordering": false
-		});
-	})
+	// $(document).ready(async () => {
+	// 	table = $('#table').DataTable({
+	// 		"responsive": true,
+	// 		"processing": true,
+	// 		"serverSide": true,
+	// 		"order": [],
+	// 		"ajax": {
+	// 			"url": '<?= base_url('checkout_produk/tb_pesanan') ?>',
+	// 			"type": "POST"
+	// 		},
+	// 		"ordering": false
+	// 	});
+	// })
 
 	const save = async (btn) => {
 		btn.prop('disabled', true)
 		const data = $('#form_checkout').serializeArray()
 		await $.ajax({
 			type: "post",
+            
 			url: "<?= base_url('checkout_produk/save') ?>",
 			data,
 			dataType: "json",
 			success: function(res) {
 				if (res.status) {
-					Swal.fire("", "Berhasil menyimpan data", "success");
+                    window.location.href = "sadigit_affiliate/checkout_produk_terimakasih";
 				} else {
 
 					$.each(res.messages, function(key, value) {

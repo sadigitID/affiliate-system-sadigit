@@ -10,6 +10,7 @@ class Checkout_produk extends CI_Controller
 
 		$this->load->library('form_validation');
 		$this->load->model('Umum_model', 'umum');
+
 	}
 
 	public function index()
@@ -19,41 +20,41 @@ class Checkout_produk extends CI_Controller
 		$this->load->view('checkout_produk', $data);
 	}
 
-	public function tb_pesanan()
+	public function terimakasih()
 	{
-		header('Content-Type: application/json');
-
-		$tabel = 'tb_pesanan';
-		$column_order = array();
-		$coloumn_search = array('nama_pembeli', 'no_wa_pembeli', 'id_produk');
-		$select = "*";
-		$order_by = array('id_pesanan' => 'asc');
-		$join = [];
-		$where = [];
-		$group_by = [];
-		$list = $this->umum->get_datatables($tabel, $column_order, $coloumn_search, $order_by, $where, $join, $select, $group_by);
-		$data = array();
-		$no = @$_POST['start'];
-
-		// foreach ($list as $list) {
-		//     //ini keknya untuk munculin database ke dalem table
-		// 	$row = array();
-		// 	$row[] = ++$no;
-		// 	$row[] = $list->nama_pembeli;
-		// 	$row[] = $list->no_wa_pembeli;
-		// 	$row[] = $list->id_produk;
-		// 	$data[] = $row;
-		// }
-
-		$output = array(
-			"draw" => @$_POST['draw'],
-			"recordsTotal" => $this->umum->count_all($tabel, $column_order, $coloumn_search, $order_by, $where, $join, $select, $group_by),
-			"recordsFiltered" => $this->umum->count_filtered($tabel, $column_order, $coloumn_search, $order_by, $where, $join, $select, $group_by),
-			"data" => $data,
-		);
-		//output to json format
-		echo json_encode($output);
+		$this->load->view('checkout_produk_terimakasih', $data);
 	}
+
+	// public function tb_pesanan()
+	// {
+	// 	header('Content-Type: application/json');
+
+
+	// 	$tabel = 'tb_pesanan';
+	// 	$column_order = array();
+	// 	$select = "*";
+	// 	$no = @$_POST['start'];
+
+	// 	// foreach ($list as $list) {
+    //     //     //ini keknya untuk munculin database ke dalem table
+	// 	// 	$row = array();
+	// 	// 	$row[] = ++$no;
+	// 	// 	$row[] = $list->nama_pembeli;
+	// 	// 	$row[] = $list->no_wa_pembeli;
+	// 	// 	$row[] = $list->id_produk;
+	// 	// 	$data[] = $row;
+	// 	// }
+
+	// 	$output = array(
+	// 		"draw" => @$_POST['draw'],
+	// 		"recordsTotal" => $this->umum->count_all($tabel, $column_order, $coloumn_search, $order_by, $where, $join, $select, $group_by),
+	// 		"recordsFiltered" => $this->umum->count_filtered($tabel, $column_order, $coloumn_search, $order_by, $where, $join, $select, $group_by),
+	// 		"data" => $data,
+	// 	);
+	// 	//output to json format
+	// 	echo json_encode($output);
+	// }
+
 	public function save()
 	{
 		$config = [
@@ -78,7 +79,7 @@ class Checkout_produk extends CI_Controller
 					'required' => 'nama produk tidak boleh kosong'
 				]
 			],
-			// [
+            // [
 			// 	'field' => 'foto_pembayaran',
 			// 	'rules' => 'required',
 			// 	'errors' => [
@@ -98,9 +99,9 @@ class Checkout_produk extends CI_Controller
 				'id_pesanan' => $this->input->post('id_pesanan'),
 				'nama_pembeli' => $this->input->post('nama_pembeli'),
 				'no_wa_pembeli' => $this->input->post('no_wa_pembeli'),
-				'id_produk' => $this->input->post('id_produk'),
-				'tanggal_pembayaran' => $this->input->post('tanggal_pembayaran'),
-				//'foto_pembayaran' => $this->input->post('foto_pembayaran'),
+                'id_produk' => $this->input->post('id_produk'),
+                'tanggal_pembayaran' => $this->input->post('tanggal_pembayaran'),
+                //'foto_pembayaran' => $this->input->post('foto_pembayaran'),
 			];
 
 			if ($id_pesanan == "") {

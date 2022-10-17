@@ -10,28 +10,27 @@ class Rekening extends CI_Controller
 
 		$this->load->library('form_validation');
 		$this->load->model('Umum_model', 'umum');
-        $this->load->model('affiliator/M_rekening', 'm_rekening');
+		$this->load->model('affiliator/M_rekening', 'm_rekening');
 		$this->load->model('M_bonus', 'm_bonus');
-
 	}
 
 	public function index()
 	{
 		$data = [
-            'view' => 'affiliator/rekening',
-            'active' => 'rekening',
-            'sub1' => 'rekening',
-        ];
+			'view' => 'affiliator/rekening',
+			'active' => 'rekening',
+			'sub1' => 'rekening',
+		];
 
-        $data['bank'] = $this->db->get('tb_bank')->result();
+		$data['bank'] = $this->db->get('tb_bank')->result();
 
-        $this->load->view('template/index', $data);
+		$this->load->view('template/index', $data);
 	}
 
 	public function tb_rekening()
 	{
 		header('Content-Type: application/json');
-		
+
 		$tabel = 'tb_rekening';
 		$column_order = array();
 		$coloumn_search = array('id_rek', 'nama_bank', 'nama_pemilik_rek', 'no_rek', 'id_user');
@@ -58,7 +57,7 @@ class Rekening extends CI_Controller
                     </center>";
 			$data[] = $row;
 		}
- 
+
 		$output = array(
 			"draw" => @$_POST['draw'],
 			"recordsTotal" => $this->umum->count_all($tabel, $column_order, $coloumn_search, $order_by, $where, $join, $select, $group_by),
@@ -101,7 +100,7 @@ class Rekening extends CI_Controller
 					'required' => 'nama pemilik rekening tidak boleh kosong'
 				]
 			],
-            [
+			[
 				'field' => 'no_rek',
 				'rules' => 'required|numeric',
 				'errors' => [
@@ -119,7 +118,7 @@ class Rekening extends CI_Controller
 			$id_rek = $this->input->post('id_rek');
 
 			$payloadData = [
-                'id_bank' => $this->input->post('id_bank'),
+				'id_bank' => $this->input->post('id_bank'),
 				'nama_pemilik_rek' => $this->input->post('nama_pemilik_rek'),
 				'no_rek' => $this->input->post('no_rek'),
 				'id_user' => $this->session->userdata('id_user'),
@@ -127,8 +126,7 @@ class Rekening extends CI_Controller
 
 			if ($id_rek == "") {
 				$this->db->insert('tb_rekening', $payloadData);
-			} 
-			else {
+			} else {
 				$this->db->update('tb_rekening', $payloadData, ['id_rek' => $id_rek]);
 			}
 
@@ -143,21 +141,15 @@ class Rekening extends CI_Controller
 
 	function getRekening()
 	{
-		// $id_rek = $this->input->post('id_rek', true);
-		// $data = $this->db->get_where('tb_rekening', ['id_rek' => $id_rek])->row();
-		$id_user = $this->session->userdata('id_user', true);
-		$data = $this->db->get_where('tb_rekening', ['id_user' => $id_user])->row();
+		$id_rek = $this->input->post('id_rek', true);
+		$data = $this->db->get_where('tb_rekening', ['id_rek' => $id_rek])->row();
 		echo json_encode($data);
 	}
 
 	function delete()
 	{
-		// $id_rek = $this->input->post('id_rek', true);
-		// $this->db->delete('tb_rekening',['id_rek'=>$id_rek]);
-
-		$id_user = $this->session->userdata('id_user', true);
-		$this->db->delete('tb_rekening', ['id_user' => $id_user]);
+		$id_rek = $this->input->post('id_rek', true);
+		$this->db->delete('tb_rekening', ['id_rek' => $id_rek]);
 		echo json_encode('');
 	}
 }
- 

@@ -38,9 +38,10 @@ class Produk extends CI_Controller
     $no = @$_POST['start'];
     $id_user = $this->session->userdata('id_user');
 
-
     foreach ($list as $list) {
-      $copy =  "<button> <i class='fas fa-copy btn btn-icon btn-light-success' onclick={copyToClipboard('#$list->link_produk')}></i> </button>";
+      $copy =  "<i class='btn fas fa-copy btn-icon btn-light-success' onclick={_copy('$list->id_produk')}</i>";
+      //"<button id='btn' class='btn btn-light-success' aria-label='Copy Link'>Copy</button>";
+
       $row = array();
       $row[] = ++$no;
       $row[] = $list->nama_produk;
@@ -49,7 +50,7 @@ class Produk extends CI_Controller
       $long_url = $list->link_produk . 'aff=' . $id_user . '&prd=' . $list->id_produk;
       $row[] = $long_url;
       $row[] = "<center>
-                  $copy 
+                  $copy
                 </center>";
       $data[] = $row;
     }
@@ -87,12 +88,12 @@ class Produk extends CI_Controller
     echo json_encode($data);
   }
 
-  function copyLink()
+  function copy_link()
   {
+    $id_user = $this->session->userdata('id_user', true);
     $id_produk = $this->input->post('id_produk', true);
     $data = $this->db->get_where('tb_produk', ['id_produk' => $id_produk])->row();
-    $id_user = $this->session->userdata('id_user');
-    $url = $data->link_produk . 'aff=' . $id_user . '&prd=' . $data->id_produk;
-    echo json_encode($url);
+    $link = $data->link_produk . 'aff=' . $id_user . '&prd=' . $data->id_produk;
+    echo json_encode($link);
   }
 }

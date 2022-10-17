@@ -107,15 +107,16 @@
 	// 	$('#modal_printPDF').modal('show')
 	// }
 
-	const _edit = async (id_user) => {
+	const _edit = async (id_rek) => {
 		await $.ajax({
 			type: "post",
 			url: "<?= base_url('affiliator/rekening/getRekening') ?>",
 			data: {
-				id_user
+				id_rek
 			},
 			dataType: "json",
 			success: function(res) {
+				$('#id_rek').val(res.id_rek)
 				$('#id_bank').val(res.id_bank)
 				$('#nama_pemilik_rek').val(res.nama_pemilik_rek)
 				$('#no_rek').val(res.no_rek)
@@ -128,7 +129,7 @@
 		
 	}
 
-	const _delete = async (id_user) => {
+	const _delete = async (id_rek) => {
 		const result = await confirm('apakah anda yakin akan menghapus rekening ini?')
 
 		if (!result.isConfirmed) return;
@@ -137,7 +138,7 @@
 			type: "post",
 			url: "<?= base_url('affiliator/rekening/delete') ?>",
 			data: {
-				id_user
+				id_rek
 			},
 			dataType: "json",
 			success: function(res) {

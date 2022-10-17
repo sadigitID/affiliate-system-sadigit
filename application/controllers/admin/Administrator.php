@@ -25,7 +25,14 @@ class Administrator extends CI_Controller
     $this->data['jumlah_affiliate'] = $this->m_user->jumlah();
     $this->data['jumlah_pmasuk'] = $this->m_pesanan->jumlah_masuk();
     $this->data['jumlah_pkeluar'] = $this->m_pesanan->jumlah_keluar();
+    $this->data['nama_produk'] = $this->m_pesanan->get_produk();
     $this->load->view('template_admin/index', $data);
+  }
+
+  public function data_grafik()
+  {
+    $grafik = $this->m_pesanan->data_grafik();
+    echo $data = json_encode($grafik);
   }
 
   public function produk()

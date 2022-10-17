@@ -11,19 +11,20 @@ class Profile extends CI_Controller
         $this->load->model('affiliator/m_profile', 'm_profile');
 	}
 
-    public function index() {
+    public function profile($id_user) {
         $data = [
             'view' => 'affiliator/profile',
             'active' => 'profile',
             'sub1' => 'profile',
         ];
-        $id_user = $this->session->userdata('id_user');
-        $data['user'] = $this->db->query("select a.*,b.*,c.*,d.* from tb_users a join provinces b on a.province_id=b.province_id join cities c on a.city_id=c.city_id join districts d on a.district_id=d.district_id where a.id_user='$id_user' ")->row_array();
+        $data['user'] = $this->m_profile->get_user_id($id_user);
+        // $id_user = $this->session->userdata('id_user');
+        // $data['user'] = $this->db->query("select a.*,b.*,c.*,d.* from tb_users a join provinces b on a.province_id=b.province_id join cities c on a.city_id=c.city_id join districts d on a.district_id=d.district_id where a.id_user='$id_user' ")->row_array();
         $data['provinces'] = $this->m_profile->get_province();
         $data['cities'] = $this->m_profile->get_city($data['user']['province_id']);
         $data['districts'] = $this->m_profile->get_district($data['user']['city_id']);
 
-        $this->load->view('template/index',$data);
+        $this->load->view('template/index', $data);
     }
 
     // public function editProfile()

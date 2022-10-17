@@ -88,7 +88,7 @@
 
     <!--begin::Body-->
     <div class="card-body">
-      <!--begin::Chart-->
+      <!--begin::Chart //assets/js/pages/widgets.js-->
       <div id="kt_charts_widget_2_chart">
 
       </div>
@@ -96,20 +96,131 @@
     </div>
     <!--end::Body-->
 
-    <!-- script area -->
-    <script>
-      let table
-      $(document).ready(async () => {
-        table = $('#table').DataTable({
-          "responsive": true,
-          "processing": true,
-          "serverSide": true,
-          "order": [],
-          "ajax": {
-            "url": '<?= base_url('administrator/produk/tb_produk') ?>',
-            "type": "POST"
-          },
-          "ordering": false
-        });
-      })
-    </script>
+    <!--script area-- >
+      <
+      !-- < script >
+        var KTWidgets = (function() {
+          var _initChartsWidget2 = function() {
+            var element = document.getElementById("kt_charts_widget_2_chart");
+
+            if (!element) {
+              return;
+            }
+
+            var options = {
+              series: [{
+                name: 'Net Profit',
+                data: [44, 55, 57, 56, 61, 58]
+              }],
+              chart: {
+                type: 'bar',
+                height: 350,
+                toolbar: {
+                  show: false
+                }
+              },
+              plotOptions: {
+                bar: {
+                  horizontal: false,
+                  columnWidth: ['30%'],
+                  endingShape: 'rounded'
+                },
+              },
+              legend: {
+                show: false
+              },
+              dataLabels: {
+                enabled: false
+              },
+              stroke: {
+                show: true,
+                width: 2,
+                colors: ['transparent']
+              },
+              xaxis: {
+                categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+                axisBorder: {
+                  show: false,
+                },
+                axisTicks: {
+                  show: false
+                },
+                labels: {
+                  style: {
+                    colors: KTApp.getSettings()['colors']['gray']['gray-500'],
+                    fontSize: '12px',
+                    fontFamily: KTApp.getSettings()['font-family']
+                  }
+                }
+              },
+              yaxis: {
+                labels: {
+                  style: {
+                    colors: KTApp.getSettings()['colors']['gray']['gray-500'],
+                    fontSize: '12px',
+                    fontFamily: KTApp.getSettings()['font-family']
+                  }
+                }
+              },
+              fill: {
+                opacity: 1
+              },
+              states: {
+                normal: {
+                  filter: {
+                    type: 'none',
+                    value: 0
+                  }
+                },
+                hover: {
+                  filter: {
+                    type: 'none',
+                    value: 0
+                  }
+                },
+                active: {
+                  allowMultipleDataPointsSelection: false,
+                  filter: {
+                    type: 'none',
+                    value: 0
+                  }
+                }
+              },
+              tooltip: {
+                style: {
+                  fontSize: '12px',
+                  fontFamily: KTApp.getSettings()['font-family']
+                },
+                y: {
+                  formatter: function(val) {
+                    return "$" + val + " thousands"
+                  }
+                }
+              },
+              colors: [KTApp.getSettings()['colors']['theme']['base']['warning'], KTApp.getSettings()['colors']['gray']['gray-300']],
+              grid: {
+                borderColor: KTApp.getSettings()['colors']['gray']['gray-200'],
+                strokeDashArray: 4,
+                yaxis: {
+                  lines: {
+                    show: true
+                  }
+                }
+              }
+            };
+
+            var chart = new ApexCharts(element, options);
+            chart.render();
+          };
+
+          return {
+            init: function() {
+              _initChartsWidget2();
+            },
+          };
+        })();
+
+      $(document).ready(function() {
+        KTWidgets.init();
+      }); <
+      />

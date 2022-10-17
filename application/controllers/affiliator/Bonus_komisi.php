@@ -29,14 +29,15 @@ class Bonus_komisi extends CI_Controller
     $tabel = 'tb_bonus';
     $column_order = array();
     $coloumn_search = array('jml_bonus', 'catatan', 'tanggal_bonus');
-    $select = "*";
+    $select = "tb_bonus.*, tb_users.id_user";
     $order_by = array('id_bonus' => 'desc');
-    $join = [];
-    $where = [];
+    $join[] = ['field' => 'tb_users', 'condition' => 'tb_bonus.id_user = tb_users.id_user', 'direction' => 'left'];
+    $where['tb_bonus.id_user'] = $this->session->userdata('id_user');
     $group_by = [];
     $list = $this->umum->get_datatables($tabel, $column_order, $coloumn_search, $order_by, $where, $join, $select, $group_by);
     $data = array();
     $no = @$_POST['start'];
+    //$id = $this->input->post('id_user');
 
     foreach ($list as $list) {
       $row = array();
@@ -74,8 +75,8 @@ class Bonus_komisi extends CI_Controller
 
   function getBonusK()
   {
-    $id_bonus = $this->input->post('id_bonus', true);
-    $data = $this->db->get_where('tb_bonus', ['id_bonus' => $id_bonus])->row();
+    $id_user = $this->session->userdata('id_user', true);
+    $data = $this->db->get_where('tb_bonus', ['id_user' => $id_user])->row();
     echo json_encode($data);
   }
 }

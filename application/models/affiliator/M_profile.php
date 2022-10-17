@@ -10,7 +10,14 @@ class M_profile extends CI_Model
         // $this->db->where('id_user', $id_user);
         // $data = $this->db->get('tb_users')->row_array();
         // return $data;
-    } 
+    }
+    
+    public function get_user_id($id_user)
+    {
+        $this->db->where('id_user', $id_user);
+        $data = $this->db->get('tb_users')->row_array();
+        return $data;
+    }
 
     public function update($where, $data, $table) {
         $this->db->where($where);

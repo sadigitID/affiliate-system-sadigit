@@ -18,54 +18,38 @@ class Affiliator extends CI_Controller
 	{
 		$data = [
 			'view' => 'affiliator/dashboard',
-			'active' => 'affiliator',
-			'sub1' => 'affiliator',
+			'active' => 'affiliator/affiliator',
+			'sub1' => 'affiliator/affiliator',
 		];
 
+		$this->db->get('tb_bonus')->result();
 		$this->data['jumlah_pesanan'] = $this->m_pesanan->jumlah_pesanan();
-		$this->data['jumlah_bonus'] = $this->m_bonus->jumlah_bonus();
+		$this->data['total_bonus'] = $this->m_bonus->total_bonus();
 		$this->load->view('template/index', $data);
 	}
 
-	public function bank()
-	{
-		$data = [
-			'view' => 'bank/list',
-			'active' => 'bank',
-			'sub1' => 'bank',
-		];
-
-		$this->load->view('template/index', $data);
-	}
-
-	public function dat_list()
+	public function tb_bonus()
 	{
 		header('Content-Type: application/json');
 
-
-		$tabel = 'dat_bank';
+		$tabel = 'tb_bonus';
 		$column_order = array();
-		$coloumn_search = array('nama_bank');
-		$select = "*";
-		$order_by = array('id' => 'desc');
-		$join = [];
-		$where = [];
+		$coloumn_search = array('catatan', 'jml_bonus', 'tanggal_bonus');
+		$select = "tb_bonus.*, tb_users.id_user";
+		$order_by = array('id_bonus' => 'desc');
+		$join[] = ['field' => 'tb_users', 'condition' => 'tb_bonus.id_user = tb_users.id_user', 'direction' => 'left'];
+		$where['tb_bonus.id_user'] = $this->session->userdata('id_user');
 		$group_by = [];
 		$list = $this->umum->get_datatables($tabel, $column_order, $coloumn_search, $order_by, $where, $join, $select, $group_by);
 		$data = array();
 		$no = @$_POST['start'];
 
 		foreach ($list as $list) {
-			// akuntansi_journal_edit
-			$edit =  "<i class='fas fa-edit btn btn-icon btn-light-primary' onclick={_edit('$list->id')}></i>";
-			$hapus =  "<i class='fas fa-trash-alt btn btn-icon btn-light-danger' onclick={_delete('$list->id')}></i>";
 			$row = array();
 			$row[] = ++$no;
-			$row[] = $list->nama_bank;
-			$row[] = "<center>
-                       $edit 
-                       $hapus
-                    </center>";
+			$row[] = $list->catatan;
+			$row[] = $list->jml_bonus;
+			$row[] = $list->tanggal_bonus;
 			$data[] = $row;
 		}
 
@@ -79,69 +63,25 @@ class Affiliator extends CI_Controller
 		echo json_encode($output);
 	}
 
-	function check_bank()
+	function check_bonus()
 	{
-		$nama_bank = $this->input->post('nama_bank');
-		$id = $this->input->post('id');
+		$id_bonus = $this->input->post('id_bonus');
+		$id_user = $this->input->post('id_user');
+		$jml_bonus = $this->input->post('jml_bonus');
+		$catatan = $this->input->post('catatan');
+		$tanggal_bonus = $this->input->post('tanggal_bonus');
 
-		$check = $this->db->select('nama_bank')->from('dat_bank')->where('id !=', $id)->where('nama_bank', $nama_bank)->get();
+		$check = $this->db->select('id_user', 'jml_bonus', 'catatan', 'tanggal_bonus')->from('tb_bonus')->where('id_bonus !=', $id_bonus)->where('id_bonus', $id_bonus)->get();
 		if ($check->num_rows() > 0) {
 			return false;
 		}
 		return true;
 	}
 
-	public function save()
+	function getBonus()
 	{
-		$config = [
-			[
-				'field' => 'nama_bank',
-				'rules' => 'required|callback_check_bank',
-				'errors' => [
-					'required' => 'nama bank tidak boleh kosong',
-					"check_bank" => 'nama bank sudah ada yang menggunakan'
-				]
-			],
-		];
-
-		$data = array('status' => false, 'messages' => array());
-		$this->form_validation->set_rules($config);
-		$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
-		if ($this->form_validation->run() == TRUE) {
-
-			$id = $this->input->post('id');
-
-			$payloadData = [
-				'nama_bank' => $this->input->post('nama_bank'),
-			];
-
-			if ($id == "") {
-				$this->db->insert('dat_bank', $payloadData);
-			} else {
-				$this->db->update('dat_bank', $payloadData, ['id' => $id]);
-			}
-
-			$data['status'] = true;
-			$this->session->set_flashdata('daftar_item', 'Berhasil menyimpan produk');
-		} else {
-			foreach ($_POST as $key => $value) {
-				$data['messages'][$key] = form_error($key);
-			}
-		}
+		$id_user = $this->session->userdata('id_user', true);
+		$data = $this->db->get_where('tb_bonus', ['id_user' => $id_user])->row();
 		echo json_encode($data);
-	}
-
-	function getBank()
-	{
-		$id = $this->input->post('id', true);
-		$data = $this->db->get_where('dat_bank', ['id' => $id])->row();
-		echo json_encode($data);
-	}
-
-	function delete()
-	{
-		$id = $this->input->post('id', true);
-		$this->db->delete('dat_bank', ['id' => $id]);
-		echo json_encode('');
 	}
 }

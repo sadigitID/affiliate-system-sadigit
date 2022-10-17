@@ -1,3 +1,24 @@
+<!-- start of modal salin link -->
+<div class="modal" id="modal_copy" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Salin Link Produk</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form id="form_copy">
+        <div class="modal-body">
+          <button type="button" class="btn btn-light-success" onclick="salin($(this))">Salin Link</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Batalkan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- end of modal salin link -->
+
 <div class="card card-custom">
   <div class="card-header">
     <div class="card-title">
@@ -25,7 +46,6 @@
   </div>
 </div>
 
-
 <!--end::Card-->
 <script>
   let table
@@ -43,18 +63,27 @@
     });
   })
 
-  function copyToClipboard(element) {
-  var $temp = $("button");
-  $("button").append($temp);
-  $temp.val($(element).text()).select();
-  document.execCommand("copy");
-  $temp.remove();
-}
+  const _copy = async () => {
+    $('#form_copy')[0].reset()
+    $('#modal_copy').modal('show')
+  }
 
-// <p id="p1">P1: I am paragraph 1</p>
-// <p id="p2">P2: I am a second paragraph</p>
-// <button onclick="copyToClipboard('#p1')">Copy P1</button>
-// <button onclick="copyToClipboard('#p2')">Copy P2</button>
-// <br/><br/><input type="text" placeholder="Paste here for test" />
+  const salin = async (id_produk) => {
+    await $.ajax({
+      type: "post",
+      url: "<?= base_url('affiliator/produk/copy_link') ?>",
+      data: {
+        id_produk
+      },
+      dataType: "json",
+      success: function(res) {
+        $('#id_pesanan').val(res.id_pesanan)
+        $('#status_komisi').val(res.status_komisi)
+        Swal.fire('', 'Berhasil menyalin link', 'success');
+      },
+      error(err) {
+        Swal.fire('', 'terjadi kesalahan', 'error');
+      }
+    });
+  }
 </script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>

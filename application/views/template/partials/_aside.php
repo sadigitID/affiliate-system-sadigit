@@ -215,7 +215,7 @@
 						<i class="menu-arrow"></i>
 						<ul class="menu-subnav">
 							<li class="menu-item <?= $active == 'affiliator/profile' ? 'menu-item-active' : '' ?>" aria-haspopup="true">
-								<a href="<?= base_url('affiliator/profile') ?>" class="menu-link">
+								<a href="<?= base_url('affiliator/profile/').$this->session->userdata('id_user') ?>" class="menu-link">
 									<span class="svg-icon menu-icon svg-icon-primary">
 										<!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Design\Edit.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
 											<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">

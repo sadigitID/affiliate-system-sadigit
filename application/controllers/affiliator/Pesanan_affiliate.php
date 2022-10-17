@@ -30,10 +30,11 @@ class Pesanan_affiliate extends CI_Controller
     $tabel = 'tb_pesanan';
     $column_order = array();
     $coloumn_search = array('id_produk', 'status_pesanan', 'tanggal_pesanan', 'status_komisi');
-    $select = "*";
+    $select = "tb_pesanan.*, tb_users.id_user, tb_produk.nama_produk, tb_produk.jml_komisi";
     $order_by = array('id_pesanan' => 'desc');
+    $join[] = ['field' => 'tb_users', 'condition' => 'tb_pesanan.id_user = tb_users.id_user', 'direction' => 'left'];
     $join[] = ['field' => 'tb_produk', 'condition' => 'tb_pesanan.id_produk = tb_produk.id_produk', 'direction' => 'left'];
-    $where = [];
+    $where['tb_pesanan.id_user'] = $this->session->userdata('id_user');
     $group_by = [];
     $list = $this->umum->get_datatables($tabel, $column_order, $coloumn_search, $order_by, $where, $join, $select, $group_by);
     $data = array();
@@ -77,8 +78,8 @@ class Pesanan_affiliate extends CI_Controller
 
   function getPesanan()
   {
-    $id_pesanan = $this->input->post('id_pesanan', true);
-    $data = $this->db->get_where('tb_pesanan', ['id_pesanan' => $id_pesanan])->row();
+    $id_user = $this->session->userdata('id_user', true);
+    $data = $this->db->get_where('tb_pesanan', ['id_user' => $id_user])->row();
     echo json_encode($data);
   }
 }

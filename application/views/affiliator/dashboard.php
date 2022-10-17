@@ -62,7 +62,7 @@
                     </svg>
                     <!--end::Svg Icon-->
                 </span>
-                <span class="card-title font-weight-bolder text-dark-75 font-size-h2 mb-0 mt-6 d-block">$5,209</span>
+                <span class="card-title font-weight-bolder text-dark-75 font-size-h2 mb-0 mt-6 d-block"><?= $this->data['total_bonus'] = $this->m_bonus->total_bonus(); ?></span>
                 <span class="font-weight-bold text-muted  font-size-sm">Total Bonus</span>
             </div>
             <!--end::Body-->
@@ -97,21 +97,48 @@
             <!--end::Chart-->
         </div>
         <!--end::Body-->
+    </div>
+</div>
 
-        <!-- script area -->
-        <script>
-            let table
-            $(document).ready(async () => {
-                table = $('#table').DataTable({
-                    "responsive": true,
-                    "processing": false,
-                    "serverSide": true,
-                    "order": [],
-                    "ajax": {
-                        "url": '<?= base_url('bank/dat_list/') ?>',
-                        "type": "POST"
-                    },
-                    "ordering": false
-                });
-            })
-        </script>
+<!--begin: Card-->
+<div class="card card-custom">
+    <div class="card-header">
+        <div class="card-title">
+            <span class="card-icon"><i class="flaticon-squares-1 text-primary"></i></span>
+            <h3 class="card-label">Total Komisi</h3>
+        </div>
+    </div>
+    <div class="card-body">
+        <!--begin: Datatable-->
+        <table class="table table-bordered" id="table" style="margin-top: 13px !important">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Keterangan</th>
+                    <th>Jumlah</th>
+                    <th>Tanggal</th>
+                </tr>
+            </thead>
+        </table>
+        <!--end: Datatable-->
+    </div>
+</div>
+<!--end::Card-->
+
+<!-- script area -->
+<script>
+    let table
+    $(document).ready(async () => {
+        table = $('#table').DataTable({
+            "responsive": true,
+            "processing": false,
+            "serverSide": true,
+            "order": [],
+            "ajax": {
+                "url": '<?= base_url('affiliator/affiliator/tb_bonus') ?>',
+                "type": "POST"
+            },
+            "ordering": false
+        });
+    })
+</script>
