@@ -85,7 +85,7 @@
                                 </a> 
                             </div>
                             <div class="navi-item mb-2">
-                                <a href="<?= base_url().'affiliator/edit_profile/edit/' ?>" class="navi-link py-4 ">
+                                <a href="<?= base_url().'affiliator/edit_profile/' ?>" class="navi-link py-4 ">
                                     <span class="navi-icon mr-2">
                                         <span class="svg-icon"><!--begin::Svg Icon | path:assets/media/svg/icons/Design/Layers.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">

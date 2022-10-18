@@ -39,8 +39,8 @@ class Produk extends CI_Controller
     $id_user = $this->session->userdata('id_user');
 
     foreach ($list as $list) {
-      $copy =  "<i class='btn fas fa-copy btn-icon btn-light-success' onclick={_copy('$list->id_produk')}</i>";
-      //"<button id='btn' class='btn btn-light-success' aria-label='Copy Link'>Copy</button>";
+      $copy =  "<button id='copy-btn' class='btn fas fa-copy btn-icon btn-light-success'></button>";
+      //"<i class='btn fas fa-copy btn-icon btn-light-success' onclick={_copy('$list->id_produk')}</i>";
 
       $row = array();
       $row[] = ++$no;

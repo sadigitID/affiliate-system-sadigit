@@ -31,37 +31,17 @@ class Edit_profile extends CI_Controller
 
     public function get_city()
     {
-        // if ($this->input->post('province_id')) {
-        //     echo $this->m_profile->get_city($this->input->post('province_id'));
-        // }
-        
         $province_id = $this->input->post('province_id');
         $cities = $this->m_profile->get_city($province_id);
-
-        $data = [];
-        $data['cities'] = $cities;
-        $citiesString = $this->load->view('edit-profile',$data,true); // This view will not load -- it will return as string  
-        
-        $response['cities'] = $citiesString;
-        echo json_encode($response);
-
+        echo $cities;
     }
 
     public function get_district()
     {
-        // if ($this->input->post('city_id')) {
-        //     echo $this->m_profile->get_district($this->input->post('city_id'));
-        // }
-
+        $province_id = $this->input->post('province_id');
         $city_id = $this->input->post('city_id');
-        $districts = $this->m_profile->get_district($city_id);
-
-        $data = [];
-        $data['districts'] = $districts;
-        $districtString = $this->load->view('edit-profile',$data,true); // This view will not load -- it will return as string  
-        
-        $response['districts'] = $districtString;
-        echo json_encode($response);
+        $districts = $this->m_profile->get_district($province_id, $city_id);
+        echo $districts;
     }
 
     public function profile()
@@ -74,27 +54,24 @@ class Edit_profile extends CI_Controller
 
         $data['user'] = $this->m_profile->getUser('id_user', $this->session->userdata('id_user'));
         $data['provinces'] = $this->m_profile->get_province();
-        $data['cities'] = $this->m_profile->get_city($data['user']['province_id']);
-        $data['districts'] = $this->m_profile->get_district($data['user']['city_id']);
-
+        
         $this->load->view('template/index', $data);
     }
 
-    public function edit() {
-        $data = [
-            'view' => 'affiliator/edit-profile',
-            'active' => 'edit-profile',
-            'sub1' => 'edit-profile',
-        ];
+    // public function edit() {
+    //     $data = [
+    //         'view' => 'affiliator/edit-profile',
+    //         'active' => 'edit-profile',
+    //         'sub1' => 'edit-profile',
+    //     ];
+        
+    //     $data['user'] = $this->m_profile->getUser('id_user', $this->session->userdata('id_user'));
+    //     $data['provinces'] = $this->m_profile->get_province();
+    //     $data['cities'] = $this->m_profile->get_city($data['user']['province_id']);
+    //     $data['districts'] = $this->m_profile->get_district($data['user']['city_id']);
 
-        // $data['user'] = $this->db->query("select a.*,b.*,c.*,d.* from tb_users a join provinces b on a.province_id=b.province_id join cities c on a.city_id=c.city_id join districts d on a.district_id=d.district_id where a.id_user='$id_user' ")->row_array();
-        $data['user'] = $this->m_profile->getUser('id_user', $this->session->userdata('id_user'));
-        $data['provinces'] = $this->m_profile->get_province();
-        $data['cities'] = $this->m_profile->get_city($data['user']['province_id']);
-        $data['districts'] = $this->m_profile->get_district($data['user']['city_id']);
-
-        $this->load->view('template/index',$data);
-    }
+    //     $this->load->view('template/index',$data);
+    // }
 
     public function updateUser() 
     {

@@ -15,7 +15,7 @@
                         <div class="text-center mb-10">
                             <div class="symbol symbol-60 symbol-circle symbol-xl-90">
                                 <!-- <img class="symbol symbol-60 symbol-circle symbol-xl-90" src="<?= base_url('assets/media/users/default.jpg'); ?>"> -->
-                                <span class="symbol-label text-success text-uppercase font-weight-bolder font-size-h1"><?= substr($this->session->userdata('nama_lengkap'), 0, 1) ?></span>
+                                <span class="symbol-label text-success text-uppercase font-weight-bolder font-size-h1"><?= substr($this->session->userdata('email'), 0, 3) ?></span>
                                 <i class="symbol-badge symbol-badge-bottom bg-success"></i>
                             </div>
 
