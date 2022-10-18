@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 09, 2022 at 10:36 AM
--- Server version: 10.4.20-MariaDB
--- PHP Version: 7.2.31
+-- Generation Time: Oct 18, 2022 at 07:56 AM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -7640,6 +7640,76 @@ INSERT INTO `provinces` (`province_id`, `province_name`, `created_by`, `updated_
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tb_bank`
+--
+
+CREATE TABLE `tb_bank` (
+  `id_bank` int(11) NOT NULL,
+  `nama_bank` varchar(25) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tb_bank`
+--
+
+INSERT INTO `tb_bank` (`id_bank`, `nama_bank`) VALUES
+(1, 'BCA'),
+(2, 'BRI'),
+(3, 'MANDIRI'),
+(4, 'BNI'),
+(5, 'BTN'),
+(6, 'RAYA INDONESIA'),
+(7, 'CIMB NIAGA'),
+(8, 'DANAMON'),
+(9, 'PERMATA'),
+(10, 'PANIN'),
+(11, 'MAYBANK INDONESIA'),
+(12, 'HSBC INDONESIA'),
+(13, 'KB Bukopin'),
+(14, 'MEGA'),
+(15, 'UOB INDONESIA'),
+(16, 'OCBC NISP'),
+(17, 'CITIBANK INDONESIA'),
+(18, 'CCB INDONESIA'),
+(19, 'ARTHA GRAHA'),
+(20, 'MUFG BANK, LTD'),
+(21, 'DBS'),
+(22, 'STANCHART'),
+(23, 'CAPITAL'),
+(24, 'ANZ INDONESIA'),
+(25, 'BOCI'),
+(26, 'BUMI ARTA'),
+(27, 'ANTAR DAERAH'),
+(28, 'RABOBANK'),
+(29, 'JTRUST BANK'),
+(30, 'MAYAPADA'),
+(31, 'BJB'),
+(32, 'DKI'),
+(33, 'BPD DIY'),
+(34, 'BANK JATENG'),
+(35, 'BANK JATIM'),
+(36, 'BANK JAMBI '),
+(37, 'BANK ACEH SYARIAH'),
+(38, 'BPD SUMUT'),
+(39, 'BANK NAGARI'),
+(40, 'PT BPD Riau Kepri Syariah'),
+(41, 'BANK SUMSELBABEL'),
+(42, 'BANK LAMPUNG'),
+(43, 'BANK KALSEL'),
+(44, 'BANK KALBAR'),
+(45, 'BANK JATIM'),
+(46, 'BANK JAMBI '),
+(47, 'BANK ACEH SYARIAH'),
+(48, 'BPD SUMUT'),
+(49, 'BANK NAGARI'),
+(50, 'BANK SUMSELBABEL'),
+(51, 'BANK LAMPUNG'),
+(52, 'BANK KALSEL'),
+(53, 'BANK KALBAR');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `tb_bonus`
 --
 
@@ -7656,9 +7726,8 @@ CREATE TABLE `tb_bonus` (
 --
 
 INSERT INTO `tb_bonus` (`id_bonus`, `id_user`, `jml_bonus`, `catatan`, `tanggal_bonus`) VALUES
-(1, 3, 10000, 'Kerja bagus!', '2022-09-06'),
-(2, 2, 10000, 'Terimakasih kerja kerasnya!', '2022-09-06'),
-(3, 3, 10000, 'Nice work', '2022-09-07');
+(1, 3, 50000, 'Good job', '2022-10-14'),
+(2, 2, 50000, 'Kerja bagus!', '2022-10-14');
 
 -- --------------------------------------------------------
 
@@ -7677,17 +7746,9 @@ CREATE TABLE `tb_pesanan` (
   `tanggal_pesanan` date DEFAULT NULL,
   `foto_pembayaran` varchar(50) DEFAULT NULL,
   `no_wa_pembeli` varchar(13) DEFAULT NULL,
-  `status_komisi` varchar(15) DEFAULT NULL,
+  `status_komisi` varchar(10) DEFAULT NULL,
   `status_pesanan` varchar(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `tb_pesanan`
---
-
-INSERT INTO `tb_pesanan` (`id_pesanan`, `id_produk`, `id_user`, `nama_produk`, `harga_jual`, `nama_pembeli`, `tanggal_pembayaran`, `tanggal_pesanan`, `foto_pembayaran`, `no_wa_pembeli`, `status_komisi`, `status_pesanan`) VALUES
-(1, 1, 3, 'Caratbong', 600000, 'Choi Seungcheol', '2022-09-07', '2022-09-07', 'foto', '081234567890', 'Selesai', 'Selesai'),
-(2, 1, 2, 'Caratbong', 600000, 'Salma Azizah', '2022-09-06', '2022-09-06', 'foto', '087639471823', 'Pesanan Masuk', 'Tertunda');
 
 -- --------------------------------------------------------
 
@@ -7709,7 +7770,16 @@ CREATE TABLE `tb_produk` (
 --
 
 INSERT INTO `tb_produk` (`id_produk`, `nama_produk`, `harga_produk`, `jml_komisi`, `deskripsi_produk`, `link_produk`) VALUES
-(1, 'Caratbong', 600000, 10000, 'Lightstick Seventeen Ver.2', NULL);
+(1, 'Smart PBB', 1000000, 50000, 'Aplikasi SMART PBB adalah sistem informasi pengelolaan pajak bumi dan bangunan untuk memfasilitasi Instansi pengelola pajak bumi bangunan (PBB) aplikasi ini merupakan solusi untuk mendukung kegiatan pengelolaan dan pelayanan pajak bumi dan bangunan. ', 'https://www.sadigit.co.id/aplikasi-smart-pbb/'),
+(2, 'BPHTB Online', 1000000, 50000, 'Aplikasi BPHTB Online adalah sistem informasi pengelolaan bea perolehan hak atas tanah dan bangunan  untuk mendukung pelayanan.', 'https://www.sadigit.co.id/aplikasi-bphtb-online/'),
+(3, 'SIAPDOL', 1000000, 50000, 'Dashboard realisasi pajak daerah tersedia di Aplikasi Pajak Daerah Online (SIAPDOL) yang terintegrasi dengan semua jenis pajak daerah diantaranya : Pajak PBB, Pajak BPHTB, 9 Jenis Pajak Daerah (pajak hotel, pajak restoran, pajak hiburan,pajak reklame, pajak penerangan jalan, pajak mineral bukan logam dan batuan, pajak parkir, pajak air tanah, pajak sarang burung walet. Menampilkan Target Realisasi Pajak Daerah secara real time', 'https://www.sadigit.co.id/aplikasi-siapdol/'),
+(4, 'SIPPADU', 1000000, 50000, 'Sistem Pajak Daerah Terpadu Merupakan Aplikasi Berbasis Mobile Dan Berbasis Website Yang Diperuntukkan Bagi Wajib Pajak Atau Objek Pajak Agar Memudahkan Dalam Pelaporan Jenis Pajak Daerah Yang Terdiri Dari Pajak Hotel, Pajak Restoran, Pajak Parkir, Pajak Hiburan, Pajak Reklame, Pajak Sarang Burung Walet, Pajak Penerangan, Pajak Air Tanah Dan Pajak Mineral Bukan Logam Batuan.', 'https://www.sadigit.co.id/aplikasi-sippadu/'),
+(5, 'SIPPUJAAN', 1000000, 50000, 'SIPPUJAAN (Sistem Informasi Pengelolaan Lampu Penerangan Jalan Umum) adalah sebuah aplikasi untuk melaporkan kerusakan atau gangguan pada penerangan jalan umum, pelaporan tersebut dapat  dilakukan oleh masyarakat umum kepada dinas perhubungan melalui aplikasi dengan menandai titik koordinat lampu jalan.', 'https://www.sadigit.co.id/aplikasi-sippujaan/'),
+(6, 'Faslalin', 1000000, 50000, 'Faslalin (Aplikasi Pelaporan Fasilitas Lalu Lintas) adalah sebuah aplikasi untuk melaporkan kerusakan, pengadaan fasilitas lalu lintas seperti lampu lalu lintas, zebra cross oleh masyarakat umum kepada dinas perhubungan.', 'https://www.sadigit.co.id/aplikasi-faslalin/'),
+(7, 'Sidata Pertanahan', 1000000, 50000, 'Sistem informasi yang memudahkan pihak DPKPP dalam mengelola data pertanahan milik pemerinta. Kami siap membantu dinas atau intansi terkait dalam bidang pertanahan untuk pengelolaan pemetaan bidang tanah kedalam kategori desa, pemkab, pemprov dan negara yang dapat disesuaikan dengan keinginan dinas atau intansi anda.', 'https://www.sadigit.co.id/aplikasi-sidata-pertanahan/'),
+(8, 'Smart Resto Enterprise', 1000000, 50000, 'Sistem ini mendukung pencarian wajib pajak pada usaha restoran. Aplikasi ini dipakai oleh dinas BAPPENDA atau Badan Keuangan Daerah untuk menyaring wajib pajak kategori restoran.', 'https://www.sadigit.co.id/aplikasi-smart-resto-enterprise/'),
+(9, 'Sidata Pertanahan', 1000000, 50000, 'Sistem informasi yang memudahkan pihak DPKPP dalam mengelola data pertanahan milik pemerinta. Kami siap membantu dinas atau intansi terkait dalam bidang pertanahan untuk pengelolaan pemetaan bidang tanah kedalam kategori desa, pemkab, pemprov dan negara yang dapat disesuaikan dengan keinginan dinas atau intansi anda.', 'https://www.sadigit.co.id/aplikasi-sidata-pertanahan/'),
+(10, 'Smart PBB', 1000000, 50000, 'Aplikasi SMART PBB adalah sistem informasi pengelolaan pajak bumi dan bangunan untuk memfasilitasi Instansi pengelola pajak bumi bangunan (PBB) aplikasi ini merupakan solusi untuk mendukung kegiatan pengelolaan dan pelayanan pajak bumi dan bangunan. ', 'https://www.sadigit.co.id/aplikasi-smart-pbb/');
 
 -- --------------------------------------------------------
 
@@ -7719,10 +7789,19 @@ INSERT INTO `tb_produk` (`id_produk`, `nama_produk`, `harga_produk`, `jml_komisi
 
 CREATE TABLE `tb_rekening` (
   `id_rek` int(11) NOT NULL,
-  `no_rek` varchar(25) DEFAULT NULL,
-  `nama_pemilik_rek` varchar(50) DEFAULT NULL,
-  `nama_bank` varchar(10) DEFAULT NULL
+  `id_bank` int(11) NOT NULL,
+  `nama_pemilik_rek` varchar(50) NOT NULL,
+  `no_rek` varchar(25) NOT NULL,
+  `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tb_rekening`
+--
+
+INSERT INTO `tb_rekening` (`id_rek`, `id_bank`, `nama_pemilik_rek`, `no_rek`, `id_user`) VALUES
+(22, 1, 'Salma Azizah', '12345', 2),
+(23, 3, 'Rochma Dwi Y', '123456', 3);
 
 -- --------------------------------------------------------
 
@@ -7746,7 +7825,7 @@ CREATE TABLE `tb_users` (
   `link_yutub` varchar(50) DEFAULT NULL,
   `role` enum('Admin','Affiliator') DEFAULT NULL,
   `is_active` int(1) NOT NULL,
-  `created_at` int(11) DEFAULT current_timestamp(),
+  `created_at` varchar(11) DEFAULT current_timestamp(),
   `updated_at` int(11) DEFAULT current_timestamp(),
   `deleted_at` int(11) DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -7756,9 +7835,9 @@ CREATE TABLE `tb_users` (
 --
 
 INSERT INTO `tb_users` (`id_user`, `nama_lengkap`, `password`, `province_id`, `city_id`, `district_id`, `alamat_lengkap`, `email`, `no_hp`, `link_tiktok`, `link_fb`, `link_ig`, `link_yutub`, `role`, `is_active`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'Risna Berti Sundari', '$2y$10$Maw4Dw3DaM6rfkSbLsn0oeO9PiANm/PizpDcTEDzJ5vLdLCXXXAl.', 10, 41, 573, 'Ajibarang, Banyumas', 'risnaberti76@gmail.com', '0888989', '', '', '', '', 'Admin', 1, 1662389265, 1662389265, 0),
-(2, 'Risna Berti Sundari', '$2y$10$KSvRmxalGDt91Msi.hx9MON/j6yHVYEccwMUfdEi5inrEtqR/wGjG', 10, 105, 1442, 'Cilacap', 'risnaberti07@gmail.com', '0888989', '', '', '', '', 'Affiliator', 1, 1662389400, 1662389400, 0),
-(3, 'Salma Azizah', '$2y$10$5Macijosn9JwNYpCHNRywOZtLYlSV0I1nna8z47wQUnSDu71Y1ZFu', 9, 78, 1033, 'Kp. Rawahingkik RT 04 / 07', 'azizahsalmaa06@gmail.com', '082246005003', '', '', '', '', 'Affiliator', 1, 1662440428, 1662440428, 0);
+(1, 'Risna Berti Sundari', '$2y$10$kAXZ0Hiti2OOXbeCu0NIoeo9uK9Wnw/wGGMtJgByzjVflUskIy9xu', 10, 41, 573, 'Ajibarang, Banyumas', 'risnaberti76@gmail.com', '088812341234', '', '', '', '', 'Admin', 1, '1665327638', 1665327638, 1665327638),
+(2, 'Salma Azizahhh', '$2y$10$jmyviZqSiDLGYgvrX5MOPOuIkJp6COttBQ12GIPdKYsyPLX6HjUZi', 9, NULL, 1033, 'Cileungsi, Bogor', 'salmaazizah87@gmail.com', '0878123451236', '', '', '', '', 'Affiliator', 1, '1665328793', 1665328793, 1665328793),
+(3, 'Rochmah Dwi Yuniar', '$2y$10$YmOWv/4tH49/iDLy9lTnX.FV6qdVlZvAb0VlePwmrvVzZPLxbeL6m', 5, 501, 6987, 'DI Yogyakarta', 'rochmah@gmail.com', '098765412345', '', '', '', '', 'Affiliator', 1, '1665714426', 1665714426, 1665714426);
 
 -- --------------------------------------------------------
 
@@ -7779,7 +7858,23 @@ CREATE TABLE `tb_user_token` (
 
 INSERT INTO `tb_user_token` (`tb_user_token`, `email`, `token`, `created_at`) VALUES
 (1, 'risnaberti07@gmail.com', '7V3oU76VykM1iIVNRPJ7ZEDTLoe0sGYscIUR3FVBmOM=', 1662389400),
-(2, 'azizahsalmaa06@gmail.com', '1mk0PNSdUmZj2cHaGLkYuRSuFGG0HBqzjDiq1aS9wKM=', 1662440428);
+(12, 'nadia@gmail.com', 'x7aZEYFk8ZJqtfdkkUcv4osffHSMTppg/aeUBUQdWvI=', 1664263662),
+(13, 'salmaazizah87@gmail.com', '7+jrg1zqnfxePlhpJrW4+1TuU+BOrEDClHCpugm3qVM=', 1664350638),
+(14, 'salmaazizah87@gmail.com', '0zbuKoL0j6YrcONM+Lc5R/TTdyj8wJz3L1U+rhDDeAs=', 1664350642),
+(15, 'salmaazizah87@gmail.com', 'aU/j8mWDbpLRcB6do5UQruiaomaNcZm4LdHeX4Z9NKQ=', 1664350645),
+(19, 'salmaazizah87@gmail.com', 'Y12hcLnR5sOhaNtGowAWCPC7YgaXTt0JYYJ+X/kFnsU=', 1664720321),
+(20, 'risnaberti76@gmail.com', 'B+3bG7CXzHtTu+p/7BEZWFdEYhJbv22k1PVhhXS5780=', 1664720420),
+(21, 'salmaazizah87@gmail.com', 'gGAWFF2JkSGdrirH4ZNEzWfZAkzszwxGiasKE6eA9Fg=', 1664725272),
+(22, 'rochmah@gmail.com', 'YkXjSMN+b7wXkrG1ZMgvWs6U4SHs4ru65iuJLBm/uSY=', 1664770651),
+(23, 'risnaberti76@gmail.com', 'YOX4dIsY8q4l1nncQz8MKl55H0VKtV7yWnGoJX3sNfA=', 1664772417),
+(24, 'salmaazizah87@gmail.com', 'PGVC1+Xz6vHcrRLSN3CzWgKvKBlJ9X4AUc6Qafstt1k=', 1664884800),
+(25, 'salmaazizah87@gmail.com', 'Lu73EpCfJsgJdxcO7yN+LI2wnxDs8A17+EDpVh7u6oo=', 1664885620),
+(26, 'salmaazizah87@gmail.com', 'xqTAcm9/E9zBBs4ViQzPnRSNl9VdxBR8UxSzm49VNxI=', 1664886907),
+(27, 'risnaberti76@gmail.com', 'EB2NUMcanPuNI+zept719StAS82s8qWkxyeLcXEAC7s=', 1665027003),
+(28, 'risnaberti07@gmail.com', '0DQr/eaRgVmtGomkPldbthm09zDLy4ZrjrmZ29fV7V8=', 1665027216),
+(29, 'risnaberti76@gmail.com', 'jjMDJagl/HxMHuFLEWaRn4pqZl6FbOMCkWWyocf6lM0=', 1665327638),
+(30, 'salmaazizah87@gmail.com', 'li7XojMEWi7pZnSVr3FW7TsFLC2oP17vgwJFdCvh59c=', 1665328793),
+(31, 'rochmah@gmail.com', 'yrUsMapW1I25/7QIAO5Kh+ecs22zZoFYDIs30k7VeEg=', 1665714426);
 
 --
 -- Indexes for dumped tables
@@ -7809,6 +7904,12 @@ ALTER TABLE `provinces`
   ADD UNIQUE KEY `provinces_province_name_unique` (`province_name`);
 
 --
+-- Indexes for table `tb_bank`
+--
+ALTER TABLE `tb_bank`
+  ADD PRIMARY KEY (`id_bank`);
+
+--
 -- Indexes for table `tb_bonus`
 --
 ALTER TABLE `tb_bonus`
@@ -7833,7 +7934,9 @@ ALTER TABLE `tb_produk`
 -- Indexes for table `tb_rekening`
 --
 ALTER TABLE `tb_rekening`
-  ADD PRIMARY KEY (`id_rek`);
+  ADD PRIMARY KEY (`id_rek`),
+  ADD KEY `id_bank` (`id_bank`),
+  ADD KEY `id_user` (`id_user`);
 
 --
 -- Indexes for table `tb_users`
@@ -7843,7 +7946,8 @@ ALTER TABLE `tb_users`
   ADD UNIQUE KEY `email` (`email`),
   ADD KEY `provinces` (`province_id`),
   ADD KEY `cities` (`city_id`),
-  ADD KEY `districts` (`district_id`);
+  ADD KEY `districts` (`district_id`),
+  ADD KEY `email_2` (`email`);
 
 --
 -- Indexes for table `tb_user_token`
@@ -7856,28 +7960,34 @@ ALTER TABLE `tb_user_token`
 --
 
 --
+-- AUTO_INCREMENT for table `tb_bank`
+--
+ALTER TABLE `tb_bank`
+  MODIFY `id_bank` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+
+--
 -- AUTO_INCREMENT for table `tb_bonus`
 --
 ALTER TABLE `tb_bonus`
-  MODIFY `id_bonus` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_bonus` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tb_pesanan`
 --
 ALTER TABLE `tb_pesanan`
-  MODIFY `id_pesanan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_pesanan` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tb_produk`
 --
 ALTER TABLE `tb_produk`
-  MODIFY `id_produk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_produk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `tb_rekening`
 --
 ALTER TABLE `tb_rekening`
-  MODIFY `id_rek` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_rek` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `tb_users`
@@ -7889,7 +7999,7 @@ ALTER TABLE `tb_users`
 -- AUTO_INCREMENT for table `tb_user_token`
 --
 ALTER TABLE `tb_user_token`
-  MODIFY `tb_user_token` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `tb_user_token` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- Constraints for dumped tables
@@ -7908,12 +8018,6 @@ ALTER TABLE `districts`
   ADD CONSTRAINT `districts_ibfk_1` FOREIGN KEY (`city_id`) REFERENCES `cities` (`city_id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `tb_bonus`
---
-ALTER TABLE `tb_bonus`
-  ADD CONSTRAINT `tb_bonus_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `tb_users` (`id_user`) ON UPDATE CASCADE;
-
---
 -- Constraints for table `tb_pesanan`
 --
 ALTER TABLE `tb_pesanan`
@@ -7921,12 +8025,10 @@ ALTER TABLE `tb_pesanan`
   ADD CONSTRAINT `tb_pesanan_ibfk_2` FOREIGN KEY (`id_user`) REFERENCES `tb_users` (`id_user`) ON UPDATE CASCADE;
 
 --
--- Constraints for table `tb_users`
+-- Constraints for table `tb_rekening`
 --
-ALTER TABLE `tb_users`
-  ADD CONSTRAINT `tb_users_ibfk_1` FOREIGN KEY (`city_id`) REFERENCES `cities` (`city_id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `tb_users_ibfk_2` FOREIGN KEY (`district_id`) REFERENCES `districts` (`district_id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `tb_users_ibfk_3` FOREIGN KEY (`province_id`) REFERENCES `provinces` (`province_id`) ON DELETE CASCADE;
+ALTER TABLE `tb_rekening`
+  ADD CONSTRAINT `tb_rekening_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `tb_users` (`id_user`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

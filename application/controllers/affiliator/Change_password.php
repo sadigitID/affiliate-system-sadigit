@@ -18,8 +18,8 @@ class Change_password extends CI_Controller
             'active' => 'change-password',
             'sub1' => 'change-password',
         ];
-        
-        $data['user'] =$this->m_profile->getUser($this->session->userdata('email'));
+
+        $data['user'] = $this->m_profile->getUser('id_user', $this->session->userdata('id_user'));
 
         $this->load->view('template/index', $data);
     }
@@ -29,36 +29,36 @@ class Change_password extends CI_Controller
     {
         $data['tb_users'] = $this->db->get_where('tb_users', ['email' => $this->session->userdata('email')])->row_array();
         $config = [
-			[
-				'field' => 'password',
-				'rules' => 'required|trim',
-				'errors' => [
-					'required' => 'password tidak boleh kosong'
-				]
-			],
-			[
-				'field' => 'password1',
-				'rules' => 'required|trim|min_length[6]|matches[password2]',
-				'errors' => [
-					'required' => 'new password tidak boleh kosong',
+            [
+                'field' => 'password',
+                'rules' => 'required|trim',
+                'errors' => [
+                    'required' => 'password tidak boleh kosong'
+                ]
+            ],
+            [
+                'field' => 'password1',
+                'rules' => 'required|trim|min_length[6]|matches[password2]',
+                'errors' => [
+                    'required' => 'new password tidak boleh kosong',
                     'min_length' => 'Password too short!',
                     'matches' => 'Password tidak sama'
-				]
-			],
-			[
-				'field' => 'password2',
-				'rules' => 'required|trim|min_length[6]|matches[password1]',
-				'errors' => [
-					'required' => 'new password tidak boleh kosong',
+                ]
+            ],
+            [
+                'field' => 'password2',
+                'rules' => 'required|trim|min_length[6]|matches[password1]',
+                'errors' => [
+                    'required' => 'new password tidak boleh kosong',
                     'min_length' => 'Password too short!',
                     'matches' => 'Password tidak sama'
-				]
-			],
-		];
- 
-		$data = array('status' => false, 'messages' => array());
-		$this->form_validation->set_rules($config);
-		$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
+                ]
+            ],
+        ];
+
+        $data = array('status' => false, 'messages' => array());
+        $this->form_validation->set_rules($config);
+        $this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
         $this->form_validation->set_message('required', '{field} tidak boleh kosong');
 
         if ($this->form_validation->run() == false) {
@@ -67,9 +67,9 @@ class Change_password extends CI_Controller
                 'active' => 'change-password',
                 'sub1' => 'change-password',
             ];
-            
-            $data['user'] =$this->m_profile->getUser($this->session->userdata('email'));
-    
+
+            $data['user'] = $this->m_profile->getUser($this->session->userdata('email'));
+
             $this->load->view('template/index', $data);
         } else {
             $where = $this->db->get_where('tb_users', ['email' => $this->session->userdata('email')])->row_array();

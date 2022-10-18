@@ -63,6 +63,7 @@ class Edit_profile extends CI_Controller
         $response['districts'] = $districtString;
         echo json_encode($response);
     }
+
     public function profile()
     {
         $data = [
@@ -79,14 +80,15 @@ class Edit_profile extends CI_Controller
         $this->load->view('template/index', $data);
     }
 
-    public function edit($id_user) {
+    public function edit() {
         $data = [
             'view' => 'affiliator/edit-profile',
             'active' => 'edit-profile',
             'sub1' => 'edit-profile',
         ];
 
-        $data['user'] = $this->db->query("select a.*,b.*,c.*,d.* from tb_users a join provinces b on a.province_id=b.province_id join cities c on a.city_id=c.city_id join districts d on a.district_id=d.district_id where a.id_user='$id_user' ")->row_array();
+        // $data['user'] = $this->db->query("select a.*,b.*,c.*,d.* from tb_users a join provinces b on a.province_id=b.province_id join cities c on a.city_id=c.city_id join districts d on a.district_id=d.district_id where a.id_user='$id_user' ")->row_array();
+        $data['user'] = $this->m_profile->getUser('id_user', $this->session->userdata('id_user'));
         $data['provinces'] = $this->m_profile->get_province();
         $data['cities'] = $this->m_profile->get_city($data['user']['province_id']);
         $data['districts'] = $this->m_profile->get_district($data['user']['city_id']);
