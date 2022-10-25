@@ -10,7 +10,6 @@ class Pesanan extends CI_Controller
 
 		$this->load->library('form_validation');
 		$this->load->model('admin/Pesanan_model', 'pesanan');
-
 	}
 
 	public function index()
@@ -46,17 +45,17 @@ class Pesanan extends CI_Controller
 		$no = @$_POST['start'];
 
 		foreach ($list as $list) {
-			if($list->status_komisi == 1) {
+			if ($list->status_komisi == 1) {
 				$status_komisi = '<p> Pesanan Masuk </p>';
-			} elseif ($list->status_komisi == 2) {
+			} else {
 				$status_komisi = '<p> Pesanan Selesai </p>';
 			}
 
-			if($list->status_pesanan == 1) {
+			if ($list->status_pesanan == 1) {
 				$status_pesanan = '<p> Pesanan Masuk </p>';
-			} elseif ($list->status_pesanan == 2) {
+			} else {
 				$status_pesanan = '<p> Pesanan Selesai </p>';
-			} 
+			}
 
 			$edit =  "<i class='fas fa-edit btn btn-icon btn-light-primary' onclick={_confirm('$list->id_pesanan')}></i>";
 			$row = array();
@@ -64,20 +63,20 @@ class Pesanan extends CI_Controller
 			$row[] = $list->nama_pembeli;
 			$row[] = $list->nama_produk; //harusnya joinkan tabel tb_produk terus nanti yg dipanggil field nama_produk dari tb_produk
 			$row[] = $list->harga_jual; //digunakan untuk total pesanan
-            $row[] = $status_pesanan;
-            $row[] = $list->tanggal_pembayaran;
-            $row[] = $list->foto_pembayaran;
-            $row[] = $list->nama_lengkap; //join dgn tabel user ambil field nama_lengkap
-            $row[] = $list->jml_komisi; //ini harusnya jml_komisi ambil dari tb_produk
-            $row[] = $status_komisi;
+			$row[] = $status_pesanan;
+			$row[] = $list->tanggal_pembayaran;
+			$row[] = $list->foto_pembayaran;
+			$row[] = $list->nama_lengkap; //join dgn tabel user ambil field nama_lengkap
+			$row[] = $list->jml_komisi; //ini harusnya jml_komisi ambil dari tb_produk
+			$row[] = $status_komisi;
 			$row[] = "<center>
                         $edit
                      </center>";
-					// if ($list->status_komisi == 1){
-					// 	echo "Pesanan Masuk";
-					// } else if ($list->status_komisi == 2) {
-					// 	echo "Pesanan Selesai";
-					// }
+			// if ($list->status_komisi == 1){
+			// 	echo "Pesanan Masuk";
+			// } else if ($list->status_komisi == 2) {
+			// 	echo "Pesanan Selesai";
+			// }
 			$data[] = $row;
 		}
 
@@ -88,21 +87,24 @@ class Pesanan extends CI_Controller
 			"data" => $data,
 		);
 
-		function ubah_status()
-		{
-			foreach ($list as $list) {
-				$id_pesanan['id_pesanan'] = $list['id_pesanan'];
-			}
-
-			$up['status_komisi'] 	= $this->uri->segment(4);
-
-			$this->db->update("tb_pesanan",$up,$id_pesanan);
-
-			$this->session->set_flashdata('in','OK');
-			redirect('admin/pesanan');
-		}
 
 		//output to json format
 		echo json_encode($output);
 	}
+
+	function ubah_status()
+	{
+
+		$id_pesanan = $this->input->post('id_pesanan');
+		$where = ['id_pesanan' => $id_pesanan];
+		// $getAff = $this->db->get_where('tb_pesanan', $where)->row_array();
+		// $komisi = $getAff['jml_komisi'];
+		// $id_user = $getAff['id_user'];
+		//$up = ['status_pesanan' => 2];
+		$up = ['status_komisi' => 2, 'status_pesanan' => 2];
+		$this->db->update("tb_pesanan", $up, $where);
+		echo json_encode(['status' => true]);
+	}
+
+	
 }

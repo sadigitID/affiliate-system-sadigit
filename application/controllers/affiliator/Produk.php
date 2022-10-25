@@ -19,6 +19,7 @@ class Produk extends CI_Controller
       'sub1' => 'produk',
     ];
 
+    $data['pesanan'] = $this->db->get('tb_pesanan')->row_array();
     $this->load->view('template/index', $data);
   }
 
@@ -39,15 +40,27 @@ class Produk extends CI_Controller
     $id_user = $this->session->userdata('id_user');
 
     foreach ($list as $list) {
-      $copy =  "<button id='copy-btn' class='btn fas fa-copy btn-icon btn-light-success'></button>";
-      //"<i class='btn fas fa-copy btn-icon btn-light-success' onclick={_copy('$list->id_produk')}</i>";
+      //if ($list->id_produk == $list->id_produk) {
+      //$status_komisi = '<p> Pesanan Masuk </p>';
+      //} else {
+      //$status_komisi = '<p> Pesanan Selesai </p>';
+      //}
+
+      //if ($list->id_produk == $list->id_produk) {
+      //$status_pesanan = '<p> Pesanan Masuk </p>';
+      //} else {
+      //$status_pesanan = '<p> Pesanan Selesai </p>';
+      //}
+
+      $long_url = $list->link_produk . 'aff=' . $id_user . '&prd=' . $list->id_produk;
+      $copy =  "<i class='btn fas fa-copy btn-icon btn-light-success' onclick={_copy('$long_url')}></i>";
+      //$salin =  "<i class='fas fa-edit btn btn-icon btn-light-primary' onclick={_salin('$list->id_produk')}></i>";
 
       $row = array();
       $row[] = ++$no;
       $row[] = $list->nama_produk;
       $row[] = $list->harga_produk;
       $row[] = $list->jml_komisi;
-      $long_url = $list->link_produk . 'aff=' . $id_user . '&prd=' . $list->id_produk;
       $row[] = $long_url;
       $row[] = "<center>
                   $copy
@@ -84,16 +97,19 @@ class Produk extends CI_Controller
   {
     $id_produk = $this->input->post('id_produk', true);
     $data = $this->db->get_where('tb_produk', ['id_produk' => $id_produk])->row();
-
     echo json_encode($data);
   }
 
-  function copy_link()
-  {
-    $id_user = $this->session->userdata('id_user', true);
-    $id_produk = $this->input->post('id_produk', true);
-    $data = $this->db->get_where('tb_produk', ['id_produk' => $id_produk])->row();
-    $link = $data->link_produk . 'aff=' . $id_user . '&prd=' . $data->id_produk;
-    echo json_encode($link);
-  }
+  //function isi_data()
+  //{
+  // $data['pesanan'] = $this->db->from('tb_pesanan')->join('tb_produk', 'tb_produk.id_produk = tb_pesanan.id_produk', 'left')->get()->row_array();
+
+  //$id_produk = $this->input->post('id_produk');
+  //$harga_produk = $this->input->post('harga_produk');
+  //$jml_komisi = $this->input->post('jml_komisi');
+  //$where = ['id_produk' => $id_produk];
+  //$up = ['harga_jual' => $harga_produk, 'id_produk' => $id_produk];
+  //$this->db->update("tb_pesanan", $up, $where);
+  //echo json_encode(['id_produk' => true]);
+  //}
 }

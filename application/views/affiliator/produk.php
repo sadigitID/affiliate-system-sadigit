@@ -1,3 +1,24 @@
+<!-- start of modal salin link -->
+<div class="modal" id="modal_salin" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Salin Link</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form id="form_salin">
+        <div class="modal-body">
+          <button type="button" class="btn btn-light-success" onclick="salin($(this))">Salin</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Batalkan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- end of modal salin link -->
+
 <div class="card card-custom">
   <div class="card-header">
     <div class="card-title">
@@ -41,79 +62,56 @@
       "ordering": false
     });
   })
+
+  const _copy = async (url) => {
+    try {
+      await navigator.clipboard.writeText(url);
+      alert("Copied the link : " + url);
+      console.log('Content copied to clipboard');
+    } catch (err) {
+      console.error('Failed to copy: ', err);
+    }
+  }
+
+  //const _salin = async (id_produk) => {
+  //const result = await confirm('Salin data produk ?')
+  //if (!result.isConfirmed) return;
+
+  //await $.ajax({
+  //type: "post",
+  //url: "<?= base_url('affiliator/produk/isi_data') ?>",
+  //data: {
+  //id_produk
+  //},
+  //dataType: "json",
+  //success: function(res) {
+  //Swal.fire('', 'data berhasil disalin', 'success')
+  //table.ajax.reload()
+  //},
+  //error(err) {
+  //Swal.fire('', 'terjadi kesalahan', 'error');
+  //}
+  //});
+  //}
+
+  //const salin = async (id_produk) => {
+  //await $.ajax({
+  //type: "post",
+  //url: "<?= base_url('affiliator/produk/isi_data') ?>",
+  //data: {
+  //id_produk
+  //},
+  //dataType: "json",
+  //success: function(res) {
+  //$('#id_produk').val(res.id_produk)
+  //$('#harga_jual').val(res.harga_jual)
+  //$('#status_pesanan').val(res.status_pesanan)
+  //$('#jumlah_komisi').val(res.jml_komisi)
+  //$('#status_komisi').val(res.status_komisi)
+  //},
+  //error(err) {
+  //Swal.fire('', 'terjadi kesalahan saat mengambil data pesanan', 'error');
+  //}
+  //});
+  //}
 </script>
-
-
-<script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/buttons/1.1.2/js/dataTables.buttons.min.js"></script>
-<script src="//cdn.datatables.net/buttons/1.1.2/js/buttons.html5.min.js"></script>
-
-<script>
-  $(document).ready(async () => {
-    table = $('#table').DataTable({
-      "ajax": {
-        "url": '<?= base_url('affiliator/produk/copy_link/') ?>',
-        "type": "POST",
-      },
-      "dom": 'Bfrtip',
-      "buttons": [
-        'copy'
-      ]
-    });
-
-    $("#copy-btn").on("click", function() {
-      table.button('.buttons-copy').trigger();
-    });
-  });
-</script>
-
-
-<!--<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.11/css/jquery.dataTables.min.css">-->
-<!--<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.1.2/css/buttons.dataTables.min.css">-->
-
-<script src="<?= base_url(''); ?>/assets/js/scripts.bundle.js"></script>
-<!--var clipboard = new ClipboardJS(copy, {
-target: function(trigger) {
-var example = trigger.closest('.example');
-var el = KTUtil.find(example, '.example-code .tab-pane.active');
-
-if (!el) {
-el = KTUtil.find(example, '.example-code');
-}
-
-return el;
-}
-});
-
-clipboard.on('success', function(e) {
-KTUtil.addClass(e.trigger, 'example-copied');
-e.clearSelection();
-
-setTimeout(function() {
-KTUtil.removeClass(e.trigger, 'example-copied');
-}, 2000);
-});
-
-<script src="<?= base_url(''); ?>/assets/js/pages/crud/form/widget/clipboard.js"></script>
-var KTClipboardDemo = function () {
-// Private functions
-var demos = function () {
-// basic example
-new ClipboardJS('[data-clipboard=true]').on('success', function(e) {
-e.clearSelection();
-alert('Copied!');
-});
-}
-
-return {
-// public functions
-init: function() {
-demos();
-}
-};
-}();
-
-jQuery(document).ready(function() {
-KTClipboardDemo.init();
-});

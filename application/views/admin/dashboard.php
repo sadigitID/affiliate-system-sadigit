@@ -87,30 +87,32 @@
     <!--end::Header-->
 
     <!--begin::Body-->
-    <div class="card-body">
-      <!--begin::Chart //assets/js/pages/widgets.js-->
-      <div id="kt_charts_widget_2_chart">
 
+    <div class="card-body">
+      <!--begin::Chart-->
+      <div id="kt_charts_widget_2_chart">
       </div>
       <!--end::Chart-->
     </div>
     <!--end::Body-->
 
-    <!--script area-- >
-      <
-      !-- < script >
+    <!--script area-->
+    <script>
+      var HOST_URL = "https://preview.keenthemes.com/metronic/theme/html/tools/preview";
+    </script>
+    <script src="<?= base_url(''); ?>/assets/js/pages/widget.js"></script>
+    <script>
+      $(document).ready(function() {
         var KTWidgets = (function() {
           var _initChartsWidget2 = function() {
             var element = document.getElementById("kt_charts_widget_2_chart");
-
             if (!element) {
               return;
             }
-
             var options = {
-              series: [{
-                name: 'Net Profit',
-                data: [44, 55, 57, 56, 61, 58]
+              "series": [{
+                "name": 'Net Profit',
+                data: [50, 55, 57, 56, 61, 58]
               }],
               chart: {
                 type: 'bar',
@@ -193,7 +195,7 @@
                 },
                 y: {
                   formatter: function(val) {
-                    return "$" + val + " thousands"
+                    return "$" + val
                   }
                 }
               },
@@ -219,8 +221,5 @@
             },
           };
         })();
-
-      $(document).ready(function() {
-        KTWidgets.init();
-      }); <
-      />
+      });
+    </script>

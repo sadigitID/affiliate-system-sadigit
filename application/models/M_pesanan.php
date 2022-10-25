@@ -5,14 +5,14 @@ class M_pesanan extends CI_Model
   // model dashboard admin
   public function jumlah_masuk()
   {
-    $data = $this->db->get_where('tb_pesanan', ['status_pesanan' => "Tertunda"]);
+    $data = $this->db->get_where('tb_pesanan', ['status_pesanan' => "Pesanan Masuk"]);
     return $data->num_rows();
   }
 
   //model dashboard admin
   public function jumlah_keluar()
   {
-    $data = $this->db->get_where('tb_pesanan', ['status_pesanan' => "Selesai"]);
+    $data = $this->db->get_where('tb_pesanan', ['status_pesanan' => "Pesanan Selesai"]);
     return $data->num_rows();
   }
 
