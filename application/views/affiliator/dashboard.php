@@ -114,9 +114,11 @@
             <thead>
                 <tr>
                     <th>No</th>
-                    <th>Keterangan</th>
-                    <th>Jumlah</th>
-                    <th>Tanggal</th>
+                    <th>Nama Produk</th>
+                    <th>Jumlah Komisi</th>
+                    <th>Tanggal Selesai</th>
+                    
+                    <th><?= $this->data['jml_komisi'] = $this->m_sumkomisi->jml_komisi(); ?>Total</th>
                 </tr>
             </thead>
         </table>
@@ -135,7 +137,7 @@
             "serverSide": true,
             "order": [],
             "ajax": {
-                "url": '<?= base_url('affiliator/affiliator/tb_bonus') ?>',
+                "url": '<?= base_url('affiliator/affiliator/tb_pesanan') ?>',
                 "type": "POST"
             },
             "ordering": false
