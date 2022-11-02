@@ -10,61 +10,54 @@ class Affiliator extends CI_Controller
 
 		$this->load->library('form_validation');
 		$this->load->model('Umum_model', 'umum');
-
+		$this->load->model('M_pesanan', 'm_pesanan');
+		$this->load->model('M_bonus', 'm_bonus');
+		$this->load->model('affiliator/M_sumkomisi', 'm_sumkomisi');
 	}
 
-    public function index()
+	public function index()
 	{
 		$data = [
 			'view' => 'affiliator/dashboard',
-			'active' => 'affiliator',
-			'sub1' => 'affiliator',
+			'active' => 'affiliator/affiliator',
+			'sub1' => 'affiliator/affiliator',
 		];
 
+		$this->db->get('tb_bonus')->result();
+		$this->data['jumlah_pesanan'] = $this->m_pesanan->jumlah_pesanan();
+		$this->data['total_bonus'] = $this->m_bonus->total_bonus();
+		$this->data['jml_komisi'] = $this->m_sumkomisi->jml_komisi();
 		$this->load->view('template/index', $data);
 	}
 
-	public function bank()
-	{
-		$data = [
-			'view' => 'bank/list',
-			'active' => 'bank',
-			'sub1' => 'bank',
-		];
-
-		$this->load->view('template/index', $data);
-	}
-
-	public function dat_list()
+	public function tb_pesanan()
 	{
 		header('Content-Type: application/json');
 
- 
-		$tabel = 'dat_bank';
+		$tabel = 'tb_pesanan';
 		$column_order = array();
-		$coloumn_search = array('nama_bank');
-		$select = "*";
-		$order_by = array('id' => 'desc');
-		$join = [];
-		$where = [];
+		$coloumn_search = array('id_produk', 'jml_komisi', 'tanggal_pembayaran');
+		$select = "tb_pesanan.*, tb_produk.nama_produk, tb_produk.jml_komisi";
+		$order_by = array('id_pesanan' => 'asc');
+    	$join[] = ['field' => 'tb_produk', 'condition' => 'tb_pesanan.id_produk = tb_produk.id_produk', 'direction' => 'left'];
+		$where['tb_pesanan.id_user'] = $this->session->userdata('id_user');
 		$group_by = [];
 		$list = $this->umum->get_datatables($tabel, $column_order, $coloumn_search, $order_by, $where, $join, $select, $group_by);
 		$data = array();
 		$no = @$_POST['start'];
 
+		$sum = 0;
+
 		foreach ($list as $list) {
-			// akuntansi_journal_edit
-			$edit =  "<i class='fas fa-edit btn btn-icon btn-light-primary' onclick={_edit('$list->id')}></i>";
-			$hapus =  "<i class='fas fa-trash-alt btn btn-icon btn-light-danger' onclick={_delete('$list->id')}></i>";
+			
+
 			$row = array();
 			$row[] = ++$no;
-			$row[] = $list->nama_bank;
-			$row[] = "<center>
-                       $edit 
-                       $hapus
-                    </center>";
+			$row[] = $list->nama_produk; //mengambil dari tb_produk
+			$row[] = $list->jml_komisi; //mengambil dari tb_produk
+			$row[] = $list->tanggal_pembayaran;
 			$data[] = $row;
-		}
+		  }
 
 		$output = array(
 			"draw" => @$_POST['draw'],
@@ -76,69 +69,19 @@ class Affiliator extends CI_Controller
 		echo json_encode($output);
 	}
 
-	function check_bank()
+	function check_komisi()
 	{
-		$nama_bank = $this->input->post('nama_bank');
-		$id = $this->input->post('id');
+		$id_pesanan = $this->input->post('id_pesanan');
+		$nama_produk = $this->input->post('nama_produk');
+		$jml_komisi = $this->input->post('jml_komisi');
+		$tanggal_pembayaran = $this->input->post('tanggal_pembayaran');
 
-		$check = $this->db->select('nama_bank')->from('dat_bank')->where('id !=', $id)->where('nama_bank', $nama_bank)->get();
+		$check = $this->db->select('id_pesanan', 'nama_produk', 'jml_komisi', 'tanggal_pembayaran')->from('tb_pesanan')->where('id_pesanan !=', $id_pesanan)->where('id_pesanan', $id_pesanan)->get();
 		if ($check->num_rows() > 0) {
 			return false;
 		}
 		return true;
 	}
 
-	public function save()
-	{
-		$config = [
-			[
-				'field' => 'nama_bank',
-				'rules' => 'required|callback_check_bank',
-				'errors' => [
-					'required' => 'nama bank tidak boleh kosong',
-					"check_bank" => 'nama bank sudah ada yang menggunakan'
-				]
-			],
-		];
-
-		$data = array('status' => false, 'messages' => array());
-		$this->form_validation->set_rules($config);
-		$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
-		if ($this->form_validation->run() == TRUE) {
-
-			$id = $this->input->post('id');
-
-			$payloadData = [
-				'nama_bank' => $this->input->post('nama_bank'),
-			];
-
-			if ($id == "") {
-				$this->db->insert('dat_bank', $payloadData);
-			} else {
-				$this->db->update('dat_bank', $payloadData, ['id' => $id]);
-			}
-
-			$data['status'] = true;
-			$this->session->set_flashdata('daftar_item', 'Berhasil menyimpan produk');
-		} else {
-			foreach ($_POST as $key => $value) {
-				$data['messages'][$key] = form_error($key);
-			}
-		}
-		echo json_encode($data);
-	}
-
-	function getBank()
-	{
-		$id = $this->input->post('id', true);
-		$data = $this->db->get_where('dat_bank', ['id' => $id])->row();
-		echo json_encode($data);
-	}
-
-	function delete()
-	{
-		$id = $this->input->post('id', true);
-		$this->db->delete('dat_bank',['id'=>$id]);
-		echo json_encode('');
-	}
+	
 }

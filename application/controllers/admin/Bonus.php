@@ -10,6 +10,7 @@ class Bonus extends CI_Controller
 
 		$this->load->library('form_validation');
 		$this->load->model('Umum_model', 'umum');
+		$this->load->model('M_bonus', 'm_bonus');
 
 	}
 
@@ -33,10 +34,10 @@ class Bonus extends CI_Controller
 
 		$tabel = 'tb_bonus';
 		$column_order = array();
-		$coloumn_search = array('id_user', 'jml_bonus', 'catatan', 'tanggal_bonus');
+		$coloumn_search = array('nama_lengkap', 'jml_bonus', 'catatan', 'tanggal_bonus');
 		$select = "*";
-		$order_by = array('id_bonus' => 'desc');
-		$join = [];
+		$order_by = array('id_bonus' => 'asc');
+		$join[] = ['field' => 'tb_users', 'condition' => 'tb_bonus.id_user = tb_users.id_user', 'direction' => 'left'];
 		$where = [];
 		$group_by = [];
 		$list = $this->umum->get_datatables($tabel, $column_order, $coloumn_search, $order_by, $where, $join, $select, $group_by);
@@ -48,7 +49,7 @@ class Bonus extends CI_Controller
 			$hapus =  "<i class='fas fa-trash-alt btn btn-icon btn-light-danger' onclick={_delete('$list->id_bonus')}></i>";
 			$row = array();
 			$row[] = ++$no;
-			$row[] = $list->id_user;
+			$row[] = $list->nama_lengkap;
 			$row[] = $list->jml_bonus;
 			$row[] = $list->catatan;
 			$row[] = $list->tanggal_bonus;

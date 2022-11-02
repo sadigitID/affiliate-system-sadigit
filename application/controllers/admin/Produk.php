@@ -10,7 +10,6 @@ class Produk extends CI_Controller
 
 		$this->load->library('form_validation');
 		$this->load->model('Umum_model', 'umum');
-
 	}
 
 	public function index()
@@ -28,12 +27,11 @@ class Produk extends CI_Controller
 	{
 		header('Content-Type: application/json');
 
-
 		$tabel = 'tb_produk';
 		$column_order = array();
-		$coloumn_search = array('id_produk', 'nama_produk', 'harga_produk', 'jml_komisi', 'deskripsi_produk');
+		$coloumn_search = array('id_produk', 'nama_produk', 'harga_produk', 'jml_komisi', 'deskripsi_produk', 'link_produk');
 		$select = "*";
-		$order_by = array('id_produk' => 'desc');
+		$order_by = array('id_produk' => 'asc');
 		$join = [];
 		$where = [];
 		$group_by = [];
@@ -48,9 +46,10 @@ class Produk extends CI_Controller
 			$row = array();
 			$row[] = ++$no;
 			$row[] = $list->nama_produk;
-            $row[] = $list->harga_produk;
+			$row[] = $list->harga_produk;
 			$row[] = $list->jml_komisi;
-            $row[] = $list->deskripsi_produk;
+			$row[] = $list->deskripsi_produk;
+			$row[] = $list->link_produk;
 			$row[] = "<center>
                        $edit 
                        $hapus
@@ -74,9 +73,10 @@ class Produk extends CI_Controller
 		$nama_produk = $this->input->post('nama_produk');
 		$harga_produk = $this->input->post('harga_produk');
 		$jml_komisi = $this->input->post('jml_komisi');
-        $deskripsi_produk = $this->input->post('deskripsi_produk');
+		$deskripsi_produk = $this->input->post('deskripsi_produk');
+		$link_produk = $this->input->post('link_produk');
 
-		$check = $this->db->select( 'nama_produk', 'harga_produk', 'jml_komisi', 'deskripsi_produk')->from('tb_produk')->where('id_produk !=', $id_produk)->where('id_produk', $id_produk)->get();
+		$check = $this->db->select('nama_produk', 'harga_produk', 'jml_komisi', 'deskripsi_produk', 'link_produk')->from('tb_produk')->where('id_produk !=', $id_produk)->where('id_produk', $id_produk)->get();
 		if ($check->num_rows() > 0) {
 			return false;
 		}
@@ -107,11 +107,18 @@ class Produk extends CI_Controller
 					'required' => 'jumlah komisi tidak boleh kosong'
 				]
 			],
-            [
+			[
 				'field' => 'deskripsi_produk',
 				'rules' => 'required',
 				'errors' => [
 					'required' => 'deskripsi produk tidak boleh kosong'
+				]
+			],
+			[
+				'field' => 'link_produk',
+				'rules' => 'required',
+				'errors' => [
+					'required' => 'link produk tidak boleh kosong'
 				]
 			],
 		];
@@ -127,7 +134,8 @@ class Produk extends CI_Controller
 				'nama_produk' => $this->input->post('nama_produk'),
 				'harga_produk' => $this->input->post('harga_produk'),
 				'jml_komisi' => $this->input->post('jml_komisi'),
-                'deskripsi_produk' => $this->input->post('deskripsi_produk'),
+				'deskripsi_produk' => $this->input->post('deskripsi_produk'),
+				'link_produk' => $this->input->post('link_produk'),
 			];
 
 			if ($id_produk == "") {
@@ -155,7 +163,7 @@ class Produk extends CI_Controller
 	function delete()
 	{
 		$id_produk = $this->input->post('id_produk', true);
-		$this->db->delete('tb_produk',['id_produk'=>$id_produk]);
+		$this->db->delete('tb_produk', ['id_produk' => $id_produk]);
 		echo json_encode('');
 	}
 }

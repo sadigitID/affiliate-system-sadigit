@@ -47,33 +47,10 @@
         <!--begin::Login-->
         <div class="login login-3 wizard d-flex flex-column flex-lg-row flex-column-fluid wizard" id="kt_login">
             <!--begin::Aside-->
-            <div class="login-aside d-flex flex-column flex-row-auto">
-                <!--begin::Aside Top-->
-                <div class="d-flex flex-column-auto flex-column pt-15 px-30">
-                    <!--begin::Aside header-->
-                    <a href="#" class="login-logo py-6">
-                        <img src="<?= base_url(''); ?>/assets/media/logos/logo-1.png" class="max-h-70px" alt="" />
-                    </a>
-                    <!--end::Aside header-->
-
-                    <!--begin: Wizard Nav-->
-                    <div class="wizard-nav pt-5 pt-lg-30">
-                        <!--begin::Wizard Steps-->
-                        <div class="wizard-steps">
-                        </div>
-                        <!--end::Wizard Steps-->
-                    </div>
-                    <!--end: Wizard Nav-->
-                </div>
-                <!--end::Aside Top-->
-
-                <!--begin::Aside Bottom-->
-                <div class="aside-img-wizard d-flex flex-row-fluid bgi-no-repeat bgi-position-y-bottom bgi-position-x-center pt-2 pt-lg-5" style="background-position-y: calc(100% + 3rem); background-image: url(<?= base_url(''); ?>/assets/media/svg/illustrations/features.svg)">
-                </div>
-                <!--end::Aside Bottom-->
+           <div class="login-aside d-flex align-content-around flex-wrap flex-column ">
+                
             </div>
             <!--begin::Aside-->
-
             <!--begin::Content-->
             <div class="login-content flex-column-fluid d-flex flex-column p-10">
                 <!--begin::Wrapper-->
@@ -99,24 +76,24 @@
 
                                 <!--begin::Form Group-->
                                 <div class="form-group">
-                                    <label class="font-size-h6 font-weight-bolder text-dark">Nama</label>
-                                    <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="nama_lengkap" id="nama_lengkap" placeholder="Nama Lengkap" value="<?= set_value('nama_lengkap') ?>" required />
+                                    <label class="font-size-h6 font-weight-bolder text-dark" for="nama_lengkap">Name</label>
+                                    <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="nama_lengkap" id="nama_lengkap" placeholder="Full Name" value="<?= set_value('nama_lengkap') ?>" required />
                                     <?= form_error('nama_lengkap', '<small class="text-danger pl-3">', '</small>'); ?>
                                 </div>
                                 <!--end::Form Group-->
 
                                 <!--begin::Form Group-->
                                 <div class="form-group">
-                                    <label class="font-size-h6 font-weight-bolder text-dark">Password</label>
-                                    <input type="password" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="password" placeholder="Password" required />
+                                    <label class="font-size-h6 font-weight-bolder text-dark" for="password">Password</label>
+                                    <input type="password" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="password" id="password" placeholder="Password" required />
                                     <?= form_error('password', '<small class="text-danger pl-3">', '</small>'); ?>
                                 </div>
                                 <!--end::Form Group-->
                                 <!--begin::Form Group-->
                                 <div class="form-group">
-                                    <label class="font-size-h6 font-weight-bolder text-dark">Provinsi</label>
+                                    <label class="font-size-h6 font-weight-bolder text-dark" for="province_id">Province</label>
                                     <select name="province_id" id="province_id" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6">
-                                    <option >-- Pilih Provinsi --</option>
+                                        <option >-- Select a Province --</option>
                                         <?php
                                         foreach($provinces as $province){ ?>
                                             <option value="<?=$province->province_id?>"><?=$province->province_name?></option>
@@ -128,17 +105,19 @@
                                 <!--end::Form Group-->
                                 <!--begin::Form Group-->
                                 <div class="form-group">
-                                    <label class="font-size-h6 font-weight-bolder text-dark">Kabupaten</label>
-                                    <select name="city_id" id="city_id" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" >
-                                        <option>-- Pilih Kabupaten --</option>  
-                                    </select>
+                                    <label class="font-size-h6 font-weight-bolder text-dark" for="city_id">County/City</label>
+                                    <div id="cityBox">
+                                        <select name="city_id" id="city_id" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" >
+                                            <option>-- Pilih Kabupaten --</option>  
+                                        </select>
+                                    </div>
                                     <!-- <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="city_id" id="city_id" placeholder="Kabupaten/Kota" value="<?= set_value('city_id') ?>" required />
                                     <?= form_error('kabupaten', '<small class="text-danger pl-3">', '</small>'); ?> -->
                                 </div>
                                 <!--end::Form Group-->
                                 <!--begin::Form Group-->
                                 <div class="form-group">
-                                    <label class="font-size-h6 font-weight-bolder text-dark">Kecamatan</label>
+                                    <label class="font-size-h6 font-weight-bolder text-dark" for="district_id">District</label>
                                     <select name="district_id" id="district_id" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6">
                                         <option value="">-- Pilih Kecamatan --</option>
                                     </select>
@@ -149,52 +128,52 @@
 
                                 <!--begin::Form Group-->
                                 <div class="form-group">
-                                    <label class="font-size-h6 font-weight-bolder text-dark">Alamat Lengkap</label>
-                                    <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="alamat_lengkap" placeholder="ALamat Lengkap" value="<?= set_value('alamat_lengkap') ?>" required />
+                                    <label class="font-size-h6 font-weight-bolder text-dark" for="alamat_lengkap">Complete Address</label>
+                                    <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="alamat_lengkap" id="alamat_lengkap" placeholder="Complete Address" value="<?= set_value('alamat_lengkap') ?>" required />
                                     <?= form_error('alamat_lengkap', '<small class="text-danger pl-3">', '</small>'); ?>
                                 </div>
                                 <!--end::Form Group-->
                                 <!--begin::Form Group-->
                                 <div class="form-group">
-                                    <label class="font-size-h6 font-weight-bolder text-dark">Email</label>
-                                    <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="email" placeholder="Email" value="<?= set_value('email') ?>" />
+                                    <label class="font-size-h6 font-weight-bolder text-dark" for="email">Email Address</label>
+                                    <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="email" id="email" placeholder="Email" value="<?= set_value('email') ?>" />
                                     <?= form_error('email', '<small class="text-danger pl-3">', '</small>'); ?>
                                 </div>
                                 <!--end::Form Group-->
 
                                 <!--begin::Form Group-->
                                 <div class="form-group">
-                                    <label class="font-size-h6 font-weight-bolder text-dark">No Telephon</label>
-                                    <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="no_hp" placeholder="No telephon" value="<?= set_value('no_hp') ?>" required />
+                                    <label class="font-size-h6 font-weight-bolder text-dark" for="no_hp">Phone Number</label>
+                                    <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="no_hp" id="no_hp" placeholder="Phone Number" value="<?= set_value('no_hp') ?>" required />
                                     <?= form_error('no_hp', '<small class="text-danger pl-3">', '</small>'); ?>
                                 </div>
                                 <!--end::Form Group-->
 
                                 <!--begin::Form Group-->
                                 <div class="form-group">
-                                    <label class="font-size-h6 font-weight-bolder text-dark">Link Akun Tiktok</label>
-                                    <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="link_tiktok" placeholder="Link Akun Tiktok" value="<?= set_value('link_tiktok') ?>" required />
+                                    <label class="font-size-h6 font-weight-bolder text-dark">Tiktok Account Link</label>
+                                    <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="link_tiktok" id="link_tiktok" placeholder="Tiktok Account Link" value="<?= set_value('link_tiktok') ?>" required />
                                     <?= form_error('link_tiktok', '<small class="text-danger pl-3">', '</small>'); ?>
                                 </div>
                                 <!--end::Form Group-->
                                 <!--begin::Form Group-->
                                 <div class="form-group">
-                                    <label class="font-size-h6 font-weight-bolder text-dark">Link Akun Facebook</label>
-                                    <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="link_fb" placeholder="Link Akun Facebook" value="<?= set_value('link_fb') ?>" required />
+                                    <label class="font-size-h6 font-weight-bolder text-dark">Facebook Account Link</label>
+                                    <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="link_fb" id="link_fb" placeholder="Facebook Account Link" value="<?= set_value('link_fb') ?>" required />
                                     <?= form_error('link_fb', '<small class="text-danger pl-3">', '</small>'); ?>
                                 </div>
                                 <!--end::Form Group-->
                                 <!--begin::Form Group-->
                                 <div class="form-group">
-                                    <label class="font-size-h6 font-weight-bolder text-dark">Link Akun Instagram</label>
-                                    <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="link_ig" placeholder="Link Akun Instagram" value="<?= set_value('link_ig') ?>" required />
+                                    <label class="font-size-h6 font-weight-bolder text-dark">Instagram Account Link</label>
+                                    <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="link_ig" id="link_ig" placeholder="Instagram Account Link" value="<?= set_value('link_ig') ?>" required />
                                     <?= form_error('link_ig', '<small class="text-danger pl-3">', '</small>'); ?>
                                 </div>
                                 <!--end::Form Group-->
                                 <!--begin::Form Group-->
                                 <div class="form-group">
-                                    <label class="font-size-h6 font-weight-bolder text-dark">Link Akun Youtube</label>
-                                    <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="link_yutub" placeholder="Link Akun Youtube" value="<?= set_value('link_yutub') ?>" required />
+                                    <label class="font-size-h6 font-weight-bolder text-dark">Youtube Account Link</label>
+                                    <input type="text" class="form-control h-auto py-7 px-6 border-0 rounded-lg font-size-h6" name="link_yutub" id="link_yutub" placeholder="Youtube Account Link" value="<?= set_value('link_yutub') ?>" required />
                                     <?= form_error('link_yutub', '<small class="text-danger pl-3">', '</small>'); ?>
                                 </div>
                                 <!--end::Form Group-->

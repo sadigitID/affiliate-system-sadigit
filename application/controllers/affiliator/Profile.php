@@ -8,20 +8,24 @@ class Profile extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->library('form_validation');
-        $this->load->model('M_user', 'm_user');
+        $this->load->model('affiliator/m_profile', 'm_profile');
 	}
 
-    public function index() {
+    public function index() 
+    {
         $data = [
             'view' => 'affiliator/profile',
             'active' => 'profile',
-            'sub1' => 'edit-profile',
+            'sub1' => 'profile',
         ];
 
-        $data['tb_users'] = $this->db->get_where('tb_users', ['email' => $this->session->userdata('email')])->row_array();
+        $data['user'] = $this->m_profile->getUser($this->session->userdata('id_user'));
+        $data['provinces'] = $this->m_profile->get_province();
+        $data['cities'] = $this->m_profile->get_city($data['user']['province_id']);
+        $data['districts'] = $this->m_profile->get_district($data['user']['city_id']);
+
         $this->load->view('template/index', $data);
     }
 
-   
-
+    
 }

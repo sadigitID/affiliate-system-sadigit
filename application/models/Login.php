@@ -12,7 +12,7 @@ class Login extends CI_Model
     {
         $user = $this->db->get_where('tb_users', ['email' => $email])->row_array();
 
-        //jika usernya ada
+        //jika usernya ada 
         if ($user) {
             //jika user active
             if ($user['is_active'] == 1) {
@@ -20,7 +20,9 @@ class Login extends CI_Model
                 if (password_verify($password, $user['password'])) {
                     $data = [
                         'email' => $user['email'],
-                        'role' => $user['role']
+                        'role' => $user['role'],
+                        'nama_lengkap' => $user['nama_lengkap'],
+                        'id_user' => $user['id_user'],
                     ];
                     $this->session->set_userdata($data);
                     if ($user['role'] == 'Admin') {
@@ -86,6 +88,16 @@ class Login extends CI_Model
 
     private function _sendEmail($token, $type)
     {
+        // $config = [
+        //     'protocol'  => 'smtp',
+        //     'smtp_host' => 'ssl://smtp.googlemail.com',
+        //     'smtp_user' => 'gabudbanget@gmail.com',
+        //     'smtp_pass' => '1234567890',
+        //     'smtp_port' => 465,
+        //     'mailtype'  => 'html',
+        //     'charset'   => 'utf-8',
+        //     'newline'   => "\r\n"
+        // ];
 
         $config = Array(
             'protocol' => 'smtp',
@@ -133,20 +145,20 @@ class Login extends CI_Model
                     $this->db->update('tb_users');
 
                     $this->db->delete('tb_user_token', ['email' => $email]);
-                    $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">' . $email . ' Telah diaktivasi. Silahkan login</div>');
+                    $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">' . $email . ' has been activated! Please login.</div>');
                     redirect('auth');
                 } else {
                     $this->db->delete('tb_users', ['email' => $email]);
                     $this->db->delete('tb_user_token', ['email' => $email]);
-                    $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Token kadaluarsa</div>');
+                    $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Account activation failed! Token expired.</div>');
                     redirect('auth');
                 }
             } else {
-                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Token salah</div>');
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Account activation failed! Wrong token.</div>');
                 redirect('auth');
             }
         } else {
-            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Email salah</div>');
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Account activation failed! Wrong email.</div>');
             redirect('auth');
         }
     }
@@ -166,54 +178,54 @@ class Login extends CI_Model
             ];
             $this->db->insert('tb_user_token', $user_token);
             $this->_sendEmail($token, 'forgot');
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Silahkan cek email anda</div>');
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Please check your email to reset your password!</div>');
             redirect('auth/forgot_password');
         } else {
-            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Email belum terdaftar atau belum diaktivasi</div>');
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Email is not registered or activated!</div>');
             redirect('auth/forgot_password');
         }
     }
 
-    public function resetpassword($email, $token)
-    {
-        $user = $this->db->get_where('tb_users', ['email' => $email])->row_array();
+    // public function resetpassword($email, $token)
+    // {
+    //     $user = $this->db->get_where('tb_users', ['email' => $email])->row_array();
 
-        if ($user) {
-            $user_token = $this->db->get_where('tb_user_token', ['token' => $token])->row_array();
+    //     if ($user) {
+    //         $user_token = $this->db->get_where('tb_user_token', ['token' => $token])->row_array();
 
-            if ($user_token) {
-                $this->session->set_userdata('reset_email', $email);
-                $this->change_password();
-            } else {
-                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Token salah</div>');
-                redirect('auth');
-            }
-        } else {
-            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Email salah</div>');
-            redirect('auth');
-        }
-    }
+    //         if ($user_token) {
+    //             $this->session->set_userdata('reset_email', $email);
+    //             $this->change_password();
+    //         } else {
+    //             $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Token salah</div>');
+    //             redirect('auth');
+    //         }
+    //     } else {
+    //         $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Email salah</div>');
+    //         redirect('auth');
+    //     }
+    // }
 
-    public function change_password()
-    {
-        if (!$this->session->userdata('reset_email')) {
-            redirect('auth');
-        }
+    // public function change_password()
+    // {
+    //     if (!$this->session->userdata('reset_email')) {
+    //         redirect('auth');
+    //     }
 
-        $this->form_validation->set_rules('password1', 'Password', 'trim|required|min_length[6]|matches[password2]');
-        $this->form_validation->set_rules('password2', 'Password', 'trim|required|min_length[6]|matches[password1]');
-        if ($this->form_validation->run() == false) {
-            $this->load->view('auth/change-password');
-        } else {
-            $password = password_hash($this->input->post('password1'), PASSWORD_DEFAULT);
-            $email = $this->session->userdata('reset_email');
-            $this->db->set('password', $password);
-            $this->db->where('email', $email);
-            $this->db->update('tb_users');
-            $this->session->unset_userdata('reset_email');
-            $this->db->delete('tb_user_token', ['email' => $email]);
-            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Password berhasil diubah</div>');
-            redirect('auth');
-        }
-    }
+    //     $this->form_validation->set_rules('password1', 'Password', 'trim|required|min_length[6]|matches[password2]');
+    //     $this->form_validation->set_rules('password2', 'Password', 'trim|required|min_length[6]|matches[password1]');
+    //     if ($this->form_validation->run() == false) {
+    //         $this->load->view('auth/change-forgot-password');
+    //     } else {
+    //         $password = password_hash($this->input->post('password1'), PASSWORD_DEFAULT);
+    //         $email = $this->session->userdata('reset_email');
+    //         $this->db->set('password', $password);
+    //         $this->db->where('email', $email);
+    //         $this->db->update('tb_users');
+    //         $this->session->unset_userdata('reset_email');
+    //         $this->db->delete('tb_user_token', ['email' => $email]);
+    //         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Password berhasil diubah</div>');
+    //         redirect('auth');
+    //     }
+    // }
 }

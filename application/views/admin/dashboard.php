@@ -70,46 +70,153 @@
 
 </div>
 <!--End::Row-->
+<!--end::Body-->
 
-<div class="col-m-12">
-  <!--begin::Charts Widget 2-->
-  <div class="card card-custom card-stretch gutter-b">
-    <!--begin::Header-->
-    <div class="card-header h-auto border-0">
-      <!--begin::Title-->
-      <div class="card-title py-5">
-        <h3 class="card-label">
-          <span class="d-block text-dark font-weight-bolder">Grafik Total Pendapatan</span>
-        </h3>
-      </div>
-      <!--end::Title-->
-    </div>
-    <!--end::Header-->
+<!--script area-->
+<!DOCTYPE html>
+<html lang="en">
 
-    <!--begin::Body-->
-    <div class="card-body">
-      <!--begin::Chart-->
-      <div id="kt_charts_widget_2_chart">
+<head>
+  <meta charset="UTF-8" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+</head>
 
-      </div>
-      <!--end::Chart-->
-    </div>
-    <!--end::Body-->
+<body>
+  <!--Load chart js-->
+  <h3>Grafik Total Pendapatan</h3>
+  <div class="chart-container">
+    <canvas id="barCanvas" aria-label="chart" role="img" width="1879" height="938" style="display: block; box-sizing: border-box; height: 750.4px; width: 1503.2px;"></canvas>
+  </div>
+  <script type="text/javascript">
+    const ctx = document.getElementById('barCanvas');
+    /* ---------- Data ---------- */
+    //let l1 = [];
+    //for (let i = 0; i < script 10; i++) {
+    //l1.push(Math.floor(Math.random() * 100) + 1);
+    //}
+    const data = async () => {
+      $.ajax({
+        type: "post",
+        url: "<?= base_url('admin/administrator/get_pendapatan') ?>",
+        data: {
+          id_pesanan
+        },
+        dataType: "json",
+      });
+    }
 
-    <!-- script area -->
-    <script>
-      let table
-      $(document).ready(async () => {
-        table = $('#table').DataTable({
-          "responsive": true,
-          "processing": true,
-          "serverSide": true,
-          "order": [],
-          "ajax": {
-            "url": '<?= base_url('administrator/produk/tb_produk') ?>',
-            "type": "POST"
-          },
-          "ordering": false
-        });
-      })
-    </script>
+    const month = async () => {
+      $.ajax({
+        type: "post",
+        url: "<?= base_url('admin/administrator/get_month') ?>",
+        data: {
+          id_pesanan
+        },
+        dataType: "json",
+      });
+    }
+    //const date = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
+    /* ---------- Grfaik ---------- */
+    const barChart = {
+      type: 'bar',
+      yAxisID: 'y',
+      label: 'Pendapatan',
+      data: data,
+      backgroundColor: [
+        'rgba(255, 26, 104, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)',
+        'rgba(75, 192, 192, 0.2)',
+        'rgba(153, 102, 255, 0.2)',
+        'rgba(255, 159, 64, 0.2)',
+        'rgba(0, 0, 0, 0.2)'
+      ],
+      borderColor: [
+        'rgba(255, 26, 104, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)',
+        'rgba(75, 192, 192, 1)',
+        'rgba(153, 102, 255, 1)',
+        'rgba(255, 159, 64, 1)',
+        'rgba(0, 0, 0, 1)'
+      ],
+      borderWidth: 1,
+      order: 2
+    };
+
+    /* ---------- Skala ---------- */
+    const scalesChart = {
+      y: {
+        //anchor: 'end',
+        //align: 'top',
+        type: 'linear',
+        position: 'left',
+        beginAtZero: true
+      },
+    };
+
+    const mixedChart = new Chart(ctx, {
+      data: {
+        datasets: [barChart],
+        labels: month
+      },
+      options: {
+        scales: scalesChart,
+        plugins: {
+          datalabels: {
+            //y: {
+            anchor: 'end',
+            align: 'top',
+            //}
+          }
+
+        }
+      },
+      plugins: [ChartDataLabels]
+    });
+  </script>
+</body>
+
+</html>
+
+
+<!--<canvas id="myChart" width="800" height="500"></canvas>
+<script>
+  const ctx = document.getElementById('myChart').getContext('2d');
+  const myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: <?= $this->data['month'] = $this->m_pesanan->get_month(); ?>,
+      datasets: [{
+        label: 'Grafik Total Pendapatan',
+        data: <?= $this->data['pendapatan'] = $this->m_pesanan->get_pendapatan(); ?>,
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.2)',
+          'rgba(54, 162, 235, 0.2)',
+          'rgba(255, 206, 86, 0.2)',
+          'rgba(75, 192, 192, 0.2)',
+          'rgba(153, 102, 255, 0.2)',
+          'rgba(255, 159, 64, 0.2)'
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(255, 206, 86, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)',
+          'rgba(255, 159, 64, 1)'
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</>-->

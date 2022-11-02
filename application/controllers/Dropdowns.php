@@ -7,7 +7,7 @@ class Dropdowns extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Dropdown');
-    }
+    } 
 
     public function index()
     {
@@ -21,6 +21,7 @@ class Dropdowns extends CI_Controller
         if ($this->input->post('province_id')) {
             echo $this->Dropdown->get_city($this->input->post('province_id'));
         }
+
     }
 
     public function get_district()
@@ -28,6 +29,7 @@ class Dropdowns extends CI_Controller
         if ($this->input->post('city_id')) {
             echo $this->Dropdown->get_district($this->input->post('city_id'));
         }
-    }
 
+    }
+ 
 }
