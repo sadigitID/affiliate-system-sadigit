@@ -5,14 +5,14 @@ class M_pesanan extends CI_Model
   // model dashboard admin
   public function jumlah_masuk()
   {
-    $data = $this->db->get_where('tb_pesanan', ['status_pesanan' => "Pesanan Masuk"]);
+    $data = $this->db->get_where('tb_pesanan', ['status_pesanan' => 1]);
     return $data->num_rows();
   }
 
   //model dashboard admin
   public function jumlah_keluar()
   {
-    $data = $this->db->get_where('tb_pesanan', ['status_pesanan' => "Pesanan Selesai"]);
+    $data = $this->db->get_where('tb_pesanan', ['status_pesanan' => 2]);
     return $data->num_rows();
   }
 
@@ -44,17 +44,28 @@ class M_pesanan extends CI_Model
       ->get()->result(); // Tampilkan data export sesuai tanggal yang diinput oleh user pada filter
   }
 
-  //model dashboard admin grafik
-  public function get_produk()
+  //function grafik_laporan()
+  //{
+  //$tanggal_pembayaran = $this->input->post('tanggal_pembayaran');
+  //$data = $this->db->select('SUM(harga_jual) AS total')->from('tb_pesanan')->where('MONTH(tanggal_pembayaran)=10 AND YEAR(tanggal_pembayaran)=2022', $tanggal_pembayaran)->group_by('YEAR(tanggal_pembayaran)')->get();
+  //return $data->result();
+  //}
+
+  function get_pendapatan()
   {
-    $data = $this->db->from('tb_pesanan')->join('tb_produk', 'tb_produk.id_produk = tb_pesanan.id_produk', 'left')->get();
-    return $data->result();
+    $query = $this->db->select('SUM(harga_jual) AS pendapatan')->from('tb_pesanan')->group_by('MONTH(tanggal_pembayaran)')->get();
+
+    if ($query->num_rows() > 0) {
+      foreach ($query->result_array() as $data) {
+        $row[] = $data;
+      }
+      return $row;
+    }
   }
 
-  //model dashboard admin grafik
-  public function data_grafik()
+  function get_month()
   {
-    $data = $this->db->select('harga_jual, count(*) as data')->from('tb_pesanan')->group_by('id_produk')->get();
-    return $data->result();
+    $data = $this->db->select('MONTH(tanggal_pembayaran)')->from('tb_pesanan')->get();
+    return $data->result_array();
   }
 }
