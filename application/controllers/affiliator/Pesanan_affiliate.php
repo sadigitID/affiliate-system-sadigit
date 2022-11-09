@@ -34,7 +34,7 @@ class Pesanan_affiliate extends CI_Controller
     $column_order = array();
     $coloumn_search = array('id_produk', 'status_pesanan', 'tanggal_pesanan', 'status_komisi');
     $select = "tb_pesanan.*, tb_users.id_user, tb_produk.nama_produk, tb_produk.jml_komisi";
-    $order_by = array('id_pesanan' => 'desc');
+    $order_by = array('id_pesanan' => 'asc');
     $join[] = ['field' => 'tb_users', 'condition' => 'tb_pesanan.id_user = tb_users.id_user', 'direction' => 'left'];
     $join[] = ['field' => 'tb_produk', 'condition' => 'tb_pesanan.id_produk = tb_produk.id_produk', 'direction' => 'left'];
     $where['tb_pesanan.id_user'] = $this->session->userdata('id_user');
@@ -44,13 +44,25 @@ class Pesanan_affiliate extends CI_Controller
     $no = @$_POST['start'];
 
     foreach ($list as $list) {
+      if ($list->status_komisi == 1) {
+				$status_komisi = '<p> Pesanan Masuk </p>';
+			} else {
+				$status_komisi = '<p> Pesanan Selesai </p>';
+			}
+
+			if ($list->status_pesanan == 1) {
+				$status_pesanan = '<p> Pesanan Masuk </p>';
+			} else {
+				$status_pesanan = '<p> Pesanan Selesai </p>';
+			}
+
       $row = array();
       $row[] = $list->id_pesanan;
       $row[] = $list->nama_produk; //mengambil dari tb_produk
-      $row[] = $list->status_pesanan;
+      $row[] = $status_pesanan;
       $row[] = $list->jml_komisi; //mengambil dari tb_produk
       $row[] = $list->tanggal_pesanan;
-      $row[] = $list->status_komisi;
+      $row[] = $status_komisi;
       $data[] = $row;
     }
 

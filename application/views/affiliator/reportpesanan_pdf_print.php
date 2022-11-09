@@ -39,13 +39,26 @@
         } else { // Jika jumlah data lebih dari 0 (Berarti jika data ada)
             foreach ($export as $data) { // Looping hasil data transaksi
                 $tanggal_pesanan = date('d-m-Y', strtotime($data->tanggal_pesanan)); // Ubah format tanggal jadi dd-mm-yyyy
+                
+                if ($data->status_komisi == 1) {
+                    $status_komisi = '<p> Pesanan Masuk </p>';
+                } else {
+                    $status_komisi = '<p> Pesanan Selesai </p>';
+                }
+    
+                if ($data->status_pesanan == 1) {
+                    $status_pesanan = '<p> Pesanan Masuk </p>';
+                } else {
+                    $status_pesanan = '<p> Pesanan Selesai </p>';
+                }
+                
                 echo "<tr>";
                 echo "<td>" . $data->id_pesanan . "</td>";
                 echo "<td>" . $data->nama_produk . "</td>";
-                echo "<td>" . $data->status_pesanan . "</td>";
+                echo "<td>" . $status_pesanan . "</td>";
                 echo "<td>" . $data->jml_komisi . "</td>";
                 echo "<td>" . $tanggal_pesanan . "</td>";
-                echo "<td>" . $data->status_komisi . "</td>";
+                echo "<td>" . $status_komisi . "</td>";
                 echo "</tr>";
             }
         }
