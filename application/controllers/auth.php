@@ -16,10 +16,10 @@ class Auth extends CI_Controller
 
     public function index()
     {
-        // if ($this->session->userdata('email')) {
-        //     $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">You are already logged in!</div>');
-        //     redirect(base_url());
-        // }
+        if ($this->session->userdata('email')) {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">You are already logged in!</div>');
+            redirect(base_url());
+        }
 
         $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
         $this->form_validation->set_rules('password', 'Password', 'trim|required');
