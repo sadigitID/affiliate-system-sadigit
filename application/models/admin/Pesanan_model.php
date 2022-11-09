@@ -113,4 +113,49 @@ class Pesanan_model extends CI_Model
         $val = join('', $exp);
         return (float) $val;
     }
+
+    public function view_all_pdf()
+    {
+        //return $this->db->get('tb_bonus')->result(); // Tampilkan semua data export
+        return $this->db->from('tb_pesanan')
+        ->join('tb_produk', 'tb_produk.id_produk = tb_pesanan.id_produk')
+        ->join('tb_users', 'tb_users.id_user = tb_pesanan.id_user')
+        ->get()
+        ->result();
+    }
+
+    public function view_by_date_pdf($tgl_awal, $tgl_akhir)
+    {
+
+        $tgl_awal = $this->db->escape($tgl_awal);
+        $tgl_akhir = $this->db->escape($tgl_akhir);
+        $this->db->where('DATE(tanggal_pembayaran) BETWEEN ' . $tgl_awal . ' AND ' . $tgl_akhir); // Tambahkan where tanggal nya
+        return $this->db->from('tb_pesanan')
+        ->join('tb_produk', 'tb_produk.id_produk = tb_pesanan.id_produk')
+        ->join('tb_users', 'tb_users.id_user = tb_pesanan.id_user')
+        ->get()
+        ->result(); // Tampilkan data export sesuai tanggal yang diinput oleh user pada filter
+    }
+
+    public function view_all_excel()
+    {
+        //return $this->db->get('tb_pesanan')->result(); // Tampilkan semua data export
+        return $this->db->from('tb_pesanan')
+        ->join('tb_produk', 'tb_produk.id_produk = tb_pesanan.id_produk')
+        ->join('tb_users', 'tb_users.id_user = tb_pesanan.id_user')
+        ->get()
+        ->result();
+    }
+
+    public function view_by_date_excel($tgl_awal, $tgl_akhir)
+    {
+        $tgl_awal = $this->db->escape($tgl_awal);
+        $tgl_akhir = $this->db->escape($tgl_akhir);
+        $this->db->where('DATE(tanggal_pembayaran) BETWEEN ' . $tgl_awal . ' AND ' . $tgl_akhir); // Tambahkan where tanggal nya
+        return $this->db->from('tb_pesanan')
+        ->join('tb_produk', 'tb_produk.id_produk = tb_pesanan.id_produk')
+        ->join('tb_users', 'tb_users.id_user = tb_pesanan.id_user')
+        ->get()
+        ->result(); // Tampilkan data export sesuai tanggal yang diinput oleh user pada filter
+    }
 }

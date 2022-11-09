@@ -7,10 +7,12 @@ class Bonus extends CI_Controller
 	function __construct()
 	{
 		parent::__construct();
-
+		if ($this->session->userdata('role') != "Admin") {
+			$alert = $this->session->set_flashdata('massage', 'Anda Harus Login Sebagai Admin!');
+			redirect(base_url("auth"));
+		}
 		$this->load->library('form_validation');
 		$this->load->model('Umum_model', 'umum');
-		$this->load->model('M_bonus', 'm_bonus');
 
 	}
 

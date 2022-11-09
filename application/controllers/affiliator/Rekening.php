@@ -11,7 +11,6 @@ class Rekening extends CI_Controller
 		$this->load->library('form_validation');
 		$this->load->model('Umum_model', 'umum');
 		$this->load->model('affiliator/M_rekening', 'm_rekening');
-		$this->load->model('M_bonus', 'm_bonus');
 	}
 
 	public function index()

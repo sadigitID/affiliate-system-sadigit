@@ -25,7 +25,7 @@
                 ?>
             </form>
             <hr />
-            <h4 style="margin-bottom: 5px;"><b>Data PEsanan</b></h4>
+            <h4 style="margin-bottom: 5px;"><b>Data Pesanan</b></h4>
             <?php echo $label ?><br />
             <div style="margin-top: 5px;">
                 <a href="<?php echo $url_export ?>">CETAK EXCEL</a>
@@ -54,17 +54,29 @@
                             foreach ($export as $data) { // Looping hasil data export
                                 $tanggal_pembayaran = date('d-m-Y', strtotime($data->tanggal_pembayaran)); // Ubah format tanggal jadi dd-mm-yyyy
 
+                                if ($data->status_komisi == 1) {
+                                    $status_komisi = '<p> Pesanan Masuk </p>';
+                                } else {
+                                    $status_komisi = '<p> Pesanan Selesai </p>';
+                                }
+                    
+                                if ($data->status_pesanan == 1) {
+                                    $status_pesanan = '<p> Pesanan Masuk </p>';
+                                } else {
+                                    $status_pesanan = '<p> Pesanan Selesai </p>';
+                                }
+
                                 echo "<tr>";
                                 echo "<td>" . $data->id_pesanan . "</td>";
                                 echo "<td>" . $data->nama_pembeli . "</td>";
                                 echo "<td>" . $data->nama_produk . "</td>";
                                 echo "<td>" . $data->harga_jual . "</td>";
-                                echo "<td>" . $data->status_pesanan . "</td>";
+                                echo "<td>" . $status_pesanan . "</td>";
                                 echo "<td>" . $tanggal_pembayaran . "</td>";
                                 echo "<td>" . $data->foto_pembayaran . "</td>";
-                                echo "<td>" . $data->id_user . "</td>";
-                                echo "<td>" . $data->status_komisi . "</td>";
-                                echo "<td>" . $data->status_komisi . "</td>";
+                                echo "<td>" . $data->nama_lengkap . "</td>";
+                                echo "<td>" . $data->jml_komisi . "</td>";
+                                echo "<td>" . $status_komisi . "</td>";
                                 echo "</tr>";
                             }
                         }

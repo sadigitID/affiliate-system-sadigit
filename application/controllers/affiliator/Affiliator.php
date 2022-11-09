@@ -7,11 +7,14 @@ class Affiliator extends CI_Controller
 	function __construct()
 	{
 		parent::__construct();
-
+		if ($this->session->userdata('role') != "Affiliator") {
+			$alert = $this->session->set_flashdata('massage', 'Anda Harus Login Sebagai Affiliator!');
+			redirect(base_url("auth"));
+		}
 		$this->load->library('form_validation');
 		$this->load->model('Umum_model', 'umum');
 		$this->load->model('M_pesanan', 'm_pesanan');
-		$this->load->model('M_bonus', 'm_bonus');
+		$this->load->model('admin/Bonus_model', 'bonus_model');
 		$this->load->model('affiliator/M_sumkomisi', 'm_sumkomisi');
 	}
 
@@ -25,8 +28,9 @@ class Affiliator extends CI_Controller
 
 		$this->db->get('tb_bonus')->result();
 		$this->data['jumlah_pesanan'] = $this->m_pesanan->jumlah_pesanan();
-		$this->data['total_bonus'] = $this->m_bonus->total_bonus();
 		$this->data['jml_komisi'] = $this->m_sumkomisi->jml_komisi();
+		$this->data['total_bonus'] = $this->bonus_model->total_bonus();
+
 		$this->load->view('template/index', $data);
 	}
 

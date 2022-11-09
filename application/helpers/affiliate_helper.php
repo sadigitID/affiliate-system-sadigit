@@ -16,7 +16,12 @@ function is_logged_in()
     }
 }
 
-function validation()
+function check_admin()
 {
+    $ci = get_instance();
+    $ci->load->library('session'); 
+    if ($ci->session->userdata('role') != 'Admin') {
+        redirect('affiliator');
+    }
    
 }

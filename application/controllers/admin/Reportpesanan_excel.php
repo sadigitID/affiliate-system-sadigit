@@ -6,7 +6,11 @@ class Reportpesanan_excel extends CI_Controller
   public function __construct()
   {
     parent::__construct();
-    $this->load->model('admin/Reportpesanan_excel_model', 'excel');
+    if ($this->session->userdata('role') != "Admin") {
+			$alert = $this->session->set_flashdata('massage', 'Anda Harus Login Sebagai Admin!');
+			redirect(base_url("auth"));
+		}
+    $this->load->model('admin/Pesanan_model', 'excel');
   }
 
   public function index()
@@ -20,11 +24,11 @@ class Reportpesanan_excel extends CI_Controller
     $tgl_awal = $this->input->get('tgl_awal'); // Ambil data tgl_awal sesuai input (kalau tidak ada set kosong)
     $tgl_akhir = $this->input->get('tgl_akhir'); // Ambil data tgl_awal sesuai input (kalau tidak ada set kosong)
     if (empty($tgl_awal) or empty($tgl_akhir)) { // Cek jika tgl_awal atau tgl_akhir kosong, maka :
-      $export = $this->excel->view_all();  // Panggil fungsi view_all yang ada di exportModel
+      $export = $this->excel->view_all_excel();  // Panggil fungsi view_all yang ada di exportModel
       $url_export = 'reportpesanan_excel/export';
       $label = 'Semua Data Pesanan';
     } else { // Jika terisi
-      $export = $this->excel->view_by_date($tgl_awal, $tgl_akhir);  // Panggil fungsi view_by_date yang ada di exportModel
+      $export = $this->excel->view_by_date_excel($tgl_awal, $tgl_akhir);  // Panggil fungsi view_by_date yang ada di exportModel
       $url_export = 'reportpesanan_excel/export?tgl_awal=' . $tgl_awal . '&tgl_akhir=' . $tgl_akhir;
       $tgl_awal = date('d-m-Y', strtotime($tgl_awal)); // Ubah format tanggal jadi dd-mm-yyyy
       $tgl_akhir = date('d-m-Y', strtotime($tgl_akhir)); // Ubah format tanggal jadi dd-mm-yyyy
@@ -79,10 +83,10 @@ class Reportpesanan_excel extends CI_Controller
     $tgl_akhir = $this->input->get('tgl_akhir'); // Ambil data tgl_awal sesuai input (kalau tidak ada set kosong)
 
     if (empty($tgl_awal) or empty($tgl_akhir)) { // Cek jika tgl_awal atau tgl_akhir kosong, maka :
-      $export = $this->excel->view_all();
+      $export = $this->excel->view_all_excel();
       $label = 'Semua Data Pesanan';
     } else { // Jika terisi
-      $export = $this->excel->view_by_date($tgl_awal, $tgl_akhir);  // Panggil fungsi view_by_date yang ada di exportModel
+      $export = $this->excel->view_by_date_excel($tgl_awal, $tgl_akhir);  // Panggil fungsi view_by_date yang ada di exportModel
       $tgl_awal = date('d-m-Y', strtotime($tgl_awal)); // Ubah format tanggal jadi dd-mm-yyyy
       $tgl_akhir = date('d-m-Y', strtotime($tgl_akhir)); // Ubah format tanggal jadi dd-mm-yyyy
       $label = 'Periode Tanggal ' . $tgl_awal . ' s/d ' . $tgl_akhir;

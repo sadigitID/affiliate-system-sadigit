@@ -79,21 +79,27 @@ class Checkout_produk extends CI_Controller
 					'required' => 'nama produk tidak boleh kosong'
 				]
 			],
-            // [
-			// 	'field' => 'foto_pembayaran',
-			// 	'rules' => 'required',
-			// 	'errors' => [
-			// 		'required' => 'nama produk tidak boleh kosong'
-			// 	]
-			// ],
 		];
 
-		$data = array('status' => false, 'messages' => array());
+		$this->load->model('umum');
+
+	if ($this->input->method() === 'post') {
+		$config['upload_path']          = './assets/media/images/';
+		$config['allowed_types']        = 'gif|jpg|jpeg|png';
+		$config['overwrite']            = true;
+		$config['max_size']             = 1024; // 1MB
+		$config['max_width']            = 1080;
+		$config['max_height']           = 1080;
+
+		$this->load->library('upload', $config);
+		
+		$data['file_nama'] = $this->upload->data("file_name");;
 		$this->form_validation->set_rules($config);
 		$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
 		if ($this->form_validation->run() == TRUE) {
 
 			$id_pesanan = $this->input->post('id_pesanan');
+			$uploaded_data = $this->upload->data();
 
 			$payloadData = [
 				'id_pesanan' => $this->input->post('id_pesanan'),
@@ -101,7 +107,8 @@ class Checkout_produk extends CI_Controller
 				'no_wa_pembeli' => $this->input->post('no_wa_pembeli'),
                 'id_produk' => $this->input->post('id_produk'),
                 'tanggal_pembayaran' => $this->input->post('tanggal_pembayaran'),
-                //'foto_pembayaran' => $this->input->post('foto_pembayaran'),
+				//'foto_pembayaran' => $uploaded_data['file_nama'],
+                'foto_pembayaran' => $this->upload->do_upload('foto_pembayaran')
 			];
 
 			if ($id_pesanan == "") {
@@ -117,5 +124,8 @@ class Checkout_produk extends CI_Controller
 			}
 		}
 		echo json_encode($data);
+		}
+
+		
 	}
 }

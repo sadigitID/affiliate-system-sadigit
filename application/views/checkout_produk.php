@@ -82,14 +82,15 @@
             <!--end::Form Group -->
 
             <!-- begin::Form Group-->
-			<!-- <div class="form-group">
+			<div class="form-group">
 				<label class="font-size-h6 font-weight-bolder text-dark">Foto Bukti Pembayaran</label>
 				<div></div>
 				<div class="custom-file">
-					<input type="file" class="custom-file-input" id="foto_pembayaran"/>
+					<input type="file" class="custom-file-input" id="foto_pembayaran" accept="image/png, image/jpeg, image/jpg, image/gif"/>
 					<label class="custom-file-label" for="foto_pembayaran">Choose file</label>
 				</div>
-			</div> -->
+                
+			</div>
             <!--end::Form Group -->
 
             <input class="form-control " type="hidden" placeholder="tanggal_pembayaran" id="tanggal_pembayaran" name="tanggal_pembayaran" value="<?php echo date("Y-m-d") ?>"/>

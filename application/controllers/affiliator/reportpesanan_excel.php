@@ -6,6 +6,10 @@ class Reportpesanan_excel extends CI_Controller
   public function __construct()
   {
     parent::__construct();
+    if ($this->session->userdata('role') != "Affiliator") {
+			$alert = $this->session->set_flashdata('massage', 'Anda Harus Login Sebagai Affiliator!');
+			redirect(base_url("auth"));
+		}
     $this->load->model('M_pesanan', 'excel');
   }
 

@@ -7,6 +7,10 @@ class Pesanan extends CI_Controller
 	function __construct()
 	{
 		parent::__construct();
+		if ($this->session->userdata('role') != "Admin") {
+			$alert = $this->session->set_flashdata('massage', 'Anda Harus Login Sebagai Admin!');
+			redirect(base_url("auth"));
+		}
 
 		$this->load->library('form_validation');
 		$this->load->model('admin/Pesanan_model', 'pesanan');
@@ -58,6 +62,8 @@ class Pesanan extends CI_Controller
 			}
 
 			$edit =  "<i class='fas fa-edit btn btn-icon btn-light-primary' onclick={_confirm('$list->id_pesanan')}></i>";
+			$salin =  "<i class='btn fas fa-copy btn-icon btn-light-success' onclick={_salin('$list->id_produk')}></i>";
+			
 			$row = array();
 			$row[] = $list->id_pesanan;
 			$row[] = $list->nama_pembeli;
@@ -71,6 +77,7 @@ class Pesanan extends CI_Controller
 			$row[] = $status_komisi;
 			$row[] = "<center>
                         $edit
+						$salin
                      </center>";
 			// if ($list->status_komisi == 1){
 			// 	echo "Pesanan Masuk";

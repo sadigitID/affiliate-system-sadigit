@@ -62,7 +62,7 @@
                     </svg>
                     <!--end::Svg Icon-->
                 </span>
-                <span class="card-title font-weight-bolder text-dark-75 font-size-h2 mb-0 mt-6 d-block"><?= $this->data['total_bonus'] = $this->m_bonus->total_bonus(); ?></span>
+                <span class="card-title font-weight-bolder text-dark-75 font-size-h2 mb-0 mt-6 d-block"><?= $this->data['total_bonus'] = $this->bonus_model->total_bonus(); ?></span>
                 <span class="font-weight-bold text-muted  font-size-sm">Total Bonus</span>
             </div>
             <!--end::Body-->
@@ -117,7 +117,6 @@
                     <th>Nama Produk</th>
                     <th>Jumlah Komisi</th>
                     <th>Tanggal Selesai</th>
-                    
                     <th><?= $this->data['jml_komisi'] = $this->m_sumkomisi->jml_komisi(); ?>Total</th>
                 </tr>
             </thead>
