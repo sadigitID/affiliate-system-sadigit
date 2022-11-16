@@ -56,11 +56,23 @@ class Pesanan_affiliate extends CI_Controller
 				$status_pesanan = '<p> Pesanan Selesai </p>';
 			}
 
+      if ($list->status_pesanan == 1) {
+				$status_pesanan = '<p> Pesanan Masuk </p>';
+			} else {
+				$status_pesanan = '<p> Pesanan Selesai </p>';
+			}
+
+			if($list->status_komisi == 1 && $list->status_pesanan == 1){
+				$komisi = 0;
+			} else {
+				$komisi = $list->jml_komisi;
+			}
+
       $row = array();
       $row[] = $list->id_pesanan;
       $row[] = $list->nama_produk; //mengambil dari tb_produk
       $row[] = $status_pesanan;
-      $row[] = $list->jml_komisi; //mengambil dari tb_produk
+      $row[] = $komisi; //mengambil dari tb_produk
       $row[] = $list->tanggal_pesanan;
       $row[] = $status_komisi;
       $data[] = $row;

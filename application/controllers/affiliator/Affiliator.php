@@ -30,6 +30,7 @@ class Affiliator extends CI_Controller
 		$this->data['jumlah_pesanan'] = $this->m_pesanan->jumlah_pesanan();
 		$this->data['jml_komisi'] = $this->m_sumkomisi->jml_komisi();
 		$this->data['total_bonus'] = $this->bonus_model->total_bonus();
+		$this->data['grafik_pesanan'] = $this->m_pesanan->get_grafik_pesanan();
 
 		$this->load->view('template/index', $data);
 	}
@@ -43,7 +44,7 @@ class Affiliator extends CI_Controller
 		$coloumn_search = array('id_produk', 'jml_komisi', 'tanggal_pembayaran');
 		$select = "tb_pesanan.*, tb_produk.nama_produk, tb_produk.jml_komisi";
 		$order_by = array('id_pesanan' => 'asc');
-    	$join[] = ['field' => 'tb_produk', 'condition' => 'tb_pesanan.id_produk = tb_produk.id_produk', 'direction' => 'left'];
+		$join[] = ['field' => 'tb_produk', 'condition' => 'tb_pesanan.id_produk = tb_produk.id_produk', 'direction' => 'left'];
 		$where['tb_pesanan.id_user'] = $this->session->userdata('id_user');
 		$group_by = [];
 		$list = $this->umum->get_datatables($tabel, $column_order, $coloumn_search, $order_by, $where, $join, $select, $group_by);
@@ -53,7 +54,7 @@ class Affiliator extends CI_Controller
 		$sum = 0;
 
 		foreach ($list as $list) {
-			
+
 
 			$row = array();
 			$row[] = ++$no;
@@ -61,7 +62,7 @@ class Affiliator extends CI_Controller
 			$row[] = $list->jml_komisi; //mengambil dari tb_produk
 			$row[] = $list->tanggal_pembayaran;
 			$data[] = $row;
-		  }
+		}
 
 		$output = array(
 			"draw" => @$_POST['draw'],
@@ -86,6 +87,4 @@ class Affiliator extends CI_Controller
 		}
 		return true;
 	}
-
-	
 }

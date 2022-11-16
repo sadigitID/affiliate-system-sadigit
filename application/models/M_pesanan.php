@@ -16,6 +16,20 @@ class M_pesanan extends CI_Model
     return $data->num_rows();
   }
 
+  // model grafik dashboard admin
+  public function get_grafik()
+  {
+    $data = [];
+    for ($i = 1; $i <= 12; $i++) {
+      $query = $this->db->select('SUM(jml_komisi) AS pendapatan')->from('tb_pesanan')
+        ->join('tb_produk', 'tb_produk.id_produk = tb_pesanan.id_produk', 'left')
+        ->where(['status_komisi' => 2, 'MONTH(tanggal_pembayaran)' => $i])
+        ->group_by('MONTH(tanggal_pembayaran)')->get()->row_array();
+      $data[] = intval($query['pendapatan']);
+    }
+    echo json_encode($data);
+  }
+
   //model dashboard affiliator
   public function jumlah_pesanan()
   {
@@ -23,7 +37,18 @@ class M_pesanan extends CI_Model
     return $data->num_rows();
   }
 
-  //model report pesanan
+  // model grafik dashboard admin
+  public function get_grafik_pesanan()
+  {
+    $data = [];
+    for ($i = 1; $i <= 12; $i++) {
+      $query = $this->db->get_where('tb_pesanan', ['status_pesanan' => 2, 'MONTH(tanggal_pembayaran)' => $i])->num_rows();
+      $data[] = intval($query);
+    }
+    echo json_encode($data);
+  }
+
+  //model report pesanan affiliator
   public function view_all()
   {
     return $this->db->from('tb_pesanan')
@@ -32,7 +57,7 @@ class M_pesanan extends CI_Model
       ->get()->result();
   }
 
-  //model report pesanan
+  //model report pesanan affiliator
   public function view_by_date($tgl_awal, $tgl_akhir)
   {
     $tgl_awal = $this->db->escape($tgl_awal);
@@ -42,30 +67,5 @@ class M_pesanan extends CI_Model
       ->join('tb_produk', 'tb_produk.id_produk = tb_pesanan.id_produk', 'left')
       ->where('id_user', $this->session->userdata('id_user'))
       ->get()->result(); // Tampilkan data export sesuai tanggal yang diinput oleh user pada filter
-  }
-
-  //function grafik_laporan()
-  //{
-  //$tanggal_pembayaran = $this->input->post('tanggal_pembayaran');
-  //$data = $this->db->select('SUM(harga_jual) AS total')->from('tb_pesanan')->where('MONTH(tanggal_pembayaran)=10 AND YEAR(tanggal_pembayaran)=2022', $tanggal_pembayaran)->group_by('YEAR(tanggal_pembayaran)')->get();
-  //return $data->result();
-  //}
-
-  function get_pendapatan()
-  {
-    $query = $this->db->select('SUM(harga_jual) AS pendapatan')->from('tb_pesanan')->group_by('MONTH(tanggal_pembayaran)')->get();
-
-    if ($query->num_rows() > 0) {
-      foreach ($query->result_array() as $data) {
-        $row[] = $data;
-      }
-      return $row;
-    }
-  }
-
-  function get_month()
-  {
-    $data = $this->db->select('MONTH(tanggal_pembayaran)')->from('tb_pesanan')->get();
-    return $data->result_array();
   }
 }

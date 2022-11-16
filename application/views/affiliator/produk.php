@@ -107,6 +107,7 @@
         $('#id_produk').val(res.id_produk)
         $('#nama_produk').val(res.nama_produk)
         $('#harga_jual').val(res.harga_jual)
+        $('#tanggal_pesanan').val(res.tanggal_pesanan)
         $('#status_pesanan').val(res.status_pesanan)
         $('#status_komisi').val(res.status_komisi)
       },

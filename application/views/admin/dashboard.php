@@ -75,148 +75,60 @@
 <!--script area-->
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8" />
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
-</head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 
 <body>
   <!--Load chart js-->
-  <h3>Grafik Total Pendapatan</h3>
-  <div class="chart-container">
-    <canvas id="barCanvas" aria-label="chart" role="img" width="1879" height="938" style="display: block; box-sizing: border-box; height: 750.4px; width: 1503.2px;"></canvas>
-  </div>
-  <script type="text/javascript">
-    const ctx = document.getElementById('barCanvas');
-    /* ---------- Data ---------- */
-    //let l1 = [];
-    //for (let i = 0; i < script 10; i++) {
-    //l1.push(Math.floor(Math.random() * 100) + 1);
-    //}
-    const data = async () => {
-      $.ajax({
-        type: "post",
-        url: "<?= base_url('admin/administrator/get_pendapatan') ?>",
-        data: {
-          id_pesanan
-        },
-        dataType: "json",
-      });
-    }
-
-    const month = async () => {
-      $.ajax({
-        type: "post",
-        url: "<?= base_url('admin/administrator/get_month') ?>",
-        data: {
-          id_pesanan
-        },
-        dataType: "json",
-      });
-    }
-    //const date = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-
-    /* ---------- Grfaik ---------- */
-    const barChart = {
-      type: 'bar',
-      yAxisID: 'y',
-      label: 'Pendapatan',
-      data: data,
-      backgroundColor: [
-        'rgba(255, 26, 104, 0.2)',
-        'rgba(54, 162, 235, 0.2)',
-        'rgba(255, 206, 86, 0.2)',
-        'rgba(75, 192, 192, 0.2)',
-        'rgba(153, 102, 255, 0.2)',
-        'rgba(255, 159, 64, 0.2)',
-        'rgba(0, 0, 0, 0.2)'
-      ],
-      borderColor: [
-        'rgba(255, 26, 104, 1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)',
-        'rgba(75, 192, 192, 1)',
-        'rgba(153, 102, 255, 1)',
-        'rgba(255, 159, 64, 1)',
-        'rgba(0, 0, 0, 1)'
-      ],
-      borderWidth: 1,
-      order: 2
-    };
-
-    /* ---------- Skala ---------- */
-    const scalesChart = {
-      y: {
-        //anchor: 'end',
-        //align: 'top',
-        type: 'linear',
-        position: 'left',
-        beginAtZero: true
-      },
-    };
-
-    const mixedChart = new Chart(ctx, {
+  <canvas id="myChart" style="width:100%; max-width:1500px"></canvas>
+  <script>
+    new Chart("myChart", {
+      type: "bar",
       data: {
-        datasets: [barChart],
-        labels: month
+        labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+        datasets: [{
+          data: <?= $this->data['grafik_pendapatan'] = $this->m_pesanan->get_grafik(); ?>,
+          backgroundColor: [
+            "rgba(224, 77, 107, 0.5)",
+            "rgba(255, 99, 132, 0.5)",
+            "rgba(223, 132, 58, 0.5)",
+            "rgba(255, 159, 64, 0.5)",
+            "rgba(224, 177, 67, 0.5)",
+            "rgba(255, 205, 86, 0.5)",
+            "rgba(77, 164, 165, 0.5)",
+            "rgba(75, 192, 192, 0.5)",
+            "rgba(52, 111, 179, 0.5)",
+            "rgba(54, 162, 235, 0.5)",
+            "rgba(124, 76, 226, 0.5)",
+            "rgba(153, 102, 255, 0.5)",
+          ],
+          borderColor: [
+            "rgba(224, 77, 107)",
+            "rgba(255, 99, 132)",
+            "rgba(223, 132, 58)",
+            "rgba(255, 159, 64)",
+            "rgba(224, 177, 67)",
+            "rgba(255, 205, 86)",
+            "rgba(77, 164, 165)",
+            "rgba(75, 192, 192)",
+            "rgba(52, 111, 179)",
+            "rgba(54, 162, 235)",
+            "rgba(124, 76, 226)",
+            "rgba(153, 102, 255)",
+          ],
+          borderWidth: 1
+        }]
       },
       options: {
-        scales: scalesChart,
-        plugins: {
-          datalabels: {
-            //y: {
-            anchor: 'end',
-            align: 'top',
-            //}
-          }
-
+        legend: {
+          display: false
+        },
+        title: {
+          display: true,
+          text: "Grafik Total Pendapatan"
         }
-      },
-      plugins: [ChartDataLabels]
+      }
     });
   </script>
 </body>
 
 </html>
-
-
-<!--<canvas id="myChart" width="800" height="500"></canvas>
-<script>
-  const ctx = document.getElementById('myChart').getContext('2d');
-  const myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: <?= $this->data['month'] = $this->m_pesanan->get_month(); ?>,
-      datasets: [{
-        label: 'Grafik Total Pendapatan',
-        data: <?= $this->data['pendapatan'] = $this->m_pesanan->get_pendapatan(); ?>,
-        backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(255, 159, 64, 0.2)'
-        ],
-        borderColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)'
-        ],
-        borderWidth: 1
-      }]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
-        }
-      }
-    }
-  });
-</>-->

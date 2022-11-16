@@ -7,9 +7,9 @@ class Produk extends CI_Controller
   {
     parent::__construct();
     if ($this->session->userdata('role') != "Affiliator") {
-			$alert = $this->session->set_flashdata('massage', 'Anda Harus Login Sebagai Affiliator!');
-			redirect(base_url("auth"));
-		}
+      $alert = $this->session->set_flashdata('massage', 'Anda Harus Login Sebagai Affiliator!');
+      redirect(base_url("auth"));
+    }
     $this->load->library('form_validation');
     $this->load->model('Umum_model', 'umum');
   }
@@ -94,30 +94,14 @@ class Produk extends CI_Controller
 
   function isi_data()
   {
-    $data = $this->db->select('*')->from('tb_pesanan')->join('tb_produk', 'tb_produk.id_produk = tb_pesanan.id_produk', 'left')->get()->result_array();
+    $id_produk = $this->input->post('id_produk');
+    $id_user = $this->session->userdata('id_user');
+    $tanggal_pesanan = date("Y-m-d");
 
-    foreach ($data as $data) {
-      if ($data->status_pesanan == 1) {
-        $status_pesanan = '<p> Pesanan Masuk </p>';
-      } else {
-        $status_pesanan = '<p> Pesanan Selesai </p>';
-      }
+    $produk = $this->db->get_where('tb_produk', ['id_produk' => $id_produk])->row_array();
 
-      if ($data->status_komisi == 1) {
-        $status_komisi = '<p> Pesanan Masuk </p>';
-      } else {
-        $status_komisi = '<p> Pesanan Selesai </p>';
-      }
-
-      $id_produk = $this->input->post('id_produk');
-      $nama_produk = $this->input->post('nama_produk');
-      $harga_jual = $this->input->post('harga_jual');
-      $id_user = $this->session->userdata('id_user');
-
-      $up = ['id_user' => $id_user, 'id_produk' => $id_produk, 'nama_produk' => $nama_produk, 'harga_jual' => $harga_jual, 'status_komisi' => 1, 'status_pesanan' => 1];
-      $where = ['id_produk' => $id_produk];
-      $this->db->update("tb_pesanan", $up, $where);
-      echo json_encode(['status' => true]);
-    }
+    $up = ['id_user' => $id_user, 'id_produk' => $id_produk, 'nama_produk' => $produk['nama_produk'], 'harga_jual' => $produk['harga_produk'], 'tanggal_pesanan' => $tanggal_pesanan, 'status_komisi' => 1, 'status_pesanan' => 1];
+    $this->db->insert("tb_pesanan", $up);
+    echo json_encode(['status' => true]);
   }
 }
