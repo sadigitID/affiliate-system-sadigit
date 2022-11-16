@@ -45,7 +45,7 @@
                 <tbody>
                     <?php
                     if (empty($export)) { // Jika data tidak ada
-                        echo "<tr><td colspan='5'>Data tidak ada</td></tr>";
+                        echo "<tr><td colspan='6'>Data tidak ada</td></tr>";
                     } else { // Jika jumlah data lebih dari 0 (Berarti jika data ada)
                         foreach ($export as $data) { // Looping hasil data export
                             $tanggal_pesanan = date('d-m-Y', strtotime($data->tanggal_pesanan)); // Ubah format tanggal jadi dd-mm-yyyy

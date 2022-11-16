@@ -119,6 +119,7 @@
 				$('#harga_produk').val(res.harga_produk)
 				$('#jml_komisi').val(res.jml_komisi)
 				$('#deskripsi_produk').val(res.deskripsi_produk)
+				$('#link_produk').val(res.link_produk)
 				$('#modal_produk').modal('show')
 			},
 			error(err) {
