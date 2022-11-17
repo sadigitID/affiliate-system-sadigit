@@ -7839,7 +7839,7 @@ CREATE TABLE `tb_user_token` (
   `tb_user_token` int(11) NOT NULL,
   `email` varchar(50) NOT NULL,
   `token` varchar(250) NOT NULL,
-  `created_at` int(11) NOT NULL DEFAULT current_timestamp()
+  `created_at` date DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
