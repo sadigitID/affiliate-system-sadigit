@@ -11,6 +11,7 @@ class Affiliator extends CI_Controller
 			$alert = $this->session->set_flashdata('massage', 'Anda Harus Login Sebagai Affiliator!');
 			redirect(base_url("auth"));
 		}
+
 		$this->load->library('form_validation');
 		$this->load->model('Umum_model', 'umum');
 		$this->load->model('M_pesanan', 'm_pesanan');
@@ -25,13 +26,77 @@ class Affiliator extends CI_Controller
 			'active' => 'affiliator/affiliator',
 			'sub1' => 'affiliator/affiliator',
 		];
-
 		$this->db->get('tb_bonus')->result();
-		$this->data['jumlah_pesanan'] = $this->m_pesanan->jumlah_pesanan();
-		$this->data['jml_komisi'] = $this->m_sumkomisi->jml_komisi();
-		$this->data['total_bonus'] = $this->bonus_model->total_bonus();
-		$this->data['grafik_pesanan'] = $this->m_pesanan->get_grafik_pesanan();
+		$this->load->view('template/index', $data);
+	}
 
+	public function produk()
+	{
+		$data = [
+			'view' => 'affiliator/produk',
+			'active' => 'affiliator/produk',
+			'sub1' => 'affiliator/produk',
+		];
+		$this->load->view('template/index', $data);
+	}
+
+	public function pesanan_affiliate()
+	{
+		$data = [
+			'view' => 'affiliator/pesanan_affiliate',
+			'active' => 'affiliator/pesanan_affiliate',
+			'sub1' => 'affiliator/pesanan_affiliate',
+		];
+		$this->load->view('template/index', $data);
+	}
+
+	public function reportpesanan_pdf()
+	{
+		$data = [
+			'view' => 'affiliator/reportpesanan_pdf',
+			'active' => 'affiliator/reportpesanan_pdf',
+			'sub1' => 'affiliator/reportpesanan_pdf',
+		];
+		$this->load->view('template/index', $data);
+	}
+
+	public function reportpesanan_excel()
+	{
+		$data = [
+			'view' => 'affiliator/reportpesanan_excel',
+			'active' => 'affiliator/reportpesanan_excel',
+			'sub1' => 'affiliator/reportpesanan_excel',
+		];
+		$this->load->view('template/index', $data);
+	}
+
+	public function bonus_komisi()
+	{
+		$data = [
+			'view' => 'affiliator/bonus_komisi',
+			'active' => 'affiliator/bonus_komisi',
+			'sub1' => 'affiliator/bonus_komisi',
+		];
+		$this->load->view('template/index', $data);
+	}
+
+	public function profile()
+	{
+		$data = [
+			'view' => 'affiliator/profile',
+			'active' => 'affiliator/profile',
+			'sub1' => 'affiliator/profile',
+		];
+		$this->load->view('template/index', $data);
+	}
+
+	public function rekening()
+	{
+		$data = [
+			'view' => 'affiliator/rekening',
+			'active' => 'affiliator/rekening',
+			'sub1' => 'affiliator/rekening',
+		];
 		$this->load->view('template/index', $data);
 	}
 
@@ -41,7 +106,7 @@ class Affiliator extends CI_Controller
 
 		$tabel = 'tb_pesanan';
 		$column_order = array();
-		$coloumn_search = array('id_produk', 'jml_komisi', 'tanggal_pembayaran');
+		$coloumn_search = array('tb_pesanan.id_produk', 'jml_komisi', 'tanggal_pembayaran');
 		$select = "tb_pesanan.*, tb_produk.nama_produk, tb_produk.jml_komisi";
 		$order_by = array('id_pesanan' => 'asc');
 		$join[] = ['field' => 'tb_produk', 'condition' => 'tb_pesanan.id_produk = tb_produk.id_produk', 'direction' => 'left'];
@@ -50,16 +115,19 @@ class Affiliator extends CI_Controller
 		$list = $this->umum->get_datatables($tabel, $column_order, $coloumn_search, $order_by, $where, $join, $select, $group_by);
 		$data = array();
 		$no = @$_POST['start'];
-
 		$sum = 0;
 
 		foreach ($list as $list) {
-
+			if($list->status_komisi == 1 && $list->status_pesanan == 1){
+				$komisi = 0;
+			} else {
+				$komisi = $list->jml_komisi;
+			}
 
 			$row = array();
 			$row[] = ++$no;
 			$row[] = $list->nama_produk; //mengambil dari tb_produk
-			$row[] = $list->jml_komisi; //mengambil dari tb_produk
+			$row[] = $komisi; //mengambil dari tb_produk
 			$row[] = $list->tanggal_pembayaran;
 			$data[] = $row;
 		}
