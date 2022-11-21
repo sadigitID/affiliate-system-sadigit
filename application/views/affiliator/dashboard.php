@@ -16,7 +16,7 @@
                     </svg>
                     <!--end::Svg Icon-->
                 </span>
-                <span class="card-title font-weight-bolder text-dark-75 font-size-h2 mb-0 mt-6 d-block"><?= $this->m_pesanan->jumlah_pesanan(); ?></span>
+                <span class="card-title font-weight-bolder text-dark-75 font-size-h2 mb-0 mt-6 d-block"><?= $this->data['jumlah_pesanan'] = $this->m_pesanan->jumlah_pesanan(); ?></span>
                 <span class="font-weight-bold text-muted  font-size-sm">Total Pesanan</span>
             </div>
             <!--end::Body-->
@@ -39,7 +39,7 @@
                     </svg>
                     <!--end::Svg Icon-->
                 </span>
-                <span class="card-title font-weight-bolder text-white font-size-h2 mb-0 mt-6 d-block">2,044</span>
+                <span class="card-title font-weight-bolder text-white font-size-h2 mb-0 mt-6 d-block"><?= $this->data['jumlah_pesanan'] = $this->m_pesanan->jumlah_pesanan(); ?></span>
                 <span class="font-weight-bold text-white  font-size-sm">Total Klik Link</span>
             </div>
             <!--end::Body-->
@@ -62,7 +62,7 @@
                     </svg>
                     <!--end::Svg Icon-->
                 </span>
-                <span class="card-title font-weight-bolder text-dark-75 font-size-h2 mb-0 mt-6 d-block"><?= $this->bonus_model->total_bonus(); ?></span>
+                <span class="card-title font-weight-bolder text-dark-75 font-size-h2 mb-0 mt-6 d-block"><?= $this->data['total_bonus'] = $this->bonus_model->total_bonus(); ?></span>
                 <span class="font-weight-bold text-muted  font-size-sm">Total Bonus</span>
             </div>
             <!--end::Body-->
@@ -90,10 +90,7 @@
                     <th>Nama Produk</th>
                     <th>Jumlah Komisi</th>
                     <th>Tanggal Selesai</th>
-                </tr>
-                <tr>
-                    <th colspan="3">Total</th>
-                    <th><?= $this->m_sumkomisi->jml_komisi(); ?></th>
+                    <th><?= $this->data['jml_komisi'] = $this->m_sumkomisi->jml_komisi(); ?>Total</th>
                 </tr>
             </thead>
         </table>
@@ -120,56 +117,62 @@
     })
 </script>
 
+<!DOCTYPE html>
+<html lang="en">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 
-<!--Load chart js-->
-<canvas id="myChart" style="width:100%; max-width:1500px"></canvas>
-<script>
-    new Chart("myChart", {
-        type: "bar",
-        data: {
-            labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-            datasets: [{
-                data: <?= $this->m_pesanan->get_grafik_pesanan(); ?>,
-                backgroundColor: [
-                    "rgba(224, 77, 107, 0.5)",
-                    "rgba(255, 99, 132, 0.5)",
-                    "rgba(223, 132, 58, 0.5)",
-                    "rgba(255, 159, 64, 0.5)",
-                    "rgba(224, 177, 67, 0.5)",
-                    "rgba(255, 205, 86, 0.5)",
-                    "rgba(77, 164, 165, 0.5)",
-                    "rgba(75, 192, 192, 0.5)",
-                    "rgba(52, 111, 179, 0.5)",
-                    "rgba(54, 162, 235, 0.5)",
-                    "rgba(124, 76, 226, 0.5)",
-                    "rgba(153, 102, 255, 0.5)",
-                ],
-                borderColor: [
-                    "rgba(224, 77, 107)",
-                    "rgba(255, 99, 132)",
-                    "rgba(223, 132, 58)",
-                    "rgba(255, 159, 64)",
-                    "rgba(224, 177, 67)",
-                    "rgba(255, 205, 86)",
-                    "rgba(77, 164, 165)",
-                    "rgba(75, 192, 192)",
-                    "rgba(52, 111, 179)",
-                    "rgba(54, 162, 235)",
-                    "rgba(124, 76, 226)",
-                    "rgba(153, 102, 255)",
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            legend: {
-                display: false
+<body>
+    <!--Load chart js-->
+    <canvas id="myChart" style="width:100%; max-width:1500px"></canvas>
+    <script>
+        new Chart("myChart", {
+            type: "bar",
+            data: {
+                labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+                datasets: [{
+                    data: <?= $this->data['grafik_pesanan'] = $this->m_pesanan->get_grafik_pesanan(); ?>,
+                    backgroundColor: [
+                        "rgba(224, 77, 107, 0.5)",
+                        "rgba(255, 99, 132, 0.5)",
+                        "rgba(223, 132, 58, 0.5)",
+                        "rgba(255, 159, 64, 0.5)",
+                        "rgba(224, 177, 67, 0.5)",
+                        "rgba(255, 205, 86, 0.5)",
+                        "rgba(77, 164, 165, 0.5)",
+                        "rgba(75, 192, 192, 0.5)",
+                        "rgba(52, 111, 179, 0.5)",
+                        "rgba(54, 162, 235, 0.5)",
+                        "rgba(124, 76, 226, 0.5)",
+                        "rgba(153, 102, 255, 0.5)",
+                    ],
+                    borderColor: [
+                        "rgba(224, 77, 107)",
+                        "rgba(255, 99, 132)",
+                        "rgba(223, 132, 58)",
+                        "rgba(255, 159, 64)",
+                        "rgba(224, 177, 67)",
+                        "rgba(255, 205, 86)",
+                        "rgba(77, 164, 165)",
+                        "rgba(75, 192, 192)",
+                        "rgba(52, 111, 179)",
+                        "rgba(54, 162, 235)",
+                        "rgba(124, 76, 226)",
+                        "rgba(153, 102, 255)",
+                    ],
+                    borderWidth: 1
+                }]
             },
-            title: {
-                display: true,
-                text: "Grafik Total Pesanan Selesai"
+            options: {
+                legend: {
+                    display: false
+                },
+                title: {
+                    display: true,
+                    text: "Grafik Total Pesanan Selesai"
+                }
             }
-        }
-    });
-</script>
+        });
+    </script>
+</body>
+
+</html>

@@ -11,7 +11,6 @@ class Affiliator extends CI_Controller
 			$alert = $this->session->set_flashdata('massage', 'Anda Harus Login Sebagai Affiliator!');
 			redirect(base_url("auth"));
 		}
-
 		$this->load->library('form_validation');
 		$this->load->model('Umum_model', 'umum');
 		$this->load->model('M_pesanan', 'm_pesanan');
@@ -26,77 +25,13 @@ class Affiliator extends CI_Controller
 			'active' => 'affiliator/affiliator',
 			'sub1' => 'affiliator/affiliator',
 		];
+
 		$this->db->get('tb_bonus')->result();
-		$this->load->view('template/index', $data);
-	}
+		$this->data['jumlah_pesanan'] = $this->m_pesanan->jumlah_pesanan();
+		$this->data['jml_komisi'] = $this->m_sumkomisi->jml_komisi();
+		$this->data['total_bonus'] = $this->bonus_model->total_bonus();
+		$this->data['grafik_pesanan'] = $this->m_pesanan->get_grafik_pesanan();
 
-	public function produk()
-	{
-		$data = [
-			'view' => 'affiliator/produk',
-			'active' => 'affiliator/produk',
-			'sub1' => 'affiliator/produk',
-		];
-		$this->load->view('template/index', $data);
-	}
-
-	public function pesanan_affiliate()
-	{
-		$data = [
-			'view' => 'affiliator/pesanan_affiliate',
-			'active' => 'affiliator/pesanan_affiliate',
-			'sub1' => 'affiliator/pesanan_affiliate',
-		];
-		$this->load->view('template/index', $data);
-	}
-
-	public function reportpesanan_pdf()
-	{
-		$data = [
-			'view' => 'affiliator/reportpesanan_pdf',
-			'active' => 'affiliator/reportpesanan_pdf',
-			'sub1' => 'affiliator/reportpesanan_pdf',
-		];
-		$this->load->view('template/index', $data);
-	}
-
-	public function reportpesanan_excel()
-	{
-		$data = [
-			'view' => 'affiliator/reportpesanan_excel',
-			'active' => 'affiliator/reportpesanan_excel',
-			'sub1' => 'affiliator/reportpesanan_excel',
-		];
-		$this->load->view('template/index', $data);
-	}
-
-	public function bonus_komisi()
-	{
-		$data = [
-			'view' => 'affiliator/bonus_komisi',
-			'active' => 'affiliator/bonus_komisi',
-			'sub1' => 'affiliator/bonus_komisi',
-		];
-		$this->load->view('template/index', $data);
-	}
-
-	public function profile()
-	{
-		$data = [
-			'view' => 'affiliator/profile',
-			'active' => 'affiliator/profile',
-			'sub1' => 'affiliator/profile',
-		];
-		$this->load->view('template/index', $data);
-	}
-
-	public function rekening()
-	{
-		$data = [
-			'view' => 'affiliator/rekening',
-			'active' => 'affiliator/rekening',
-			'sub1' => 'affiliator/rekening',
-		];
 		$this->load->view('template/index', $data);
 	}
 
@@ -115,9 +50,12 @@ class Affiliator extends CI_Controller
 		$list = $this->umum->get_datatables($tabel, $column_order, $coloumn_search, $order_by, $where, $join, $select, $group_by);
 		$data = array();
 		$no = @$_POST['start'];
+
 		$sum = 0;
 
 		foreach ($list as $list) {
+
+
 			$row = array();
 			$row[] = ++$no;
 			$row[] = $list->nama_produk; //mengambil dari tb_produk
