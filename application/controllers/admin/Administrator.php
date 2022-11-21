@@ -22,15 +22,9 @@ class Administrator extends CI_Controller
   {
     $data = [
       'view' => 'admin/dashboard',
-      'active' => 'administrator',
-      'sub1' => 'administrator',
+      'active' => 'admin/administrator',
+      'sub1' => 'admin/administrator',
     ];
-
-    $this->data['jumlah_affiliate'] = $this->m_user->jumlah();
-    $this->data['jumlah_pmasuk'] = $this->m_pesanan->jumlah_masuk();
-    $this->data['jumlah_pkeluar'] = $this->m_pesanan->jumlah_keluar();
-    $this->data['grafik_pendapatan'] = $this->m_pesanan->get_grafik();
-
     $this->load->view('template_admin/index', $data);
   }
 
@@ -38,8 +32,8 @@ class Administrator extends CI_Controller
   {
     $data = [
       'view' => 'admin/produk',
-      'active' => 'produk',
-      'sub1' => 'produk',
+      'active' => 'admin/produk',
+      'sub1' => 'admin/produk',
     ];
     $this->load->view('template_admin/index', $data);
   }
@@ -48,8 +42,28 @@ class Administrator extends CI_Controller
   {
     $data = [
       'view' => 'admin/pesanan',
-      'active' => 'pesanan',
-      'sub1' => 'pesanan',
+      'active' => 'admin/pesanan',
+      'sub1' => 'admin/pesanan',
+    ];
+    $this->load->view('template_admin/index', $data);
+  }
+
+  public function reportpesanan_pdf()
+  {
+    $data = [
+      'view' => 'admin/reportpesanan_pdf',
+      'active' => 'admin/reportpesanan_pdf',
+      'sub1' => 'admin/reportpesanan_pdf',
+    ];
+    $this->load->view('template_admin/index', $data);
+  }
+
+  public function reportpesanan_excel()
+  {
+    $data = [
+      'view' => 'admin/reportpesanan_excel',
+      'active' => 'admin/reportpesanan_excel',
+      'sub1' => 'admin/reportpesanan_excel',
     ];
     $this->load->view('template_admin/index', $data);
   }
@@ -58,8 +72,28 @@ class Administrator extends CI_Controller
   {
     $data = [
       'view' => 'admin/bonus',
-      'active' => 'bonus',
-      'sub1' => 'bonus',
+      'active' => 'admin/bonus',
+      'sub1' => 'admin/bonus',
+    ];
+    $this->load->view('template_admin/index', $data);
+  }
+
+  public function reportbonus_pdf()
+  {
+    $data = [
+      'view' => 'admin/reportbonus_pdf',
+      'active' => 'admin/reportbonus_pdf',
+      'sub1' => 'admin/reportbonus_pdf',
+    ];
+    $this->load->view('template_admin/index', $data);
+  }
+
+  public function reportbonus_excel()
+  {
+    $data = [
+      'view' => 'admin/reportbonus_excel',
+      'active' => 'admin/reportbonus_excel',
+      'sub1' => 'admin/reportbonus_excel',
     ];
     $this->load->view('template_admin/index', $data);
   }

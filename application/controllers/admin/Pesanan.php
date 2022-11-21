@@ -38,13 +38,13 @@ class Pesanan extends CI_Controller
 
 		$tabel = 'tb_pesanan';
 		$column_order = array();
-		$coloumn_search = array('id_pesanan', 'nama_pembeli', 'id_produk', 'harga_jual', 'status_pesanan', 'tanggal_pembayaran', 'foto_pembayaran', 'id_user', 'status_komisi');
+		$coloumn_search = array('id_pesanan', 'tb_produk.nama_produk', 'nama_pembeli', 'harga_jual', 'tanggal_pembayaran', 'foto_pembayaran', 'tb_users.nama_lengkap', 'status_komisi', 'status_pesanan');
 		$select = "*";
-		$order_by = array('id_pesanan' => 'asc');
 		$join[] = ['field' => 'tb_produk', 'condition' => 'tb_pesanan.id_produk = tb_produk.id_produk', 'direction' => 'left'];
 		$join[] = ['field' => 'tb_users', 'condition' => 'tb_pesanan.id_user = tb_users.id_user', 'direction' => 'left'];
 		$where = [];
 		$group_by = [];
+		$order_by = array('id_pesanan' => 'asc');
 		$list = $this->pesanan->get_datatables($tabel, $column_order, $coloumn_search, $order_by, $where, $join, $select, $group_by);
 		$data = array();
 		$no = @$_POST['start'];

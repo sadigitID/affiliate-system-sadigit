@@ -62,8 +62,6 @@
         </div>
     </div>
 </div>
-</div>
-</div>
 
 <!-- Include File JS Bootstrap -->
 <script src="<?php echo base_url('assets/js/bootstrap.min.js') ?>"></script>

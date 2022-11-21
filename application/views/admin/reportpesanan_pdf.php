@@ -1,10 +1,11 @@
 <div class="card card-custom" style="padding: 15px;">
     <div class="card-header">
-        <div class="card-body">
             <div class="card-title">
                 <span class="card-icon"><i class="flaticon-squares-1 text-primary"></i></span>
                 <h3 class="card-label">Print Data Pesanan PDF</h3>
             </div>
+    </div>
+        <div class="card-body">
             <form method="get" action="<?php echo base_url('admin/reportpesanan_pdf/index') ?>">
                 <div class="row">
                     <div class="col-sm-6 col-md-4">
@@ -31,6 +32,7 @@
                 <a href="<?php echo $url_cetak ?>">CETAK PDF</a>
             </div>
 
+            <div class="table-responsive">
             <table class="table table-bordered" id="table" style="margin-top: 13px !important">
                 <thead>
                     <tr>
@@ -49,7 +51,7 @@
                 <tbody>
                     <?php
                     if (empty($export)) { // Jika data tidak ada
-                        echo "<tr><td colspan='10'>Data tidak ada</td></tr>";
+                        echo "<tr><td colspan='5'>Data tidak ada</td></tr>";
                     } else { // Jika jumlah data lebih dari 0 (Berarti jika data ada)
                         foreach ($export as $data) { // Looping hasil data export
                             $tanggal_pembayaran = date('d-m-Y', strtotime($data->tanggal_pembayaran)); // Ubah format tanggal jadi dd-mm-yyyy
@@ -85,8 +87,6 @@
             </table>
         </div>
     </div>
-</div>
-</div>
 </div>
 
 <!-- Include File JS Bootstrap -->

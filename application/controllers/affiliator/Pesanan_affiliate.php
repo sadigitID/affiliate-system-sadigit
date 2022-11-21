@@ -32,8 +32,8 @@ class Pesanan_affiliate extends CI_Controller
 
     $tabel = 'tb_pesanan';
     $column_order = array();
-    $coloumn_search = array('id_produk', 'status_pesanan', 'tanggal_pesanan', 'status_komisi');
-    $select = "tb_pesanan.*, tb_users.id_user, tb_produk.nama_produk, tb_produk.jml_komisi";
+    $coloumn_search = array('tb_pesanan.nama_produk', 'status_pesanan', 'tanggal_pesanan', 'status_komisi', 'jml_komisi');
+    $select = "*";
     $order_by = array('id_pesanan' => 'asc');
     $join[] = ['field' => 'tb_users', 'condition' => 'tb_pesanan.id_user = tb_users.id_user', 'direction' => 'left'];
     $join[] = ['field' => 'tb_produk', 'condition' => 'tb_pesanan.id_produk = tb_produk.id_produk', 'direction' => 'left'];

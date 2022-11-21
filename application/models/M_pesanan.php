@@ -17,7 +17,7 @@ class M_pesanan extends CI_Model
   }
 
   // model grafik dashboard admin
-  public function get_grafik()
+  function get_grafik()
   {
     $data = [];
     for ($i = 1; $i <= 12; $i++) {
@@ -37,12 +37,13 @@ class M_pesanan extends CI_Model
     return $data->num_rows();
   }
 
-  // model grafik dashboard admin
+  // model grafik dashboard affiliator
   public function get_grafik_pesanan()
   {
     $data = [];
+    $id_user = $this->session->userdata('id_user');
     for ($i = 1; $i <= 12; $i++) {
-      $query = $this->db->get_where('tb_pesanan', ['status_pesanan' => 2, 'MONTH(tanggal_pembayaran)' => $i])->num_rows();
+      $query = $this->db->get_where('tb_pesanan', ['status_pesanan' => 2, 'id_user' => $id_user, 'MONTH(tanggal_pembayaran)' => $i])->num_rows();
       $data[] = intval($query);
     }
     echo json_encode($data);
@@ -62,7 +63,7 @@ class M_pesanan extends CI_Model
   {
     $tgl_awal = $this->db->escape($tgl_awal);
     $tgl_akhir = $this->db->escape($tgl_akhir);
-    $this->db->where('DATE(tanggal_pesanan) BETWEEN ' . $tgl_awal . ' AND ' . $tgl_akhir); // Tambahkan where tanggal nya
+    $this->db->where('DATE(tanggal_pembayaran) BETWEEN ' . $tgl_awal . ' AND ' . $tgl_akhir); // Tambahkan where tanggal nya
     return $this->db->from('tb_pesanan')
       ->join('tb_produk', 'tb_produk.id_produk = tb_pesanan.id_produk', 'left')
       ->where('id_user', $this->session->userdata('id_user'))

@@ -8,7 +8,6 @@
 		<a href="<?= base_url('admin/administrator') ?>" class="brand-logo">
 			<h4 style="color:white;">SADIGIT Affiliate</h4>
 		</a>
-
 		<!--end::Logo-->
 
 		<!--begin::Toggle-->
@@ -68,7 +67,7 @@
 				<!-- START PRODUK MENU -->
 				<li class="menu-item <?= $active == 'admin/produk' ? 'menu-item-active' : '' ?>" aria-haspopup="true">
 					<a href="<?= base_url('admin/produk') ?>" class="menu-link">
-						<span class="svg-icon menu-icon svg-icon-primary">
+						<span class="menu-icon svg-icon svg-icon-primary">
 							<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
 								<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
 									<rect x="0" y="0" width="24" height="24" />
@@ -77,15 +76,15 @@
 								</g>
 							</svg>
 						</span>
-						<span class="menu-text">Kelola Produk</span>
+						<span class="menu-text">Produk</span>
 					</a>
 				</li>
 				<!-- END PRODUK MENU -->
 
 				<!-- START PESANAN MENU -->
-				<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+				<li class="menu-item menu-item-submenu menu-item-open" aria-haspopup="true" data-menu-toggle="hover">
 					<a href="javascript:;" class="menu-link menu-toggle">
-						<span class="svg-icon menu-icon svg-icon-primary">
+						<span class="menu-icon svg-icon svg-icon-primary">
 							<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
 								<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
 									<rect x="0" y="0" width="24" height="24" />
@@ -108,7 +107,7 @@
 							</li>
 							<li class="menu-item <?= $active == 'admin/pesanan' ? 'menu-item-active' : '' ?>" aria-haspopup="true">
 								<a href="<?= base_url('admin/pesanan') ?>" class="menu-link">
-									<span class="svg-icon menu-icon svg-icon-primary">
+									<span class="menu-icon svg-icon svg-icon-primary">
 										<!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Shopping\Chart-bar1.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
 											<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
 												<rect x="0" y="0" width="24" height="24" />
@@ -120,14 +119,12 @@
 										</svg>
 										<!--end::Svg Icon-->
 									</span>
-									<span>
-									</span>
 									</i>
 									<span class="menu-text">Data Pesanan</span>
 								</a>
 							</li>
 
-							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+							<li class="menu-item menu-item-submenu menu-item-open" aria-haspopup="true" data-menu-toggle="hover">
 								<a href="javascript:;" class="menu-link menu-toggle">
 									<span class="svg-icon menu-icon svg-icon-primary">
 										<!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Files\Export.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -140,7 +137,6 @@
 										</svg>
 										<!--end::Svg Icon-->
 									</span>
-									<span></span>
 									</i>
 									<span class="menu-text">Export Data Pesanan</span>
 									<i class="menu-arrow"></i>
@@ -173,7 +169,7 @@
 				<!-- END PESANAN MENU -->
 
 				<!-- START BONUS MENU -->
-				<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+				<li class="menu-item menu-item-submenu menu-item-open" aria-haspopup="true" data-menu-toggle="hover">
 					<a href="javascript:;" class="menu-link menu-toggle">
 						<span class="svg-icon menu-icon svg-icon-primary">
 							<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -210,14 +206,12 @@
 										</svg>
 										<!--end::Svg Icon-->
 									</span>
-									<span>
-									</span>
 									</i>
 									<span class="menu-text">Manajemen Bonus</span>
 								</a>
 							</li>
 
-							<li class="menu-item menu-item-submenu" aria-haspopup="true" data-menu-toggle="hover">
+							<li class="menu-item menu-item-submenu menu-item-open" aria-haspopup="true" data-menu-toggle="hover">
 								<a href="javascript:;" class="menu-link menu-toggle">
 									<span class="svg-icon menu-icon svg-icon-primary">
 										<!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Files\Export.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -261,15 +255,11 @@
 					</div>
 				</li>
 				<!-- END BONUS MENU -->
-
 			</ul>
-
 			<!--end::Menu Nav-->
 		</div>
-
 		<!--end::Menu Container-->
 	</div>
-
 	<!--end::Aside Menu-->
 </div>
 

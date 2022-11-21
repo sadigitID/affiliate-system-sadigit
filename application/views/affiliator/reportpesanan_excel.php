@@ -1,10 +1,11 @@
 <div class="card card-custom" style="padding: 15px;">
     <div class="card-header">
-        <div class="card-body">
             <div class="card-title">
                 <span class="card-icon"><i class="flaticon-squares-1 text-primary"></i></span>
                 <h3 class="card-label">Print Data Pesanan Excel</h3>
             </div>
+    </div>
+        <div class="card-body">
             <form method="get" action="<?php echo base_url('affiliator/reportpesanan_excel/index') ?>">
                 <div class="row">
                     <div class="col-sm-6 col-md-4">
@@ -33,6 +34,7 @@
 
             <div class="table-responsive">
                 <table class="table table-bordered">
+                    <thead>
                     <tr>
                         <th>No Pesanan</th>
                         <th>Nama Produk</th>
@@ -45,7 +47,7 @@
                     <tbody>
                         <?php
                         if (empty($export)) { // Jika data tidak ada
-                            echo "<tr><td colspan='6'>Data tidak ada</td></tr>";
+                            echo "<tr><td colspan='5'>Data tidak ada</td></tr>";
                         } else { // Jika jumlah data lebih dari 0 (Berarti jika data ada)
                             foreach ($export as $data) { // Looping hasil data export
                                 $tanggal_pesanan = date('d-m-Y', strtotime($data->tanggal_pesanan)); // Ubah format tanggal jadi dd-mm-yyyy
@@ -73,8 +75,11 @@
                             }
                         }
                         ?>
+                        </tbody>
                 </table>
             </div>
+        </div>
+</div>
 
             <script src="<?php echo base_url('assets/libraries/bootstrap-datepicker/js/bootstrap-datepicker.min.js'); ?>"></script> <!-- Load file bootstrap-datepicker.min.js -->
             <script>
