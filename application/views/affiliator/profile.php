@@ -5,65 +5,60 @@
     <!--begin::Profile 2-->
     <div class="d-flex flex-row">
             <!--begin::Aside-->
-            <div class="flex-row-auto offcanvas-mobile w-300px w-xl-350px" id="kt_profile_aside">
+            <div class="flex-row-auto offcanvas-mobile w-300px w-xxl-350px" id="kt_profile_aside">
                 <!--begin::Card-->
-                <div class="card card-custom">
+                <div class="card card-custom card-stretch">
                     <!--begin::Body-->
-                    <div class="card-body pt-15">
-                         <!--begin::User-->
-                         <div class="text-center mb-10">
-                            <div class="symbol symbol-60 symbol-circle symbol-xl-90">
-                                <!-- <img class="symbol symbol-60 symbol-circle symbol-xl-90" src="<?= base_url('assets/media/users/default.jpg'); ?>"> -->
-			                    <span class="symbol-label text-success text-uppercase font-weight-bolder font-size-h1"><?= substr($this->session->userdata('nama_lengkap'), 0, 1) ?></span>
-                                <i class="symbol-badge symbol-badge-bottom bg-success"></i>
+                    <div class="card-body pt-4">
+                         <!--begin::Toolbar-->
+                            <div class="d-flex justify-content-end">
+                                <div class="dropdown dropdown-inline">
+                                    <i class="ki ki-bold-more-hor"></i>
+                                </div>  
                             </div>
-
-                            <h4 class="font-weight-bold my-2">
-                                <?= $user['nama_lengkap']; ?>
-                            </h4>
-                            <div class="text-muted mb-2">
-                                <?= $user['role']; ?>
+                            <!--end::Toolbar-->
+                            
+                        <!--begin::User-->
+                        <div class="d-flex align-items-center">
+                            <div class="symbol symbol-60 symbol-xxl-100 mr-5 align-self-start align-self-xxl-center">
+                                <div class="symbol-label" style="background-image:url('assets/media/users/300_21.jpg')"></div>
+                                <i class="symbol-badge bg-success"></i>
+                            </div>
+                            <div>
+                                <a href="<?= base_url().'affiliator/profile/' ?>" class="font-weight-bolder font-size-h5 text-dark-75 text-hover-primary">
+                                    <?= $user['nama_lengkap']; ?>
+                                </a>
+                                <div class="text-muted">
+                                    <?= $user['role']; ?>
+                                </div>
+                                <div class="mt-2">
+                                    <a href="<?= $user['link_fb']; ?>" class="btn btn-icon btn-circle btn-light-facebook mr-2 "><i class="socicon-facebook"></i></a>
+                                    <a href="<?= $user['link_ig']; ?>" class="btn btn-icon btn-circle btn-light-instagram mr-2"><i class="socicon-instagram"></i></a>
+                                    <a href="<?= $user['link_yutub']; ?>" class="btn btn-icon btn-circle btn-light-youtube"><i class="socicon-youtube"></i></a>
+                                </div>
                             </div>
                         </div>
                         <!--end::User-->
 
                         <!--begin::Contact-->
-                        <div class="mb-8 text-center">
-                            <a href="<?= $user['link_fb']; ?>" class="btn btn-icon btn-circle btn-light-facebook mr-2">
-                                <i class="socicon-facebook"></i>
-                            </a>
-                            <a href="<?= $user['link_ig']; ?>" class="btn btn-icon btn-circle btn-light-instagram mr-2">
-                                <i class="socicon-instagram"></i>
-                            </a>
-                            <a href="<?= $user['link_yutub']; ?>" class="btn btn-icon btn-circle btn-light-youtube">
-                                <i class="socicon-youtube"></i>
-                            </a>
-                        </div>
-                        <!--end::Contact-->
-
-                
-                            <!--begin::Contact-->
-                            <div class="pt-6 pb-8">
-                                <div class="d-flex align-items-center justify-content-between mb-2">
-                                    <span class="font-weight-bold mr-2">Name:</span>
-                                    <span class="text-muted"><?= $user['nama_lengkap']; ?></span>
-                                </div>
-                                <div class="d-flex align-items-center justify-content-between mb-2">
-                                    <span class="font-weight-bold mr-2">Email:</span>
-                                    <span class="text-muted"><?= $user['email']; ?></span>
-                                </div>
-                                <div class="d-flex align-items-center justify-content-between mb-2">
-                                    <span class="font-weight-bold mr-2">Phone:</span>
-                                    <span class="text-muted"><?= $user['no_hp']; ?></span>
-                                </div>
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <span class="font-weight-bold mr-2">Location:</span>
-                                    <span class="text-muted"><?= $user['alamat_lengkap']; ?></span>
-                                </div>
+                        <div class="py-9">
+                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                <span class="font-weight-bold mr-2">Name:</span>
+                                <span class="text-muted"><?= $user['nama_lengkap']; ?></span>
                             </div>
-                            <!-- <div class="d-flex align-items-center justify-content-between mb-3">
-                                <span class="text-muted">Member since <?= date('d F Y',strtotime($user['created_at'])); ?></span>
-                            </div> -->
+                            <div class="d-flex align-items-center justify-content-between mb-2">
+                                <span class="font-weight-bold mr-2">Email:</span>
+                                <span class="text-muted"><?= $user['email']; ?></span>
+                            </div>
+                            <div class="d-flex align-items-center justify-content-between">
+                                <span class="font-weight-bold mr-2">Phone:</span>
+                                <span class="text-muted"><?= $user['no_hp']; ?></span>
+                            </div>
+                            <div class="d-flex align-items-center justify-content-between">
+                                <span class="font-weight-bold mr-2">Location:</span>
+                                <span class="text-muted"><?= $user['alamat_lengkap']; ?></span>
+                            </div>
+                        </div>
                         <!--end::Contact-->
 
                         <!--begin::Nav-->
@@ -118,7 +113,6 @@
                             </div>
                         </div>
                         <!--end::Nav-->
-
                     </div>
                     <!--end::Body-->
                 </div>
@@ -126,93 +120,93 @@
             </div>
             <!--end::Aside-->
 
-            <!--begin::Content-->
-            <div class="flex-row-fluid ml-lg-8">
-                <!--begin::Row-->
-                <div class="row">
-                    <div class="col-lg-6"> 
-                        <!--begin::List Widget 10-->
-                        <div class="card card-custom  card-stretch gutter-b">
-                            <!--begin::Card-->
-                            <div class="card" style="width: 35rem;">
-                                <!--begin::Header-->
-                                    <div class="card-header">
-                                        <div class="card-title align-items-start flex-column">
-                                            <h3 class="card-label font-weight-bolder text-dark">Personal Information</h3>
-                                            <span class="text-muted font-weight-bold font-size-sm mt-1">Member since <?= date('d F Y',strtotime($user['created_at'])); ?></span>
+    <div class="flex-row-fluid ml-lg-8">
+        <!--begin::Advance Table: Widget 7-->
+        <div class="card card-custom gutter-b">
+            <!--begin::Header-->
+            <div class="card-header border-0 pt-5">
+                <h3 class="card-title align-items-start flex-column">
+                    <span class="card-label font-weight-bolder text-dark">Personal Information</span>
+                    <span class="text-muted font-weight-bold font-size-sm mt-3">Member since <?= date('d F Y',strtotime($user['created_at'])); ?></span>
+                </h3>
+            </div>
+            <!--end::Header-->
+
+            <!--begin::Body-->
+            <div class="card-body pt-2 pb-0 mt-n3">
+                <div class="tab-content mt-5" id="myTabTables12">
+                    <!--begin::Tap pane-->
+                    <div class="tab-pane fade show active" id="kt_tab_pane_12_3" role="tabpanel" aria-labelledby="kt_tab_pane_12_3">
+                        <!--begin::Table-->
+                        <div class="table">
+                                <!-- <tbody> -->
+                                    <!--begin::Form Group-->
+                                    <div class="form-group row">
+                                        <div class=" col-xl-12 d-flex align-items-center justify-content-between ">
+                                            <span class="font-weight-bold mr-6">Name Full:</span>
+                                            <span class="text-muted"><?= $user['nama_lengkap']; ?></span>
                                         </div>
                                     </div>
-                                <!--end::Header-->
-
-                                <!--begin::Form-->
-                                <?= $this->session->flashdata('message'); ?>
-                                <form action="<?= base_url('affiliator/edit_profile/updateUser') ?>" method="get" class="form offcanvas-mobile w-350px w-xxl-750px">
-                                    <div class="card-body" style="width: 35rem;">
-                                    <!--begin::Heading-->
-                                    <!--begin::Form Group-->
-                                        <div class="form-group row">
-                                            <div class=" col-xl-12 d-flex align-items-center justify-content-between ">
-                                                <span class="font-weight-bold mr-6">Name Full:</span>
-                                                <span class="text-muted"><?= $user['nama_lengkap']; ?></span>
-                                            </div>
-                                        </div>
+                                    <!--end::Form Group-->
                                     <!--begin::Form Group-->
                                     <div class="form-group row">
-                                            <div class=" col-xl-12 col-lg-3 d-flex align-items-center justify-content-between ">
-                                                <span class="font-weight-bold mr-6">Province:</span>
-                                                <span class="text-muted"><?= $user['province_name']; ?></span>
-                                            </div>
+                                        <div class=" col-xl-12 col-lg-3 d-flex align-items-center justify-content-between ">
+                                            <span class="font-weight-bold mr-6">Province:</span>
+                                            <span class="text-muted"><?= $user['province_name']; ?></span>
                                         </div>
+                                    </div>
+                                    <!--end::Form Group-->
                                     <!--begin::Form Group-->
                                     <div class="form-group row">
-                                            <div class=" col-xl-12 col-lg-3 d-flex align-items-center justify-content-between ">
-                                                <span class="font-weight-bold mr-6">County/City:</span>
-                                                <span class="text-muted"><?= $user['city_name']; ?></span>
-                                            </div>
+                                        <div class=" col-xl-12 col-lg-3 d-flex align-items-center justify-content-between ">
+                                            <span class="font-weight-bold mr-6">County/City:</span>
+                                            <span class="text-muted"><?= $user['city_name']; ?></span>
                                         </div>
+                                    </div>
+                                    <!--end::Form Group-->
                                     <!--begin::Form Group-->
                                     <div class="form-group row">
-                                            <div class=" col-xl-12 col-lg-3 d-flex align-items-center justify-content-between ">
-                                                <span class="font-weight-bold mr-6">District:</span>
-                                                <span class="text-muted"><?= $user['district_name']; ?></span>
-                                            </div>
+                                        <div class=" col-xl-12 col-lg-3 d-flex align-items-center justify-content-between ">
+                                            <span class="font-weight-bold mr-6">District:</span>
+                                            <span class="text-muted"><?= $user['district_name']; ?></span>
                                         </div>
+                                    </div>
+                                    <!--end::Form Group-->
                                     <!--begin::Form Group-->
                                     <div class="form-group row">
-                                            <div class=" col-xl-12 col-lg-3 d-flex align-items-center justify-content-between ">
-                                                <span class="font-weight-bold mr-6">Complete Address:</span>
-                                                <span class="text-muted"><?= $user['alamat_lengkap']; ?></span>
-                                            </div>
+                                        <div class=" col-xl-12 col-lg-3 d-flex align-items-center justify-content-between ">
+                                            <span class="font-weight-bold mr-6">Complete Address:</span>
+                                            <span class="text-muted"><?= $user['alamat_lengkap']; ?></span>
                                         </div>
+                                    </div>
                                     <!--begin::Form Group-->
                                     <div class="form-group row">
-                                            <div class=" col-xl-12 col-lg-3 d-flex align-items-center justify-content-between ">
-                                                <span class="font-weight-bold mr-6">Email Address:</span>
-                                                <span class="text-muted"><?= $user['email']; ?></span>
-                                            </div>
+                                        <div class=" col-xl-12 col-lg-3 d-flex align-items-center justify-content-between ">
+                                            <span class="font-weight-bold mr-6">Email Address:</span>
+                                            <span class="text-muted"><?= $user['email']; ?></span>
                                         </div>
+                                    </div>
+                                    <!--end::Form Group-->
                                     <!--begin::Form Group-->
                                     <div class="form-group row">
-                                            <div class=" col-xl-12 col-lg-3 d-flex align-items-center justify-content-between ">
-                                                <span class="font-weight-bold mr-6">Phone Number:</span>
-                                                <span class="text-muted"><?= $user['no_hp']; ?></span>
-                                            </div>
+                                        <div class=" col-xl-12 col-lg-3 d-flex align-items-center justify-content-between ">
+                                            <span class="font-weight-bold mr-6">Phone Number:</span>
+                                            <span class="text-muted"><?= $user['no_hp']; ?></span>
                                         </div>
-                                    
-                                </form>
-                                <!--END::Form Group-->
-                            </div>
-                            <!--end::Card-->
-                            
+                                    </div>
+                                    <!--end::Form Group-->
+                                <!-- </tbody> -->
                         </div>
-                        <!--end: List Widget 10-->
+                        <!--end::Table-->
                     </div>
-                    <!-- end::col -->
+                    <!--end::Tap pane-->
                 </div>
-                <!-- end::row -->
-
+            </div>
+            <!--end::Body-->
         </div>
-        <!--end::Content-->
+        <!--end::Advance Table Widget 7-->
+    </div>
+
     </div>
     <!--end::Profile 2-->
 </div>    

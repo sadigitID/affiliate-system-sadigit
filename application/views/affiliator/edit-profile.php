@@ -3,48 +3,48 @@
 <body id="kt_body" class="header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable page-loading">
     <!--begin::Container-->
     <div class=" container ">
-        <!--begin::Profile 2-->
+
+        <!-- TRYING /////////////////////////////// -->
         <div class="d-flex flex-row">
             <!--begin::Aside-->
-            <div class="flex-row-auto offcanvas-mobile w-300px w-xl-350px" id="kt_profile_aside">
-                <!--begin::Card-->
-                <div class="card card-custom">
+            <div class="flex-row-auto offcanvas-mobile w-300px w-xxl-350px" id="kt_profile_aside">
+                <!--begin::Profile Card-->
+                <div class="card card-custom card-stretch">
                     <!--begin::Body-->
-                    <div class="card-body pt-15">
-                        <!--begin::User-->
-                        <div class="text-center mb-10">
-                            <div class="symbol symbol-60 symbol-circle symbol-xl-90">
-                                <!-- <img class="symbol symbol-60 symbol-circle symbol-xl-90" src="<?= base_url('assets/media/users/default.jpg'); ?>"> -->
-                                <span class="symbol-label text-success text-uppercase font-weight-bolder font-size-h1"><?= substr($this->session->userdata('nama_lengkap'), 0, 1) ?></span>
-                                <i class="symbol-badge symbol-badge-bottom bg-success"></i>
+                    <div class="card-body pt-4">
+                        <!--begin::Toolbar-->
+                        <div class="d-flex justify-content-end">
+                            <div class="dropdown dropdown-inline">
+                                <i class="ki ki-bold-more-hor"></i>
                             </div>
+                        </div>
+                        <!--end::Toolbar-->
 
-                            <h4 class="font-weight-bold my-2">
-                                <?= $user['nama_lengkap']; ?>
-                            </h4>
-                            <div class="text-muted mb-2">
-                                <?= $user['role']; ?>
+                        <!--begin::User-->
+                        <div class="d-flex align-items-center">
+                            <div class="symbol symbol-60 symbol-xxl-100 mr-5 align-self-start align-self-xxl-center">
+                                <div class="symbol-label" style="background-image:url('assets/media/users/300_21.jpg')">
+                                </div>
+                                <i class="symbol-badge bg-success"></i>
+                            </div>
+                            <div>
+                                <a href="<?= base_url().'affiliator/profile/' ?>" class="font-weight-bolder font-size-h5 text-dark-75 text-hover-primary">
+                                    <?= $user['nama_lengkap']; ?>
+                                </a>
+                                <div class="text-muted">
+                                    <?= $user['role']; ?>
+                                </div>
+                                <div class="mt-2">
+                                    <a href="<?= $user['link_fb']; ?>" class="btn btn-icon btn-circle btn-light-facebook mr-2 "><i class="socicon-facebook"></i></a>
+                                    <a href="<?= $user['link_ig']; ?>" class="btn btn-icon btn-circle btn-light-instagram mr-2"><i class="socicon-instagram"></i></a>
+                                    <a href="<?= $user['link_yutub']; ?>" class="btn btn-icon btn-circle btn-light-youtube"><i class="socicon-youtube"></i></a>
+                                </div>
                             </div>
                         </div>
                         <!--end::User-->
 
                         <!--begin::Contact-->
-                        <div class="mb-8 text-center">
-                            <a href="<?= $user['link_fb']; ?>" class="btn btn-icon btn-circle btn-light-facebook mr-2">
-                                <i class="socicon-facebook"></i>
-                            </a>
-                            <a href="<?= $user['link_ig']; ?>" class="btn btn-icon btn-circle btn-light-instagram mr-2">
-                                <i class="socicon-instagram"></i>
-                            </a>
-                            <a href="<?= $user['link_yutub']; ?>" class="btn btn-icon btn-circle btn-light-youtube">
-                                <i class="socicon-youtube"></i>
-                            </a>
-                        </div>
-                        <!--end::Contact-->
-
-
-                        <!--begin::Contact-->
-                        <div class="pt-6 pb-8">
+                        <div class="py-9">
                             <div class="d-flex align-items-center justify-content-between mb-2">
                                 <span class="font-weight-bold mr-2">Name:</span>
                                 <span class="text-muted"><?= $user['nama_lengkap']; ?></span>
@@ -53,7 +53,7 @@
                                 <span class="font-weight-bold mr-2">Email:</span>
                                 <span class="text-muted"><?= $user['email']; ?></span>
                             </div>
-                            <div class="d-flex align-items-center justify-content-between mb-2">
+                            <div class="d-flex align-items-center justify-content-between">
                                 <span class="font-weight-bold mr-2">Phone:</span>
                                 <span class="text-muted"><?= $user['no_hp']; ?></span>
                             </div>
@@ -105,7 +105,7 @@
                                 </a>
                             </div>
                             <div class="navi-item mb-2">
-                                <a href="<?= base_url('affiliator/change_password') ?>" class="navi-link py-4 ">
+                                <a href="<?= base_url('affiliator/change_password/') ?>" class="navi-link py-4 ">
                                     <span class="navi-icon mr-2">
                                         <span class="svg-icon">
                                             <!--begin::Svg Icon | path:assets/media/svg/icons/General/User.svg--><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
@@ -123,142 +123,115 @@
                                     </span>
                                 </a>
                             </div>
+
                         </div>
                         <!--end::Nav-->
-
                     </div>
                     <!--end::Body-->
                 </div>
-                <!--end::Card-->
+                <!--end::Profile Card-->
             </div>
             <!--end::Aside-->
 
             <!--begin::Content-->
             <div class="flex-row-fluid ml-lg-8">
-                <!--begin::Row-->
-                <div class="row">
-                    <div class="col-lg-6">
-                        <!--begin::List Widget 10-->
-                        <div class="card card-custom  card-stretch gutter-b">
-                            <!--begin::Card-->
-                            <div class="card" style="width: 35rem;">
-                                <!--begin::Header-->
-                                <div class="card-header">
-                                    <div class="card-title align-items-start flex-column">
-                                        <h3 class="card-label font-weight-bolder text-dark">Personal Information</h3>
-                                        <span class="text-muted font-weight-bold font-size-sm mt-1">Change your personal information</span>
+                <!--begin::Card-->
+                <div class="card card-custom card-stretch">
+                    <!--begin::Header-->
+                    <div class="card-header py-3">
+                        <div class="card-title align-items-start flex-column">
+                            <h3 class="card-label font-weight-bolder text-dark">Personal Information</h3>
+                            <span class="text-muted font-weight-bold font-size-sm mt-1">Update your personal informaiton</span>
+                        </div>
+                    </div>
+                    <!--end::Header-->
+
+                    <!--begin::Form-->
+                    <form class="form" action="<?= base_url() .'affiliator/edit_profile/updateUser/' ?>" method="post">
+                        <?= $this->session->flashdata('message'); ?>
+                        <!--begin::Body-->
+                        <input type="hidden" value="<?= $user['id_user']; ?>" name="id_user">
+                        <div class="card-body">
+                            <div class="form-group row">
+                                <label class="col-xl-3 col-lg-3 col-form-label">Full Name</label>
+                                <div class="col-lg-9 col-xl-6">
+                                    <input class="form-control form-control-lg form-control-solid" type="text" id="nama_lengkap" name="nama_lengkap" value="<?= $user['nama_lengkap']; ?>" />
+                                    <?= form_error('nama_lengkap', '<small class="text-danger pl-3">', '</small>'); ?>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-xl-3 col-lg-3 col-form-label">Province</label>
+                                <div class="col-lg-9 col-xl-6">
+                                    <select id="province_id" name="province_id" class="form-control form-control-lg form-control-solid">
+                                        <option value="">-- Select Province --</option>
+                                        <?php
+                                        foreach ($provinces as $province) {
+                                        ?>
+                                            <option value="<?php echo $province['province_id']; ?>"><?php echo $province['province_name']; ?></option>}
+                                        <?php
+                                        }
+                                        ?>
+                                    </select>
+                                </div>
+                                <?= form_error('province_id', '<small class="text-danger pl-3">', '</small>'); ?>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-xl-3 col-lg-3 col-form-label">County/City</label>
+                                <div class="col-lg-9 col-xl-6">
+                                    <select id="city_id" name="city_id" class="form-control form-control-lg form-control-solid">
+                                        <option value="">-- Select County/City --</option>
+                                    </select>
+                                </div>
+                                <?= form_error('city_id', '<small class="text-danger pl-3">', '</small>'); ?>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-xl-3 col-lg-3 col-form-label">District</label>
+                                <div class="col-lg-9 col-xl-6">
+                                    <select id="district_id" name="district_id" class="form-control form-control-lg form-control-solid">
+                                        <option value="">-- Select District --</option>
+                                    </select>
+                                </div>
+                                <?= form_error('district_id', '<small class="text-danger pl-3">', '</small>'); ?>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-xl-3 col-lg-3 col-form-label">Complete Address</label>
+                                <div class="col-lg-9 col-xl-6">
+                                    <div class="input-group input-group-lg input-group-solid">
+                                        <input id="alamat_lengkap" name="alamat_lengkap" class="form-control form-control-lg form-control-solid" type="text" value="<?= $user['alamat_lengkap']; ?>" />
+                                        <?= form_error('alamat_lengkap', '<small class="text-danger pl-3">', '</small>'); ?>
                                     </div>
                                 </div>
-                                <!--end::Header-->
-
-                                <!--begin::Form-->
-                                <?= $this->session->flashdata('message'); ?>
-                                <form action="<?= base_url() . 'affiliator/edit_profile/updateUser/' ?>" method="post" class="form offcanvas-mobile w-350px w-xxl-750px">
-                                    <div class="card-body" style="width: 35rem;">
-                                        <!--begin::Heading-->
-                                        <input type="hidden" value="<?= $user['id_user']; ?>" name="id_user">
-                                        <!--begin::Form Group-->
-                                        <div class="form-group row">
-                                            <label class="col-xl-6 col-lg-3 col-form-label" for="nama_lengkap">Full Name</label>
-                                            <div class="col-xl-12">
-                                                <div class="input-group input-group-lg input-group-solid">
-                                                    <input class="form-control form-control-lg form-control-solid" type="text" id="nama_lengkap" name="nama_lengkap" value="<?= $user['nama_lengkap']; ?>" />
-                                                    <?= form_error('nama_lengkap', '<small class="text-danger pl-3">', '</small>'); ?>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!--begin::Form Group-->
-                                        <div class="form-group row">
-                                            <label class="col-xl-6 col-lg-3 col-form-label" for="province_id">Province</label>
-                                            <div class="col-xl-12">
-                                                <select id="province_id" name="province_id" class="form-control form-control-lg form-control-solid">
-                                                    <!-- <option value="">-- Pilih Kabupaten/Kota --</option> -->
-                                                    <option value="">-- Select Province --</option>
-                                                    <?php
-                                                    foreach ($provinces as $province) {
-                                                    ?>
-                                                        <option value="<?php echo $province['province_id']; ?>"><?php echo $province['province_name']; ?></option>}
-                                                    <?php
-                                                    }
-                                                    ?>
-                                                </select>
-                                            </div>
-                                            <?= form_error('province_id', '<small class="text-danger pl-3">', '</small>'); ?>
-                                        </div>
-                                        <!--begin::Form Group-->
-                                        <div class="form-group row">
-                                            <label class="col-xl-6 col-lg-3 col-form-label" for="city_id">County/City </label>
-                                            <div class="col-xl-12">
-                                                <select id="city_id" name="city_id" class="form-control form-control-lg form-control-solid">
-                                                    <option value="">-- Select County/City --</option>
-                                                </select>
-                                            </div>
-                                            <?= form_error('city_id', '<small class="text-danger pl-3">', '</small>'); ?>
-                                        </div>
-                                        <!--begin::Form Group-->
-                                        <div class="form-group row">
-                                            <label class="col-xl-6 col-lg-3 col-form-label" for="district_id">District</label>
-                                            <div class="col-xl-12">
-                                                <select id="district_id" name="district_id" class="form-control form-control-lg form-control-solid">
-                                                    <option value="">-- Select District --</option>
-                                                </select>
-                                            </div>
-                                            <?= form_error('district_id', '<small class="text-danger pl-3">', '</small>'); ?>
-                                        </div>
-                                        <!--begin::Form Group-->
-                                        <div class="form-group row">
-                                            <label class="col-xl-6 col-lg-3 col-form-label" for="alamat_lengkap">Complete Address</label>
-                                            <div class="col-xl-12">
-                                                <div class="input-group input-group-lg input-group-solid">
-                                                    <input id="alamat_lengkap" name="alamat_lengkap" class="form-control form-control-lg form-control-solid" type="text" value="<?= $user['alamat_lengkap']; ?>" />
-                                                    <?= form_error('alamat_lengkap', '<small class="text-danger pl-3">', '</small>'); ?>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!--begin::Form Group-->
-                                        <div class="form-group row">
-                                            <label class="col-xl-6 col-lg-3 col-form-label" for="email">Email Address</label>
-                                            <div class="col-xl-12">
-                                                <div class="input-group input-group-lg input-group-solid">
-                                                    <div class="input-group-prepend"><span class="input-group-text"><i class="la la-at"></i></span></div>
-                                                    <input id="email" name="email" type="text" class="form-control form-control-lg form-control-solid" value="<?= $user['email']; ?>" readonly />
-                                                    <?= form_error('email', '<small class="text-danger pl-3">', '</small>'); ?>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!--begin::Form Group-->
-                                        <div class="form-group row">
-                                            <label class="col-xl-6 col-lg-3 col-form-label" for="no_hp">Phone Number/WhatsApp</label>
-                                            <div class="col-xl-12">
-                                                <div class="input-group input-group-lg input-group-solid">
-                                                    <input id="no_hp" name="no_hp" class="form-control form-control-lg form-control-solid" type="text" value="<?= $user['no_hp']; ?>" />
-                                                    <?= form_error('no_hp', '<small class="text-danger pl-3">', '</small>'); ?>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <div class="col-xl-12">
-                                                <button type="sumbit" class="btn btn-success mr-2">Save Changes</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                                <!--END::Form Group-->
                             </div>
-                            <!--end::Card-->
-
+                            <div class="form-group row">
+                                <label class="col-xl-3 col-lg-3 col-form-label">Email Address</label>
+                                <div class="col-lg-9 col-xl-6">
+                                    <div class="input-group input-group-lg input-group-solid">
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-at"></i></span></div>
+                                        <input id="email" name="email" type="text" class="form-control form-control-lg form-control-solid" value="<?= $user['email']; ?>" readonly /> <?= form_error('email', '<small class="text-danger pl-3">', '</small>'); ?>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-xl-3 col-lg-3 col-form-label">Phone Number/WhatsApp</label>
+                                <div class="col-lg-9 col-xl-6">
+                                    <div class="input-group input-group-lg input-group-solid">
+                                        <input id="no_hp" name="no_hp" class="form-control form-control-lg form-control-solid" type="text" value="<?= $user['no_hp']; ?>" />
+                                        <?= form_error('no_hp', '<small class="text-danger pl-3">', '</small>'); ?>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-toolbar">
+                                <button type="submit" class="btn btn-success mr-2">Save Changes</button>
+                            </div>
                         </div>
-                        <!--end: List Widget 10-->
-                    </div>
-                    <!-- end::col -->
+                        <!--end::Body-->
+                    </form>
+                    <!--end::Form-->
                 </div>
-                <!-- end::row -->
-
             </div>
             <!--end::Content-->
         </div>
-        <!--end::Profile 2-->
+
     </div>
     <!--end::Container-->
 </body>
