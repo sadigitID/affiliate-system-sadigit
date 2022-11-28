@@ -126,12 +126,25 @@ class Reportpesanan_excel extends CI_Controller
 
     foreach ($export as $data) {
       $tanggal_pesanan = date('d-m-Y', strtotime($data->tanggal_pesanan)); // Ubah format tanggal jadi dd-mm-yyyy
+
+      if ($data->status_komisi == 1) {
+        $status_komisi = 'Pesanan Masuk';
+      } else {
+        $status_komisi = 'Pesanan Selesai';
+      }
+
+      if ($data->status_pesanan == 1) {
+          $status_pesanan = 'Pesanan Masuk';
+      } else {
+          $status_pesanan = 'Pesanan Selesai';
+      }
+
       $excel->getActiveSheet()->setCellValue('A' . $numrow, $data->id_pesanan);
       $excel->getActiveSheet()->setCellValue('B' . $numrow, $data->nama_produk);
-      $excel->getActiveSheet()->setCellValue('C' . $numrow, $data->status_pesanan);
+      $excel->getActiveSheet()->setCellValue('C' . $numrow, $status_pesanan);
       $excel->getActiveSheet()->setCellValue('D' . $numrow, $data->jml_komisi);
       $excel->getActiveSheet()->setCellValue('E' . $numrow, $tanggal_pesanan);
-      $excel->getActiveSheet()->setCellValue('F' . $numrow, $data->status_komisi);
+      $excel->getActiveSheet()->setCellValue('F' . $numrow, $status_komisi);
 
       // Apply style row yang telah kita buat tadi ke masing-masing baris (isi tabel)
       $excel->getActiveSheet()->getStyle('A' . $numrow)->applyFromArray($style_row);

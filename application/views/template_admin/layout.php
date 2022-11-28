@@ -1,7 +1,7 @@
 <!--begin::Main-->
-
 <?php $this->load->view('template_admin/partials/_header-mobile') ?>
 <div class="d-flex flex-column flex-root">
+	
 	<!--begin::Page-->
 	<div class="d-flex flex-row flex-column-fluid page">
 		<?php $this->load->view('template_admin/partials/_aside') ?>
@@ -17,16 +17,14 @@
 					<?php $this->load->view("$view") ?>
 				</div>
 			</div>
-
 			<!--end::Content-->
 
 			<?php $this->load->view('template_admin/partials/_footer') ?>
 		</div>
-
 		<!--end::Wrapper-->
+
 	</div>
-
 	<!--end::Page-->
-</div>
 
+</div>
 <!--end::Main-->

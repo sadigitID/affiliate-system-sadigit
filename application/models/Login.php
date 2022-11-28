@@ -108,7 +108,7 @@ class Login extends CI_Model
             'crlf' => "\r\n",
             'newline' => "\r\n"
           );
-
+          
         $this->load->library('email');
         $this->email->initialize($config);
 
