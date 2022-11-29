@@ -102,11 +102,6 @@
 		$('#modal_rekening').modal('show')
 	}
 
-	// const printPDF = async () => {
-	// 	$('#form_printPDF')[0].reset()
-	// 	$('#modal_printPDF').modal('show')
-	// }
-
 	const _edit = async (id_rek) => {
 		await $.ajax({
 			type: "post",

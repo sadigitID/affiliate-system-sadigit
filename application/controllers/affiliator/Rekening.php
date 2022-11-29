@@ -29,10 +29,10 @@ class Rekening extends CI_Controller
 	public function tb_rekening()
 	{
 		header('Content-Type: application/json');
-
 		$tabel = 'tb_rekening';
 		$column_order = array();
-		$coloumn_search = array('id_rek', 'nama_bank', 'nama_pemilik_rek', 'no_rek', 'id_user');
+		$coloumn_search = array( 'tb_bank.nama_bank', 'nama_pemilik_rek', 'no_rek');
+		// $coloumn_search = array('tb_pesanan.nama_produk', 'status_pesanan', 'tanggal_pesanan', 'status_komisi', 'jml_komisi');
 		$select = "tb_rekening.*, tb_bank.nama_bank, tb_users.id_user";
 		$order_by = array('id_rek' => 'asc');
 		$join[] = ['field' => 'tb_bank', 'condition' => 'tb_rekening.id_bank = tb_bank.id_bank', 'direction' => 'left'];
