@@ -88,26 +88,26 @@ class Login extends CI_Model
 
     private function _sendEmail($token, $type)
     {
-        // $config = [
-        //     'protocol'  => 'smtp',
-        //     'smtp_host' => 'ssl://smtp.googlemail.com',
-        //     'smtp_user' => 'gabudbanget@gmail.com',
-        //     'smtp_pass' => '1234567890',
-        //     'smtp_port' => 465,
-        //     'mailtype'  => 'html',
-        //     'charset'   => 'utf-8',
-        //     'newline'   => "\r\n"
-        // ];
+        $config = [
+            'protocol'  => 'smtp',
+            'smtp_host' => 'ssl://smtp.googlemail.com',
+            'smtp_user' => 'gabudbanget@gmail.com',
+            'smtp_pass' => '1234567890',
+            'smtp_port' => 465,
+            'mailtype'  => 'html',
+            'charset'   => 'utf-8',
+            'newline'   => "\r\n"
+        ];
 
-        $config = Array(
-            'protocol' => 'smtp',
-            'smtp_host' => 'smtp.mailtrap.io',
-            'smtp_port' => 2525,
-            'smtp_user' => '5cd193e14cca6d',
-            'smtp_pass' => '6ea6946ee15b3b',
-            'crlf' => "\r\n",
-            'newline' => "\r\n"
-          );
+        // $config = Array(
+        //     'protocol' => 'smtp',
+        //     'smtp_host' => 'smtp.mailtrap.io',
+        //     'smtp_port' => 2525,
+        //     'smtp_user' => '5cd193e14cca6d',
+        //     'smtp_pass' => '6ea6946ee15b3b',
+        //     'crlf' => "\r\n",
+        //     'newline' => "\r\n"
+        //   );
           
         $this->load->library('email');
         $this->email->initialize($config);

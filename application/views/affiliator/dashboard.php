@@ -62,7 +62,7 @@
                     </svg>
                     <!--end::Svg Icon-->
                 </span>
-                <span class="card-title font-weight-bolder text-dark-75 font-size-h2 mb-0 mt-6 d-block"><?= $this->bonus_model->total_bonus(); ?></span>
+                <span class="card-title font-weight-bolder text-dark-75 font-size-h2 mb-0 mt-6 d-block"><?= $total_bns = "Rp " . number_format($this->bonus_model->total_bonus(), 2, ',', '.'); ?></span>
                 <span class="font-weight-bold text-muted  font-size-sm">Total Bonus</span>
             </div>
             <!--end::Body-->
@@ -93,7 +93,7 @@
                 </tr>
                 <tr>
                     <th colspan="3">Total</th>
-                    <th><?= $this->m_sumkomisi->jml_komisi(); ?></th>
+                    <th><?= $jml_kms = "Rp " . number_format($this->m_sumkomisi->jml_komisi(), 2, ',', '.'); ?></th>
                 </tr>
             </thead>
         </table>

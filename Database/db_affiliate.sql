@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 16, 2022 at 07:26 AM
+-- Generation Time: Dec 01, 2022 at 04:47 AM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 7.2.31
 
@@ -7721,6 +7721,14 @@ CREATE TABLE `tb_bonus` (
   `tanggal_bonus` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `tb_bonus`
+--
+
+INSERT INTO `tb_bonus` (`id_bonus`, `id_user`, `jml_bonus`, `catatan`, `tanggal_bonus`) VALUES
+(1, 1, 1000, 'kerja bagus! A+', '2022-11-17'),
+(5, 1, 10000, 'You did really well!', '2022-11-28');
+
 -- --------------------------------------------------------
 
 --
@@ -7747,7 +7755,10 @@ CREATE TABLE `tb_pesanan` (
 --
 
 INSERT INTO `tb_pesanan` (`id_pesanan`, `id_produk`, `id_user`, `nama_produk`, `harga_jual`, `nama_pembeli`, `tanggal_pembayaran`, `tanggal_pesanan`, `foto_pembayaran`, `no_wa_pembeli`, `status_komisi`, `status_pesanan`) VALUES
-(3, 1, 1, 'Smart PBB', 1000000, 'salma', '2022-11-16', '2022-11-16', 'http://localhost/affiliate-system-sadigit-master/f', '123123', '2', '2');
+(3, 1, 1, 'Smart PBB', 1000000, 'salma', '2022-11-16', '2022-11-16', 'http://localhost/affiliate-system-sadigit-master/f', '123123', '2', '2'),
+(6, 2, 1, 'BPHTB Online', 1000000, 'seungcheol', '2022-11-28', '2022-11-28', 'http://localhost/affiliate-system-sadigit-master-n', '123123', '2', '2'),
+(7, 3, 1, 'SIAPDOL', 1000000, 'asdasd', '2022-11-29', '2022-11-28', 'http://localhost/affiliate-system-sadigit-master-n', 'werwer', '2', '2'),
+(8, 7, 1, 'Sidata Pertanahan', 1000000, NULL, NULL, '2022-12-01', NULL, NULL, '1', '1');
 
 -- --------------------------------------------------------
 
@@ -7774,7 +7785,6 @@ INSERT INTO `tb_produk` (`id_produk`, `nama_produk`, `harga_produk`, `jml_komisi
 (3, 'SIAPDOL', 1000000, 50000, 'Dashboard realisasi pajak daerah tersedia di Aplikasi Pajak Daerah Online (SIAPDOL) yang terintegrasi dengan semua jenis pajak daerah diantaranya : Pajak PBB, Pajak BPHTB, 9 Jenis Pajak Daerah (pajak hotel, pajak restoran, pajak hiburan,pajak reklame, pajak penerangan jalan, pajak mineral bukan logam dan batuan, pajak parkir, pajak air tanah, pajak sarang burung walet. Menampilkan Target Realisasi Pajak Daerah secara real time', 'https://www.sadigit.co.id/aplikasi-siapdol/'),
 (4, 'SIPPADU', 1000000, 50000, 'Sistem Pajak Daerah Terpadu Merupakan Aplikasi Berbasis Mobile Dan Berbasis Website Yang Diperuntukkan Bagi Wajib Pajak Atau Objek Pajak Agar Memudahkan Dalam Pelaporan Jenis Pajak Daerah Yang Terdiri Dari Pajak Hotel, Pajak Restoran, Pajak Parkir, Pajak Hiburan, Pajak Reklame, Pajak Sarang Burung Walet, Pajak Penerangan, Pajak Air Tanah Dan Pajak Mineral Bukan Logam Batuan.', 'https://www.sadigit.co.id/aplikasi-sippadu/'),
 (5, 'SIPPUJAAN', 1000000, 50000, 'SIPPUJAAN (Sistem Informasi Pengelolaan Lampu Penerangan Jalan Umum) adalah sebuah aplikasi untuk melaporkan kerusakan atau gangguan pada penerangan jalan umum, pelaporan tersebut dapat  dilakukan oleh masyarakat umum kepada dinas perhubungan melalui aplikasi dengan menandai titik koordinat lampu jalan.', 'https://www.sadigit.co.id/aplikasi-sippujaan/'),
-(6, 'Faslalin', 1000000, 50000, 'Faslalin (Aplikasi Pelaporan Fasilitas Lalu Lintas) adalah sebuah aplikasi untuk melaporkan kerusakan, pengadaan fasilitas lalu lintas seperti lampu lalu lintas, zebra cross oleh masyarakat umum kepada dinas perhubungan.', 'https://www.sadigit.co.id/aplikasi-faslalin/'),
 (7, 'Sidata Pertanahan', 1000000, 50000, 'Sistem informasi yang memudahkan pihak DPKPP dalam mengelola data pertanahan milik pemerinta. Kami siap membantu dinas atau intansi terkait dalam bidang pertanahan untuk pengelolaan pemetaan bidang tanah kedalam kategori desa, pemkab, pemprov dan negara yang dapat disesuaikan dengan keinginan dinas atau intansi anda.', 'https://www.sadigit.co.id/aplikasi-sidata-pertanahan/'),
 (8, 'Smart Resto Enterprise', 1000000, 50000, 'Sistem ini mendukung pencarian wajib pajak pada usaha restoran. Aplikasi ini dipakai oleh dinas BAPPENDA atau Badan Keuangan Daerah untuk menyaring wajib pajak kategori restoran.', 'https://www.sadigit.co.id/aplikasi-smart-resto-enterprise/'),
 (9, 'Sidata Pertanahan', 1000000, 50000, 'Sistem informasi yang memudahkan pihak DPKPP dalam mengelola data pertanahan milik pemerinta. Kami siap membantu dinas atau intansi terkait dalam bidang pertanahan untuk pengelolaan pemetaan bidang tanah kedalam kategori desa, pemkab, pemprov dan negara yang dapat disesuaikan dengan keinginan dinas atau intansi anda.', 'https://www.sadigit.co.id/aplikasi-sidata-pertanahan/');
@@ -7792,6 +7802,13 @@ CREATE TABLE `tb_rekening` (
   `no_rek` varchar(25) NOT NULL,
   `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tb_rekening`
+--
+
+INSERT INTO `tb_rekening` (`id_rek`, `id_bank`, `nama_pemilik_rek`, `no_rek`, `id_user`) VALUES
+(1, 1, 'Salma Azizah', '234', 1);
 
 -- --------------------------------------------------------
 
@@ -7839,7 +7856,7 @@ CREATE TABLE `tb_user_token` (
   `tb_user_token` int(11) NOT NULL,
   `email` varchar(50) NOT NULL,
   `token` varchar(250) NOT NULL,
-  `created_at` date DEFAULT current_timestamp()
+  `created_at` int(11) NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -7942,13 +7959,13 @@ ALTER TABLE `tb_bank`
 -- AUTO_INCREMENT for table `tb_bonus`
 --
 ALTER TABLE `tb_bonus`
-  MODIFY `id_bonus` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_bonus` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tb_pesanan`
 --
 ALTER TABLE `tb_pesanan`
-  MODIFY `id_pesanan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_pesanan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `tb_produk`
@@ -7960,7 +7977,7 @@ ALTER TABLE `tb_produk`
 -- AUTO_INCREMENT for table `tb_rekening`
 --
 ALTER TABLE `tb_rekening`
-  MODIFY `id_rek` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_rek` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tb_users`

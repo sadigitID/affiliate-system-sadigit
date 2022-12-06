@@ -14,7 +14,6 @@ class Pesanan extends CI_Controller
 		$this->load->library('form_validation');
 		$this->load->model('Umum_model', 'umum');
 		$this->load->model('admin/Pesanan_model', 'pesanan');
-
 	}
 
 	public function index()
@@ -61,13 +60,15 @@ class Pesanan extends CI_Controller
 			} else {
 				$status_pesanan = '<p> Pesanan Selesai </p>';
 			}
-			
-			if($list->status_komisi == 1 && $list->status_pesanan == 1){
+
+			if ($list->status_komisi == 1 && $list->status_pesanan == 1) {
 				$komisi = 0;
 			} else {
 				$komisi = $list->jml_komisi;
 			}
 
+			$jml_kms = "Rp " . number_format($komisi, 2, ',', '.');
+			$hrg_jual = "Rp " . number_format($list->harga_jual, 2, ',', '.');
 			$confirm =  "<i class='fas fa-copy btn btn-icon btn-light-primary' onclick={_confirm('$list->id_pesanan')}></i>";
 			$edit =  "<i class='fas fa-edit btn btn-icon btn-light-primary' onclick={_edit('$list->id_pesanan')}></i>";
 			//$hapus =  "<i class='fas fa-trash-alt btn btn-icon btn-light-danger' onclick={_delete('$list->id_pesanan')}></i>";
@@ -76,13 +77,13 @@ class Pesanan extends CI_Controller
 			$row[] = ++$no;
 			$row[] = $list->nama_pembeli;
 			$row[] = $list->nama_produk;
-			$row[] = $list->harga_jual;
+			$row[] = $hrg_jual;
 			$row[] = $list->tanggal_pembayaran;
 			$row[] = $list->foto_pembayaran;
 			$row[] = $list->nama_lengkap;
 			$row[] = $status_pesanan;
 			$row[] = $status_komisi;
-			$row[] = $komisi;
+			$row[] = $jml_kms;
 			$row[] = "<center>
 						$confirm
                        	$edit 
@@ -155,17 +156,17 @@ class Pesanan extends CI_Controller
 
 			$id_pesanan = $this->input->post('id_pesanan');
 
-			$config['max_size']				=2048;
-			$config['upload_path']          = FCPATH.'/foto/';
+			$config['max_size']				= 2048;
+			$config['upload_path']          = FCPATH . '/foto/';
 			$config['allowed_types']        = 'gif|jpg|png|jpeg';
- 
-			$this->load->library('upload' , $config);
+
+			$this->load->library('upload', $config);
 
 			$this->upload->do_upload('foto_pembayaran');
-			$data_image=$this->upload->data('file_name');
-			$location=base_url().'foto/';
-			$pict=$location.$data_image;
-			
+			$data_image = $this->upload->data('file_name');
+			$location = base_url() . 'foto/';
+			$pict = $location . $data_image;
+
 			$payloadData = [
 				'nama_pembeli' => $this->input->post('nama_pembeli'),
 				'tanggal_pembayaran' => $this->input->post('tanggal_pembayaran'),
@@ -182,7 +183,6 @@ class Pesanan extends CI_Controller
 			}
 
 			$data['status'] = true;
-
 		} else {
 			foreach ($_POST as $key => $value) {
 				$data['messages'][$key] = form_error($key);

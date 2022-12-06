@@ -7,9 +7,9 @@ class Reportpesanan_excel extends CI_Controller
   {
     parent::__construct();
     if ($this->session->userdata('role') != "Admin") {
-			$alert = $this->session->set_flashdata('massage', 'Anda Harus Login Sebagai Admin!');
-			redirect(base_url("auth"));
-		}
+      $alert = $this->session->set_flashdata('massage', 'Anda Harus Login Sebagai Admin!');
+      redirect(base_url("auth"));
+    }
     $this->load->model('admin/Pesanan_model', 'excel');
   }
 
@@ -137,29 +137,31 @@ class Reportpesanan_excel extends CI_Controller
     $numrow = 5; // Set baris pertama untuk isi tabel adalah baris ke 5
 
     foreach ($export as $data) {
+      $hrg_jual = "Rp " . number_format($data->harga_jual, 2, ',', '.');
+      $jml_kms = "Rp " . number_format($data->jml_komisi, 2, ',', '.');
       $tanggal_pembayaran = date('d-m-Y', strtotime($data->tanggal_pembayaran)); // Ubah format tanggal jadi dd-mm-yyyy
 
       if ($data->status_komisi == 1) {
-          $status_komisi = 'Pesanan Masuk';
+        $status_komisi = 'Pesanan Masuk';
       } else {
-          $status_komisi = 'Pesanan Selesai';
+        $status_komisi = 'Pesanan Selesai';
       }
 
       if ($data->status_pesanan == 1) {
-          $status_pesanan = 'Pesanan Masuk';
+        $status_pesanan = 'Pesanan Masuk';
       } else {
-          $status_pesanan = 'Pesanan Selesai';
+        $status_pesanan = 'Pesanan Selesai';
       }
 
       $excel->getActiveSheet()->setCellValue('A' . $numrow, $data->id_pesanan);
       $excel->getActiveSheet()->setCellValue('B' . $numrow, $data->nama_pembeli);
       $excel->getActiveSheet()->setCellValue('C' . $numrow, $data->nama_produk);
-      $excel->getActiveSheet()->setCellValue('D' . $numrow, $data->harga_jual);
+      $excel->getActiveSheet()->setCellValue('D' . $numrow, $hrg_jual);
       $excel->getActiveSheet()->setCellValue('E' . $numrow, $status_pesanan);
       $excel->getActiveSheet()->setCellValue('F' . $numrow, $tanggal_pembayaran);
       $excel->getActiveSheet()->setCellValue('G' . $numrow, $data->foto_pembayaran);
       $excel->getActiveSheet()->setCellValue('H' . $numrow, $data->nama_lengkap);
-      $excel->getActiveSheet()->setCellValue('I' . $numrow, $data->jml_komisi);
+      $excel->getActiveSheet()->setCellValue('I' . $numrow, $jml_kms);
       $excel->getActiveSheet()->setCellValue('J' . $numrow, $status_komisi);
       // Apply style row yang telah kita buat tadi ke masing-masing baris (isi tabel)
       $excel->getActiveSheet()->getStyle('A' . $numrow)->applyFromArray($style_row);
@@ -179,13 +181,13 @@ class Reportpesanan_excel extends CI_Controller
 
     // Set width kolom
     $excel->getActiveSheet()->getColumnDimension('A')->setWidth(15); // Set width kolom A
-    $excel->getActiveSheet()->getColumnDimension('B')->setWidth(18); // Set width kolom B
+    $excel->getActiveSheet()->getColumnDimension('B')->setWidth(15); // Set width kolom B
     $excel->getActiveSheet()->getColumnDimension('C')->setWidth(25); // Set width kolom C
-    $excel->getActiveSheet()->getColumnDimension('D')->setWidth(40); // Set width kolom D
+    $excel->getActiveSheet()->getColumnDimension('D')->setWidth(15); // Set width kolom D
     $excel->getActiveSheet()->getColumnDimension('E')->setWidth(15); // Set width kolom A
-    $excel->getActiveSheet()->getColumnDimension('F')->setWidth(15); // Set width kolom A
-    $excel->getActiveSheet()->getColumnDimension('G')->setWidth(15); // Set width kolom A
-    $excel->getActiveSheet()->getColumnDimension('H')->setWidth(15); // Set width kolom A
+    $excel->getActiveSheet()->getColumnDimension('F')->setWidth(20); // Set width kolom A
+    $excel->getActiveSheet()->getColumnDimension('G')->setWidth(25); // Set width kolom A
+    $excel->getActiveSheet()->getColumnDimension('H')->setWidth(20); // Set width kolom A
     $excel->getActiveSheet()->getColumnDimension('I')->setWidth(15); // Set width kolom A
     $excel->getActiveSheet()->getColumnDimension('J')->setWidth(15); // Set width kolom A
     // Set orientasi kertas jadi LANDSCAPE

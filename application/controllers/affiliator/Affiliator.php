@@ -118,16 +118,17 @@ class Affiliator extends CI_Controller
 		$sum = 0;
 
 		foreach ($list as $list) {
-			if($list->status_komisi == 1 && $list->status_pesanan == 1){
+			if ($list->status_komisi == 1 && $list->status_pesanan == 1) {
 				$komisi = 0;
 			} else {
 				$komisi = $list->jml_komisi;
 			}
+			$jml_kms = "Rp " . number_format($komisi, 2, ',', '.');
 
 			$row = array();
 			$row[] = ++$no;
 			$row[] = $list->nama_produk; //mengambil dari tb_produk
-			$row[] = $komisi; //mengambil dari tb_produk
+			$row[] = $jml_kms; //mengambil dari tb_produk
 			$row[] = $list->tanggal_pembayaran;
 			$data[] = $row;
 		}

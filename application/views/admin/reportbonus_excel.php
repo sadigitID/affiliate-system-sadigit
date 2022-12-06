@@ -1,8 +1,10 @@
 <html>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
     <div class="card card-custom" style="padding: 15px;">
         <div class="card-header">
             <div class="card-body">
@@ -50,11 +52,12 @@
                                 echo "<tr><td colspan='5'>Data tidak ada</td></tr>";
                             } else { // Jika jumlah data lebih dari 0 (Berarti jika data ada)
                                 foreach ($export as $data) { // Looping hasil data export
+                                    $jml_bns = "Rp " . number_format($data->jml_bonus, 2, ',', '.');
                                     $tanggal_bonus = date('d-m-Y', strtotime($data->tanggal_bonus)); // Ubah format tanggal jadi dd-mm-yyyy
 
                                     echo "<tr>";
                                     echo "<td>" . $data->nama_lengkap . "</td>";
-                                    echo "<td>" . $data->jml_bonus . "</td>";
+                                    echo "<td>" . $jml_bns . "</td>";
                                     echo "<td>" . $data->catatan . "</td>";
                                     echo "<td>" . $tanggal_bonus . "</td>";
                                     echo "</tr>";
@@ -63,22 +66,23 @@
                             ?>
                     </table>
                 </div>
-            </div>        
+            </div>
         </div>
     </div>
-            <script src="<?php echo base_url('assets/libraries/bootstrap-datepicker/js/bootstrap-datepicker.min.js'); ?>"></script> <!-- Load file bootstrap-datepicker.min.js -->
-            <script>
-                function setDatePicker() {
-                    $(".datepicker").datepicker({
-                        format: "yyyy-mm-dd",
-                        todayHighlight: true,
-                        autoclose: true
-                    }).attr("readonly", "readonly").css({
-                        "cursor": "pointer",
-                        "background": "white"
-                    });
-                }
-            </script>
-            </table>
-            </body>
-            </html>
+    <script src="<?php echo base_url('assets/libraries/bootstrap-datepicker/js/bootstrap-datepicker.min.js'); ?>"></script> <!-- Load file bootstrap-datepicker.min.js -->
+    <script>
+        function setDatePicker() {
+            $(".datepicker").datepicker({
+                format: "yyyy-mm-dd",
+                todayHighlight: true,
+                autoclose: true
+            }).attr("readonly", "readonly").css({
+                "cursor": "pointer",
+                "background": "white"
+            });
+        }
+    </script>
+    </table>
+</body>
+
+</html>

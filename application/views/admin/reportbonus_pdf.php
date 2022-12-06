@@ -46,11 +46,12 @@
                         echo "<tr><td colspan='5'>Data tidak ada</td></tr>";
                     } else { // Jika jumlah data lebih dari 0 (Berarti jika data ada)
                         foreach ($export as $data) { // Looping hasil data export
+                            $jml_bns = "Rp " . number_format($data->jml_bonus, 2, ',', '.');
                             $tanggal_bonus = date('d-m-Y', strtotime($data->tanggal_bonus)); // Ubah format tanggal jadi dd-mm-yyyy
 
                             echo "<tr>";
                             echo "<td>" . $data->nama_lengkap . "</td>";
-                            echo "<td>" . $data->jml_bonus . "</td>";
+                            echo "<td>" . $jml_bns . "</td>";
                             echo "<td>" . $data->catatan . "</td>";
                             echo "<td>" . $tanggal_bonus . "</td>";
                             echo "</tr>";

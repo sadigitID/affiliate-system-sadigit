@@ -21,7 +21,7 @@ class M_sumkomisi extends CI_Model
     //$data = $this->db->select('SUM(jml_komisi) as total')->from('tb_produk')->get();
     $data = $this->db->select('SUM(jml_komisi) AS total')->from('tb_pesanan')
       ->join('tb_produk', 'tb_produk.id_produk = tb_pesanan.id_produk', 'left')
-      ->where(['id_user' => $this->session->userdata('id_user')])->get();
+      ->where(['id_user' => $this->session->userdata('id_user'), 'status_komisi' => 2])->get();
     return $data->row()->total;
   }
 }
