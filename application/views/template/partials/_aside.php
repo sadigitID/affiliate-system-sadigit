@@ -84,7 +84,7 @@
 				<!-- END PRODUK MENU -->
 
 				<!-- START PESANAN MENU -->
-				<li class="menu-item menu-item-submenu menu-item-open" aria-haspopup="true" data-menu-toggle="hover">
+				<li class="menu-item menu-item-submenu " aria-haspopup="true" data-menu-toggle="hover">
 					<a href="javascript:;" class="menu-link menu-toggle">
 						<span class="svg-icon menu-icon svg-icon-primary">
 							<!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Shopping\Cart1.svg-->
@@ -110,7 +110,7 @@
 							</li>
 
 							<!--MENU DATA TRACKING-->
-							<li class="menu-item <?= $active == 'affiliator/pesanan_affiliate' ? 'menu-item-active' : '' ?>" aria-haspopup="true">
+							<li class="menu-item <?= $active === 'affiliator/pesanan_affiliate' ? 'menu-item-active' : '' ?>" aria-haspopup="true">
 								<a href="<?= base_url('affiliator/pesanan_affiliate') ?>" class="menu-link">
 									<span class="svg-icon menu-icon svg-icon-primary">
 										<!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Shopping\Chart-bar1.svg-->
@@ -131,7 +131,7 @@
 							</li>
 
 							<!--MENU EXPORT DATA-->
-							<li class="menu-item menu-item-submenu menu-item-open" aria-haspopup="true" data-menu-toggle="hover">
+							<li class="menu-item menu-item-submenu " aria-haspopup="true" data-menu-toggle="hover">
 								<a href="javascript:;" class="menu-link menu-toggle">
 									<span class="svg-icon menu-icon svg-icon-primary">
 										<!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Files\Export.svg-->
@@ -202,7 +202,7 @@
 				<!-- END PESANAN MENU -->
 
 				<!-- START SETTINGS MENU -->
-				<li class="menu-item menu-item-submenu menu-item-open" aria-haspopup="true" data-menu-toggle="hover">
+				<li class="menu-item menu-item-submenu " aria-haspopup="true" data-menu-toggle="hover">
 					<a href="javascript:;" class="menu-link menu-toggle">
 						<span class="svg-icon menu-icon svg-icon-primary">
 							<!--begin::Svg Icon | path:C:\wamp64\www\keenthemes\themes\metronic\theme\html\demo1\dist/../src/media/svg/icons\Code\Settings4.svg-->

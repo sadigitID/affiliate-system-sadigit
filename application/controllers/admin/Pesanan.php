@@ -167,6 +167,17 @@ class Pesanan extends CI_Controller
 			$location = base_url() . 'foto/';
 			$pict = $location . $data_image;
 
+			// $config['allowed_types'] = 'gif|jpg|png';
+            // $config['max_size']      = '2048';
+            // $config['upload_path'] = './assets/img/pembayaran/';
+
+            // $this->load->library('upload', $config);
+
+			// $this->upload->do_upload('foto_pembayaran');
+			// $data_image = $this->upload->data('file_name');
+			// $location = base_url() . 'assets/img/pembayaran/';
+			// $pict = $location . $data_image;
+
 			$payloadData = [
 				'nama_pembeli' => $this->input->post('nama_pembeli'),
 				'tanggal_pembayaran' => $this->input->post('tanggal_pembayaran'),

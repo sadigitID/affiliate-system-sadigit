@@ -9,6 +9,7 @@
 				</button>
 			</div> 
 			<form id="form_pesanan">
+			<!-- <?= form_open_multipart('form_pesanan'); ?> -->
 				<div class="modal-body">
 					<input class="d-none" type="text" id="id_pesanan" name="id_pesanan" autocomplete="off" />
 					<!-- <div class="form-group row">

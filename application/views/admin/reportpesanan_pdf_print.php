@@ -42,8 +42,6 @@
             echo "<tr><td colspan='10'>Data tidak ada</td></tr>";
         } else { // Jika jumlah data lebih dari 0 (Berarti jika data ada)
             foreach ($export as $data) { // Looping hasil data transaksi
-                $hrg_jual = "Rp " . number_format($data->harga_jual, 2, ',', '.');
-                $jml_kms = "Rp " . number_format($data->jml_komisi, 2, ',', '.');
                 $tanggal_pembayaran = date('d-m-Y', strtotime($data->tanggal_pembayaran)); // Ubah format tanggal jadi dd-mm-yyyy
 
                 if ($data->status_komisi == 1) {
@@ -51,23 +49,26 @@
                 } else {
                     $status_komisi = '<p> Pesanan Selesai </p>';
                 }
-
+    
                 if ($data->status_pesanan == 1) {
                     $status_pesanan = '<p> Pesanan Masuk </p>';
                 } else {
                     $status_pesanan = '<p> Pesanan Selesai </p>';
                 }
 
+                $harga_jual = number_format($data->harga_jual);
+                $komisi = number_format($data->jml_komisi);
+
                 echo "<tr>";
                 echo "<td>" . $data->id_pesanan . "</td>";
                 echo "<td>" . $data->nama_pembeli . "</td>";
                 echo "<td>" . $data->nama_produk . "</td>";
-                echo "<td>" . $hrg_jual . "</td>";
+                echo "<td>" . $harga_jual . "</td>";
                 echo "<td>" . $status_pesanan . "</td>";
                 echo "<td>" . $tanggal_pembayaran . "</td>";
                 echo "<td>" . $data->foto_pembayaran . "</td>";
                 echo "<td>" . $data->nama_lengkap . "</td>";
-                echo "<td>" . $jml_kms . "</td>";
+                echo "<td>" . $komisi . "</td>";
                 echo "<td>" . $status_komisi . "</td>";
                 echo "</tr>";
             }
