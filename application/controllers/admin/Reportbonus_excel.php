@@ -7,9 +7,9 @@ class Reportbonus_excel extends CI_Controller
   {
     parent::__construct();
     if ($this->session->userdata('role') != "Admin") {
-      $alert = $this->session->set_flashdata('massage', 'Anda Harus Login Sebagai Admin!');
-      redirect(base_url("auth"));
-    }
+			$alert = $this->session->set_flashdata('massage', 'Anda Harus Login Sebagai Admin!');
+			redirect(base_url("auth"));
+		}
     $this->load->model('admin/Bonus_model', 'excel');
   }
 
@@ -119,12 +119,12 @@ class Reportbonus_excel extends CI_Controller
     $numrow = 5; // Set baris pertama untuk isi tabel adalah baris ke 5
 
     foreach ($export as $data) {
-      $jml_bns = "Rp " . number_format($data->jml_bonus, 2, ',', '.');
       $tanggal_bonus = date('d-m-Y', strtotime($data->tanggal_bonus)); // Ubah format tanggal jadi dd-mm-yyyy
+      $jml_bonus = number_format($data->jml_bonus);
 
       $excel->getActiveSheet()->setCellValue('A' . $numrow, $tanggal_bonus);
       $excel->getActiveSheet()->setCellValue('B' . $numrow, $data->nama_lengkap);
-      $excel->getActiveSheet()->setCellValue('C' . $numrow, $jml_bns);
+      $excel->getActiveSheet()->setCellValue('C' . $numrow, $jml_bonus);
       $excel->getActiveSheet()->setCellValue('D' . $numrow, $data->catatan);
       // Apply style row yang telah kita buat tadi ke masing-masing baris (isi tabel)
       $excel->getActiveSheet()->getStyle('A' . $numrow)->applyFromArray($style_row);
@@ -138,8 +138,8 @@ class Reportbonus_excel extends CI_Controller
 
     // Set width kolom
     $excel->getActiveSheet()->getColumnDimension('A')->setWidth(15); // Set width kolom A
-    $excel->getActiveSheet()->getColumnDimension('B')->setWidth(20); // Set width kolom B
-    $excel->getActiveSheet()->getColumnDimension('C')->setWidth(15); // Set width kolom C
+    $excel->getActiveSheet()->getColumnDimension('B')->setWidth(18); // Set width kolom B
+    $excel->getActiveSheet()->getColumnDimension('C')->setWidth(25); // Set width kolom C
     $excel->getActiveSheet()->getColumnDimension('D')->setWidth(40); // Set width kolom D
     // Set orientasi kertas jadi LANDSCAPE
     $excel->getActiveSheet()->getPageSetup()->setOrientation(PHPExcel_Worksheet_PageSetup::ORIENTATION_LANDSCAPE);

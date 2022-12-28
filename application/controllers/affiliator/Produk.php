@@ -43,17 +43,17 @@ class Produk extends CI_Controller
     $id_user = $this->session->userdata('id_user');
 
     foreach ($list as $list) {
-      $harga_prd = "Rp " . number_format($list->harga_produk, 2, ',', '.');
-      $jml_kms = "Rp " . number_format($list->jml_komisi, 2, ',', '.');
       $long_url = $list->link_produk . 'aff=' . $id_user . '&prd=' . $list->id_produk;
+      $komisi = number_format($list->jml_komisi);
+      $harga_produk = number_format($list->harga_produk);
       $copy =  "<i class='btn fas fa-copy btn-icon btn-light-success' onclick={_copy('$long_url')}></i>";
       $salin =  "<i class='fas fa-edit btn btn-icon btn-light-primary' onclick={_salin('$list->id_produk')}></i>";
 
       $row = array();
       $row[] = ++$no;
       $row[] = $list->nama_produk;
-      $row[] = $harga_prd;
-      $row[] = $jml_kms;
+      $row[] = $harga_produk;
+      $row[] = $komisi;
       $row[] = $long_url;
       $row[] = "<center>
                   $copy

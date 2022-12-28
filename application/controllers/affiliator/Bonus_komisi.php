@@ -7,9 +7,9 @@ class Bonus_komisi extends CI_Controller
   {
     parent::__construct();
     if ($this->session->userdata('role') != "Affiliator") {
-      $alert = $this->session->set_flashdata('massage', 'Anda Harus Login Sebagai Affiliator!');
-      redirect(base_url("auth"));
-    }
+			$alert = $this->session->set_flashdata('massage', 'Anda Harus Login Sebagai Affiliator!');
+			redirect(base_url("auth"));
+		}
     $this->load->library('form_validation');
     $this->load->model('Umum_model', 'umum');
   }
@@ -43,11 +43,11 @@ class Bonus_komisi extends CI_Controller
     //$id = $this->input->post('id_user');
 
     foreach ($list as $list) {
-      $jml_bns = "Rp " . number_format($list->jml_bonus, 2, ',', '.');
+      $jml_bonus = number_format($list->jml_bonus);
 
       $row = array();
       $row[] = ++$no;
-      $row[] = $jml_bns;
+      $row[] = $jml_bonus;
       $row[] = $list->catatan;
       $row[] = $list->tanggal_bonus;
       $data[] = $row;

@@ -13,6 +13,7 @@ class Bonus extends CI_Controller
 		}
 		$this->load->library('form_validation');
 		$this->load->model('Umum_model', 'umum');
+
 	}
 
 	public function index()
@@ -46,14 +47,14 @@ class Bonus extends CI_Controller
 		$no = @$_POST['start'];
 
 		foreach ($list as $list) {
-			$jml_bns = "Rp " . number_format($list->jml_bonus, 2, ',', '.');
+			$jml_bonus = number_format($list->jml_bonus);
+
 			$edit =  "<i class='fas fa-edit btn btn-icon btn-light-primary' onclick={_edit('$list->id_bonus')}></i>";
 			$hapus =  "<i class='fas fa-trash-alt btn btn-icon btn-light-danger' onclick={_delete('$list->id_bonus')}></i>";
-
 			$row = array();
 			$row[] = ++$no;
 			$row[] = $list->nama_lengkap;
-			$row[] = $jml_bns;
+			$row[] = $jml_bonus;
 			$row[] = $list->catatan;
 			$row[] = $list->tanggal_bonus;
 			$row[] = "<center>
@@ -153,7 +154,7 @@ class Bonus extends CI_Controller
 	function delete()
 	{
 		$id_bonus = $this->input->post('id_bonus', true);
-		$this->db->delete('tb_bonus', ['id_bonus' => $id_bonus]);
+		$this->db->delete('tb_bonus',['id_bonus'=>$id_bonus]);
 		echo json_encode('');
 	}
 }

@@ -8,7 +8,7 @@ class M_user extends CI_Model
     $data = $this->db->get_where('tb_users', ['role' => "Affiliator"]);
     return $data->num_rows();
   }
-
+  
   public function get_user($id_user = null)
   {
     $this->db->from('tb_users');

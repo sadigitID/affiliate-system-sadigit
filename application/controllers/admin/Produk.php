@@ -43,17 +43,17 @@ class Produk extends CI_Controller
 		$no = @$_POST['start'];
 
 		foreach ($list as $list) {
+			$harga_produk = number_format($list->harga_produk);
+			$komisi = number_format($list->jml_komisi);
+
 			// akuntansi_journal_edit
-			$harga_prd = "Rp " . number_format($list->harga_produk, 2, ',', '.');
-			$jml_kms = "Rp " . number_format($list->jml_komisi, 2, ',', '.');
 			$edit =  "<i class='fas fa-edit btn btn-icon btn-light-primary' onclick={_edit('$list->id_produk')}></i>";
 			$hapus =  "<i class='fas fa-trash-alt btn btn-icon btn-light-danger' onclick={_delete('$list->id_produk')}></i>";
-
 			$row = array();
 			$row[] = ++$no;
 			$row[] = $list->nama_produk;
-			$row[] = $harga_prd;
-			$row[] = $jml_kms;
+			$row[] = $harga_produk;
+			$row[] = $komisi;
 			$row[] = $list->deskripsi_produk;
 			$row[] = $list->link_produk;
 			$row[] = "<center>

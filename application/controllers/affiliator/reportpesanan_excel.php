@@ -7,9 +7,9 @@ class Reportpesanan_excel extends CI_Controller
   {
     parent::__construct();
     if ($this->session->userdata('role') != "Affiliator") {
-      $alert = $this->session->set_flashdata('massage', 'Anda Harus Login Sebagai Affiliator!');
-      redirect(base_url("auth"));
-    }
+			$alert = $this->session->set_flashdata('massage', 'Anda Harus Login Sebagai Affiliator!');
+			redirect(base_url("auth"));
+		}
     $this->load->model('M_pesanan', 'excel');
   }
 
@@ -125,7 +125,6 @@ class Reportpesanan_excel extends CI_Controller
     $numrow = 5; // Set baris pertama untuk isi tabel adalah baris ke 5
 
     foreach ($export as $data) {
-      $jml_kms = "Rp " . number_format($data->jml_komisi, 2, ',', '.');
       $tanggal_pesanan = date('d-m-Y', strtotime($data->tanggal_pesanan)); // Ubah format tanggal jadi dd-mm-yyyy
 
       if ($data->status_komisi == 1) {
@@ -135,15 +134,17 @@ class Reportpesanan_excel extends CI_Controller
       }
 
       if ($data->status_pesanan == 1) {
-        $status_pesanan = 'Pesanan Masuk';
+          $status_pesanan = 'Pesanan Masuk';
       } else {
-        $status_pesanan = 'Pesanan Selesai';
+          $status_pesanan = 'Pesanan Selesai';
       }
+
+      $komisi = number_format($data->jml_komisi);
 
       $excel->getActiveSheet()->setCellValue('A' . $numrow, $data->id_pesanan);
       $excel->getActiveSheet()->setCellValue('B' . $numrow, $data->nama_produk);
       $excel->getActiveSheet()->setCellValue('C' . $numrow, $status_pesanan);
-      $excel->getActiveSheet()->setCellValue('D' . $numrow, $jml_kms);
+      $excel->getActiveSheet()->setCellValue('D' . $numrow, $komisi);
       $excel->getActiveSheet()->setCellValue('E' . $numrow, $tanggal_pesanan);
       $excel->getActiveSheet()->setCellValue('F' . $numrow, $status_komisi);
 

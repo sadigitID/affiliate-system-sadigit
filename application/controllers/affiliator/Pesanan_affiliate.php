@@ -8,9 +8,9 @@ class Pesanan_affiliate extends CI_Controller
   {
     parent::__construct();
     if ($this->session->userdata('role') != "Affiliator") {
-      $alert = $this->session->set_flashdata('massage', 'Anda Harus Login Sebagai Affiliator!');
-      redirect(base_url("auth"));
-    }
+			$alert = $this->session->set_flashdata('massage', 'Anda Harus Login Sebagai Affiliator!');
+			redirect(base_url("auth"));
+		}
     $this->load->library('form_validation');
     $this->load->model('Umum_model', 'umum');
   }
@@ -32,7 +32,7 @@ class Pesanan_affiliate extends CI_Controller
 
     $tabel = 'tb_pesanan';
     $column_order = array();
-    $coloumn_search = array('tb_pesanan.nama_produk', 'status_pesanan', 'tanggal_pesanan', 'status_komisi', 'tb_produk.jml_komisi');
+    $coloumn_search = array('tb_pesanan.nama_produk', 'status_pesanan', 'tanggal_pesanan', 'status_komisi', 'jml_komisi');
     $select = "*";
     $order_by = array('id_pesanan' => 'asc');
     $join[] = ['field' => 'tb_users', 'condition' => 'tb_pesanan.id_user = tb_users.id_user', 'direction' => 'left'];
@@ -45,36 +45,36 @@ class Pesanan_affiliate extends CI_Controller
 
     foreach ($list as $list) {
       if ($list->status_komisi == 1) {
-        $status_komisi = '<p> Pesanan Masuk </p>';
-      } else {
-        $status_komisi = '<p> Pesanan Selesai </p>';
-      }
+				$status_komisi = '<p> Pesanan Masuk </p>';
+			} else {
+				$status_komisi = '<p> Pesanan Selesai </p>';
+			}
+
+			if ($list->status_pesanan == 1) {
+				$status_pesanan = '<p> Pesanan Masuk </p>';
+			} else {
+				$status_pesanan = '<p> Pesanan Selesai </p>';
+			}
 
       if ($list->status_pesanan == 1) {
-        $status_pesanan = '<p> Pesanan Masuk </p>';
-      } else {
-        $status_pesanan = '<p> Pesanan Selesai </p>';
-      }
+				$status_pesanan = '<p> Pesanan Masuk </p>';
+			} else {
+				$status_pesanan = '<p> Pesanan Selesai </p>';
+			}
 
-      if ($list->status_pesanan == 1) {
-        $status_pesanan = '<p> Pesanan Masuk </p>';
-      } else {
-        $status_pesanan = '<p> Pesanan Selesai </p>';
-      }
+			if($list->status_komisi == 1 && $list->status_pesanan == 1){
+				$komisi = 0;
+			} else {
+				$komisi = $list->jml_komisi;
+			}
 
-      if ($list->status_komisi == 1 && $list->status_pesanan == 1) {
-        $komisi = 0;
-      } else {
-        $komisi = $list->jml_komisi;
-      }
-
-      $jml_kms = "Rp " . number_format($komisi, 2, ',', '.');
+      $komisi = number_format($list->jml_komisi);
 
       $row = array();
       $row[] = $list->id_pesanan;
       $row[] = $list->nama_produk; //mengambil dari tb_produk
       $row[] = $status_pesanan;
-      $row[] = $jml_kms; //mengambil dari tb_produk
+      $row[] = $komisi; //mengambil dari tb_produk
       $row[] = $list->tanggal_pesanan;
       $row[] = $status_komisi;
       $data[] = $row;
