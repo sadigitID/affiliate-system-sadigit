@@ -1,9 +1,13 @@
-<div class="card card-custom" style="padding: 15px;">
+<div class="card card-custom">
     <div class="card-header">
         
             <div class="card-title">
                 <span class="card-icon"><i class="flaticon-squares-1 text-primary"></i></span>
                 <h3 class="card-label">Print Data Bonus PDF</h3>
+            </div>
+            <div class="card-toolbar">
+                <a href="<?php echo $url_cetak ?>" class="btn btn-primary font-weight-bolder">
+                    <i class="la la-print"></i>CETAK PDF</a>
             </div>
             
     </div>
@@ -24,6 +28,7 @@
                     </div>
                 </div>
                 <button type="submit" name="filter" value="true" class="btn btn-primary">TAMPILKAN</button>
+                <a href="<?= base_url('admin/bonus') ?>" class="btn btn-primary">BACK</a>
                 <?php
                 if (isset($_GET['filter']))
                     echo '<a href="' . base_url('admin/reportbonus_pdf/index') . '" class="btn btn-default">RESET</a>';
@@ -32,9 +37,6 @@
             <hr />
             <h4 style="margin-bottom: 5px;"><b>Data Bonus</b></h4>
             <?php echo $label ?><br />
-            <div style="margin-top: 5px;">
-                <a href="<?php echo $url_cetak ?>">CETAK PDF</a>
-            </div>
 
             <table class="table table-bordered" id="table" style="margin-top: 13px !important">
                 <thead>
